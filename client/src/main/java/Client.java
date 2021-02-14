@@ -11,14 +11,12 @@ public class Client {
         final Option name = Option.builder().longOpt("name").hasArgs().argName("name").build();options.addOption(name);
         final CommandLineParser commandLineParser = new DefaultParser();
         final CommandLine cl = commandLineParser.parse(options, args);
-        String Username = "none";
-
+        String Username = "client";
 
         if (cl.hasOption("name")) {
            Username = cl.getOptionValue("name");
         }
-        logger.info("The client programme is running... The name of the client is : name={}",Username);
+        logger.info("The client program is running... The name of the client is {}",Username);
 
     }
-
 }
