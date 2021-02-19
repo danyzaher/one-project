@@ -12,6 +12,7 @@
         <module>server</module>
         <module>client</module>
         <module>application</module>
+        <module>Database</module>
     </modules>
 
     <properties>
