@@ -1,41 +1,52 @@
-import java.sql.* ;
-import java.io.*;
-import ch.qos.logback.classic.Logger;
-import org.apache.commons.cli.*;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.lang.reflect.InvocationTargetException;
+import java.sql.* ;
+
 public  class Pool {
-	private final static Logger logger = (Logger) LoggerFactory.getLogger(Pool.class.getName());
-
-	public  static  void main (String[] args) throws ParseException {
-
+	private final static Logger logger = LoggerFactory.getLogger(Pool.class.getName());
+	public  static  void main (String[] args) {
 		try {
 			// chargement de la classe par son nom
-			Class c = Class.forName("com.postgresql.jdbc.Driver") ;
-			Driver pilote = (Driver)c.newInstance() ;
+			Class c = Class.forName("org.postgresql.Driver") ;
+			Driver pilote = (Driver)c.getDeclaredConstructor().newInstance() ;
 			// enregistrement du pilote auprès du DriverManager
 			DriverManager.registerDriver(pilote);
 			// Protocole de connexion
-			String protocole =  "jdbc:postegresql:" ;
+			String protocole =  "jdbc:postgresql:" ;
 			// Adresse IP de l’hôte de la base et port
-			String ip =  "127.0.0.1" ;  // dépend du contexte
-			String port =  "53020" ;  // port MySQL par défaut
-			// Nom de la base
-			String nomBase =  "testone" ;  // dépend du contexte
+			String ip =  "localhost" ;
+			String port =  "5432" ;  // port MySQL par défaut
+			// Nom de la base ;
+			String nomBase =  "testone" ;
 			// Chaîne de connexion
 			String conString = protocole +  "//" + ip +  ":" + port +  "/" + nomBase ;
 			// Identifiants de connexion et mot de passe
-			String nomConnexion =  "postgres" ;  // dépend du contexte
-			String motDePasse =  "123" ;  // dépend du contexte
+			String nomConnexion =  "dany";
+			String motDePasse =  "123";
 			// Connexion
 			Connection con = DriverManager.getConnection(conString, nomConnexion, motDePasse) ;
-
+			logger.info("connexion reussie");
 			// Envoi d’un requête générique
-			String sql =  "select * from salles" ;
+			String sql =  "select * from \"Produit\"" ;
 			Statement smt = con.createStatement() ;
 			ResultSet rs = smt.executeQuery(sql) ;
 			while (rs.next()) {
-				System.out.println(rs.getString("numero_salle")) ;
+				System.out.println(rs.getArray("name")) ;
 			}
+		} catch (InstantiationException e) {
+			e.printStackTrace();
+		} catch (InvocationTargetException e) {
+			e.printStackTrace();
+		} catch (NoSuchMethodException e) {
+			e.printStackTrace();
+		} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		} catch (IllegalAccessException e) {
+			e.printStackTrace();
+		} catch (ClassNotFoundException e) {
+			e.printStackTrace();
+		}
 	}
 }
