@@ -1,6 +1,5 @@
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import java.lang.reflect.InvocationTargetException;
 import java.sql.* ;
 
@@ -18,7 +17,7 @@ public  class Pool {
 			// Adresse IP de l’hôte de la base et port
 			String ip =  "localhost" ;
 			String port =  "5432" ;  // port MySQL par défaut
-			// Nom de la base ;
+			// Nom de la base 
 			String nomBase =  "testone" ;
 			// Chaîne de connexion
 			String conString = protocole +  "//" + ip +  ":" + port +  "/" + nomBase ;
