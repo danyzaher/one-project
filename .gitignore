@@ -3,6 +3,10 @@
 /workspace.xml
 .idea/
 .metadata/
-.gitignore
 target/
+<<<<<<< HEAD
 */.class
+=======
+.class
+*/META-INF/
+>>>>>>> 3b28100a3edfb5ad75cd6d6a590d5e7fe6c90249
