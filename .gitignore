@@ -5,4 +5,4 @@
 .metadata/
 .gitignore
 target/
-.class
+*/.class
