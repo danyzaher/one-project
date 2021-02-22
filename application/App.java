@@ -1,24 +1,25 @@
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.*;
+import java.applet.*;
 
 public class App extends JFrame {
 
     public App() {
 
         super("One test");
-        Image icon = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Dany\\Documents\\one-project\\files\\logo.png");
+        Image icon = Toolkit.getDefaultToolkit().getImage("one-project\\files\\logo.png");
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         JButton button = new JButton("test");
         setSize(800,700);
         setDefaultLookAndFeelDecorated(true);
-        setBackground(new Color(899999));
+        setBackground(new Color( 204, 255, 255));
         setIconImage(icon);
         setLayout(null);
         setLocationRelativeTo(null);
         setResizable(true);
-        Panneau pane = new Panneau();
-        pane.add(button);
-        setContentPane(pane);
+        setContentPane(new Panneau());
     }
     public static void main(String[] arg) {
         App fenetre = new App();
@@ -38,13 +39,16 @@ class Panneau extends JPanel {
         
         int x8 = this.getWidth()/8;
         int y8 = this.getHeight()/8;   
+               
         Font font = new Font("Courier", Font.BOLD,20);
         g.setFont(font);
         g.drawString("Choisissez un étage",10,30);           
         g.drawRect(x4, y4, x2, y2);
-        g.drawRect(x4,y4, x8, y8);
+        g.setColor(Color.black);
+        g.fillRect(x4,y4, x8, y8);
         g.drawRect(x4,y2, x8,y4);
-        g.drawRect(x2, y4,x4,y4);
+        g.fillRect(x2, y4,x4,y4);
         g.drawRect(x2,y2+30, x4,y4-30);
+
   }       
 }
