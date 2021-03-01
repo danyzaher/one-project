@@ -18,10 +18,10 @@ public class Connectioninfo {
 
             props.load(inStream);
 
-            this.url = props.getProperty("url");
-            this.driver = props.getProperty("driver");
-            this.user = props.getProperty("user");
-            this.password= props.getProperty("password");
+            this.url = props.getProperty("jdbc:postgresql://localhost:5432/testone");
+            this.driver = props.getProperty("org.postgresql.Driver");
+            this.user = props.getProperty("dany");
+            this.password= props.getProperty("123");
 
         } catch (IOException e) {
 

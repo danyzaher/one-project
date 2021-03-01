@@ -14,7 +14,6 @@ public class JDBCConnectionPool {
 
         this.collection = new ArrayList<>();
         this.connectioninfo = new Connectioninfo();
-
         addConnections(nboneco);
     }
 
