@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Pool</mainClass>
+                            <mainClass>testConnectionPool</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

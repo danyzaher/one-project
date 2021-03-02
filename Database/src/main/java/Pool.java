@@ -22,17 +22,17 @@ public  class Pool {
 			// Chaîne de connexion
 			String conString = protocole +  "//" + ip +  ":" + port +  "/" + nomBase ;
 			// Identifiants de connexion et mot de passe
-			String nomConnexion =  "dany";
+			String nomConnexion =  "julien";
 			String motDePasse =  "123";
 			// Connexion
 			Connection con = DriverManager.getConnection(conString, nomConnexion, motDePasse) ;
 			logger.info("connexion reussie");
 			// Envoi d’un requête générique
-			String sql =  "select * from \"Produit\"" ;
+			String sql =  "select * from \"distance\"" ;
 			Statement smt = con.createStatement() ;
 			ResultSet rs = smt.executeQuery(sql) ;
 			while (rs.next()) {
-				System.out.println(rs.getArray("name")) ;
+				System.out.println(rs.getArray("risque")) ;
 			}
 		} catch (InstantiationException e) {
 			e.printStackTrace();
