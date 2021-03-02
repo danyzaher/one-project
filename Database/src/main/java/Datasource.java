@@ -16,7 +16,4 @@ public class Datasource {
     public static void closeConnections() {
         physical_co.endConnections();
     }
-//    public static JDBCConnectionPool getPool() {
-//        return physical_co;
-//    }
 }

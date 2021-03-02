@@ -1,6 +1,4 @@
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 import java.util.ArrayList;
 
 
@@ -8,12 +6,11 @@ public class JDBCConnectionPool {
 
     private ArrayList<Connection> collection;
 
-    private Connectioninfo connectioninfo;
+    private Connection connectioninfo;
 
     public JDBCConnectionPool(int nboneco) {
 
         this.collection = new ArrayList<>();
-        this.connectioninfo = new Connectioninfo();
         addConnections(nboneco);
     }
 
@@ -25,9 +22,9 @@ public class JDBCConnectionPool {
 
         for (int i = 0; i < nboneco; i++) {
 
-            try {Class.forName(connectioninfo.getDriver());
+            try {Class.forName("org.postgresql.Driver");
 
-                oneco = DriverManager.getConnection(connectioninfo.getUrl(),connectioninfo.getUser(), connectioninfo.getPassword());
+                oneco = DriverManager.getConnection("jdbc:postgresql://localhost:5432/testone","postgres","123");
 
                 collection.add(oneco);
 

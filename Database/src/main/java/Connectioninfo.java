@@ -9,7 +9,7 @@ public class Connectioninfo {
     String user;
     String password;
 
-    public Connectioninfo() {
+    public Connectioninfo() throws NullPointerException {
 
         InputStream inStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties");
         Properties props = new Properties();
