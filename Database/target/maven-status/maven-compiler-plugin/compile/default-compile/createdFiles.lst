@@ -1,1 +1,5 @@
+Connectioninfo.class
+Datasource.class
 Pool.class
+testConnectionPool.class
+JDBCConnectionPool.class
