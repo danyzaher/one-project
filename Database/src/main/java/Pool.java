@@ -7,27 +7,27 @@ public  class Pool {
 	private final static Logger logger = LoggerFactory.getLogger(Pool.class.getName());
 	public  static  void main (String[] args) {
 		try {
-			// chargement de la classe par son nom
+			// Load class by its name
 			Class c = Class.forName("org.postgresql.Driver") ;
 			Driver pilote = (Driver)c.getDeclaredConstructor().newInstance() ;
-			// enregistrement du pilote auprès du DriverManager
+			// Saving of the pilot with the DriverManager
 			DriverManager.registerDriver(pilote);
-			// Protocole de connexion
+			// Connection protocol
 			String protocole =  "jdbc:postgresql:" ;
-			// Adresse IP de l’hôte de la base et port
+			// Host IP address of the database and the port
 			String ip =  "localhost" ;
-			String port =  "5432" ;  // port MySQL par défaut
-			// Nom de la base 
+			String port =  "5432" ;  // MySQL default port
+			// Database name
 			String nomBase =  "testone" ;
-			// Chaîne de connexion
+			// Connection chain
 			String conString = protocole +  "//" + ip +  ":" + port +  "/" + nomBase ;
-			// Identifiants de connexion et mot de passe
+			// Connection IDs and password
 			String nomConnexion =  "julien";
 			String motDePasse =  "123";
-			// Connexion
+			// Connection
 			Connection con = DriverManager.getConnection(conString, nomConnexion, motDePasse) ;
 			logger.info("connexion reussie");
-			// Envoi d’un requête générique
+			// Sending a generic request
 			String sql =  "select * from \"distance\"" ;
 			Statement smt = con.createStatement() ;
 			ResultSet rs = smt.executeQuery(sql) ;
