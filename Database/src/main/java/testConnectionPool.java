@@ -19,7 +19,7 @@ public class testConnectionPool  {
     }
 
     public static void showElement(Connection c , String Table, String column) throws SQLException {
-        String sql = "select * from \"" + Table + "\";";
+        String sql = "select * from " + Table;
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         while (rs.next()) {
@@ -43,9 +43,9 @@ public class testConnectionPool  {
             Datasource source = new Datasource(iMaxConnection);
             Connection c1 =  source.getConnection();
             Connection c2 =  source.getConnection();
-            addElement(c1, "distance", "risque", "meteo");
-            showElement(c2, "distance", "risque");
-            eraseElement(c2, "distance", "id_distance",16);
+            addElement(c1, "produit", "name", "jambon");
+            showElement(c2, "produit", "name");
+           // eraseElement(c2, "distance", "id_distance",3);
             showElement(c1, "distance", "risque");
             source.setConnection(c1);
             source.setConnection(c2);
