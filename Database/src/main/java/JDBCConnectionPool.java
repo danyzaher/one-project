@@ -29,6 +29,7 @@ public class JDBCConnectionPool {
                 oneco = DriverManager.getConnection("jdbc:postgresql://172.31.249.113:5432/one","venom","venom");
 
                 collection.add(oneco);
+                logger.info("Connection available = "+collection.size());
 
             } catch (SQLException | ClassNotFoundException throwables) {
                 throwables.printStackTrace();
@@ -43,6 +44,7 @@ public class JDBCConnectionPool {
     } else {
         Connection oneco = collection.get(0);
         collection.remove(0);
+        logger.info("Connection available = "+collection.size());
         return oneco;
     }}
 
