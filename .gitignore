@@ -1,0 +1,10 @@
+/shelf/
+/workspace.xml
+.idea/
+.metadata/
+target/
+*/.class
+*/META-INF/
+*.iml
+*.lst
+*.ist
