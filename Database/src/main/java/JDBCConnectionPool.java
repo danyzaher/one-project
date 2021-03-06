@@ -1,8 +1,12 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 import java.util.ArrayList;
 
 
 public class JDBCConnectionPool {
+    public static Logger logger = LoggerFactory.getLogger("JDBCConnectionPool");
 
     private ArrayList<Connection> collection;
 
@@ -35,11 +39,14 @@ public class JDBCConnectionPool {
     }
 
     public Connection getConnection()
-    {
+    {if (collection.isEmpty()){
+        logger.info("No more connection !!!");
+        return null;
+    } else {
         Connection oneco = collection.get(0);
         collection.remove(0);
         return oneco;
-    }
+    }}
 
 
     public void endConnections()
