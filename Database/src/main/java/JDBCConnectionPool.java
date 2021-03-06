@@ -10,8 +10,6 @@ public class JDBCConnectionPool {
 
     private ArrayList<Connection> collection;
 
-    private Connection connectioninfo;
-
     public JDBCConnectionPool(int nboneco) {
 
         this.collection = new ArrayList<>();
