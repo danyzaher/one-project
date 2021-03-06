@@ -19,4 +19,7 @@ public class Datasource {
     public static boolean isEmpty() {
         return physical_co.isEmpty();
     }
+    public int size() {
+        return physical_co.size();
+    }
 }

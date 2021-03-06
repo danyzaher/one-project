@@ -48,21 +48,26 @@ public class testConnectionPool {
             Datasource source = new Datasource(iMaxConnection);
             int i = 0;
             while (!source.isEmpty()) {
+                logger.info("Number of connections: " + source.size());
                 connectionManager.add(i, source.getConnection());
                 showElement(connectionManager.get(i), "distance", "id_distance", "risque");
                 sleep(itimeOut);
                 i++;
             }
+            logger.info("no more connections");
             logger.info("retrieve connection pool");
             while (!connectionManager.isEmpty()) {
+                logger.info("Number of connections: " + source.size());
                 source.setConnection(connectionManager.get(0));
                 connectionManager.remove(0);
+                sleep(itimeOut);
             }
             source.closeConnections();
         } else {
-            logger.info("Aucune connexion");
+            logger.info("no connection");
             System.exit(-1);
         }
-        logger.info("Fin de connexion");
+        logger.info("ending connection");
     }
+
 }

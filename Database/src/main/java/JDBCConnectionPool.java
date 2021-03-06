@@ -8,7 +8,7 @@ public class JDBCConnectionPool {
     private Connectioninfo cf;
 
     public JDBCConnectionPool(int nboneco) {
-        this.cf = new Connectioninfo();
+        cf = new Connectioninfo();
         this.collection = new ArrayList<>();
         addConnections(nboneco);
     }
@@ -42,7 +42,7 @@ public class JDBCConnectionPool {
     public void endConnections()
     {
 
-        for (int i=0; i <= collection.size(); i++) {
+        for (int i=0; i < collection.size(); i++) {
             try {
                 getConnection().close();
             } catch (SQLException throwables) {
@@ -54,4 +54,7 @@ public class JDBCConnectionPool {
         collection.add(oneco);
     }
     public boolean isEmpty() { return collection.isEmpty(); }
+    public int size() {
+        return collection.size();
+    }
 }
