@@ -52,7 +52,7 @@ public class JDBCConnectionPool {
     public void endConnections()
     {
 
-        for (int i=0; i <= collection.size(); i++) {
+        for (int i=0; i < collection.size(); i++) {
             try {
                 getConnection().close();
             } catch (SQLException throwables) {

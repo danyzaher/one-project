@@ -28,11 +28,12 @@ public class testPool {
             }
             stock.add(c);
         }
-        int j = stock.size();
-        for (int k=0; k<j;k++){
-            datasource.setConnection(stock.get(0));
-            stock.remove(0);
-        }
+
+        //int j = stock.size();
+        //for (int k=0; k<j;k++){
+          //  datasource.setConnection(stock.get(0));
+            //stock.remove(0);
+        //}
         datasource.closeConnections();
         logger.info("ConnectionPool closed");
 
