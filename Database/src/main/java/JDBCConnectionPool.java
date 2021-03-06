@@ -26,7 +26,7 @@ public class JDBCConnectionPool {
 
             try {Class.forName("org.postgresql.Driver");
 
-                oneco = DriverManager.getConnection("jdbc:postgresql://172.31.249.113:5432/one","venom","venom");
+                oneco = DriverManager.getConnection("jdbc:postgresql://localhost:5432/testone","maxime","admin");
 
                 collection.add(oneco);
                 logger.info("Connection available = "+collection.size());
