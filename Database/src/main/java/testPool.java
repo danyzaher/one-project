@@ -13,8 +13,8 @@ public class testPool {
         Datasource datasource = new Datasource(10);
         logger.info("ConnectionPool with 10 connection ready");
         ArrayList<Connection> stock = new ArrayList<>();
-        String Table = "distance";
-        String column = "risque";
+        String Table = "salles";
+        String column = "numero_salle";
         String sql = "select * from " + Table;
         for (int i = 0; i<20 ; i++){
             Connection c =datasource.getConnection();
@@ -22,7 +22,7 @@ public class testPool {
             Statement smt = c.createStatement();
             ResultSet rs = smt.executeQuery(sql);
             while (rs.next()) {
-                System.out.println(rs.getArray(column)) ;
+                logger.info(String.valueOf(rs.getArray(column))); ;
             }} catch (Exception e){
 
             }
