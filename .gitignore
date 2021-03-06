@@ -8,3 +8,5 @@ target/
 *.iml
 *.lst
 *.ist
+*/*.iml
+*/target
