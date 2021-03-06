@@ -28,7 +28,8 @@ public class testPool {
             }
             stock.add(c);
         }
-        for (int k=0; k<stock.size();k++){
+        int j = stock.size();
+        for (int k=0; k<j;k++){
             datasource.setConnection(stock.get(0));
             stock.remove(0);
         }
