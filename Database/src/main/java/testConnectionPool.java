@@ -64,16 +64,16 @@ public class testConnectionPool {
             int i = 0;
             if (iShow) {
                 while (!source.isEmpty()) {
-                    logger.info("Number of connections: " + source.size());
+                    logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
-                    showElement(connectionManager.get(i), "distance", "id_distance", "risque");
+                    showElement(connectionManager.get(i), "personne", "id", "nom");
                     sleep(itimeOut);
                     i++;
                 }
                 logger.info("no more connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-                    logger.info("Number of connections: " + source.size());
+                    logger.info("Number of available connections: " + source.size());
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -81,15 +81,15 @@ public class testConnectionPool {
             }
             if (iCreate) {
                 while (!source.isEmpty()) {
-                    logger.info("Number of connections: " + source.size());
+                    logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
                     logger.info("adding element");
-                    addElement(connectionManager.get(i), "distance", "risque", commandLine.getOptionValue("create"));
-                    showElement(connectionManager.get(i), "distance", "id_distance", "risque");
+                    addElement(connectionManager.get(i), "produit", "nom", commandLine.getOptionValue("create"));
+                    showElement(connectionManager.get(i), "produit", "id_produit", "nom");
                     sleep(itimeOut);
                     i++;
                 }
-                logger.info("no more connections");
+                logger.info("no more available connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
                     logger.info("Number of connections: " + source.size());
@@ -100,18 +100,18 @@ public class testConnectionPool {
             }
             if (iDelete) {
                 while (!source.isEmpty()) {
-                    logger.info("Number of connections: " + source.size());
+                    logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
                     logger.info("deleting element");
-                    deleteElement(connectionManager.get(i), "distance", "id_distance");
-                    showElement(connectionManager.get(i), "distance", "id_distance", "risque");
+                    deleteElement(connectionManager.get(i), "produit", "id_produit");
+                    showElement(connectionManager.get(i), "produit", "id_produit", "nom");
                     sleep(itimeOut);
                     i++;
                 }
-                logger.info("no more connections");
+                logger.info("no more available connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-                    logger.info("Number of connections: " + source.size());
+                    logger.info("Number of available connections: " + source.size());
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
