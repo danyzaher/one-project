@@ -13,7 +13,7 @@ then
   read -p 'Entrez timeOut : ' t
 
   java -jar database-1.0-SNAPSHOT-jar-with-dependencies.jar -maxConnection=$b -timeOut=$t -show=1
-fi
+
 
 elif [ "$c" = "update" ]; then
   read -p 'Entrez maxConnection: '  b
