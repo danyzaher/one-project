@@ -1,7 +1,4 @@
-ConnectionSQL.class
-Pool.class
-testConnectionPool.class
-crud.class
 Connectioninfo.class
 Datasource.class
+testConnectionPool.class
 JDBCConnectionPool.class

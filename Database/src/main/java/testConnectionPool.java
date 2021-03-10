@@ -34,11 +34,32 @@ public class testConnectionPool {
         }
         System.out.println();
     }
+    public static void updateElement(Connection c , String Table, String idcolumn,
+                                     String namecolumn,String newValue) throws SQLException {
+        String sql = "update \"" + Table + "\"set \"" + namecolumn + "\" = \"" + newValue
+                + "\" where id_produit = \""+ idcolumn + "\";";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String sql2 = "select * from \"" + Table + "\" where id_produit = \""+ idcolumn + "\";";
+        Statement smt2 = c.createStatement();
+        ResultSet rs2 = smt2.executeQuery(sql2);
+        while (rs2.next()) {
+            System.out.println(rs.getArray(idcolumn) + "   " + rs.getArray(namecolumn)) ;
+        }
+        System.out.println();
+
+    }
     public static void main(String[] args) throws SQLException, ParseException, InterruptedException {
         ArrayList<Connection> connectionManager = new ArrayList<>();
         final Options options = new Options();
         final Option maxConnection = Option.builder().longOpt("maxConnection").hasArg().build();
         options.addOption(maxConnection);
+        final Option namecolomn = Option.builder().longOpt("namecolumn").hasArg().build();
+        options.addOption(namecolomn);
+        final Option tableName = Option.builder().longOpt("tableName").hasArg().build();
+        options.addOption(tableName);
+        final Option idcolomn = Option.builder().longOpt("idcolomn").hasArg().build();
+        options.addOption(idcolomn);
         final Option show = Option.builder().longOpt("show").hasArg().build();
         options.addOption(show);
         final Option create = Option.builder().longOpt("create").hasArg().build();
@@ -47,11 +68,13 @@ public class testConnectionPool {
         options.addOption(timeOut);
         final Option delete = Option.builder().longOpt("delete").hasArg().build();
         options.addOption(delete);
+        final Option update = Option.builder().longOpt("update").hasArg().build();
+        options.addOption(update);
         final CommandLineParser parser = new DefaultParser();
         final CommandLine commandLine = parser.parse(options, args);
         int iMaxConnection = 10;
         int itimeOut = 5000;
-        boolean iShow = false, iCreate = false, iDelete = false;
+        boolean iShow = false, iCreate = false, iDelete = false, iUpdate = false;
         if (commandLine.hasOption("maxConnection"))
             iMaxConnection = Integer.parseInt(commandLine.getOptionValue("maxConnection"));
         if (commandLine.hasOption("timeOut"))
@@ -59,6 +82,7 @@ public class testConnectionPool {
         iShow = commandLine.hasOption("show");
         iCreate = commandLine.hasOption("create");
         iDelete = commandLine.hasOption("delete");
+        iUpdate = commandLine.hasOption("update");
         if (iMaxConnection>0) {
             Datasource source = new Datasource(iMaxConnection);
             int i = 0;
@@ -67,6 +91,24 @@ public class testConnectionPool {
                     logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
                     showElement(connectionManager.get(i), "personne", "id", "nom");
+                    sleep(itimeOut);
+                    i++;
+                }
+                logger.info("no more connections");
+                logger.info("retrieve connection pool");
+                while (!connectionManager.isEmpty()) {
+                    logger.info("Number of available connections: " + source.size());
+                    source.setConnection(connectionManager.get(0));
+                    connectionManager.remove(0);
+                    sleep(itimeOut);
+                }
+            }
+            if (iUpdate) {
+                while (!source.isEmpty()) {
+                    logger.info("Number of available connections: " + source.size());
+                    connectionManager.add(i, source.getConnection());
+                    updateElement(connectionManager.get(i),
+                            commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idcolomn"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
                     sleep(itimeOut);
                     i++;
                 }
