@@ -1,5 +1,5 @@
 cd ../../target/
-read -p 'add or delete or update?: ' c
+read -p 'add or delete or update or show?: ' c
 
 if [ "$c" = "add" ]
 then
@@ -7,6 +7,13 @@ then
   read -p 'Entrez timeOut : ' t
   read -p 'Entrez ce que vous voulez ajouter : ' nom
   java -jar database-1.0-SNAPSHOT-jar-with-dependencies.jar -maxConnection="$b" -timeOut=$t -create=$nom
+elif [ "$c" = "show" ]
+then
+  read -p 'Entrez maxConnection: '  b
+  read -p 'Entrez timeOut : ' t
+
+  java -jar database-1.0-SNAPSHOT-jar-with-dependencies.jar -maxConnection=$b -timeOut=$t -show=1
+fi
 
 elif [ "$c" = "update" ]; then
   read -p 'Entrez maxConnection: '  b
