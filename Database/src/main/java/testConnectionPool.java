@@ -34,20 +34,11 @@ public class testConnectionPool {
         }
         System.out.println();
     }
-    public static void updateElement(Connection c , String Table, String idcolumn,
-                                     String namecolumn,String newValue) throws SQLException {
-        String sql = "update \"" + Table + "\"set \"" + namecolumn + "\" = \"" + newValue
-                + "\" where id_produit = \""+ idcolumn + "\";";
+    public static void updateElement(Connection c , String Table, String idvalues, String namecolumn,String newValue) throws SQLException {
+        String sql = "update \"" + Table + "\"set (\"" + namecolumn + "\" = \"" + newValue
+                + "\") where (id_produit = \""+ idvalues + "\");";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
-        String sql2 = "select * from \"" + Table + "\" where id_produit = \""+ idcolumn + "\";";
-        Statement smt2 = c.createStatement();
-        ResultSet rs2 = smt2.executeQuery(sql2);
-        while (rs2.next()) {
-            System.out.println(rs.getArray(idcolumn) + "   " + rs.getArray(namecolumn)) ;
-        }
-        System.out.println();
-
     }
     public static void main(String[] args) throws SQLException, ParseException, InterruptedException {
         ArrayList<Connection> connectionManager = new ArrayList<>();
@@ -58,8 +49,8 @@ public class testConnectionPool {
         options.addOption(namecolomn);
         final Option tableName = Option.builder().longOpt("tableName").hasArg().build();
         options.addOption(tableName);
-        final Option idcolomn = Option.builder().longOpt("idcolomn").hasArg().build();
-        options.addOption(idcolomn);
+        final Option idvalue = Option.builder().longOpt("idvalue").hasArg().build();
+        options.addOption(idvalue);
         final Option show = Option.builder().longOpt("show").hasArg().build();
         options.addOption(show);
         final Option create = Option.builder().longOpt("create").hasArg().build();
@@ -107,8 +98,7 @@ public class testConnectionPool {
                 while (!source.isEmpty()) {
                     logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
-                    updateElement(connectionManager.get(i),
-                            commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idcolomn"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
+                    updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
                     sleep(itimeOut);
                     i++;
                 }
