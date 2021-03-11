@@ -90,7 +90,7 @@ public class testConnectionPool {
                 while (!source.isEmpty()) {
                     logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
-                    showElement(connectionManager.get(i), "personne", "id", "nom");
+                    showElement(connectionManager.get(i), "produit", "id_produit", "nom");
                     sleep(itimeOut);
                     i++;
                 }
