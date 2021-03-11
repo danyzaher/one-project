@@ -16,4 +16,10 @@ public class Datasource {
     public static void closeConnections() {
         physical_co.endConnections();
     }
+    public static boolean isEmpty() {
+        return physical_co.isEmpty();
+    }
+    public int size() {
+        return physical_co.size();
+    }
 }

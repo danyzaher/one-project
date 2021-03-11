@@ -1,3 +1,3 @@
 cd ../..
 mvn clean compile install
-cd scripts
+cd scripts/Linux
