@@ -34,9 +34,9 @@ public class testConnectionPool {
         }
         System.out.println();
     }
-    public static void updateElement(Connection c , String Table, String idcolumn, String idvalues, String namecolumn,String newValue) throws SQLException {
+    public static void updateElement(Connection c , String Table, String idcolumn, String idvalue, String namecolumn,String newValue) throws SQLException {
         String sql = "update \"" + Table + "\" set (\"" + namecolumn + "\" = \"" + newValue
-                + "\") where (" + idcolumn + " = \""+ idvalues + "\");";
+                + "\") where (" + idcolumn + " = \""+ idvalue + "\");";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
     }
