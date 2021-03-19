@@ -32,7 +32,7 @@ public class ClientSocketTCP {
         final CommandLineParser parser = new DefaultParser();
         final CommandLine commandLine = parser.parse(options, args);
 
-        String hostName = "localhost"; //IP
+        String hostName = "172.31.254.86"; //IP
         //String nom = "julien";
 
         Socket sock = null;
@@ -40,9 +40,16 @@ public class ClientSocketTCP {
         ObjectInputStream in = null;
 
         try {
-            sock = new Socket(hostName, 3333);
-            out = new  PrintWriter(sock.getOutputStream(), true);
-            in = new ObjectInputStream(sock.getInputStream());
+            sock = new Socket(hostName, 3333); //A verifier pour port
+            out = new  PrintWriter(sock.getOutputStream(), true); //envoie
+            in = new ObjectInputStream(sock.getInputStream()); //reception
+            if(commandLine.hasOption("show")){
+                out.println(show);
+            }
+            else{
+                out.println("erreur de saisi");
+            }
+
 
         } catch(UnknownHostException e) {
             System.err.println("Host injoignable : " + hostName);
@@ -51,7 +58,6 @@ public class ClientSocketTCP {
             System.err.println("Connexion impossible avec : " + hostName);
             System.exit(1);
         }
-        out.println();
 
         try {
             Object recu = in.readObject();

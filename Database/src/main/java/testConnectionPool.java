@@ -156,5 +156,4 @@ public class testConnectionPool {
         }
         logger.info("ending connection");
     }
-
 }

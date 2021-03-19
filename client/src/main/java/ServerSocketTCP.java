@@ -1,11 +1,22 @@
 import java.net.*;
 import java.io.*;
+
+import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 public class ServerSocketTCP {
 
-    public static void main(String[] args) {
-	PU [] tab = {
+
+    public static void main(String[] args) throws IOException,ParseException {
+
+		final Options options = new Options();
+		final Option show = Option.builder().longOpt("show").hasArg().build();
+		options.addOption(show);
+
+		final CommandLineParser parser = new DefaultParser();
+		final CommandLine commandLine = parser.parse(options, args);
+
+		PU [] tab = {
 	    new PU("dany", "POO", 18),
 	    new PU("maxime", "math", 18),
 	    new PU("julien", "anglais", 11)};
