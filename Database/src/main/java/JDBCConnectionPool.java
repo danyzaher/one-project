@@ -9,7 +9,10 @@ public class JDBCConnectionPool {
     public static Logger logger = LoggerFactory.getLogger("JDBCConnectionPool");
 
     public ArrayList<Connection> collection;
+    public boolean isEmpty(){
 
+        return collection.isEmpty();
+    }
     public JDBCConnectionPool(int nboneco) {
 
         this.collection = new ArrayList<>();

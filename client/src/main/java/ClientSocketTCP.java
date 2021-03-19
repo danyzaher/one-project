@@ -14,20 +14,12 @@ public class ClientSocketTCP {
 
     public static void main(String[] args) throws IOException, SQLException, ParseException, InterruptedException {
 
-        //ArrayList<Connection> connectionManager = new ArrayList<>();
         final Options options = new Options();
-        //final Option maxConnection = Option.builder().longOpt("maxConnection").hasArg().build();
-        //options.addOption(maxConnection);
-        //final Option namecolomn = Option.builder().longOpt("namecolumn").hasArg().build();
-        //options.addOption(namecolomn);
-        //final Option tableName = Option.builder().longOpt("tableName").hasArg().build();
-        //options.addOption(tableName);
-        //final Option idvalue = Option.builder().longOpt("idvalue").hasArg().build();
-        //options.addOption(idvalue);
         final Option show = Option.builder().longOpt("show").hasArg().build();
         options.addOption(show);
-        //final Option create = Option.builder().longOpt("create").hasArg().build();
-        //options.addOption(create);
+
+        final Option variable = Option.builder().longOpt("variable").hasArg().build();
+        options.addOption(variable);
 
         final CommandLineParser parser = new DefaultParser();
         final CommandLine commandLine = parser.parse(options, args);
@@ -43,17 +35,20 @@ public class ClientSocketTCP {
             sock = new Socket(hostName, 3333); //A verifier pour port
             out = new  PrintWriter(sock.getOutputStream(), true); //envoie
             in = new ObjectInputStream(sock.getInputStream()); //reception
-            if(commandLine.hasOption("show")){
-                out.println(show);
+
+            if (commandLine.hasOption("show") && commandLine.hasOption("variable")) {
+                out.println("show");
+                out.println(commandLine.getOptionValue("variable"));
             }
             else{
-                out.println("erreur de saisi");
+                out.println("erreur de saisie");
             }
 
 
         } catch(UnknownHostException e) {
             System.err.println("Host injoignable : " + hostName);
             System.exit(1);
+
         } catch(IOException ee) {
             System.err.println("Connexion impossible avec : " + hostName);
             System.exit(1);

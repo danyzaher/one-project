@@ -17,9 +17,6 @@ public class Datasource {
         physical_co.endConnections();
     }
 
-    public static boolean isEmpty() {
-        return
-        physical_co.collection.isEmpty();
-    }
+    public static boolean isEmpty() { return physical_co.isEmpty(); }
     }
 
