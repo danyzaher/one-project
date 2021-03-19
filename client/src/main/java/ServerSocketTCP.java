@@ -4,7 +4,11 @@ import java.io.*;
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import javax.sql.DataSource;
+
 public class ServerSocketTCP {
+	DataSource source = new DataSource(10);
 
 
     public static void main(String[] args) throws IOException,ParseException {
@@ -13,19 +17,15 @@ public class ServerSocketTCP {
 		final Option show = Option.builder().longOpt("show").hasArg().build();
 		options.addOption(show);
 
-		final CommandLineParser parser = new DefaultParser();
-		final CommandLine commandLine = parser.parse(options, args);
+		ServerSocket server = null;
 
-		PU [] tab = {
-	    new PU("dany", "POO", 18),
-	    new PU("maxime", "math", 18),
-	    new PU("julien", "anglais", 11)};
-
-	ServerSocket server = null;
 	try {
 	    server = new ServerSocket(3333);
 	    while (true) {
 		Socket sock = server.accept();
+			if (source.isEmpty()) {
+
+			}
 		System.out.println("Connected");
 		ObjectOutputStream out = new ObjectOutputStream(sock.getOutputStream());
 		BufferedReader in = new BufferedReader(new InputStreamReader(sock.getInputStream()));

@@ -8,7 +8,7 @@ import java.util.ArrayList;
 public class JDBCConnectionPool {
     public static Logger logger = LoggerFactory.getLogger("JDBCConnectionPool");
 
-    private ArrayList<Connection> collection;
+    public ArrayList<Connection> collection;
 
     public JDBCConnectionPool(int nboneco) {
 
@@ -37,8 +37,9 @@ public class JDBCConnectionPool {
         }
     }
 
-    public Connection getConnection()
-    {if (collection.isEmpty()){
+    public Connection getConnection(){
+
+        if (collection.isEmpty()){
         logger.info("No more connection !!!");
         return null;
     } else {
