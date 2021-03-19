@@ -55,18 +55,10 @@ public class ServerSocketTCP {
 					if (methode == "show"){
 						String nom = recu.trim();
 						String result = model.showElement(connectionManager.get(i),nom);
+						out.writeBytes(result);
 					}
+				}
 
-				}
-				while ((recu = in.readLine()) != null) {
-					System.out.println("recu : " + recu);
-					String methode = recu.trim();
-					for (int i = 0; i < tab.length; i++)
-						if (tab[i].getNom().equals(nom)) {
-							out.writeObject(tab[i]);
-							break;
-						}
-				}
 				in.close();
 				out.close();
 			}
