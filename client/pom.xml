@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>Client</mainClass>
+                            <mainClass>ServerSocketTCP</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

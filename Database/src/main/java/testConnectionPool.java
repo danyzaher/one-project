@@ -79,7 +79,7 @@ public class testConnectionPool {
             int i = 0;
             if (iShow) {
                 while (!source.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
+                    //logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
                     showElement(connectionManager.get(i), "produit", "id_produit", "nom");
                     sleep(itimeOut);
@@ -88,7 +88,7 @@ public class testConnectionPool {
                 logger.info("no more connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
+                    //logger.info("Number of available connections: " + source.size());
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -96,16 +96,16 @@ public class testConnectionPool {
             }
             if (iUpdate) {
                 while (!source.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
+                    //logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
-                    updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
+                    //updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
                     sleep(itimeOut);
                     i++;
                 }
                 logger.info("no more connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
+                   // logger.info("Number of available connections: " + source.size());
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -113,7 +113,7 @@ public class testConnectionPool {
             }
             if (iCreate) {
                 while (!source.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
+                    //logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
                     logger.info("adding element");
                     addElement(connectionManager.get(i), "produit", "nom", commandLine.getOptionValue("create"));
@@ -124,7 +124,7 @@ public class testConnectionPool {
                 logger.info("no more available connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-                    logger.info("Number of connections: " + source.size());
+                    //logger.info("Number of connections: " + source.size());
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -132,7 +132,7 @@ public class testConnectionPool {
             }
             if (iDelete) {
                 while (!source.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
+                    //logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
                     logger.info("deleting element");
                     deleteElement(connectionManager.get(i), "produit", "id_produit");
@@ -143,7 +143,7 @@ public class testConnectionPool {
                 logger.info("no more available connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
+                    //logger.info("Number of available connections: " + source.size());
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
