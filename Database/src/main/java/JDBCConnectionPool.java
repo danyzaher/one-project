@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 public class JDBCConnectionPool {
 
-    private ArrayList<Connection> collection;
+    private ArrayList<ConnectionCrud> collection;
 
     private Connection connectioninfo;
 
@@ -26,7 +26,7 @@ public class JDBCConnectionPool {
 
                 oneco = DriverManager.getConnection("jdbc:postgresql://localhost:5432/testone","dany","123");
 
-                collection.add(oneco);
+                collection.add((ConnectionCrud) oneco);
 
             } catch (SQLException | ClassNotFoundException throwables) {
                 throwables.printStackTrace();
@@ -54,6 +54,7 @@ public class JDBCConnectionPool {
         }
     }
     public void setConnection(Connection oneco) {
-        collection.add(oneco);
+        collection.add((ConnectionCrud) oneco);
     }
+    public boolean isEmpty() { return collection.isEmpty(); }
 }
