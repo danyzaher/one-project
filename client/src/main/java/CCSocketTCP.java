@@ -8,14 +8,14 @@ import java.net.*;
 public class CCSocketTCP {
     protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP");
     public static void main(String[] args) throws Exception {
-        String hostName = "127.0.0.1"; //IP
+        String hostName = "172.31.254.86"; //IP
         Socket socket = new Socket(hostName, 3333);
-            System.out.println("SOCKET = " + socket);
+        System.out.println("SOCKET = " + socket);
 
         BufferedReader plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter pred = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
 
-        String str = "bonjour";
+        String str = "Armageddon";
             for (int i = 0; i < 10; i++) {
             pred.println(str);          // envoi d'un message
             str = plec.readLine();      // lecture de l'écho
