@@ -94,14 +94,14 @@ public class testConnectionPool {
                     sleep(itimeOut);
                 }
             }
-            if (iUpdate) {
-                while (!source.isEmpty()) {
-                    logger.info("Number of available connections: " + source.size());
-                    connectionManager.add(i, source.getConnection());
-                    updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
-                    sleep(itimeOut);
-                    i++;
-                }
+            //if (iUpdate) {
+               // while (!source.isEmpty()) {
+                   // logger.info("Number of available connections: " + source.size());
+                    //connectionManager.add(i, source.getConnection());
+                    //updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
+                    //sleep(itimeOut);
+                    //i++;
+               // }
                 logger.info("no more connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {

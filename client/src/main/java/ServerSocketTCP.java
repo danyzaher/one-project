@@ -1,8 +1,12 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.*;
 import java.io.*;
 
 public class ServerSocketTCP {
 
+	public static Logger logger = LoggerFactory.getLogger("ServeurSocketTCP");
     public static void main(String[] args) {
 	PU [] tab = {
 	    new PU("dany", "POO", 18),
@@ -20,12 +24,11 @@ public class ServerSocketTCP {
 		String recu;
 		while ((recu = in.readLine()) != null) {
 		    System.out.println("recu : " + recu);
-		    String nom = recu.trim();
 		    for(int i = 0; i < tab.length; i++)
-			if (tab[i].getNom().equals(nom)) {
+			if (tab[i].getNom().equals(recu)) {
 				out.writeObject(tab[i]);
-				break;
-				}	
+				logger.info(recu +" "+ i);
+				}
 		}
 		out.close();
 		sock.close();

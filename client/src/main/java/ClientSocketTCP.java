@@ -26,13 +26,16 @@ public class ClientSocketTCP {
             System.exit(1);
         }
         out.println(nom);
+        out.println("dany");
+        Object recu;
         try {
-            Object recu = in.readObject();
+            while ((recu = in.readObject()) != null) {
+
             if (recu == null) System.err.println("Erreur");
             else {
                 PU pu = (PU)recu;
                 System.out.println("Serveur->Client : " + pu);
-            }
+            }}
         } catch(ClassNotFoundException e) {
             System.err.println("Classe inconnue : " + hostName);
             System.exit(1);
