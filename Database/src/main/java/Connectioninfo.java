@@ -1,9 +1,13 @@
 import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
+import java.io.Reader;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.HashMap;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
 public class Connectioninfo {
-
+    final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String url;
     String driver;
     String user;
@@ -11,45 +15,36 @@ public class Connectioninfo {
 
     public Connectioninfo() throws NullPointerException {
 
-        InputStream inStream = Thread.currentThread().getContextClassLoader().getResourceAsStream("application.properties");
-        Properties props = new Properties();
-
         try {
+            Reader reader = Files.newBufferedReader(Paths.get("Database\\src\\main\\resources\\databaseConnection.json"));
+            HashMap<?, ?> map = gson.fromJson(reader, HashMap.class);
 
-            props.load(inStream);
-
-            this.url = props.getProperty("url");
-            this.driver = props.getProperty("driver");
-            this.user = props.getProperty("user");
-            this.password= props.getProperty("mdp");
-
+            this.url = (String) map.get("url");
+            this.driver = (String) map.get("driver");
+            this.user = (String) map.get("user");
+            this.password= (String) map.get("mdp");
+            reader.close();
         } catch (IOException e) {
 
             e.getMessage();
 
-        } finally {
-
-            try {
-
-                inStream.close();
-
-            } catch (IOException e) {
-                e.getMessage();
-            }
         }
-
     }
 
     public String getUrl() {
-        return url; }
+        return url;
+    }
 
     public String getDriver() {
-        return driver; }
+        return driver;
+    }
 
     public String getUser() {
-        return user; }
+        return user;
+    }
 
     public String getPassword() {
-        return password; }
+        return password;
+    }
 }
 
