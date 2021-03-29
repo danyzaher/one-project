@@ -28,9 +28,9 @@ class ServerTCP {
                 BufferedReader in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
                 PrintStream out = new PrintStream(socketClient.getOutputStream());
                 message = in.readLine();
-                out.println(message);
+                out.println();
                 addElement(connectionManager.get(i), "produit", "nom", message);
-                showElement(connectionManager.get(i),"produit","nom");
+                out.println(showElement(connectionManager.get(i),"produit","nom"));
                 socketClient.close();
             }
         } catch (Exception e) {
