@@ -28,7 +28,6 @@ class ServerTCP {
                 BufferedReader in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
                 PrintStream out = new PrintStream(socketClient.getOutputStream());
                 message = in.readLine();
-                out.println();
                 addElement(connectionManager.get(i), "produit", "nom", message);
                 out.println(showElement(connectionManager.get(i),"produit","nom"));
                 socketClient.close();
