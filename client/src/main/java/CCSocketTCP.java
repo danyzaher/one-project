@@ -18,7 +18,15 @@ public class CCSocketTCP {
         String str = "bonjour";
             for (int i = 0; i < 10; i++) {
             pred.println(str);          // envoi d'un message
-            str = plec.readLine();      // lecture de l'écho
+        }
+        try {
+            String recu = null;
+            clientLog.debug("debut lecture du message recu");
+            while ((recu = plec.readLine()) != null) {
+                clientLog.info(recu);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
         }
         System.out.println("END");     // message de terminaison
         pred.println("END") ;
