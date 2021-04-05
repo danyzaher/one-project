@@ -8,6 +8,7 @@ import static java.lang.Thread.sleep;
 
 public class testConnectionPool {
     private final static Logger logger = LoggerFactory.getLogger(testConnectionPool.class.getName());
+
     public static void addElement(Connection c, String Table, String column, Object value) throws SQLException {
         String sql = "INSERT INTO \"" + Table + "\"(" + column + ") " + "VALUES ('" + value + "');";
         Statement smt = c.createStatement();
@@ -19,27 +20,30 @@ public class testConnectionPool {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
+
     public static void deleteElement(Connection c, String Table, String idcolumn) throws SQLException {
         String sql = "delete from \"" + Table + "\" where " + idcolumn + " = (select max(" + idcolumn + ") from \"" + Table + "\");";
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
 
-    public static void showElement(Connection c , String Table, String idcolumn, String columna) throws SQLException {
+    public static void showElement(Connection c, String Table, String idcolumn, String columna) throws SQLException {
         String sql = "select * from \"" + Table + "\";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         while (rs.next()) {
-            System.out.println(rs.getArray(idcolumn) + "   " + rs.getArray(columna)) ;
+            System.out.println(rs.getArray(idcolumn) + "   " + rs.getArray(columna));
         }
         System.out.println();
     }
-    public static void updateElement(Connection c , String Table, String idcolumn, String idvalue, String namecolumn,String newValue) throws SQLException {
+
+    public static void updateElement(Connection c, String Table, String idcolumn, String idvalue, String namecolumn, String newValue) throws SQLException {
         String sql = "update \"" + Table + "\" set (\"" + namecolumn + "\" = \"" + newValue
-                + "\") where (" + idcolumn + " = \""+ idvalue + "\");";
+                + "\") where (" + idcolumn + " = \"" + idvalue + "\");";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
     }
+
     public static void main(String[] args) throws SQLException, ParseException, InterruptedException {
         ArrayList<Connection> connectionManager = new ArrayList<>();
         final Options options = new Options();
@@ -69,21 +73,18 @@ public class testConnectionPool {
         if (commandLine.hasOption("maxConnection"))
             iMaxConnection = Integer.parseInt(commandLine.getOptionValue("maxConnection"));
         if (commandLine.hasOption("timeOut"))
-            itimeOut = Integer.parseInt(commandLine.getOptionValue("timeOut"))*1000;
+            itimeOut = Integer.parseInt(commandLine.getOptionValue("timeOut")) * 1000;
         iShow = commandLine.hasOption("show");
         iCreate = commandLine.hasOption("create");
         iDelete = commandLine.hasOption("delete");
         iUpdate = commandLine.hasOption("update");
-        if (iMaxConnection>0) {
+        if (iMaxConnection > 0) {
             Datasource source = new Datasource(iMaxConnection);
             int i = 0;
             if (iShow) {
                 while (!source.isEmpty()) {
-<<<<<<< HEAD
-                    //logger.info("Number of available connections: " + source.size());
-=======
+
                     logger.info("Number of available connections: " + source.size());
->>>>>>> main
                     connectionManager.add(i, source.getConnection());
                     showElement(connectionManager.get(i), "produit", "id_produit", "nom");
                     sleep(itimeOut);
@@ -92,11 +93,9 @@ public class testConnectionPool {
                 logger.info("no more connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-<<<<<<< HEAD
-                    //logger.info("Number of available connections: " + source.size());
-=======
+
                     logger.info("Number of available connections: " + source.size());
->>>>>>> main
+
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -104,26 +103,20 @@ public class testConnectionPool {
             }
             if (iUpdate) {
                 while (!source.isEmpty()) {
-<<<<<<< HEAD
+
                     //logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
                     //updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
-=======
-                    logger.info("Number of available connections: " + source.size());
-                    connectionManager.add(i, source.getConnection());
-                    updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
->>>>>>> main
+
                     sleep(itimeOut);
                     i++;
                 }
                 logger.info("no more connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-<<<<<<< HEAD
-                   // logger.info("Number of available connections: " + source.size());
-=======
+
                     logger.info("Number of available connections: " + source.size());
->>>>>>> main
+
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -131,11 +124,9 @@ public class testConnectionPool {
             }
             if (iCreate) {
                 while (!source.isEmpty()) {
-<<<<<<< HEAD
-                    //logger.info("Number of available connections: " + source.size());
-=======
+
                     logger.info("Number of available connections: " + source.size());
->>>>>>> main
+
                     connectionManager.add(i, source.getConnection());
                     logger.info("adding element");
                     addElement(connectionManager.get(i), "produit", "nom", commandLine.getOptionValue("create"));
@@ -146,11 +137,9 @@ public class testConnectionPool {
                 logger.info("no more available connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-<<<<<<< HEAD
-                    //logger.info("Number of connections: " + source.size());
-=======
+
                     logger.info("Number of connections: " + source.size());
->>>>>>> main
+
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -158,11 +147,9 @@ public class testConnectionPool {
             }
             if (iDelete) {
                 while (!source.isEmpty()) {
-<<<<<<< HEAD
-                    //logger.info("Number of available connections: " + source.size());
-=======
+
                     logger.info("Number of available connections: " + source.size());
->>>>>>> main
+
                     connectionManager.add(i, source.getConnection());
                     logger.info("deleting element");
                     deleteElement(connectionManager.get(i), "produit", "id_produit");
@@ -173,11 +160,9 @@ public class testConnectionPool {
                 logger.info("no more available connections");
                 logger.info("retrieve connection pool");
                 while (!connectionManager.isEmpty()) {
-<<<<<<< HEAD
-                    //logger.info("Number of available connections: " + source.size());
-=======
+
                     logger.info("Number of available connections: " + source.size());
->>>>>>> main
+
                     source.setConnection(connectionManager.get(0));
                     connectionManager.remove(0);
                     sleep(itimeOut);
@@ -190,9 +175,4 @@ public class testConnectionPool {
         }
         logger.info("ending connection");
     }
-<<<<<<< HEAD
 }
-=======
-
-}
->>>>>>> main

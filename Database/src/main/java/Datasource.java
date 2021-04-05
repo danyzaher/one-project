@@ -2,9 +2,7 @@ import java.sql.Connection;
 
 public class Datasource {
     private static JDBCConnectionPool physical_co;
-    public Datasource(int nboneco) {
-        physical_co = new JDBCConnectionPool(nboneco);
-    }
+    public Datasource(int nboneco) { physical_co = new JDBCConnectionPool(nboneco); }
     public static Connection getConnection() {
         return physical_co.getConnection();
     }
@@ -16,17 +14,8 @@ public class Datasource {
     public static void closeConnections() {
         physical_co.endConnections();
     }
-<<<<<<< HEAD
 
     public static boolean isEmpty() { return physical_co.isEmpty(); }
-    }
 
-=======
-    public static boolean isEmpty() {
-        return physical_co.isEmpty();
-    }
-    public int size() {
-        return physical_co.size();
-    }
+    public int size() { return physical_co.size(); }
 }
->>>>>>> main

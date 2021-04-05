@@ -1,0 +1,6 @@
+{
+  "url":"jdbc:postgresql://172.31.254.85:5432/postgres",
+  "driver":"org.postgresql.Driver",
+  "user":"postgres",
+  "mdp":"venom"
+}

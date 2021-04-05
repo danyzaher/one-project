@@ -8,76 +8,66 @@ import java.util.ArrayList;
 public class JDBCConnectionPool {
     public static Logger logger = LoggerFactory.getLogger("JDBCConnectionPool");
 
-<<<<<<< HEAD
-    public ArrayList<Connection> collection;
-    public boolean isEmpty(){
-=======
-    private final ArrayList<Connection> collection;
-    private Connectioninfo cf;
->>>>>>> main
+        private final ArrayList<Connection> collection;
+        private Connectioninfo cf;
 
-        return collection.isEmpty();
-    }
     public JDBCConnectionPool(int nboneco) {
         cf = new Connectioninfo();
         this.collection = new ArrayList<>();
         addConnections(nboneco);
     }
 
-    public void addConnections(int nboneco)
-    {
+    public void addConnections(int nboneco) {
 
         Connection oneco;
 
         for (int i = 0; i < nboneco; i++) {
 
-<<<<<<< HEAD
-            try {Class.forName("org.postgresql.Driver");
+                try {
+                    Class.forName(cf.getDriver());
 
-                oneco = DriverManager.getConnection("jdbc:postgresql://localhost:5432/testone","maxime","admin");
-=======
-            try {Class.forName(cf.getDriver());
->>>>>>> main
+                    oneco = DriverManager.getConnection(cf.getUrl(), cf.getUser(), cf.getPassword());
+                    collection.add(oneco);
+                    logger.info("Connection available = " + collection.size());
 
-                oneco = DriverManager.getConnection(cf.getUrl(),cf.getUser(),cf.getPassword());
-                collection.add(oneco);
-                logger.info("Connection available = "+collection.size());
-
-            } catch (SQLException | ClassNotFoundException throwables) {
-                throwables.printStackTrace();
+                } catch (SQLException | ClassNotFoundException throwables) {
+                    throwables.printStackTrace();
+                }
             }
         }
-    }
 
-    public Connection getConnection(){
+        public Connection getConnection () {
 
-        if (collection.isEmpty()){
-        logger.info("No more connection !!!");
-        return null;
-    } else {
-        Connection oneco = collection.get(0);
-        collection.remove(0);
-        logger.info("Connection available = "+collection.size());
-        return oneco;
-    }}
-
-
-    public void endConnections()
-    {
-
-        for (int i=0; i < collection.size(); i++) {
-            try {
-                getConnection().close();
-            } catch (SQLException throwables) {
-                throwables.printStackTrace();
+            if (collection.isEmpty()) {
+                logger.info("No more connection !!!");
+                return null;
+            } else {
+                Connection oneco = collection.get(0);
+                collection.remove(0);
+                logger.info("Connection available = " + collection.size());
+                return oneco;
             }
         }
+
+
+        public void endConnections ()
+        {
+
+            for (int i = 0; i < collection.size(); i++) {
+                try {
+                    getConnection().close();
+                } catch (SQLException throwables) {
+                    throwables.printStackTrace();
+                }
+            }
+        }
+        public void setConnection (Connection oneco){
+            collection.add(oneco);
+        }
+        public boolean isEmpty () {
+            return collection.isEmpty();
+        }
+        public int size () {
+            return collection.size();
+        }
     }
-    public void setConnection(Connection oneco) {
-        collection.add(oneco);
-    }
-    public boolean isEmpty() { return collection.isEmpty(); }
-    public int size() {
-        return collection.size();
-    }
-}
