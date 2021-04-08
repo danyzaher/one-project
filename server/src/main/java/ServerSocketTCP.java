@@ -4,9 +4,6 @@ import org.slf4j.LoggerFactory;
 import java.net.*;
 import java.io.*;
 import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
@@ -33,9 +30,15 @@ class ServerSocketTCP {
 					CC.setC(connectionManager.get(i));
 					logger.info("Connexion avec : " + socketClient.getInetAddress());
 					message = in.readLine();
-
-					CC.addElement("produit", "nom", message);
-					out.println(CC.showElement("produit"));
+					if (message.equals("add")){
+						message =in.readLine();
+					    CC.addElement("produit", "nom", message);
+						out.println(CC.showElement("produit"));}
+					else if (message.equals("delete")){
+						message =in.readLine();
+						CC.deleteElement("produit","nom");
+						out.println(CC.showElement("produit"));}
+					else {out.println("Error the message was "+message+" it is different from add or delete");}
 					socketClient.close();
 					i++;
 				} else {
