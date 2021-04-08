@@ -8,8 +8,8 @@ import javax.swing.JFrame;
 
 public class App extends JFrame {
     public App() {
-        super("MyBuilding");
-        Image var1 = Toolkit.getDefaultToolkit().getImage("one-project\\files\\logo.png");
+        super("One-Building");
+        Image var1 = Toolkit.getDefaultToolkit().getImage("one-project\\application\\files\\logo.png");
         this.setDefaultCloseOperation(3);
 
         this.setSize(800, 700);

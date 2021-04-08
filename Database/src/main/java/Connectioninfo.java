@@ -16,7 +16,7 @@ public class Connectioninfo {
     public Connectioninfo() throws NullPointerException {
 
         try {
-            Reader reader = Files.newBufferedReader(Paths.get("Database\\src\\main\\resources\\databaseConnection.json"));
+            Reader reader = Files.newBufferedReader(Paths.get("EPISEN_SRV_CONF"));
             HashMap<String, String> map = gson.fromJson(reader, HashMap.class);
 
             this.url = map.get("url");
