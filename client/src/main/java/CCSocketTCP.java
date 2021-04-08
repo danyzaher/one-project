@@ -1,10 +1,9 @@
 
-<<<<<<< HEAD
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.commons.cli.*;
-=======
->>>>>>> f1dcff6b95119d6655002fcacca8b587291bbbca
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -50,12 +49,9 @@ public class CCSocketTCP {
         } catch (Exception e) {
             e.printStackTrace();
         }
-<<<<<<< HEAD
+
         clientLog.info("END");     // message de terminaison
-=======
-        System.out.println("END");     // message de terminaison
-        pred.println("END") ;
->>>>>>> f1dcff6b95119d6655002fcacca8b587291bbbca
+
         plec.close();
         pred.close();
         socket.close();
