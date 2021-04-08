@@ -26,20 +26,24 @@ public class CCSocketTCP {
 
         BufferedReader plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter pred = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
-        final Option create = Option.builder().longOpt("create").hasArg().build();
-        options.addOption(create);
+        final Option variable = Option.builder().longOpt("create").hasArg().build();
+        final Option methode = Option.builder().longOpt("methode").hasArg().build();
+        options.addOption(variable);
+        options.addOption(methode);
         boolean iCreate;
+        boolean iMethode;
         final CommandLineParser parser = new DefaultParser();
         final CommandLine commandLine = parser.parse(options, args);
         iCreate = commandLine.hasOption("create");
+        iMethode = commandLine.hasOption("methode");
         String str;
-        if (iCreate)
-            str = commandLine.getOptionValue("create");
-        else
-            str = "Ananas";
-        for (int i = 0; i < 10; i++) {
-            pred.println(str);          // envoi d'un message
-        }
+        if (iCreate){
+            str = commandLine.getOptionValue("create");}
+        else{
+            str = "Ananas";}
+        if (iMethode){ pred.println(commandLine.getOptionValue("methode"));}
+        pred.println(str);          // envoi d'un message
+
         try {
             String recu = null;
             clientLog.debug("debut lecture du message recu");
