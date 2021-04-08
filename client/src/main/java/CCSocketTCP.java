@@ -17,7 +17,7 @@ public class CCSocketTCP {
     protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP");
     public static void main(String[] args) throws Exception {
 
-        Reader reader = Files.newBufferedReader(Paths.get("EPISEN_CLIENT_CONF"));
+        Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_CLIENT_CONF")));
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
         SocketConfig sc = om.readValue(reader, SocketConfig.class);
         final Options options = new Options();
