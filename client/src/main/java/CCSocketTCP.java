@@ -39,7 +39,7 @@ public class CCSocketTCP {
         String str;
         if (iCreate){
             str = commandLine.getOptionValue("create");}
-        else{
+        else {
             str = "Ananas";}
         if (iMethode){ pred.println(commandLine.getOptionValue("methode"));}
         pred.println(str);          // envoi d'un message
