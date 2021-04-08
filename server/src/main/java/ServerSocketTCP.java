@@ -21,7 +21,7 @@ class ServerSocketTCP {
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	static Datasource source;
 	public static void main(String[] args) throws IOException {
-		Reader reader = Files.newBufferedReader(Paths.get("EPISEN_SRV_CONF"));
+		Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_SRV_CONF")));
 		HashMap<String, Integer> map = gson.fromJson(reader, HashMap.class);
 		port = map.get(port);
 		nboneco = map.get(nboneco);

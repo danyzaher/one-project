@@ -73,6 +73,7 @@ public class testConnectionPool {
 
                     //logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
+                    CC.setC(connectionManager.get(i));
                     //updateElement(connectionManager.get(i), commandLine.getOptionValue("tableName"),commandLine.getOptionValue("idvalue"),commandLine.getOptionValue("namecolomn"), commandLine.getOptionValue("update"));
 
                     sleep(itimeOut);
@@ -121,7 +122,7 @@ public class testConnectionPool {
                     connectionManager.add(i, source.getConnection());
                     CC.setC(connectionManager.get(i));
                     logger.info("deleting element");
-                   CC.deleteElement(, "produit", "id_produit");
+                   CC.deleteElement("produit", "id_produit");
                    CC.showElement("produit", "id_produit", "nom");
                     sleep(itimeOut);
                     i++;
