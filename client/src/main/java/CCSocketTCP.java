@@ -30,18 +30,16 @@ public class CCSocketTCP {
         final Option methode = Option.builder().longOpt("methode").hasArg().build();
         options.addOption(variable);
         options.addOption(methode);
-        boolean iCreate;
-        boolean iMethode;
         final CommandLineParser parser = new DefaultParser();
         final CommandLine commandLine = parser.parse(options, args);
-        iCreate = commandLine.hasOption("create");
-        iMethode = commandLine.hasOption("methode");
+
         String str;
-        if (iCreate){
+        if (commandLine.hasOption("create")){
             str = commandLine.getOptionValue("create");}
         else {
-            str = "Ananas";}
-        if (iMethode){ pred.println(commandLine.getOptionValue("methode"));}
+            str = "Ananas";
+        }
+        if (commandLine.hasOption("methode")){ pred.println(commandLine.getOptionValue("methode"));}
         pred.println(str);          // envoi d'un message
 
         try {
