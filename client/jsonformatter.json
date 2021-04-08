@@ -1,26 +1,29 @@
-﻿[
-  {
-    "nom": "fromage",
-    "prix": 2
-  },
-  {
-    "nom": "lait",
-    "prix": 1
-  },
-  {
-    "nom": "eau",
-    "prix": 4
-  },
-  {
-    "nom": "boeuf",
-    "prix": 3
-  },
-  {
-    "nom": "test",
-    "prix": 1
-  },
-  {
-    "nom": "test 4",
-    "prix": 2
-  }
-]
+﻿{
+  "data": [
+    {
+      "nom": "fromage",
+      "prix": 2
+    },
+    {
+      "nom": "lait",
+      "prix": 1
+    },
+    {
+      "nom": "eau",
+      "prix": 4
+    },
+    {
+      "nom": "boeuf",
+      "prix": 3
+    },
+    {
+      "nom": "test",
+      "prix": 1
+    },
+    {
+      "nom": "test 4",
+      "prix": 2
+    }
+  ]
+}
+
