@@ -16,15 +16,15 @@ import static java.lang.Thread.sleep;
 
 class ServerSocketTCP {
 	final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	static int port;
+	static int p;
 	static int nboneco;
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	static Datasource source;
 	public static void main(String[] args) throws IOException {
 		Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_SRV_CONF")));
 		HashMap<String, Integer> map = gson.fromJson(reader, HashMap.class);
-		port = map.get(port);
-		nboneco = map.get(nboneco);
+		p = map.get("port");
+		nboneco = map.get("nboneco");
 		try {
 
 			final Options options = new Options();
@@ -34,7 +34,7 @@ class ServerSocketTCP {
 			options.addOption(nombre);
 			ConnectionCrud CC = new ConnectionCrud();
 			ArrayList<Connection> connectionManager = new ArrayList<>();
-			ServerSocket socketServer = new ServerSocket(port);
+			ServerSocket socketServer = new ServerSocket(p);
 			logger.info("Lancement du serveur");
 			if (commandLine.hasOption("nboneco"))
 				source = new Datasource(Integer.parseInt(commandLine.getOptionValue("nboneco")));
