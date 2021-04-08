@@ -32,7 +32,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>backend</mainClass>
+                            <mainClass>ServerSocketTCP</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
