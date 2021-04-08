@@ -1,2 +1,2 @@
 cd ..
-exec  java -jar target/client-1.0-SNAPSHOT-jar-with-dependencies.jar
+java -jar target/client-1.0-SNAPSHOT-jar-with-dependencies.jar
