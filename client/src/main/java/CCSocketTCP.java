@@ -1,4 +1,6 @@
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -11,10 +13,11 @@ import java.nio.file.Paths;
 public class CCSocketTCP {
     protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP");
     public static void main(String[] args) throws Exception {
+        Reader reader = Files.newBufferedReader(Paths.get("client\\socketConnection.yaml"));
+        ObjectMapper om = new ObjectMapper(new YAMLFactory());
+        SocketConfig sc = om.readValue(reader, SocketConfig.class);
 
-        int port=3333;
-        String hostName = "localhost"; //IP
-        Socket socket = new Socket(hostName, port);
+        Socket socket = new Socket(sc.getHost(), sc.getPort());
         System.out.println("SOCKET = " + socket);
 
         BufferedReader plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -34,7 +37,6 @@ public class CCSocketTCP {
             e.printStackTrace();
         }
         System.out.println("END");     // message de terminaison
-        pred.println("END") ;
         plec.close();
         pred.close();
         socket.close();

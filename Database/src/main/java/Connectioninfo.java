@@ -17,12 +17,12 @@ public class Connectioninfo {
 
         try {
             Reader reader = Files.newBufferedReader(Paths.get("Database\\src\\main\\resources\\databaseConnection.json"));
-            HashMap<?, ?> map = gson.fromJson(reader, HashMap.class);
+            HashMap<String, String> map = gson.fromJson(reader, HashMap.class);
 
-            this.url = (String) map.get("url");
-            this.driver = (String) map.get("driver");
-            this.user = (String) map.get("user");
-            this.password= (String) map.get("mdp");
+            this.url = map.get("url");
+            this.driver = map.get("driver");
+            this.user = map.get("user");
+            this.password= map.get("mdp");
             reader.close();
         } catch (IOException e) {
 

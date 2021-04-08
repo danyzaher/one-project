@@ -7,7 +7,7 @@ import java.sql.Statement;
 import java.util.ArrayList;
 
 class ServerSocketTCP {
-	final static int port = 3333;
+	final static int port = 60500;
 
 	public static void main(String[] args) {
 		try {
@@ -20,25 +20,30 @@ class ServerSocketTCP {
 			while (true) {
 				Socket socketClient = socketServer.accept();
 				String message = "";
-				connectionManager.add(i,source.getConnection());
-				CC.setC(connectionManager.get(i));
-				System.out.println("Connexion avec : "+socketClient.getInetAddress());
-
-
-				// InputStream in = socketClient.getInputStream();
-				// OutputStream out = socketClient.getOutputStream();
-
 				BufferedReader in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
-				PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream())),true);
-				message = in.readLine();
+				PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream())), true);
+				if (i <= source.size()) {
+					connectionManager.add(i, source.getConnection());
+					CC.setC(connectionManager.get(i));
+					System.out.println("Connexion avec : " + socketClient.getInetAddress());
+					message = in.readLine();
 
-				CC.addElement( "produit", "nom", message);
-				out.println(CC.showElement("produit"));
-				socketClient.close();
-				i++;
-			}
-		} catch (Exception e) {
-			e.printStackTrace();
+					CC.addElement("produit", "nom", message);
+					out.println(CC.showElement("produit"));
+					socketClient.close();
+					i++;
+				} else {
+					System.out.println("no more connections");
+					out.println("no more connections");
+					socketClient.close();
+					break;
+					}
+				}
+			} catch (SQLException throwables) {
+			throwables.printStackTrace();
+		} catch (IOException ioException) {
+			ioException.printStackTrace();
 		}
+		System.out.println("END");
 	}
 }
