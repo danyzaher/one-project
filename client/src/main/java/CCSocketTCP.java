@@ -1,6 +1,7 @@
 
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.commons.cli.*;
 
@@ -20,31 +21,25 @@ public class CCSocketTCP {
         Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_CLIENT_CONF")));
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
         SocketConfig sc = om.readValue(reader, SocketConfig.class);
-        final Options options = new Options();
         Socket socket = new Socket(sc.getIp(), sc.getPort());
         clientLog.info("SOCKET = " + socket);
 
         BufferedReader plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         PrintWriter pred = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
-        final Option variable = Option.builder().longOpt("create").hasArg().build();
-        final Option methode = Option.builder().longOpt("methode").hasArg().build();
-        options.addOption(variable);
-        options.addOption(methode);
-        final CommandLineParser parser = new DefaultParser();
-        final CommandLine commandLine = parser.parse(options, args);
 
-        String str;
-        if (commandLine.hasOption("create")){
-            str = commandLine.getOptionValue("create");}
-        else {
-            str = "Ananas";
+        File file = new File(String.valueOf(Paths.get("client\\jsonformatter.json")));
+        ObjectMapper obm = new ObjectMapper();
+
+        ArrayNode nodes = (ArrayNode) obm.readTree(file).get("data");
+
+
+        for (int i = 0; i < nodes.size(); i++) {
+            pred.println(nodes.get(i));
         }
-        if (commandLine.hasOption("methode")){ pred.println(commandLine.getOptionValue("methode"));}
-        pred.println(str);          // envoi d'un message
-
+       pred.println("end");
         try {
             String recu = null;
-            clientLog.debug("debut lecture du message recu");
+            clientLog.info("Starting receiving data");
             while ((recu = plec.readLine()) != null) {
                 clientLog.info(recu);
             }
@@ -52,7 +47,7 @@ public class CCSocketTCP {
             e.printStackTrace();
         }
 
-        clientLog.info("END");     // message de terminaison
+        clientLog.info("END");
 
         plec.close();
         pred.close();
