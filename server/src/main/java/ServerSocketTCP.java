@@ -13,14 +13,14 @@ import static java.lang.Thread.sleep;
 
 class ServerSocketTCP {
 	final static int port = 60500;
-	private final static Logger logger = LoggerFactory.getLogger(testConnectionPool.class.getName());
+	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 
 	public static void main(String[] args) {
 		try {
 			ConnectionCrud CC = new ConnectionCrud();
 			ArrayList<Connection> connectionManager = new ArrayList<>();
 			ServerSocket socketServer = new ServerSocket(port);
-			System.out.println("Lancement du serveur");
+			logger.info("Lancement du serveur");
 			Datasource source = new Datasource(20);
 			int i = 0;
 			while (true) {
