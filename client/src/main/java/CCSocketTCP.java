@@ -1,7 +1,10 @@
 
+<<<<<<< HEAD
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.apache.commons.cli.*;
+=======
+>>>>>>> f1dcff6b95119d6655002fcacca8b587291bbbca
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.yaml.snakeyaml.Yaml;
@@ -14,6 +17,7 @@ import java.nio.file.Paths;
 public class CCSocketTCP {
     protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP");
     public static void main(String[] args) throws Exception {
+
         Reader reader = Files.newBufferedReader(Paths.get("EPISEN_CLIENT_CONF"));
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
         SocketConfig sc = om.readValue(reader, SocketConfig.class);
@@ -46,7 +50,12 @@ public class CCSocketTCP {
         } catch (Exception e) {
             e.printStackTrace();
         }
+<<<<<<< HEAD
         clientLog.info("END");     // message de terminaison
+=======
+        System.out.println("END");     // message de terminaison
+        pred.println("END") ;
+>>>>>>> f1dcff6b95119d6655002fcacca8b587291bbbca
         plec.close();
         pred.close();
         socket.close();
