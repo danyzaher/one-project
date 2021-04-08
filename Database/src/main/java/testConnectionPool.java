@@ -9,42 +9,8 @@ import static java.lang.Thread.sleep;
 public class testConnectionPool {
     private final static Logger logger = LoggerFactory.getLogger(testConnectionPool.class.getName());
 
-    public static void addElement(Connection c, String Table, String column, Object value) throws SQLException {
-        String sql = "INSERT INTO \"" + Table + "\"(" + column + ") " + "VALUES ('" + value + "');";
-        Statement smt = c.createStatement();
-        smt.executeUpdate(sql);
-    }
-
-    public static void eraseElement(Connection c, String Table, String idcolumn, String id) throws SQLException {
-        String sql = "DELETE FROM \"" + Table + "\" WHERE " + idcolumn + " = " + id + ";";
-        Statement smt = c.createStatement();
-        smt.executeUpdate(sql);
-    }
-
-    public static void deleteElement(Connection c, String Table, String idcolumn) throws SQLException {
-        String sql = "delete from \"" + Table + "\" where " + idcolumn + " = (select max(" + idcolumn + ") from \"" + Table + "\");";
-        Statement smt = c.createStatement();
-        smt.executeUpdate(sql);
-    }
-
-    public static void showElement(Connection c, String Table, String idcolumn, String columna) throws SQLException {
-        String sql = "select * from \"" + Table + "\";";
-        Statement smt = c.createStatement();
-        ResultSet rs = smt.executeQuery(sql);
-        while (rs.next()) {
-            System.out.println(rs.getArray(idcolumn) + "   " + rs.getArray(columna));
-        }
-        System.out.println();
-    }
-
-    public static void updateElement(Connection c, String Table, String idcolumn, String idvalue, String namecolumn, String newValue) throws SQLException {
-        String sql = "update \"" + Table + "\" set (\"" + namecolumn + "\" = \"" + newValue
-                + "\") where (" + idcolumn + " = \"" + idvalue + "\");";
-        Statement smt = c.createStatement();
-        ResultSet rs = smt.executeQuery(sql);
-    }
-
     public static void main(String[] args) throws SQLException, ParseException, InterruptedException {
+        ConnectionCrud CC = new ConnectionCrud();
         ArrayList<Connection> connectionManager = new ArrayList<>();
         final Options options = new Options();
         final Option maxConnection = Option.builder().longOpt("maxConnection").hasArg().build();
@@ -86,7 +52,8 @@ public class testConnectionPool {
 
                     logger.info("Number of available connections: " + source.size());
                     connectionManager.add(i, source.getConnection());
-                    showElement(connectionManager.get(i), "produit", "id_produit", "nom");
+                    CC.setC(connectionManager.get(i));
+                    CC.showElement("produit", "id_produit", "nom");
                     sleep(itimeOut);
                     i++;
                 }
@@ -128,9 +95,10 @@ public class testConnectionPool {
                     logger.info("Number of available connections: " + source.size());
 
                     connectionManager.add(i, source.getConnection());
+                    CC.setC(connectionManager.get(i));
                     logger.info("adding element");
-                    addElement(connectionManager.get(i), "produit", "nom", commandLine.getOptionValue("create"));
-                    showElement(connectionManager.get(i), "produit", "id_produit", "nom");
+                    CC.addElement("produit", "nom", commandLine.getOptionValue("create"));
+                    CC.showElement( "produit", "id_produit", "nom");
                     sleep(itimeOut);
                     i++;
                 }
@@ -151,9 +119,10 @@ public class testConnectionPool {
                     logger.info("Number of available connections: " + source.size());
 
                     connectionManager.add(i, source.getConnection());
+                    CC.setC(connectionManager.get(i));
                     logger.info("deleting element");
-                    deleteElement(connectionManager.get(i), "produit", "id_produit");
-                    showElement(connectionManager.get(i), "produit", "id_produit", "nom");
+                   CC.deleteElement(, "produit", "id_produit");
+                   CC.showElement("produit", "id_produit", "nom");
                     sleep(itimeOut);
                     i++;
                 }
