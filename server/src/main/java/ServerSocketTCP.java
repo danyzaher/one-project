@@ -1,3 +1,6 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.net.*;
 import java.io.*;
 import java.sql.Connection;
@@ -6,8 +9,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 
+import static java.lang.Thread.sleep;
+
 class ServerSocketTCP {
 	final static int port = 60500;
+	private final static Logger logger = LoggerFactory.getLogger(testConnectionPool.class.getName());
 
 	public static void main(String[] args) {
 		try {
@@ -25,7 +31,7 @@ class ServerSocketTCP {
 				if (i <= source.size()) {
 					connectionManager.add(i, source.getConnection());
 					CC.setC(connectionManager.get(i));
-					System.out.println("Connexion avec : " + socketClient.getInetAddress());
+					logger.info("Connexion avec : " + socketClient.getInetAddress());
 					message = in.readLine();
 
 					CC.addElement("produit", "nom", message);
@@ -33,17 +39,21 @@ class ServerSocketTCP {
 					socketClient.close();
 					i++;
 				} else {
-					System.out.println("no more connections");
+					logger.info("no more connections");
 					out.println("no more connections");
+					for (int k = 0; k<connectionManager.size(); k++) {
+						source.setConnection(connectionManager.get(k));
+						logger.info("add connection " + k);
+						sleep(1000);
+					}
+					connectionManager.clear();
 					socketClient.close();
 					break;
 					}
 				}
-			} catch (SQLException throwables) {
+			} catch (Exception throwables) {
 			throwables.printStackTrace();
-		} catch (IOException ioException) {
-			ioException.printStackTrace();
 		}
-		System.out.println("END");
+		logger.info("END");
 	}
 }
