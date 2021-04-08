@@ -1,24 +1,45 @@
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.net.*;
 import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import static java.lang.Thread.sleep;
 
 class ServerSocketTCP {
-	final static int port = 60500;
+	final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
+	static int port;
+	static int nboneco;
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
-
-	public static void main(String[] args) {
+	static Datasource source;
+	public static void main(String[] args) throws IOException {
+		Reader reader = Files.newBufferedReader(Paths.get("EPISEN_SRV_CONF"));
+		HashMap<String, Integer> map = gson.fromJson(reader, HashMap.class);
+		port = map.get(port);
+		nboneco = map.get(nboneco);
 		try {
+
+			final Options options = new Options();
+			final Option nombre = Option.builder().longOpt("nboneco").hasArg().build();
+			final CommandLineParser parser = new DefaultParser();
+			final CommandLine commandLine = parser.parse(options, args);
+			options.addOption(nombre);
 			ConnectionCrud CC = new ConnectionCrud();
 			ArrayList<Connection> connectionManager = new ArrayList<>();
 			ServerSocket socketServer = new ServerSocket(port);
 			logger.info("Lancement du serveur");
-			Datasource source = new Datasource(20);
+			if (commandLine.hasOption("nboneco"))
+				source = new Datasource(Integer.parseInt(commandLine.getOptionValue("nboneco")));
+			else
+				source = new Datasource((nboneco));
 			int i = 0;
 			while (true) {
 				Socket socketClient = socketServer.accept();
