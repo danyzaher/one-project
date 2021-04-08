@@ -1,3 +1,5 @@
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import org.apache.commons.cli.*;
@@ -10,21 +12,18 @@ import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.Connection;
 import java.util.ArrayList;
-import java.util.HashMap;
+
 
 import static java.lang.Thread.sleep;
 
 class ServerSocketTCP {
-	final static Gson gson = new GsonBuilder().setPrettyPrinting().create();
-	static int p;
-	static int nboneco;
+
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	static Datasource source;
 	public static void main(String[] args) throws IOException {
 		Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_SRV_CONF")));
-		HashMap<String, Integer> map = gson.fromJson(reader, HashMap.class);
-		p = map.get("port");
-		nboneco = map.get("nboneco");
+		ObjectMapper om = new ObjectMapper(new YAMLFactory());
+		ServerConfig sc = om.readValue(reader, ServerConfig.class);
 		try {
 
 			final Options options = new Options();
@@ -34,12 +33,12 @@ class ServerSocketTCP {
 			options.addOption(nombre);
 			ConnectionCrud CC = new ConnectionCrud();
 			ArrayList<Connection> connectionManager = new ArrayList<>();
-			ServerSocket socketServer = new ServerSocket(p);
+			ServerSocket socketServer = new ServerSocket(sc.getPort());
 			logger.info("Lancement du serveur");
 			if (commandLine.hasOption("nboneco"))
 				source = new Datasource(Integer.parseInt(commandLine.getOptionValue("nboneco")));
 			else
-				source = new Datasource((nboneco));
+				source = new Datasource((sc.getNboneco()));
 			int i = 0;
 			while (true) {
 
