@@ -12,7 +12,7 @@ public class ServerConfig {
 
     @Override
     public String toString() {
-        return "SocketConfig{" +
+        return "ServerConfig{" +
                 "port=" + port +
                 ", nboneco=" + nboneco +
                 '}';

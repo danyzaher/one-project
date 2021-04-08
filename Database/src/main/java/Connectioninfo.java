@@ -2,12 +2,12 @@ import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.HashMap;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
+
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+
 
 public class Connectioninfo {
-    final Gson gson = new GsonBuilder().setPrettyPrinting().create();
     String url;
     String driver;
     String user;
@@ -17,12 +17,12 @@ public class Connectioninfo {
 
         try {
             Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_DATABASE_CONF")));
-            HashMap<String, String> map = gson.fromJson(reader, HashMap.class);
-
-            this.url = map.get("url");
-            this.driver = map.get("driver");
-            this.user = map.get("user");
-            this.password= map.get("mdp");
+            ObjectMapper om = new ObjectMapper(new YAMLFactory());
+            DatabaseConfig dc = om.readValue(reader, DatabaseConfig.class);
+            this.url = dc.getUrl();
+            this.driver = dc.getDriver();
+            this.user = dc.getUser();
+            this.password= dc.getPassword();
             reader.close();
         } catch (IOException e) {
 
