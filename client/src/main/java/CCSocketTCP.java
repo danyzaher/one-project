@@ -16,8 +16,8 @@ import java.nio.file.Paths;
 
 public class CCSocketTCP {
     protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP");
-    public static void main(String[] args) throws Exception {
 
+    public static void main(String[] args) throws IOException {
         Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_CLIENT_CONF")));
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
         SocketConfig sc = om.readValue(reader, SocketConfig.class);
@@ -25,7 +25,7 @@ public class CCSocketTCP {
         clientLog.info("SOCKET = " + socket);
 
         BufferedReader plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter pred = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())),true);
+        PrintWriter pred = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 
         File file = new File(String.valueOf(Paths.get("client\\jsonformatter.json")));
         ObjectMapper obm = new ObjectMapper();
@@ -36,7 +36,7 @@ public class CCSocketTCP {
         for (int i = 0; i < nodes.size(); i++) {
             pred.println(nodes.get(i));
         }
-       pred.println("end");
+        pred.println("end");
         try {
             String recu = null;
             clientLog.info("Starting receiving data");
@@ -48,9 +48,6 @@ public class CCSocketTCP {
         }
 
         clientLog.info("END");
-
-        plec.close();
-        pred.close();
-        socket.close();
     }
 }
+
