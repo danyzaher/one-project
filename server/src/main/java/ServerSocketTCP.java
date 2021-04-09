@@ -61,7 +61,7 @@ class ServerSocketTCP {
 					out.println("no more connections");
 					for (int k = 0; k < connectionManager.size(); k++) {
 						source.setConnection(connectionManager.get(k));
-						logger.info("add connection " + k);
+						logger.info("add connection " + k+1);
 						sleep(1000);
 					}
 					connectionManager.clear();
