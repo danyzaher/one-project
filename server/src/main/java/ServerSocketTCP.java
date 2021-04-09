@@ -24,7 +24,7 @@ import static java.lang.Thread.sleep;
 class ServerSocketTCP implements Runnable{
 	static ConnectionCrud CC = new ConnectionCrud();
 	static ArrayList<Connection> connectionManager = new ArrayList<>();
-	int i = 0;
+	static int i = 0;
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	static Reader reader;
 	static {
@@ -44,21 +44,21 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 	static Datasource source = new Datasource(sc.getNboneco());
+	static Socket socketClient;
 	public ServerSocketTCP() throws IOException {
 	}
 
 	public void run() {
 		try {
-			ServerSocket socketServer = new ServerSocket(sc.getPort());
-			Socket socketClient = socketServer.accept();
+			Socket socket = socketClient;
 			ObjectMapper mapper = new ObjectMapper();
-			BufferedReader in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
-			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream())), true);
+			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 			logger.info("Connection available = " + source.size());
 			if (source.size() > 0) {
 				connectionManager.add(i, source.getConnection());
 				CC.setC(connectionManager.get(i));
-				logger.info("Connexion avec : " + socketClient.getInetAddress());
+				logger.info("Connexion avec : " + socket.getInetAddress());
 				for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
 					logger.info("receiving data from client");
 					JsonNode jn = mapper.readTree(recu);
@@ -66,7 +66,7 @@ class ServerSocketTCP implements Runnable{
 				}
 				out.println(CC.showElement("produit"));
 
-				socketClient.close();
+				socket.close();
 				i++;
 			} else {
 				logger.info("no more connections");
@@ -87,12 +87,11 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
-		public static void main(String[] args) throws IOException {
-		try {
-			logger.info("Lancement du serveur");
-
-
-		} catch (Exception throwables) {throwables.printStackTrace();}
-		logger.info("END");
-	}
+		public void main(String[] args) throws IOException {
+		while (true){
+			ServerSocket socketServer = new ServerSocket(sc.getPort());
+			Socket socketClient = socketServer.accept();
+			run();
+		}
+		}
 }
