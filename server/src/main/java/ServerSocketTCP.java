@@ -17,9 +17,13 @@ import java.util.ArrayList;
 
 import static java.lang.Thread.sleep;
 
-class ServerSocketTCP {
+class ServerSocketTCP implements Runnable{
 
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
+
+	public void run(){
+
+	}
 
 	public static void main(String[] args) throws IOException {
 		Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_SRV_CONF")));
