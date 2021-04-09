@@ -9,7 +9,7 @@
     </parent>
     <modelVersion>4.0.0</modelVersion>
 
-    <artifactId>database</artifactId>
+    <artifactId>server</artifactId>
 
     <properties>
         <maven.compiler.source>13</maven.compiler.source>
@@ -45,17 +45,8 @@
                     </execution>
                 </executions>
             </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <configuration>
-                    <source>14</source>
-                    <target>14</target>
-                </configuration>
-            </plugin>
         </plugins>
     </build>
-
     <dependencies>
         <dependency>
             <groupId>org.postgresql</groupId>
