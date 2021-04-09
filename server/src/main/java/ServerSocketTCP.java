@@ -77,7 +77,7 @@ class ServerSocketTCP implements Runnable{
 					sleep(1000);
 				}
 				connectionManager.clear();
-				socketClient.close();
+				socket.close();
 			}
 		} catch (IOException e) {
 			e.printStackTrace();
@@ -91,7 +91,7 @@ class ServerSocketTCP implements Runnable{
 		while (true){
 			ServerSocket socketServer = new ServerSocket(sc.getPort());
 			Socket socketClient = socketServer.accept();
-			run();
+			new Thread(new ServerSocketTCP()).start();
 		}
 		}
 }
