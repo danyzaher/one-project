@@ -1,7 +1,8 @@
 import com.fasterxml.jackson.databind.JsonNode;
+
+
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-
 import org.apache.commons.cli.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -30,7 +31,8 @@ class ServerSocketTCP {
 			ArrayList<Connection> connectionManager = new ArrayList<>();
 			ServerSocket socketServer = new ServerSocket(sc.getPort());
 			logger.info("Lancement du serveur");
-			Datasource source = new Datasource((sc.getNboneco()));
+
+			Datasource source = new Datasource(sc.getNboneco());
 			int i = 0;
 			while (true) {
 
@@ -42,7 +44,7 @@ class ServerSocketTCP {
 					connectionManager.add(i, source.getConnection());
 					CC.setC(connectionManager.get(i));
 					logger.info("Connexion avec : " + socketClient.getInetAddress());
-					for (String recu = in.readLine(); !recu.equals("end") ; recu = in.readLine()) {
+					for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
 						logger.info("receiving data from client");
 						JsonNode jn = mapper.readTree(recu);
 						CC.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());

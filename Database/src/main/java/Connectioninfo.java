@@ -1,15 +1,14 @@
-
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.Reader;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-
-
-
+import java.util.HashMap;
 
 public class Connectioninfo {
     String url;
@@ -22,11 +21,12 @@ public class Connectioninfo {
         try {
             Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_DATABASE_CONF")));
             ObjectMapper om = new ObjectMapper(new YAMLFactory());
-            DatabaseConfig dc = om.readValue(reader, DatabaseConfig.class);
-            this.url = dc.getUrl();
-            this.driver = dc.getDriver();
-            this.user = dc.getUser();
-            this.password= dc.getPassword();
+            DatabaseConfig sc = om.readValue(reader, DatabaseConfig.class);
+
+            this.url = sc.getUrl();
+            this.driver = sc.getDriver();
+            this.user = sc.getUser();
+            this.password= sc.getPassword();
             reader.close();
         } catch (IOException e) {
 

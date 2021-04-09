@@ -1,13 +1,8 @@
-
 public class DatabaseConfig {
-    private String driver;
-    private String url;
     private String user;
     private String password;
-
-    public String getDriver() {
-        return driver;
-    }
+    private String driver;
+    private String url;
 
     public String getUser() {
         return user;
@@ -17,6 +12,10 @@ public class DatabaseConfig {
         return password;
     }
 
+    public String getDriver() {
+        return driver;
+    }
+
     public String getUrl() {
         return url;
     }
@@ -24,10 +23,10 @@ public class DatabaseConfig {
     @Override
     public String toString() {
         return "DatabaseConfig{" +
-                "driver='" + driver + '\'' +
-                ", url='" + url + '\'' +
-                ", user='" + user + '\'' +
+                "user='" + user + '\'' +
                 ", password='" + password + '\'' +
+                ", driver='" + driver + '\'' +
+                ", url='" + url + '\'' +
                 '}';
     }
 }

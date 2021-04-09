@@ -23,20 +23,17 @@ public class JDBCConnectionPool {
 
         for (int i = 0; i < nboneco; i++) {
 
-                try {
-                    Class.forName(cf.getDriver());
-
-                    oneco = DriverManager.getConnection(cf.getUrl(), cf.getUser(), cf.getPassword());
-                    collection.add(oneco);
-                    logger.info("Connection available = " + collection.size());
-
-                } catch (SQLException | ClassNotFoundException throwables) {
-                    throwables.printStackTrace();
-                }
+            try {
+                Class.forName(cf.getDriver());
+                oneco = DriverManager.getConnection(cf.getUrl(), cf.getUser(), cf.getPassword());
+                collection.add(oneco);
+            } catch (SQLException | ClassNotFoundException throwables) {
+                throwables.printStackTrace();
             }
         }
+    }
 
-        public Connection getConnection () {
+        public Connection getConnection() {
 
             if (collection.isEmpty()) {
                 logger.info("No more connection !!!");
