@@ -45,7 +45,6 @@ public class JDBCConnectionPool {
             } else {
                 Connection oneco = collection.get(0);
                 collection.remove(0);
-                logger.info("Connection available = " + collection.size());
                 return oneco;
             }
         }

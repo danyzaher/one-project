@@ -40,6 +40,7 @@ class ServerSocketTCP {
 				ObjectMapper mapper = new ObjectMapper();
 				BufferedReader in = new BufferedReader(new InputStreamReader(socketClient.getInputStream()));
 				PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socketClient.getOutputStream())), true);
+				logger.info("Connection available = " + source.size());
 				if (i <= source.size()) {
 					connectionManager.add(i, source.getConnection());
 					CC.setC(connectionManager.get(i));
