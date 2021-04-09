@@ -90,7 +90,7 @@ class ServerSocketTCP implements Runnable{
 		public void main(String[] args) throws IOException {
 		while (true){
 			ServerSocket socketServer = new ServerSocket(sc.getPort());
-			Socket socketClient = socketServer.accept();
+			socketClient = socketServer.accept();
 			new Thread(new ServerSocketTCP()).start();
 		}
 		}
