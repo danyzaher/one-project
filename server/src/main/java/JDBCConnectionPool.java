@@ -30,7 +30,6 @@ public class JDBCConnectionPool {
 
                     oneco = DriverManager.getConnection(cf.getUrl(), cf.getUser(), cf.getPassword());
                     collection.add(oneco);
-                    logger.info("Connection available = " + collection.size());
 
                 } catch (SQLException | ClassNotFoundException throwables) {
                     throwables.printStackTrace();
