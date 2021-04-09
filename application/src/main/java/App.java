@@ -14,7 +14,7 @@ public class App extends JFrame {
 
         this.setSize(800, 700);
         setDefaultLookAndFeelDecorated(true);
-        this.setBackground(new Color(151, 59, 69));
+        this.setBackground(new Color(47, 123, 187));
         this.setIconImage(var1);
         this.setLayout((LayoutManager)null);
         this.setLocationRelativeTo((Component)null);
