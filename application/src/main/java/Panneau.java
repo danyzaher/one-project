@@ -1,8 +1,23 @@
 import javax.swing.*;
 import java.awt.*;
+import java.util.ArrayList;
 
 class Panneau extends JPanel {
+
     public void paintComponent(Graphics g) {
+        ArrayList<String> floors = new ArrayList();
+        ArrayList<String> buildings = new ArrayList<>();
+        buildings.add("b1");buildings.add("b2");
+        floors.add("Rez de chaussée");floors.add("Etage 1");floors.add("Etage 2");
+        JComboBox jcb = new JComboBox();
+        JComboBox jcb1 = new JComboBox();
+        jcb.addItem(buildings.get(0));
+        jcb.addItem(buildings.get(1));
+        for (int i = 0; i<floors.size();i++) {
+            jcb.addItem(floors.get(i));
+        }
+        this.add(jcb1);
+        this.add(jcb);
         int x2 = this.getWidth()/2;
         int y2 = this.getHeight()/2;
 
@@ -24,6 +39,7 @@ class Panneau extends JPanel {
         g.drawRect(x4,y2, x8,y4);
         g.fillRect(x2, y4,x4,y4);
         g.drawRect(x2,y2+30, x4,y4-30);
+
 
     }
 }
