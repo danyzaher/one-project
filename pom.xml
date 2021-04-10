@@ -12,6 +12,7 @@
         <module>server</module>
         <module>client</module>
         <module>application</module>
+        <module>electrochroma</module>
     </modules>
 
     <properties>
