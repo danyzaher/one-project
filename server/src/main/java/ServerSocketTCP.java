@@ -46,7 +46,7 @@ class ServerSocketTCP implements Runnable{
 				logger.info("Connection available = " + source.size());
 				addElementsToTable(in,C);
 				listMessage.add(C.showElement("produit"));
-				source.setConnection(C.getC());
+				//source.setConnection(C.getC());
 			} else{
 				listMessage.add("no more connection come back later");
 			}
