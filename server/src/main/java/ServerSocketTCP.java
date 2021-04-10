@@ -1,12 +1,6 @@
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.JsonMappingException;
 import com.fasterxml.jackson.databind.JsonNode;
-
-
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.apache.commons.cli.*;
-import org.apache.maven.lifecycle.internal.LifecycleDependencyResolver;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -14,14 +8,9 @@ import java.net.*;
 import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.sql.Connection;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
-import java.util.List;
 
-
-import static java.lang.Thread.sleep;
 
 class ServerSocketTCP implements Runnable{
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
