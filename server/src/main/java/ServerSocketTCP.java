@@ -48,6 +48,16 @@ class ServerSocketTCP implements Runnable{
 	public ServerSocketTCP() throws IOException {
 	}
 
+	public void analyseInputStream(Socket socket){
+		try {
+			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	public void constructOutputStream(Socket socket) throws IOException {
+		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+	}
 	public void run() {
 		try {
 			Socket socket = socketClient;
@@ -65,8 +75,6 @@ class ServerSocketTCP implements Runnable{
 					CC.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
 				}
 				out.println(CC.showElement("produit"));
-
-				socket.close();
 				i++;
 			} else {
 				logger.info("no more connections");
@@ -77,8 +85,8 @@ class ServerSocketTCP implements Runnable{
 					sleep(1000);
 				}
 				connectionManager.clear();
-				socket.close();
 			}
+			socket.close();
 		} catch (IOException e) {
 			e.printStackTrace();
 		} catch (SQLException throwables) {
@@ -87,7 +95,8 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
-		public void main(String[] args) throws IOException {
+		public static void main(String[] args) throws IOException {
+			logger.info("Server is running");
 		while (true){
 			ServerSocket socketServer = new ServerSocket(sc.getPort());
 			socketClient = socketServer.accept();
