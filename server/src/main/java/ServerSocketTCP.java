@@ -35,7 +35,6 @@ class ServerSocketTCP implements Runnable{
 	static Socket socketClient;
 	public ServerSocketTCP() {
 	}
-
 	public void analyseInputStream(Socket socket){
 		try {
 			logger.info("Connexion avec : " + socket.getInetAddress());
@@ -53,11 +52,10 @@ class ServerSocketTCP implements Runnable{
 				}
 				listMessage.add(C.showElement("produit"));
 				source.setConnection(C.getC());
-				constructOutputStream(socket,listMessage);
 			} else{
 				listMessage.add("no more connection come back later");
-				constructOutputStream(socket,listMessage);
 			}
+			constructOutputStream(socket,listMessage);
 			socket.close();
 
 		} catch (IOException | SQLException e) {
@@ -75,7 +73,7 @@ class ServerSocketTCP implements Runnable{
 		Socket socket = socketClient;
 		analyseInputStream(socket);
 	}
-		public static void main(String[] args) throws IOException {
+	public static void main(String[] args) throws IOException {
 			logger.info("Server is running");
 		while (true){
 			ServerSocket socketServer = new ServerSocket(sc.getPort());
