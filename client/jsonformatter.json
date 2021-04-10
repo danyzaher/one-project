@@ -5,6 +5,18 @@
       "prix": 2
     },
     {
+      "nom": "dessert",
+      "prix": 22
+    },
+    {
+      "nom": "lapin à la moutarde",
+      "prix": 30
+    },
+    {
+      "nom": "tartare d'espadon",
+      "prix": 33
+    },
+    {
       "nom": "lait",
       "prix": 1
     },
@@ -17,11 +29,19 @@
       "prix": 3
     },
     {
-      "nom": "test",
+      "nom": "terrine de volaile",
       "prix": 1
     },
     {
-      "nom": "test 4",
+      "nom": "curry",
+      "prix": 12
+    },
+    {
+      "nom": "mouton",
+      "prix": 5
+    },
+    {
+      "nom": "pyramide de chèvre",
       "prix": 2
     }
   ]
