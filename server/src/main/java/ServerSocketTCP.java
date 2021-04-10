@@ -24,8 +24,6 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 class ServerSocketTCP implements Runnable{
-	static ConnectionCrud CC = new ConnectionCrud();
-	static ArrayList<Connection> connectionManager = new ArrayList<>();
 	static int i = 0;
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	static Reader reader;
@@ -47,22 +45,34 @@ class ServerSocketTCP implements Runnable{
 	}
 	static Datasource source = new Datasource(sc.getNboneco());
 	static Socket socketClient;
-	public ServerSocketTCP() throws IOException {
+	public ServerSocketTCP() {
 	}
 
 	public void analyseInputStream(Socket socket){
 		try {
+			logger.info("Connexion avec : " + socket.getInetAddress());
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			LinkedList<String> listMessage = new LinkedList<>();
+			ObjectMapper mapper = new ObjectMapper();
 			if (source.size() > 0) {
-
+				ConnectionCrud C = new ConnectionCrud();
+				C.setC(source.getConnection());
+				logger.info("Connection available = " + source.size());
+				for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
+					logger.info("receiving data from client");
+					JsonNode jn = mapper.readTree(recu);
+					C.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
+				}
+				listMessage.add(C.showElement("produit"));
+				source.setConnection(C.getC());
+				constructOutputStream(socket,listMessage);
 			} else{
 				listMessage.add("no more connection come back later");
 				constructOutputStream(socket,listMessage);
-				socket.close();
 			}
+			socket.close();
 
-		} catch (IOException e) {
+		} catch (IOException | SQLException e) {
 			e.printStackTrace();
 		}
 	}
@@ -73,43 +83,8 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 	public void run() {
-		try {
-			Socket socket = socketClient;
-			ObjectMapper mapper = new ObjectMapper();
-			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			logger.info("Connection available = " + source.size());
-			LinkedList<String> listMessage = new LinkedList<>();
-			if (source.size() > 0) {
-				connectionManager.add(i, source.getConnection());
-				CC.setC(connectionManager.get(i));
-				logger.info("Connexion avec : " + socket.getInetAddress());
-				for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
-					logger.info("receiving data from client");
-					JsonNode jn = mapper.readTree(recu);
-					CC.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
-				}
-				listMessage.add(CC.showElement("produit"));
-				constructOutputStream(socket,listMessage);
-				i++;
-			} else {
-				logger.info("no more connections");
-				listMessage.add("no more connections");
-				constructOutputStream(socket,listMessage);
-				for (int k = 0; k < connectionManager.size(); k++) {
-					source.setConnection(connectionManager.get(k));
-					logger.info("add connection " + k + 1);
-					sleep(1000);
-				}
-				connectionManager.clear();
-			}
-			socket.close();
-		} catch (IOException e) {
-			e.printStackTrace();
-		} catch (SQLException throwables) {
-			throwables.printStackTrace();
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
+		Socket socket = socketClient;
+		analyseInputStream(socket);
 	}
 		public static void main(String[] args) throws IOException {
 			logger.info("Server is running");
