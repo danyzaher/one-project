@@ -40,16 +40,11 @@ class ServerSocketTCP implements Runnable{
 			logger.info("Connexion avec : " + socket.getInetAddress());
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			LinkedList<String> listMessage = new LinkedList<>();
-			ObjectMapper mapper = new ObjectMapper();
 			if (source.size() > 0) {
 				ConnectionCrud C = new ConnectionCrud();
 				C.setC(source.getConnection());
 				logger.info("Connection available = " + source.size());
-				for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
-					logger.info("receiving data from client " +socket.getInetAddress());
-					JsonNode jn = mapper.readTree(recu);
-					C.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
-				}
+				addElementsToTable(in,C);
 				listMessage.add(C.showElement("produit"));
 				source.setConnection(C.getC());
 			} else{
@@ -60,6 +55,13 @@ class ServerSocketTCP implements Runnable{
 
 		} catch (IOException | SQLException e) {
 			e.printStackTrace();
+		}
+	}
+	public void addElementsToTable(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+		ObjectMapper mapper = new ObjectMapper();
+		for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
+			JsonNode jn = mapper.readTree(recu);
+			C.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
 		}
 	}
 	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException {
