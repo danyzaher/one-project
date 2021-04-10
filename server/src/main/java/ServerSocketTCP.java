@@ -15,6 +15,7 @@ import java.util.LinkedList;
 class ServerSocketTCP implements Runnable{
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	static Reader reader;
+
 	static {
 		try {
 			reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_SRV_CONF")));
@@ -81,14 +82,23 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 		analyseInputStream(socket);
-
+		currentThread().interrupt();
+		logger.info(String.valueOf(currentThread().isAlive()));
 	}
-	public static void main(String[] args) throws IOException {
+
+	private Thread currentThread() {
+		return this.currentThread();
+	}
+
+	public static void main(String[] args) throws IOException, InterruptedException {
 		logger.info("Server is running");
 		ServerSocket socketServer = new ServerSocket(sc.getPort());
 		while (true){
+
 			socketClient = socketServer.accept();
-			new Thread(new ServerSocketTCP()).start();
+			Thread thread = new Thread(new ServerSocketTCP());
+			thread.start();
+
 		}
-		}
+	}
 }
