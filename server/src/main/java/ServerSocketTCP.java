@@ -57,7 +57,7 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	public void addElementsToTable(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+	public synchronized void addElementsToTable(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
 		logger.info("addElementsToTable");
 		ObjectMapper mapper = new ObjectMapper();
 		for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
