@@ -74,9 +74,9 @@ class ServerSocketTCP implements Runnable{
 		analyseInputStream(socket);
 	}
 	public static void main(String[] args) throws IOException {
-			logger.info("Server is running");
+		logger.info("Server is running");
+		ServerSocket socketServer = new ServerSocket(sc.getPort());
 		while (true){
-			ServerSocket socketServer = new ServerSocket(sc.getPort());
 			socketClient = socketServer.accept();
 			new Thread(new ServerSocketTCP()).start();
 		}
