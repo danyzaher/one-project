@@ -17,6 +17,8 @@ import java.nio.file.Paths;
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
 
 import static java.lang.Thread.sleep;
@@ -51,20 +53,24 @@ class ServerSocketTCP implements Runnable{
 	public void analyseInputStream(Socket socket){
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
 	}
-	public void constructOutputStream(Socket socket) throws IOException {
+	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+		while(!listMessage.isEmpty()){
+			out.println(listMessage.poll());
+		}
 	}
 	public void run() {
 		try {
 			Socket socket = socketClient;
 			ObjectMapper mapper = new ObjectMapper();
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-			PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 			logger.info("Connection available = " + source.size());
+			LinkedList<String> listMessage = new LinkedList<>();
 			if (source.size() > 0) {
 				connectionManager.add(i, source.getConnection());
 				CC.setC(connectionManager.get(i));
@@ -74,11 +80,13 @@ class ServerSocketTCP implements Runnable{
 					JsonNode jn = mapper.readTree(recu);
 					CC.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
 				}
-				out.println(CC.showElement("produit"));
+				listMessage.add(CC.showElement("produit"));
+				constructOutputStream(socket,listMessage);
 				i++;
 			} else {
 				logger.info("no more connections");
-				out.println("no more connections");
+				listMessage.add("no more connections");
+				constructOutputStream(socket,listMessage);
 				for (int k = 0; k < connectionManager.size(); k++) {
 					source.setConnection(connectionManager.get(k));
 					logger.info("add connection " + k + 1);
