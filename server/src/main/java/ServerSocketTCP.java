@@ -58,6 +58,7 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 	public void addElementsToTable(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+		logger.info("addElementsToTable");
 		ObjectMapper mapper = new ObjectMapper();
 		for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
 			JsonNode jn = mapper.readTree(recu);
@@ -69,6 +70,7 @@ class ServerSocketTCP implements Runnable{
 		while(!listMessage.isEmpty()){
 			out.println(listMessage.poll());
 		}
+		logger.info("message envoyé");
 	}
 	public void run() {
 		logger.info("new Client");
