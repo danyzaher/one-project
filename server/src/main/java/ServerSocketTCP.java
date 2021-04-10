@@ -59,7 +59,7 @@ class ServerSocketTCP implements Runnable{
 				C.setC(source.getConnection());
 				logger.info("Connection available = " + source.size());
 				for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
-					logger.info("receiving data from client");
+					logger.info("receiving data from client " +socket.getInetAddress());
 					JsonNode jn = mapper.readTree(recu);
 					C.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
 				}
@@ -83,6 +83,7 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 	public void run() {
+		logger.info("new Client");
 		Socket socket = socketClient;
 		analyseInputStream(socket);
 	}
