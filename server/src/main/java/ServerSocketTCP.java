@@ -53,6 +53,14 @@ class ServerSocketTCP implements Runnable{
 	public void analyseInputStream(Socket socket){
 		try {
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+			LinkedList<String> listMessage = new LinkedList<>();
+			if (source.size() > 0) {
+
+			} else{
+				listMessage.add("no more connection come back later");
+				constructOutputStream(socket,listMessage);
+				socket.close();
+			}
 
 		} catch (IOException e) {
 			e.printStackTrace();
