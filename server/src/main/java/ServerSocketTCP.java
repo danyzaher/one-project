@@ -84,6 +84,7 @@ class ServerSocketTCP implements Runnable{
 		analyseInputStream(socket);
 		currentThread().interrupt();
 		logger.info(String.valueOf(currentThread().isAlive()));
+		logger.info("la daronne à julien");
 	}
 
 	private Thread currentThread() {
