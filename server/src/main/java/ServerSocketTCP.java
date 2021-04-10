@@ -24,7 +24,6 @@ import java.util.List;
 import static java.lang.Thread.sleep;
 
 class ServerSocketTCP implements Runnable{
-	static int i = 0;
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	static Reader reader;
 	static {
