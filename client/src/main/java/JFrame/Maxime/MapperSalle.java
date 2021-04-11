@@ -20,6 +20,12 @@ public class MapperSalle extends JFrame {
         add(button2);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
+        JMenu jMenu = new JMenu("Menu");
+        JMenuBar jMenuBar = new JMenuBar();
+        jMenuBar.add(jMenu);
+        JMenuItem e1 = new JMenuItem("liste des équipement à ajouter");
+        jMenu.add(e1);
+        this.setJMenuBar(jMenuBar);
     }
     public void ajouterLesEquippement(){
         for(int i=0; i<listEquippementDansLaSalle.size();i++){
