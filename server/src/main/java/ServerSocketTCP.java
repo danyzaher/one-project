@@ -43,11 +43,11 @@ class ServerSocketTCP implements Runnable{
 			LinkedList<String> listMessage = new LinkedList<>();
 			if (source.size() > 0) {
 				ConnectionCrud C = new ConnectionCrud();
-				C.setC(source.getConnection());
+				C.setC(Datasource.getConnection());
 				logger.info("Connection available = " + source.size());
 				addElementsToTable(in,C);
 				listMessage.add(C.showElement("produit"));
-				source.setConnection(C.getC());
+				Datasource.setConnection(C.getC());
 			} else{
 				listMessage.add("no more connection come back later");
 			}
@@ -83,8 +83,6 @@ class ServerSocketTCP implements Runnable{
 		}
 		analyseInputStream(socket);
 		currentThread().interrupt();
-		logger.info(String.valueOf(currentThread().isAlive()));
-		logger.info("la daronne à julien");
 	}
 
 	private Thread currentThread() {
