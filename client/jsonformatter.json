@@ -1,7 +1,7 @@
 ﻿{
   "data": [
     {
-      "nom": "fromage",
+      "nom": "fromage de chèvre",
       "prix": 2
     },
     {
@@ -9,7 +9,7 @@
       "prix": 1
     },
     {
-      "nom": "eau",
+      "nom": "eau gazeuse",
       "prix": 4
     },
     {
