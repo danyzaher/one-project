@@ -23,6 +23,8 @@ public class MapperSalle extends JFrame {
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
         JMenuItem e1 = new JMenuItem("liste des équipement à ajouter");
+        JMenuItem electrochroma = new JMenuItem("option électrochromatique");
+        jMenu.add(electrochroma);
         jMenu.add(e1);
         this.setJMenuBar(jMenuBar);
     }
