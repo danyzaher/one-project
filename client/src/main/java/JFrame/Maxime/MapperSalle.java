@@ -18,7 +18,6 @@ public class MapperSalle extends JFrame {
         JButton button2 = new JButton("equip 2");
         button2.setBounds(50,50,11,15);
         add(button2);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         JMenu jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();

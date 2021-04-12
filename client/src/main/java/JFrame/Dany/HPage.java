@@ -56,6 +56,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        HPageEntreprise hPageEntreprise = new HPageEntreprise();
+        String s = l2.getText();
+        HPageEntreprise hPageEntreprise = new HPageEntreprise(s);
     }
 }

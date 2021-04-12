@@ -5,9 +5,8 @@ import java.awt.*;
 
 public class HPageEntreprise extends JFrame {
 
-    public HPageEntreprise(){
-        setTitle("page d'accueil de l'entreprise");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+    public HPageEntreprise(String s){
+        setTitle("page d'accueil de l'entreprise "+s);
         setLayout(new FlowLayout());
         setSize(600, 500);
         setVisible(true);
@@ -25,6 +24,6 @@ public class HPageEntreprise extends JFrame {
         this.setJMenuBar(jMenuBar);
     }
     public static void main(String[] args) {
-        HPageEntreprise hPageEntreprise = new HPageEntreprise();
+        HPageEntreprise hPageEntreprise = new HPageEntreprise("Fritel Inc");
     }
 }
