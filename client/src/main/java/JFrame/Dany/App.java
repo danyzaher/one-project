@@ -11,7 +11,7 @@ public class App extends JFrame {
     public App() {
         super("One-Building");
         Image var1 = Toolkit.getDefaultToolkit().getImage("one-project\\application\\files\\logo.png");
-        this.setDefaultCloseOperation(3);
+        this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         this.setSize(800, 700);
         setDefaultLookAndFeelDecorated(true);
