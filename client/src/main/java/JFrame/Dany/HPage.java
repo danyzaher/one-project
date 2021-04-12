@@ -1,5 +1,6 @@
 package JFrame.Dany;
 
+import JFrame.Maxime.HPageEntreprise;
 import JFrame.Maxime.MapperSalle;
 
 import javax.swing.*;
@@ -55,6 +56,6 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MapperSalle mapperSalle = new MapperSalle(4);
+        HPageEntreprise hPageEntreprise = new HPageEntreprise();
     }
 }
