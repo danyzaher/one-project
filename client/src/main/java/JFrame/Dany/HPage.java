@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class HPage {
+public class HPage extends JFrame{
     private JButton confirmerButton;
     private JPanel panel1;
     private JTextPane textPane1;
@@ -18,5 +18,8 @@ public class HPage {
 
             }
         });
+    }
+    public static void main(String[] args){
+        HPage hPage = new HPage();
     }
 }

@@ -8,8 +8,8 @@ public class MapperSalle extends JFrame {
     int numeroSalle;
     ArrayList<Equippement> listEquippementDansLaSalle = new ArrayList<>();
     ArrayList<Equippement> listEquippementDisponible = new ArrayList<>();
-    public MapperSalle(){
-        setTitle("salle numéro 3");
+    public MapperSalle(int numeroSalle){
+        setTitle("salle numéro "+ numeroSalle);
         setVisible(true);
         setSize(400,300);
         JButton button = new JButton("equip 1");
@@ -37,7 +37,7 @@ public class MapperSalle extends JFrame {
     public void remplirListEquippementDansLaSalle(){}
     public void remplirlistEquippementDisponible(){}
     public static void main(String[] args){
-        new MapperSalle();
+        new MapperSalle(3);
     }
 
 }
