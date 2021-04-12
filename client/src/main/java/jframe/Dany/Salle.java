@@ -1,4 +1,4 @@
-package JFrame.Dany;
+package jframe.Dany;
 
 public class Salle {
     private boolean available;

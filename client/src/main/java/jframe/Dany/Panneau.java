@@ -1,4 +1,4 @@
-package JFrame.Dany;
+package jframe.Dany;
 
 import javax.swing.*;
 import java.awt.*;

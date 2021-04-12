@@ -1,4 +1,4 @@
-package JFrame.Dany;
+package jframe.Dany;
 
 import java.awt.Color;
 import java.awt.Component;
