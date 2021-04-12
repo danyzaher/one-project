@@ -26,7 +26,7 @@ public class ConnectionCrud {
         smt.executeUpdate(sql);
     }
 
-    public void eraseElement( String Table, String idcolumn, String id) throws SQLException {
+    public void deleteElement( String Table, String idcolumn, String id) throws SQLException {
         String sql = "DELETE FROM \"" + Table + "\" WHERE " + idcolumn + " = " + id + ";";
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
