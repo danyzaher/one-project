@@ -25,6 +25,11 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
+    public void addElement(String Table, String column, String column1,String column2, Object value, Object value1,Object value2) throws SQLException {
+        String sql = "INSERT INTO \"" + Table + "\"(" + column + "," + column1+ ","+ column2 +") " + "VALUES ('" + value + "','" + value1 + "','" + value2 +"');";
+        Statement smt = c.createStatement();
+        smt.executeUpdate(sql);
+    }
 
     public void deleteElement( String Table, String idcolumn, String id) throws SQLException {
         String sql = "DELETE FROM \"" + Table + "\" WHERE " + idcolumn + " = " + id + ";";
