@@ -25,6 +25,7 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
+
     public void eraseElement( String Table, String idcolumn, String id) throws SQLException {
         String sql = "DELETE FROM \"" + Table + "\" WHERE " + idcolumn + " = " + id + ";";
         Statement smt = c.createStatement();
@@ -56,5 +57,21 @@ public class ConnectionCrud {
         }
         return result;
     }
+    public void updateElement(String Table, String column, Object value) throws SQLException {
+        String sql = "update\"" + Table + "\" set " + column + " = " + value + ";";
+        Statement smt = c.createStatement();
+        smt.executeUpdate(sql);
+    }
+    public void updateElement(String Table, String column,String idcolumn, String id,Object value) throws SQLException {
+        String sql = "update\"" + Table + "\" set " + column + " = " + value + "\" where " + idcolumn + " = " + id +";";
+        Statement smt = c.createStatement();
+        smt.executeUpdate(sql);
+    }
+    public void updateElement(String Table,String column,String column1,String idcolumn,String idcolumn1,Object value1,Object value2,String id,String id1) throws SQLException {
+        String sql = "update\"" + Table + "\" set (" + column + ","+ column1 + ") = (" + value1 +"," + value2 + ")\" where " +idcolumn+ "=" +id+"and"+idcolumn1+"="+id1+";";
+        Statement smt = c.createStatement();
+        smt.executeUpdate(sql);
+    }
+
 
 }
