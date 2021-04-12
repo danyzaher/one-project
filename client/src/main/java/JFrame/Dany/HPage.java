@@ -1,5 +1,7 @@
 package JFrame.Dany;
 
+import JFrame.Maxime.MapperSalle;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -7,7 +9,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
-public class HPage extends JFrame implements ItemListener{
+public class HPage extends JFrame implements ItemListener, ActionListener{
 
     JComboBox combobox;
     JLabel l1, l2;
@@ -28,17 +30,16 @@ public class HPage extends JFrame implements ItemListener{
 
         l2.setForeground(Color.blue);
 
-        // créer un nouveau panneau
         JPanel p = new JPanel();
-        // ajouter combobox et labels au panneau
         p.add(l1);
         p.add(combobox);
         p.add(l2);
-        // ajouter le panneau au frame
         add(p);
         JButton jButton = new JButton("Confirmer");
         add(jButton);
         jButton.setBounds(200,100,50,50);
+        jButton.addActionListener(this);
+
     }
     public static void main(String[] args){
          HPage h = new HPage();
@@ -52,4 +53,8 @@ public class HPage extends JFrame implements ItemListener{
         }
     }
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        MapperSalle mapperSalle = new MapperSalle(4);
+    }
 }
