@@ -14,7 +14,7 @@ public class FenetreListEquipement extends JFrame implements ActionListener, Ite
         this.mapperSalle=mapperSalle;
         setTitle("liste des équipement disponible pour la salle " + mapperSalle.numeroSalle);
         setVisible(true);
-        setSize(500,600);
+        setSize(1000,1000);
         JComboBox combobox;
         String s1[] = { "equipement 34", "equipement 45","equipement 22" };
 
@@ -28,6 +28,8 @@ public class FenetreListEquipement extends JFrame implements ActionListener, Ite
         JPanel p = new JPanel();
         p.add(l1);
         p.add(combobox);
+        p.add(l2);
+        add(p);
         JButton jButton = new JButton("Confirmer");
         add(jButton);
         jButton.setBounds(200,100,50,50);

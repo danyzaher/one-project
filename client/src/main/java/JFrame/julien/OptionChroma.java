@@ -23,7 +23,9 @@ public class OptionChroma extends JFrame{
     String [] fenetrestore = {"1","2","3"};
 
     public OptionChroma() {
-
+        setSize(300,400);
+        setVisible(true);
+        setTitle("Parametres des Options ElectroChromatiques ");
         setLayout(new FlowLayout());
 
         tempext = new JLabel("Temperature à l'exterieur : 5°C");
