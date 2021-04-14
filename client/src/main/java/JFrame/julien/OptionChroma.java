@@ -29,6 +29,7 @@ public class OptionChroma extends JFrame{
         temperature.addChangeListener(et);
 
         //Store Part
+        setLayout(new FlowLayout());
         store = new JSlider(JSlider.HORIZONTAL, 0,5, 5);
         store.setMajorTickSpacing(1);
         store.setPaintTicks(true);
@@ -36,16 +37,27 @@ public class OptionChroma extends JFrame{
 
         AStore = new JLabel("Hauteur actuelle du store : ");
         add(AStore);
+        eventStor es = new eventStor();
+        store.addChangeListener(es);
 
 
+
+    }
+    public class eventStor implements ChangeListener{
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            int valeurstor = store.getValue();
+            AStore.setText("Hauteur actuelle du store : "+ valeurstor);
+        }
     }
     public class eventTemp implements ChangeListener {
 
         @Override
         public void stateChanged(ChangeEvent et) {
 
-            int valeur = temperature.getValue();
-            ATemp.setText("Temperature actuelle dans la salle : "+ valeur + "° C");
+            int valeurtemp = temperature.getValue();
+            ATemp.setText("Temperature actuelle dans la salle : "+ valeurtemp + "° C");
 
         }
 
@@ -54,6 +66,7 @@ public class OptionChroma extends JFrame{
     }
 
     public static void main(String[] args) {
+
         OptionChroma opchro = new OptionChroma();
         opchro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         opchro.setSize(500,200);
