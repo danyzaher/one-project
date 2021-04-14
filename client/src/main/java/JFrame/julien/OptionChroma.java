@@ -15,23 +15,28 @@ public class OptionChroma extends JFrame{
     JLabel AStore;
     JLabel AFen;
 
+    ImageIcon dispoFenStor;
+    JLabel aide;
+
+
     /*Upper part of thr frame*/
     JLabel tempext;
     JLabel tempint;
     JLabel eclairage;
 
 
+
+
     public OptionChroma() {
 
         setLayout(new FlowLayout());
+
         tempext = new JLabel("Temperature à l'exterieur : 5°C");
         tempint = new JLabel("Temperature dans la salle : 20°C");
         eclairage = new JLabel("Taux de luminosité dans la salle : 50%");
         add(tempext);
         add(tempint);
         add(eclairage);
-
-
 
         //Temperature lower part
 
@@ -67,6 +72,11 @@ public class OptionChroma extends JFrame{
         eventFen ef = new eventFen();
         fenetre.addChangeListener(ef);
 
+        /********* HELP PICTURE FOR THE USER *************/
+
+        dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
+        aide = new JLabel(dispoFenStor);
+        add(aide);
 
 
     }
@@ -108,6 +118,7 @@ public class OptionChroma extends JFrame{
         opchro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         opchro.setSize(300,400);
         opchro.setVisible(true);
+        opchro.pack();
         opchro.setTitle("Parametres des Options ElectroChromatiques ");
 
 
