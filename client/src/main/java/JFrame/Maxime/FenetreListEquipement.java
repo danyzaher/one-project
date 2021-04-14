@@ -9,7 +9,9 @@ public class FenetreListEquipement extends JFrame implements ActionListener {
 
     public FenetreListEquipement(MapperSalle mapperSalle){
         this.mapperSalle=mapperSalle;
-
+        setTitle("liste des équipement disponible pour la salle " + mapperSalle.numeroSalle);
+        setVisible(true);
+        setSize(400,300);
     }
 
 

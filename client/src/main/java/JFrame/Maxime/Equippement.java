@@ -9,6 +9,7 @@ public class Equippement extends JButton implements ActionListener {
     boolean etat = true;
     public Equippement(String nom){
         this.nom = nom;
+        addActionListener(this);
     }
 
     public String getNom() {
@@ -25,6 +26,6 @@ public class Equippement extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        new FenetreInformationEtChoix(this);
+        FenetreInformationEtChoix fenetreInformationEtChoix =new FenetreInformationEtChoix(this);
     }
 }
