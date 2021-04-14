@@ -9,19 +9,21 @@ import java.awt.event.ItemListener;
 
 public class FenetreListEquipement extends JFrame implements ActionListener, ItemListener {
     MapperSalle mapperSalle;
-
+    JLabel l1, l2;
+    JComboBox combobox;
     public FenetreListEquipement(MapperSalle mapperSalle){
         this.mapperSalle=mapperSalle;
         setTitle("liste des équipement disponible pour la salle " + mapperSalle.numeroSalle);
         setVisible(true);
+        setLayout(new FlowLayout());
         setSize(1000,1000);
-        JComboBox combobox;
-        String s1[] = { "equipement 34", "equipement 45","equipement 22" };
+        String s1[] = { "équipement 21", "équipement 34", "équipement 43" };
 
         combobox = new JComboBox(s1);
         combobox.addItemListener(this);
-        JLabel l1 = new JLabel("ajouter un equipement : ");
-        JLabel l2 = new JLabel("equipement 34");
+
+        l1 = new JLabel("choisissez un équipement à ajouter ");
+        l2 = new JLabel("équipement 21");
 
         l2.setForeground(Color.blue);
 
@@ -32,7 +34,7 @@ public class FenetreListEquipement extends JFrame implements ActionListener, Ite
         add(p);
         JButton jButton = new JButton("Confirmer");
         add(jButton);
-        jButton.setBounds(200,100,50,50);
+        jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
     }
 
