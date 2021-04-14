@@ -19,7 +19,7 @@ public class OptionChroma extends JFrame{
         temperature.setPaintTicks(true);
         add(temperature);
 
-        ATemp = new JLabel("Valeur actuel : 19°C");
+        ATemp = new JLabel("Temperature actuelle dans la salle : 19°C");
         add(ATemp);
 
         event e = new event();
@@ -31,7 +31,20 @@ public class OptionChroma extends JFrame{
         @Override
         public void stateChanged(ChangeEvent e) {
 
+            int valeur = temperature.getValue();
+            ATemp.setText("Temperature actuelle dans la salle : "+ valeur + "° C");
+
 
         }
+    }
+
+    public static void main(String[] args) {
+        OptionChroma opchro = new OptionChroma();
+        opchro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        opchro.setSize(500,200);
+        opchro.setVisible(true);
+        opchro.setTitle("Parametres des Options ElectroChromatiques ");
+
+
     }
 }
