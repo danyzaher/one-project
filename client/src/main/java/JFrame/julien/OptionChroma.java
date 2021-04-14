@@ -4,16 +4,20 @@ import java.awt.*;
 import javax.swing.event.*;
 
 public class OptionChroma extends JFrame{
+
     JSlider temperature;
-    JSlider Store;
-    JSlider Fenetre;
+    JSlider store;
+    JSlider fenetre;
 
     JLabel ATemp;
     JLabel AStore;
     JLabel AFen;
 
     public OptionChroma() {
+
         setLayout(new FlowLayout());
+        //Temperature part
+
         temperature = new JSlider(JSlider.HORIZONTAL, 0,30, 19);
         temperature.setMajorTickSpacing(1);
         temperature.setPaintTicks(true);
@@ -21,21 +25,32 @@ public class OptionChroma extends JFrame{
 
         ATemp = new JLabel("Temperature actuelle dans la salle : 19°C");
         add(ATemp);
+        eventTemp et = new eventTemp();
+        temperature.addChangeListener(et);
 
-        event e = new event();
-        temperature.addChangeListener(e);
+        //Store Part
+        store = new JSlider(JSlider.HORIZONTAL, 0,5, 5);
+        store.setMajorTickSpacing(1);
+        store.setPaintTicks(true);
+        add(store);
+
+        AStore = new JLabel("Hauteur actuelle du store : ");
+        add(AStore);
+
 
     }
-    public class event implements ChangeListener {
+    public class eventTemp implements ChangeListener {
 
         @Override
-        public void stateChanged(ChangeEvent e) {
+        public void stateChanged(ChangeEvent et) {
 
             int valeur = temperature.getValue();
             ATemp.setText("Temperature actuelle dans la salle : "+ valeur + "° C");
 
-
         }
+
+
+
     }
 
     public static void main(String[] args) {
