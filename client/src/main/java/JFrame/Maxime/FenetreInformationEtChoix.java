@@ -15,7 +15,9 @@ public class FenetreInformationEtChoix extends JFrame {
         JButton déplacer = new JButton("deplacer l'equipement");
         déplacer.setBounds(50,200,30,50);
         add(déplacer);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JButton information = new JButton("information à propos de l'equipement");
+        information.setBounds(50,300,30,50);
+        add(information);
         setLayout(null);
     }
 }
