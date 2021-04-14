@@ -4,28 +4,21 @@ import java.awt.*;
 import javax.swing.event.*;
 
 public class OptionChroma extends JFrame{
-    /*Lower part of the frame*/
+    /**Lower part of the frame**/
 
     //Sliders and Labels
-    JSlider temperature;
-    JSlider store;
-    JSlider fenetre;
+    JSlider temperature, store, fenetre;
+    JLabel ATemp, AStore, AFen;
 
-    JLabel ATemp;
-    JLabel AStore;
-    JLabel AFen;
-
+    //Help items
     ImageIcon dispoFenStor;
     JLabel aide;
 
+    /**Upper part of thr frame**/
+    JLabel tempext, tempint, eclairage;
 
-    /*Upper part of thr frame*/
-    JLabel tempext;
-    JLabel tempint;
-    JLabel eclairage;
-
-    JComboBox numstore;
-    JComboBox numfenetre;
+    //Selection of windows or store
+    JComboBox numstore,numfenetre;
 
     String [] fenetrestore = {"1","2","3"};
 
@@ -88,7 +81,6 @@ public class OptionChroma extends JFrame{
         add(numfenetre);
         add(numstore);
 
-
     }
     public class eventFen implements ChangeListener{
 
@@ -114,13 +106,8 @@ public class OptionChroma extends JFrame{
 
             int valeurtemp = temperature.getValue();
             ATemp.setText("Temperature dans la salle souhaitée : "+ valeurtemp + "° C");
-
         }
-
-
-
     }
-
 
     public static void main(String[] args) {
 
@@ -130,7 +117,6 @@ public class OptionChroma extends JFrame{
         opchro.setVisible(true);
         opchro.pack();
         opchro.setTitle("Parametres des Options ElectroChromatiques ");
-
 
     }
 }
