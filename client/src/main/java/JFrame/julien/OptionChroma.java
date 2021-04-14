@@ -76,12 +76,15 @@ public class OptionChroma extends JFrame{
 
         /********* HELP PICTURE FOR THE USER *************/
 
-      //  dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
+        //dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
         aide = new JLabel(dispoFenStor);
         add(aide);
 
+        /******** JCOMBOBOXES FOR SELECT THE STORE OR WINDOW *******/
+
         numfenetre = new JComboBox(fenetrestore);
         numstore = new JComboBox(fenetrestore);
+
         add(numfenetre);
         add(numstore);
 
