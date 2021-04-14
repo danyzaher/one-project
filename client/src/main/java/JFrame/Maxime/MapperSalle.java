@@ -10,6 +10,7 @@ public class MapperSalle extends JFrame implements ActionListener {
     int numeroSalle;
     ArrayList<Equippement> listEquippementDansLaSalle = new ArrayList<>();
     ArrayList<Equippement> listEquippementDisponible = new ArrayList<>();
+    ArrayList<Emplacement> emplacementArrayList = new ArrayList<>();
     public MapperSalle(int numeroSalle){
         setTitle("salle numéro "+ numeroSalle);
         setVisible(true);
@@ -25,6 +26,7 @@ public class MapperSalle extends JFrame implements ActionListener {
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
         JMenuItem e1 = new JMenuItem("liste des équipement à ajouter");
+        e1.addActionListener(this);
         JMenuItem electrochroma = new JMenuItem("option électrochromatique");
         jMenu.add(electrochroma);
         jMenu.add(e1);
@@ -44,6 +46,6 @@ public class MapperSalle extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        FenetreListEquipement fenetreListEquipement = new FenetreListEquipement(this);
     }
 }

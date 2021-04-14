@@ -8,7 +8,7 @@ public class FenetreInformationEtChoix extends JFrame {
         this.equippement = equippement;
         setTitle(equippement.nom);
         setVisible(true);
-        setSize(100,400);
+        setSize(500,600);
         JButton retirer = new JButton("retirer l'equipement");
         retirer.setBounds(50,100,30,50);
         add(retirer);

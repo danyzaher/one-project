@@ -10,7 +10,7 @@ public class HPageEntreprise extends JFrame implements ActionListener {
     public HPageEntreprise(String s){
         setTitle("page d'accueil de l'entreprise "+s);
         setLayout(new FlowLayout());
-        setSize(600, 500);
+        setSize(1000, 900);
         setVisible(true);
         JMenu jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();

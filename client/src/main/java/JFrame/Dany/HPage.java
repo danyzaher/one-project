@@ -18,7 +18,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         setTitle("page d'accueil");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-        setSize(400, 200);
+        setSize(3000, 2000);
         setVisible(true);
 
         String s1[] = { "Fritel Inc", "FloraFlore" };
