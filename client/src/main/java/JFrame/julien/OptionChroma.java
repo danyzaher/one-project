@@ -8,6 +8,10 @@ public class OptionChroma extends JFrame{
     JSlider Store;
     JSlider Fenetre;
 
+    JLabel ATemp;
+    JLabel AStore;
+    JLabel AFen;
+
     public OptionChroma() {
         setLayout(new FlowLayout());
         temperature = new JSlider(JSlider.HORIZONTAL, 0,30, 19);
@@ -15,6 +19,19 @@ public class OptionChroma extends JFrame{
         temperature.setPaintTicks(true);
         add(temperature);
 
-        //ATemp = new JLabel("Valeur actuel : 19°C");
+        ATemp = new JLabel("Valeur actuel : 19°C");
+        add(ATemp);
+
+        event e = new event();
+        temperature.addChangeListener(e);
+
+    }
+    public class event implements ChangeListener {
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+
+
+        }
     }
 }
