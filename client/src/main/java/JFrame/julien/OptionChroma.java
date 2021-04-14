@@ -24,8 +24,10 @@ public class OptionChroma extends JFrame{
     JLabel tempint;
     JLabel eclairage;
 
+    JComboBox numstore;
+    JComboBox numfenetre;
 
-
+    String [] fenetrestore = {"1","2","3"};
 
     public OptionChroma() {
 
@@ -74,9 +76,14 @@ public class OptionChroma extends JFrame{
 
         /********* HELP PICTURE FOR THE USER *************/
 
-        dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
+      //  dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
         aide = new JLabel(dispoFenStor);
         add(aide);
+
+        numfenetre = new JComboBox(fenetrestore);
+        numstore = new JComboBox(fenetrestore);
+        add(numfenetre);
+        add(numstore);
 
 
     }
