@@ -29,19 +29,37 @@ public class OptionChroma extends JFrame{
         temperature.addChangeListener(et);
 
         //Store Part
-        setLayout(new FlowLayout());
-        store = new JSlider(JSlider.HORIZONTAL, 0,5, 5);
+        store = new JSlider(JSlider.HORIZONTAL, 0,5, 0);
         store.setMajorTickSpacing(1);
         store.setPaintTicks(true);
         add(store);
 
-        AStore = new JLabel("Hauteur actuelle du store : ");
+        AStore = new JLabel("Hauteur actuelle du store : 0");
         add(AStore);
         eventStor es = new eventStor();
         store.addChangeListener(es);
 
+        //Windows Part
+        fenetre = new JSlider(JSlider.HORIZONTAL, 0,5, 0);
+        fenetre.setMajorTickSpacing(1);
+        fenetre.setPaintTicks(true);
+        add(fenetre);
+
+        AFen = new JLabel("Opacité actuelle de la fenetre : 0 ");
+        add(AFen);
+        eventFen ef = new eventFen();
+        fenetre.addChangeListener(ef);
 
 
+
+    }
+    public class eventFen implements ChangeListener{
+
+        @Override
+        public void stateChanged(ChangeEvent e) {
+            int valeurfen = fenetre.getValue();
+            AFen.setText("Opacité actuelle de la fenetre : "+valeurfen);
+        }
     }
     public class eventStor implements ChangeListener{
 
