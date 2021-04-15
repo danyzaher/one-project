@@ -4,6 +4,7 @@ import java.awt.*;
 import javax.swing.event.*;
 
 public class OptionChroma extends JFrame{
+
     /**Lower part of the frame**/
 
     //Sliders and Labels
@@ -11,7 +12,7 @@ public class OptionChroma extends JFrame{
     JLabel ATemp, AStore, AFen;
 
     //Help items
-    ImageIcon dispoFenStor;
+    Image dispoFenStor;
     JLabel aide;
 
     /**Upper part of thr frame**/
@@ -26,6 +27,9 @@ public class OptionChroma extends JFrame{
     String [] fenetrestore = {"1","2","3"};
 
     public OptionChroma() {
+
+        //dispoFenStor = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Julien CANNOUX\\one-project\\client\\src\\main\\java\\JFrame\\julien\\aide.jpeg");
+
         setSize(320,400);
         setResizable(false);
         setTitle("Option ElectroChroma");
@@ -45,7 +49,7 @@ public class OptionChroma extends JFrame{
         temperature.setPaintTicks(true);
         add(temperature);
 
-        ATemp = new JLabel("Temperature actuelle dans la salle : ... °C");
+        ATemp = new JLabel("Temperature souhaitée dans la salle : ... °C");
         add(ATemp);
         eventTemp et = new eventTemp();
         temperature.addChangeListener(et);
@@ -56,7 +60,7 @@ public class OptionChroma extends JFrame{
         store.setPaintTicks(true);
         add(store);
 
-        AStore = new JLabel("Hauteur actuelle du store : ...");
+        AStore = new JLabel("Hauteur du store selectionné souhaité : ...");
         add(AStore);
         eventStor es = new eventStor();
         store.addChangeListener(es);
@@ -67,7 +71,7 @@ public class OptionChroma extends JFrame{
         fenetre.setPaintTicks(true);
         add(fenetre);
 
-        AFen = new JLabel("Opacité actuelle de la fenetre : ...");
+        AFen = new JLabel("Opacité de la fenetre souhaité : ...");
         add(AFen);
         eventFen ef = new eventFen();
         fenetre.addChangeListener(ef);
@@ -75,8 +79,9 @@ public class OptionChroma extends JFrame{
         /********* HELP PICTURE FOR THE USER *************/
 
         //dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
-        aide = new JLabel(dispoFenStor);
-        add(aide);
+        //aide = new JLabel(dispoFenStor);
+        //add(aide);
+        //add(dispoFenStor);
 
         /******** JCOMBOBOXES FOR SELECT THE STORE OR WINDOW *******/
 
@@ -94,6 +99,8 @@ public class OptionChroma extends JFrame{
         setVisible(true);
 
     }
+
+
     public class eventFen implements ChangeListener{
 
         @Override
