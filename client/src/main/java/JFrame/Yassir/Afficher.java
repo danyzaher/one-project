@@ -1,50 +1,49 @@
 package JFrame.Yassir;
+
 import javax.swing.*;
 import java.awt.*;
 
-public class Afficher extends JFrame {
+public class Afficher  extends JFrame {
     public Afficher() {
-        super();
+        this.setTitle("OneBuilding");
+        this.setSize(500, 300);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setLocationRelativeTo(null);
 
-        setTitle("OneBuilding");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        JPanel num = new JPanel();
+        num.add(new JLabel("Numéro de badge:"));
+        num.add(new JLabel("A12A"));
 
-        Object[][] donnees = {
-                {"A12A", "Paul", "2","Actif"},
-                {"A13A", "Robert", "1", "Actif"},
-                {"A14B", "Bob", "2", "Actif"},
-                {"A15C", "Anna", "1", "Actif"},
-                {"B251", "Sara", "3", "Actif"},
 
-        };
+        JPanel num1 = new JPanel();
+        num1.add(new JLabel("Propriétaire badge:"));
+        num1.add(new JLabel("Paul Denis"));
 
-        String[] entetes = {"Numéro Badge", "Employé", "Niveau d'accès", "Statut"};
 
-        JPanel tab = new JPanel();
+        JPanel num2 = new JPanel();
+        num2.add(new JLabel("Niveau d'accès:"));
+        num2.add(new JLabel("2"));
 
-        JTable tableau = new JTable(donnees, entetes);
 
-        getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
-
-        JPanel boutons=new JPanel();
-
-        boutons.add(new JButton("Précedent"));
-
-        getContentPane().add(boutons, BorderLayout.SOUTH);
+        JPanel num3 = new JPanel();
+        num3.add(new JLabel("Statut:"));
+        num3.add(new JLabel("Actif"));
 
 
 
+        JPanel fenetre = new JPanel();
+        fenetre.setLayout(new BoxLayout(fenetre, BoxLayout.PAGE_AXIS));
+        fenetre.add(num);
+        fenetre.add(num1);
+        fenetre.add(num2);
+        fenetre.add(num3);
+        fenetre.add(new JButton("Précedent"));
 
-
-
-
-
-
-        pack();
+        this.getContentPane().add(fenetre);
+        this.setVisible(true);
     }
 
     public static void main(String[] args) {
-        new Afficher().setVisible(true);
-
+        Afficher affiche = new Afficher();
     }
 }
