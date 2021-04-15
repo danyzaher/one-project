@@ -1,6 +1,7 @@
 package JFrame.julien;
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ItemEvent;
 import javax.swing.event.*;
 
 public class OptionChroma extends JFrame{
@@ -28,7 +29,7 @@ public class OptionChroma extends JFrame{
 
     public OptionChroma() {
 
-        //dispoFenStor = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Julien CANNOUX\\one-project\\client\\src\\main\\java\\JFrame\\julien\\aide.jpeg");
+        //dispoFenStor = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Julien CANNOUX\\one-project\\client\\src\\main\\java\\JFrame\\julien\\aide.jpg");
 
         setSize(320,400);
         setResizable(false);
@@ -87,6 +88,8 @@ public class OptionChroma extends JFrame{
 
         numfenetre = new JComboBox(fenetrestore);
         numstore = new JComboBox(fenetrestore);
+        //numstore.addActionListener(this);
+
 
         validation = new JButton("VALIDER");
         validation.setSize(100,100);
@@ -126,6 +129,12 @@ public class OptionChroma extends JFrame{
             int valeurtemp = temperature.getValue();
             ATemp.setText("Temperature dans la salle souhaitée : "+ valeurtemp + "° C");
         }
+    }
+    public void actionPermormed (ItemEvent e){
+        if(e.getSource() == numstore){
+
+        }
+
     }
 
     public static void main(String[] args) {
