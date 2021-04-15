@@ -1,7 +1,6 @@
 package JFrame.Dany;
 
 import JFrame.Maxime.HPageEntreprise;
-import JFrame.Maxime.MapperSalle;
 
 import javax.swing.*;
 import java.awt.*;
@@ -14,7 +13,6 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
 
     JComboBox combobox;
     JLabel l1, l2;
-    String s1[];
     public HPage(){
         setTitle("page d'accueil");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -22,7 +20,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         setSize(1200, 1000);
         setVisible(true);
 
-        s1 = new String[]{"Fritel Inc", "FloraFlore", "Julien Industry"};
+        String s1[] = { "Fritel Inc", "FloraFlore","Julien Industry" };
 
         combobox = new JComboBox(s1);
         combobox.addItemListener(this);
@@ -45,12 +43,6 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     }
     public static void main(String[] args){
          HPage h = new HPage();
-    }
-    public void chercherToutesLesEntreprises(){
-        //créer un fichier JSON avec comme mot-clé
-        // show Client nom
-        // Envoyer via un client TCP une requete à la base de donnée
-        // puis mettre les données dans le tableau de String s1
     }
     public void itemStateChanged(ItemEvent e)
     {
