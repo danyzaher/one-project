@@ -45,7 +45,7 @@ public class OptionChroma extends JFrame{
         temperature.setPaintTicks(true);
         add(temperature);
 
-        ATemp = new JLabel("Temperature actuelle dans la salle : 19°C");
+        ATemp = new JLabel("Temperature actuelle dans la salle : ... °C");
         add(ATemp);
         eventTemp et = new eventTemp();
         temperature.addChangeListener(et);
@@ -56,7 +56,7 @@ public class OptionChroma extends JFrame{
         store.setPaintTicks(true);
         add(store);
 
-        AStore = new JLabel("Hauteur actuelle du store : 0");
+        AStore = new JLabel("Hauteur actuelle du store : ...");
         add(AStore);
         eventStor es = new eventStor();
         store.addChangeListener(es);
@@ -67,7 +67,7 @@ public class OptionChroma extends JFrame{
         fenetre.setPaintTicks(true);
         add(fenetre);
 
-        AFen = new JLabel("Opacité actuelle de la fenetre : 0 ");
+        AFen = new JLabel("Opacité actuelle de la fenetre : ...");
         add(AFen);
         eventFen ef = new eventFen();
         fenetre.addChangeListener(ef);
