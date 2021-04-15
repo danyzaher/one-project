@@ -114,7 +114,7 @@ public class OptionChroma extends JFrame{
     public class eventTemp implements ChangeListener {
 
         @Override
-        public void stateChanged(ChangeEvent et) {
+        public void stateChanged(ChangeEvent e) {
 
             int valeurtemp = temperature.getValue();
             ATemp.setText("Temperature dans la salle souhaitée : "+ valeurtemp + "° C");
