@@ -17,10 +17,10 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         setTitle("page d'accueil");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-        setSize(400, 200);
+        setSize(1200, 1000);
         setVisible(true);
 
-        String s1[] = { "Fritel Inc", "FloraFlore" };
+        String s1[] = { "Fritel Inc", "FloraFlore","Julien Industry" };
 
         combobox = new JComboBox(s1);
         combobox.addItemListener(this);
@@ -37,7 +37,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         add(p);
         JButton jButton = new JButton("Confirmer");
         add(jButton);
-        jButton.setBounds(200,100,50,50);
+        jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
 
     }
