@@ -20,13 +20,14 @@ public class OptionChroma extends JFrame{
     //Selection of windows or store
     JComboBox numstore,numfenetre;
 
-
+    //Validation Button
+    JButton validation;
 
     String [] fenetrestore = {"1","2","3"};
 
     public OptionChroma() {
-        setSize(300,400);
-        setVisible(true);
+        setSize(320,400);
+        setResizable(false);
         setTitle("Option ElectroChroma");
         setLayout(new FlowLayout());
 
@@ -82,8 +83,13 @@ public class OptionChroma extends JFrame{
         numfenetre = new JComboBox(fenetrestore);
         numstore = new JComboBox(fenetrestore);
 
+        validation = new JButton("VALIDER");
+        validation.setSize(100,100);
+
         add(numfenetre);
         add(numstore);
+
+        add(validation);
 
         setVisible(true);
 
