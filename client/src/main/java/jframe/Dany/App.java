@@ -10,12 +10,12 @@ import javax.swing.JFrame;
 public class App extends JFrame {
     public App() {
         super("One-Building");
-        Image var1 = Toolkit.getDefaultToolkit().getImage("one-project\\application\\files\\logo.png");
+        Image var1 = Toolkit.getDefaultToolkit().getImage("client\\files\\logo.png");
         this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 
         this.setSize(800, 700);
         setDefaultLookAndFeelDecorated(true);
-        this.setBackground(new Color(255, 255, 255));
+        this.setBackground(new Color(177, 56, 56));
         this.setIconImage(var1);
         this.setLayout((LayoutManager)null);
         this.setLocationRelativeTo((Component)null);

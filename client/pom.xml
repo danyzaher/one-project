@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>ClientSocketTCP</mainClass>
+                            <mainClass>jframe.Dany.App</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

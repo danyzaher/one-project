@@ -8,8 +8,8 @@ public class MapperSalle extends JFrame {
     int numeroSalle;
     ArrayList<Equippement> listEquippementDansLaSalle = new ArrayList<>();
     ArrayList<Equippement> listEquippementDisponible = new ArrayList<>();
-    public MapperSalle(){
-        setTitle("salle numéro 3");
+    public MapperSalle(int numeroSalle){
+        setTitle("salle numéro "+ numeroSalle);
         setVisible(true);
         setSize(400,300);
         JButton button = new JButton("equip 1");
@@ -18,12 +18,13 @@ public class MapperSalle extends JFrame {
         JButton button2 = new JButton("equip 2");
         button2.setBounds(50,50,11,15);
         add(button2);
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(null);
         JMenu jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
         JMenuItem e1 = new JMenuItem("liste des équipement à ajouter");
+        JMenuItem electrochroma = new JMenuItem("option électrochromatique");
+        jMenu.add(electrochroma);
         jMenu.add(e1);
         this.setJMenuBar(jMenuBar);
     }
@@ -37,7 +38,7 @@ public class MapperSalle extends JFrame {
     public void remplirListEquippementDansLaSalle(){}
     public void remplirlistEquippementDisponible(){}
     public static void main(String[] args){
-        new MapperSalle();
+        new MapperSalle(3);
     }
 
 }
