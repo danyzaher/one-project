@@ -8,6 +8,7 @@ public class Emplacement extends JButton implements ActionListener {
     int x;
     int y;
     boolean etat = true;
+
     public Emplacement(int x,int y){
         this.x = x;
         this.y = y;
