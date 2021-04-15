@@ -7,6 +7,7 @@ import java.awt.event.ActionListener;
 
 public class HPageEntreprise extends JFrame implements ActionListener {
 
+    JMenuItem e4;
     public HPageEntreprise(String s){
         setTitle("Page d'accueil de l'entreprise "+s);
         setLayout(new FlowLayout());
@@ -22,7 +23,7 @@ public class HPageEntreprise extends JFrame implements ActionListener {
         e1.add(batiment1);
         JMenu e3 = new JMenu("Etage 1");
         batiment1.add(e3);
-        JMenuItem e4 = new JMenuItem("Salle 1");
+        e4 = new JMenuItem("Salle 1");
         e4.addActionListener(this);
         e3.add(e4);
         jMenu.add(e1);
@@ -36,6 +37,8 @@ public class HPageEntreprise extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        MapperSalle mapperSalle = new MapperSalle(3);
+        if(e.getSource()==e4){
+        MapperSalle mapperSalle = new MapperSalle(e4.getName());
+        this.setVisible(false);}
     }
 }

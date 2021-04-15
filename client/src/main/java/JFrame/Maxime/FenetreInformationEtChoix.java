@@ -1,23 +1,37 @@
 package JFrame.Maxime;
 
 import javax.swing.*;
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class FenetreInformationEtChoix extends JFrame {
+public class FenetreInformationEtChoix extends JFrame implements ActionListener {
+
     Equippement equippement;
+    JButton retirer;
+    JButton déplacer;
+    JButton information;
     public FenetreInformationEtChoix(Equippement equippement){
         this.equippement = equippement;
         setTitle(equippement.nom);
         setVisible(true);
         setSize(500,600);
-        JButton retirer = new JButton("retirer l'equipement");
+        setLayout(new FlowLayout());
+        retirer = new JButton("retirer l'equipement");
         retirer.setBounds(50,100,30,50);
         add(retirer);
-        JButton déplacer = new JButton("deplacer l'equipement");
+        déplacer = new JButton("deplacer l'equipement");
         déplacer.setBounds(50,200,30,50);
         add(déplacer);
-        JButton information = new JButton("information à propos de l'equipement");
+        information = new JButton("information à propos de l'equipement");
         information.setBounds(50,300,30,50);
         add(information);
-        setLayout(null);
+
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource()==retirer){
+        }
     }
 }

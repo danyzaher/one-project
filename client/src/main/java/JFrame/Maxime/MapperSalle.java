@@ -19,16 +19,17 @@ public class MapperSalle extends JFrame implements ActionListener {
     ArrayList<Equippement> listEquippementDansLaSalle = new ArrayList<>();
     ArrayList<Equippement> listEquippementDisponible = new ArrayList<>();
     ArrayList<Emplacement> emplacementArrayList = new ArrayList<>();
-    public MapperSalle(int numeroSalle){
-        this.numeroSalle = numeroSalle;
-        setTitle("salle numéro "+ numeroSalle);
+    public MapperSalle(String nomSalle){
+        setTitle(nomSalle);
         setVisible(true);
         setSize(400,300);
         Equippement equippement1 = new Equippement("equipement 1");
+        listEquippementDansLaSalle.add(equippement1);
         equippement1.setBounds(50,100,20,15);
         equippement1.setBackground(Color.GREEN);
         add(equippement1);
         Equippement equippement2 = new Equippement("equipement 2");
+        listEquippementDansLaSalle.add(equippement2);
         equippement2.setBounds(100,100,20,15);
         add(equippement2);
         equippement2.setBackground(Color.RED);
@@ -44,16 +45,11 @@ public class MapperSalle extends JFrame implements ActionListener {
         jMenu.add(e1);
         this.setJMenuBar(jMenuBar);
     }
-    public void ajouterLesEquippement(){
-        for(int i=0; i<listEquippementDansLaSalle.size();i++){
-            Equippement equippement = listEquippementDansLaSalle.get(i);
-            JButton button = new JButton(equippement.nom);
-            add(button);}
-    }
+    public void ajouterLesEquippement(){ }
     public void remplirListEquippementDansLaSalle(){}
     public void remplirlistEquippementDisponible(){}
     public static void main(String[] args){
-        new MapperSalle(3);
+        new MapperSalle("salle numéro 3");
     }
 
     @Override

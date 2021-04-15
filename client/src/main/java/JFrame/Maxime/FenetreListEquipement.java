@@ -45,8 +45,12 @@ public class FenetreListEquipement extends JFrame implements ActionListener, Ite
 
     }
 
-    @Override
-    public void itemStateChanged(ItemEvent e) {
+    public void itemStateChanged(ItemEvent e)
+    {
+        // si l'état du combobox est modifiée
+        if (e.getSource() == combobox) {
 
+            l2.setText(" ["+combobox.getSelectedItem()+"]");
+        }
     }
 }
