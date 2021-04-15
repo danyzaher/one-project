@@ -24,7 +24,7 @@ public class OptionChroma extends JFrame{
     //Validation Button
     JButton validation;
 
-    String [] fenetrestore = {"1","2","3"};
+    String fenetrestore []  = {"1","2","3"};
 
     public OptionChroma() {
 
@@ -104,7 +104,7 @@ public class OptionChroma extends JFrame{
     public class eventFen implements ChangeListener{
 
         @Override
-        public void stateChanged(ChangeEvent e) {
+        public void stateChanged(ChangeEvent ef) {
 
             int valeurfen = fenetre.getValue();
             AFen.setText("Opacité de la fenetre selectionnée souhaité  : "+valeurfen);
@@ -113,7 +113,7 @@ public class OptionChroma extends JFrame{
     public class eventStor implements ChangeListener{
 
         @Override
-        public void stateChanged(ChangeEvent e) {
+        public void stateChanged(ChangeEvent es) {
             int valeurstor = store.getValue();
             AStore.setText("Hauteur du store selectionné souhaité : "+ valeurstor);
         }
@@ -121,7 +121,7 @@ public class OptionChroma extends JFrame{
     public class eventTemp implements ChangeListener {
 
         @Override
-        public void stateChanged(ChangeEvent e) {
+        public void stateChanged(ChangeEvent et) {
 
             int valeurtemp = temperature.getValue();
             ATemp.setText("Temperature dans la salle souhaitée : "+ valeurtemp + "° C");
