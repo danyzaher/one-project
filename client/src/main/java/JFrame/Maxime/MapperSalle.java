@@ -17,6 +17,7 @@ public class MapperSalle extends JFrame implements ActionListener {
     JMenuItem e1;
     JMenuItem electrochroma;
     ArrayList<Equippement> listEquippementDansLaSalle = new ArrayList<>();
+    ArrayList<Capteur> capteurArrayList = new ArrayList<>();
     ArrayList<Equippement> listEquippementDisponible = new ArrayList<>();
     ArrayList<Emplacement> emplacementArrayList = new ArrayList<>();
     public MapperSalle(String nomSalle){
@@ -33,6 +34,12 @@ public class MapperSalle extends JFrame implements ActionListener {
         equippement2.setBounds(100,100,20,15);
         add(equippement2);
         equippement2.setBackground(Color.RED);
+        Capteur capteur1 = new Capteur("capteur 1");
+        capteurArrayList.add(capteur1);
+        capteur1.setBounds(50,100,20,15);
+        capteur1.setBackground(Color.GREEN);
+        capteur1.setBorder(capteur1);
+        add(capteur1);
         setLayout(null);
         JMenu jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();
