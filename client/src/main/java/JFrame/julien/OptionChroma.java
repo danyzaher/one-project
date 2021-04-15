@@ -20,12 +20,14 @@ public class OptionChroma extends JFrame{
     //Selection of windows or store
     JComboBox numstore,numfenetre;
 
+
+
     String [] fenetrestore = {"1","2","3"};
 
     public OptionChroma() {
         setSize(300,400);
         setVisible(true);
-        setTitle("Parametres des Options ElectroChromatiques ");
+        setTitle("Option ElectroChroma");
         setLayout(new FlowLayout());
 
         tempext = new JLabel("Temperature à l'exterieur : 5°C");
@@ -83,6 +85,8 @@ public class OptionChroma extends JFrame{
         add(numfenetre);
         add(numstore);
 
+        setVisible(true);
+
     }
     public class eventFen implements ChangeListener{
 
@@ -114,11 +118,6 @@ public class OptionChroma extends JFrame{
     public static void main(String[] args) {
 
         OptionChroma opchro = new OptionChroma();
-        opchro.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        opchro.setSize(300,400);
-        opchro.setVisible(true);
-        opchro.pack();
-        opchro.setTitle("Parametres des Options ElectroChromatiques ");
 
     }
 }
