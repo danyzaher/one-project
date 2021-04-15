@@ -6,7 +6,7 @@ public class Afficher extends JFrame {
     public Afficher() {
         super();
 
-        setTitle("JTable basique dans un JScrollPane");
+        setTitle("OneBuilding");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         Object[][] donnees = {
@@ -20,14 +20,31 @@ public class Afficher extends JFrame {
 
         String[] entetes = {"Numéro Badge", "Employé", "Niveau d'accès", "Statut"};
 
+        JPanel tab = new JPanel();
+
         JTable tableau = new JTable(donnees, entetes);
 
         getContentPane().add(new JScrollPane(tableau), BorderLayout.CENTER);
+
+        JPanel boutons=new JPanel();
+
+        boutons.add(new JButton("Précedent"));
+
+        getContentPane().add(boutons, BorderLayout.SOUTH);
+
+
+
+
+
+
+
+
 
         pack();
     }
 
     public static void main(String[] args) {
         new Afficher().setVisible(true);
+
     }
 }
