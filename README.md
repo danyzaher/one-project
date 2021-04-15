@@ -2,7 +2,7 @@
 -----
 ## Description
 
-SI for smartbuildings
+SI for smartbuildings.
 An application that allows you to rent one or more rooms among the 5 smartbuildings of the city, and manage them as you wish (light, alarms, amenities...).
 
 -----
