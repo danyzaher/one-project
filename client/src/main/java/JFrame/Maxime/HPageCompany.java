@@ -74,10 +74,16 @@ public class HPageCompany extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (Map.Entry map: jMenus.entrySet()){
-
-        if(e.getSource()==jMenuItem){
-        MapperRoom mapperRoom = new MapperRoom(jMenuItem.getName());}}
+        for (Map.Entry mapentry : jMenus.entrySet()){
+            HashMap<JMenu,ArrayList<JMenuItem>> j = (HashMap<JMenu, ArrayList<JMenuItem>>) mapentry.getValue();
+            for(Map.Entry map : j.entrySet()){
+                ArrayList<JMenuItem> a = (ArrayList<JMenuItem>) map.getValue();
+                for(int k=0 ; k<a.size();k++){
+                    if(e.getSource().equals(a.get(k))){
+                        MapperRoom mapperRoom = new MapperRoom(a.get(k).getName());}
+                }
+            }
+        }
         this.setVisible(false);
     }
 }
