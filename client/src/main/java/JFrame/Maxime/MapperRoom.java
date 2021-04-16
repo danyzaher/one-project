@@ -10,7 +10,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class MapperSalle extends JFrame implements ActionListener {
+public class MapperRoom extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("MapperSalle");
     JFrame frame;
     int numeroSalle;
@@ -20,7 +20,7 @@ public class MapperSalle extends JFrame implements ActionListener {
     ArrayList<Capteur> capteurArrayList = new ArrayList<>();
     ArrayList<Equippement> listEquippementDisponible = new ArrayList<>();
     ArrayList<Emplacement> emplacementArrayList = new ArrayList<>();
-    public MapperSalle(String nomSalle){
+    public MapperRoom(String nomSalle){
         setTitle(nomSalle);
         setVisible(true);
         setSize(400,300);
@@ -56,7 +56,7 @@ public class MapperSalle extends JFrame implements ActionListener {
     public void remplirListEquippementDansLaSalle(){}
     public void remplirlistEquippementDisponible(){}
     public static void main(String[] args){
-        new MapperSalle("salle numéro 3");
+        new MapperRoom("salle numéro 3");
     }
 
     @Override
