@@ -15,20 +15,20 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
 
     JComboBox combobox;
     JLabel l1, l2;
+    ArrayList<String> s1 = new ArrayList<>();
     public HPage(){
         setTitle("page d'accueil");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
         setSize(1200, 1000);
         setVisible(true);
-
-        String s1[] = { "Fritel Inc", "FloraFlore","Julien Industry" };
-
-        combobox = new JComboBox(s1);
+        listCompany();
+        String s2[] = s1.toArray(new String[0]);
+        combobox = new JComboBox(s2);
         combobox.addItemListener(this);
 
         l1 = new JLabel("choisissez une société ");
-        l2 = new JLabel("[Fritel Inc]");
+        l2 = new JLabel(s1.get(0));
 
         l2.setForeground(Color.blue);
 
@@ -50,9 +50,10 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         // show Company name
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
-        stringArrayList.add("Company");
+        stringArrayList.add("company");
         stringArrayList.add("name");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        s1 = ccSocketTCP2.result;
 
 
     }

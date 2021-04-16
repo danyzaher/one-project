@@ -14,7 +14,7 @@ import java.util.ArrayList;
 
 public class CCSocketTCPbis {
     protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP2");
-    ArrayList<String> result = new ArrayList<>();
+    public ArrayList<String> result = new ArrayList<>();
     public CCSocketTCPbis(ArrayList<String> strings){
         Reader reader = null;
         try {
