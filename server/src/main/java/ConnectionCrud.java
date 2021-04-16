@@ -74,5 +74,15 @@ public class ConnectionCrud {
         return result;
     }
 
+    public String getWinStore() throws SQLException{
+        String sql = "Select room from Company;"; // To change
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("name");}
+        return result;
+    }
+
 
 }
