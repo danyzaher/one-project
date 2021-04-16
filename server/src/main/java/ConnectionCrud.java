@@ -69,7 +69,9 @@ public class ConnectionCrud {
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            result += rs.getArray("name")+ "        |               " + rs.getArray("floor_s_number") + "            |       "  + rs.getArray("address") + "\n";
+            result += rs.getArray("name") + "\n";
+            result += rs.getArray("floor_s_number")+ "\n";
+            result += rs.getArray("address") + "\n";
         }
         return result;
     }
