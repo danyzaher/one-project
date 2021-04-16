@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>CCSocketTCP</mainClass>
+                            <mainClass>Socket.CCSocketTCP</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>

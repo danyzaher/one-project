@@ -45,8 +45,21 @@ class ServerSocketTCP implements Runnable{
 				ConnectionCrud C = new ConnectionCrud();
 				C.setC(Datasource.getConnection());
 				logger.info("Connection available = " + source.size());
-				addElementsToTable(in,C);
-				listMessage.add(C.showElement("produit"));
+				String recu = in.readLine();
+				logger.info("recu = "+recu);
+				if (recu.equals("show")){
+					recu = in.readLine();
+					if (recu.equals("company")){
+						recu = in.readLine();
+						if (recu.equals("name")){
+							logger.info("last if");
+							listMessage.add(C.getCompanyName());
+						}
+					}
+				}
+				else{
+					addElementsToTable(in,C);
+					listMessage.add(C.showElement("produit"));}
 				Datasource.setConnection(C.getC());
 			} else{
 				listMessage.add("no more connection come back later");
@@ -76,13 +89,8 @@ class ServerSocketTCP implements Runnable{
 	public void run() {
 		logger.info("new Client");
 		Socket socket = socketClient;
-		try {
-			this.wait(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		analyseInputStream(socket);
-		currentThread().interrupt();
+
 	}
 
 	private Thread currentThread() {

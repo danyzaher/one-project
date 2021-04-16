@@ -53,6 +53,15 @@ public class ConnectionCrud {
         }
         return result;
     }
+    public String getCompanyName() throws SQLException{
+        String sql = "Select name from Company;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("name");}
+        return result;
+    }
 
 
 }
