@@ -40,54 +40,6 @@ public class OptionChroma extends JFrame {
         setTitle("Option ElectroChroma");
         setLayout(new FlowLayout());
 
-        tempext = new JLabel("Temperature à l'exterieur : 5°C");
-        tempint = new JLabel("Temperature dans la salle : 20°C");
-        light = new JLabel("Taux de luminosité dans la salle : 50%");
-        add(tempext);
-        add(tempint);
-        add(light);
-
-        //Temperature lower part
-
-        temperature = new JSlider(JSlider.HORIZONTAL, 0, 30, 19);
-        temperature.setMajorTickSpacing(1);
-        temperature.setPaintTicks(true);
-        add(temperature);
-
-        ATemp = new JLabel("Temperature souhaitée dans la salle : ... °C");
-        add(ATemp);
-        eventTemp et = new eventTemp();
-        temperature.addChangeListener(et);
-
-        //Store lower Part
-        store = new JSlider(JSlider.HORIZONTAL, 0, 5, 0);
-        store.setMajorTickSpacing(1);
-        store.setPaintTicks(true);
-        add(store);
-
-        AStore = new JLabel("Hauteur du store selectionné souhaité : ...");
-        add(AStore);
-        eventStor es = new eventStor();
-        store.addChangeListener(es);
-
-        //Windows lower Part
-        window = new JSlider(JSlider.HORIZONTAL, 0, 5, 0);
-        window.setMajorTickSpacing(1);
-        window.setPaintTicks(true);
-        add(window);
-
-        AWin = new JLabel("Opacité de la fenetre souhaité : ...");
-        add(AWin);
-        eventWin ew = new eventWin();
-        window.addChangeListener(ew);
-
-        /********* HELP PICTURE FOR THE USER *************/
-
-        //dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
-        //aide = new JLabel(dispoFenStor);
-        //add(aide);
-        //add(dispoFenStor);
-
         /******** JCOMBOBOXES FOR SELECT THE STORE OR WINDOW *******/
 
         numwindow = new JComboBox(windowstore);
@@ -98,8 +50,61 @@ public class OptionChroma extends JFrame {
         validation = new JButton("VALIDER");
         validation.setSize(100, 100);
 
-        add(numwindow);
+
+
+        tempext = new JLabel("Temperature à l'exterieur : 5°C \n");
+        tempint = new JLabel("Temperature dans la salle : 20°C \n");
+        light = new JLabel("Taux de luminosité dans la salle : 50%\n");
+        add(tempext);
+        add(tempint);
+        add(light);
+
+        //Temperature lower part
+
+        temperature = new JSlider(JSlider.HORIZONTAL, 0, 30, 19);
+        temperature.setMajorTickSpacing(1);
+        temperature.setPaintTicks(true);
+
+
+        ATemp = new JLabel("Temperature souhaitée dans la salle : ... °C");
+        add(ATemp);
+        add(temperature);
+        eventTemp et = new eventTemp();
+        temperature.addChangeListener(et);
+
+        //Store lower Part
+        store = new JSlider(JSlider.HORIZONTAL, 0, 5, 0);
+        store.setMajorTickSpacing(1);
+        store.setPaintTicks(true);
+
+
+        AStore = new JLabel("Hauteur du store selectionné souhaité : ...");
+        add(AStore);
         add(numstore);
+        add(store);
+        eventStor es = new eventStor();
+        store.addChangeListener(es);
+
+        //Windows lower Part
+        window = new JSlider(JSlider.HORIZONTAL, 0, 5, 0);
+        window.setMajorTickSpacing(1);
+        window.setPaintTicks(true);
+
+
+        AWin = new JLabel("Opacité de la fenetre souhaité : ...");
+        add(AWin);
+        add(numwindow);
+        add(window);
+
+        eventWin ew = new eventWin();
+        window.addChangeListener(ew);
+
+        /********* HELP PICTURE FOR THE USER *************/
+
+        //dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
+        //aide = new JLabel(dispoFenStor);
+        //add(aide);
+        //add(dispoFenStor);
 
         add(validation);
 
