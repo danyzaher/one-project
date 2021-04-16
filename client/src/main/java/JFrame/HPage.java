@@ -1,6 +1,7 @@
 package JFrame;
 
 import JFrame.Maxime.HPageEntreprise;
+import Socket.CCSocketTCPbis;
 
 import javax.swing.*;
 import java.awt.*;
@@ -51,7 +52,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         stringArrayList.add("show");
         stringArrayList.add("Company");
         stringArrayList.add("name");
-        CCSocketTCP2 ccSocketTCP2 = new CCSocketTCP2(stringArrayList);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
 
 
     }

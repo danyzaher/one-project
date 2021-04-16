@@ -1,22 +1,21 @@
-
+package Socket;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.node.ArrayNode;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
-import org.apache.commons.cli.*;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.*;
-import java.net.*;
+import java.net.Socket;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 
-public class CCSocketTCP {
-    protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP");
-    public CCSocketTCP(){
+public class CCSocketTCPbis {
+    protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP2");
+    ArrayList<String> result = new ArrayList<>();
+    public CCSocketTCPbis(ArrayList<String> strings){
         Reader reader = null;
         try {
             reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_CLIENT_CONF")));
@@ -51,19 +50,8 @@ public class CCSocketTCP {
             e.printStackTrace();
         }
 
-        File file = new File(String.valueOf(Paths.get("client//jsonformatter.json")));
-        ObjectMapper obm = new ObjectMapper();
-
-        ArrayNode nodes = null;
-        try {
-            nodes = (ArrayNode) obm.readTree(file).get("data");
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-
-        for (int i = 0; i < nodes.size(); i++) {
-            pred.println(nodes.get(i));
+        for (int i = 0; i < strings.size(); i++) {
+            pred.println(strings.get(i));
         }
         pred.println("end");
         try {
@@ -71,6 +59,7 @@ public class CCSocketTCP {
             clientLog.info("Starting receiving data");
             while ((recu = plec.readLine()) != null) {
                 clientLog.info(recu);
+                result.add(recu);
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -80,8 +69,5 @@ public class CCSocketTCP {
     }
 
 
-    public static void main(String[] args) {
-        CCSocketTCP ccSocketTCP = new CCSocketTCP();
-    }
-}
 
+    }
