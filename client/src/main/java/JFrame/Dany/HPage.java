@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
 public class HPage extends JFrame implements ItemListener, ActionListener{
 
@@ -46,6 +47,12 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     }
     public void listCompany(){
         // show Company name
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("Company");
+        stringArrayList.add("name");
+        CCSocketTCP2 ccSocketTCP2 = new CCSocketTCP2(stringArrayList);
+
 
     }
     public void itemStateChanged(ItemEvent e)
