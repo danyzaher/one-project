@@ -8,12 +8,12 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 
 public class FenetreListEquipement extends JFrame implements ActionListener, ItemListener {
-    MapperSalle mapperSalle;
+    MapperRoom mapperRoom;
     JLabel l1, l2;
     JComboBox combobox;
-    public FenetreListEquipement(MapperSalle mapperSalle){
-        this.mapperSalle=mapperSalle;
-        setTitle("liste des équipement disponible pour la salle " + mapperSalle.numeroSalle);
+    public FenetreListEquipement(MapperRoom mapperRoom){
+        this.mapperRoom = mapperRoom;
+        setTitle("liste des équipement disponible pour la salle " + mapperRoom.numeroSalle);
         setVisible(true);
         setLayout(new FlowLayout());
         setSize(1000,1000);

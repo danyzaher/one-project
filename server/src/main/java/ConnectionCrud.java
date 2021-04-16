@@ -59,6 +59,29 @@ public class ConnectionCrud {
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
+            result += rs.getArray("name")+ "\n";}
+        return result;
+    }
+
+    public String getMenu(String company) throws SQLException{
+        String sql = "Select room.name, floor.floor_s_number,building.address from floor inner join room on floor.id_floor=room.id_floor inner join building on floor.address=building.address where room.room_s_number in ( Select room_s_number from location inner join company on company.id_company=location.id_company where company.name= '"+company+"');";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("name") + "\n";
+            result += rs.getArray("floor_s_number")+ "\n";
+            result += rs.getArray("address") + "\n";
+        }
+        return result;
+    }
+
+    public String getWinStore() throws SQLException{
+        String sql = "Select room from Company;"; // To change
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
             result += rs.getArray("name");}
         return result;
     }
