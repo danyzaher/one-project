@@ -11,3 +11,5 @@ target/
 *.ist
 */*.iml
 */target
+META-INF/
+MANIFEST.MF
