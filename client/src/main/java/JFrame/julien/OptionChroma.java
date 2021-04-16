@@ -9,23 +9,23 @@ public class OptionChroma extends JFrame{
     /**Lower part of the frame**/
 
     //Sliders and Labels
-    JSlider temperature, store, fenetre;
-    JLabel ATemp, AStore, AFen;
+    JSlider temperature, store, window;
+    JLabel ATemp, AStore, AWin;
 
     //Help items
     Image dispoFenStor;
-    JLabel aide;
+    JLabel help;
 
     /**Upper part of thr frame**/
-    JLabel tempext, tempint, eclairage;
+    JLabel tempext, tempint, light;
 
     //Selection of windows or store
-    JComboBox numstore,numfenetre;
+    JComboBox numstore,numwindow;
 
     //Validation Button
     JButton validation;
 
-    String fenetrestore []  = {"1","2","3"};
+    String windowstore []  = {"1","2","3"};
 
     public OptionChroma() {
 
@@ -38,10 +38,10 @@ public class OptionChroma extends JFrame{
 
         tempext = new JLabel("Temperature à l'exterieur : 5°C");
         tempint = new JLabel("Temperature dans la salle : 20°C");
-        eclairage = new JLabel("Taux de luminosité dans la salle : 50%");
+        light = new JLabel("Taux de luminosité dans la salle : 50%");
         add(tempext);
         add(tempint);
-        add(eclairage);
+        add(light);
 
         //Temperature lower part
 
@@ -67,15 +67,15 @@ public class OptionChroma extends JFrame{
         store.addChangeListener(es);
 
         //Windows lower Part
-        fenetre = new JSlider(JSlider.HORIZONTAL, 0,5, 0);
-        fenetre.setMajorTickSpacing(1);
-        fenetre.setPaintTicks(true);
-        add(fenetre);
+        window = new JSlider(JSlider.HORIZONTAL, 0,5, 0);
+        window.setMajorTickSpacing(1);
+        window.setPaintTicks(true);
+        add(window);
 
-        AFen = new JLabel("Opacité de la fenetre souhaité : ...");
-        add(AFen);
-        eventFen ef = new eventFen();
-        fenetre.addChangeListener(ef);
+        AWin = new JLabel("Opacité de la fenetre souhaité : ...");
+        add(AWin);
+        eventWin ew = new eventWin();
+        window.addChangeListener(ew);
 
         /********* HELP PICTURE FOR THE USER *************/
 
@@ -86,15 +86,15 @@ public class OptionChroma extends JFrame{
 
         /******** JCOMBOBOXES FOR SELECT THE STORE OR WINDOW *******/
 
-        numfenetre = new JComboBox(fenetrestore);
-        numstore = new JComboBox(fenetrestore);
+        numwindow = new JComboBox(windowstore);
+        numstore = new JComboBox(windowstore);
         //numstore.addActionListener(this);
 
 
         validation = new JButton("VALIDER");
         validation.setSize(100,100);
 
-        add(numfenetre);
+        add(numwindow);
         add(numstore);
 
         add(validation);
@@ -104,13 +104,13 @@ public class OptionChroma extends JFrame{
     }
 
 
-    public class eventFen implements ChangeListener{
+    public class eventWin implements ChangeListener{
 
         @Override
-        public void stateChanged(ChangeEvent ef) {
+        public void stateChanged(ChangeEvent ew) {
 
-            int valeurfen = fenetre.getValue();
-            AFen.setText("Opacité de la fenetre selectionnée souhaité  : "+valeurfen);
+            int valeurfen = window.getValue();
+            AWin.setText("Opacité de la fenetre selectionnée souhaité  : "+valeurfen);
         }
     }
     public class eventStor implements ChangeListener{

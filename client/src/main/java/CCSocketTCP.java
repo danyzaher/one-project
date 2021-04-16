@@ -16,21 +16,50 @@ import java.nio.file.Paths;
 
 public class CCSocketTCP {
     protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP");
-
-    public static void main(String[] args) throws IOException {
-        Reader reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_CLIENT_CONF")));
+    public CCSocketTCP(){
+        Reader reader = null;
+        try {
+            reader = Files.newBufferedReader(Paths.get(System.getenv("EPISEN_CLIENT_CONF")));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         ObjectMapper om = new ObjectMapper(new YAMLFactory());
-        SocketConfig sc = om.readValue(reader, SocketConfig.class);
-        Socket socket = new Socket(sc.getIp(), sc.getPort());
+        SocketConfig sc = null;
+        try {
+            sc = om.readValue(reader, SocketConfig.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        Socket socket = null;
+        try {
+            socket = new Socket(sc.getIp(), sc.getPort());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         clientLog.info("SOCKET = " + socket);
 
-        BufferedReader plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
-        PrintWriter pred = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+        BufferedReader plec = null;
+        try {
+            plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        PrintWriter pred = null;
+        try {
+            pred = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
-        File file = new File(String.valueOf(Paths.get("client\\jsonformatter.json")));
+        File file = new File(String.valueOf(Paths.get("client//jsonformatter.json")));
         ObjectMapper obm = new ObjectMapper();
 
-        ArrayNode nodes = (ArrayNode) obm.readTree(file).get("data");
+        ArrayNode nodes = null;
+        try {
+            nodes = (ArrayNode) obm.readTree(file).get("data");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
 
         for (int i = 0; i < nodes.size(); i++) {
@@ -48,6 +77,11 @@ public class CCSocketTCP {
         }
 
         clientLog.info("END");
+    }
+
+
+    public static void main(String[] args) {
+        CCSocketTCP ccSocketTCP = new CCSocketTCP();
     }
 }
 

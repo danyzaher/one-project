@@ -76,13 +76,8 @@ class ServerSocketTCP implements Runnable{
 	public void run() {
 		logger.info("new Client");
 		Socket socket = socketClient;
-		try {
-			this.wait(1000);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
-		}
 		analyseInputStream(socket);
-		currentThread().interrupt();
+
 	}
 
 	private Thread currentThread() {

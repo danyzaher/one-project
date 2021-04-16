@@ -44,6 +44,10 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     public static void main(String[] args){
          HPage h = new HPage();
     }
+    public void listCompany(){
+        // show Company name
+
+    }
     public void itemStateChanged(ItemEvent e)
     {
         // si l'état du combobox est modifiée
