@@ -4,6 +4,8 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Afficher  extends JFrame {
+    JButton prec;
+
     public Afficher() {
         this.setTitle("OneBuilding");
         this.setSize(500, 300);
@@ -16,7 +18,7 @@ public class Afficher  extends JFrame {
 
 
         JPanel num1 = new JPanel();
-        num1.add(new JLabel("Propriétaire badge:"));
+        num1.add(new JLabel("Propriétaire du badge:"));
         num1.add(new JLabel("Paul Denis"));
 
 
@@ -29,6 +31,14 @@ public class Afficher  extends JFrame {
         num3.add(new JLabel("Statut:"));
         num3.add(new JLabel("Actif"));
 
+        JPanel num4 = new JPanel();
+        num4.setLayout(new BoxLayout(num4, BoxLayout.PAGE_AXIS));
+        prec=new JButton("Précedent");
+
+        num4.add(prec);
+
+
+
 
 
         JPanel fenetre = new JPanel();
@@ -37,7 +47,8 @@ public class Afficher  extends JFrame {
         fenetre.add(num1);
         fenetre.add(num2);
         fenetre.add(num3);
-        fenetre.add(new JButton("Précedent"));
+        fenetre.add(num4);
+
 
         this.getContentPane().add(fenetre);
         this.setVisible(true);
