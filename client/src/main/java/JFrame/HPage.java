@@ -1,6 +1,6 @@
 package JFrame;
 
-import JFrame.Maxime.HPageEntreprise;
+import JFrame.Maxime.HPageCompany;
 import Socket.CCSocketTCPbis;
 
 import javax.swing.*;
@@ -69,6 +69,6 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     @Override
     public void actionPerformed(ActionEvent e) {
         String s = l2.getText();
-        HPageEntreprise hPageEntreprise = new HPageEntreprise(s);
+        HPageCompany hPageCompany = new HPageCompany(s);
     }
 }
