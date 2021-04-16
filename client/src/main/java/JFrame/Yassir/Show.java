@@ -1,12 +1,11 @@
 package JFrame.Yassir;
 
 import javax.swing.*;
-import java.awt.*;
 
-public class Afficher  extends JFrame {
+public class Show extends JFrame {
     JButton prec;
 
-    public Afficher() {
+    public Show() {
         this.setTitle("OneBuilding");
         this.setSize(500, 300);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,6 +54,6 @@ public class Afficher  extends JFrame {
     }
 
     public static void main(String[] args) {
-        Afficher affiche = new Afficher();
+        Show affiche = new Show();
     }
 }

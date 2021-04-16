@@ -2,8 +2,8 @@ package JFrame.Yassir;
 import javax.swing.*;
 import java.awt.*;
 
-public class Affichertout extends JFrame {
-    public Affichertout() {
+public class Showall extends JFrame {
+    public Showall() {
         super();
 
         setTitle("OneBuilding");
@@ -44,7 +44,7 @@ public class Affichertout extends JFrame {
     }
 
     public static void main(String[] args) {
-        new Affichertout().setVisible(true);
+        new Showall().setVisible(true);
 
     }
 }

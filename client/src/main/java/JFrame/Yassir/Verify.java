@@ -21,13 +21,13 @@ public class Verify extends JFrame {
         panel.setLayout(new BoxLayout(panel, BoxLayout.LINE_AXIS));
         label1=new JLabel("Badges");
         panel.add(label1);
-        panel.add(combo);
+        panel.add(combo1);
 
         JPanel panel1  = new JPanel();
         panel1.setLayout(new BoxLayout(panel1, BoxLayout.LINE_AXIS));
         label2= new JLabel("Equipements/Capteurs");
         panel1.add(label2);
-        panel1.add(combo1);
+        panel1.add(combo);
 
         JPanel panel2 = new JPanel();
         panel2.add(panel);

@@ -1,17 +1,20 @@
 package JFrame.Yassir;
 import javax.swing.* ;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Badge extends JFrame {
+public class Badge extends JFrame implements ActionListener {
     JButton show;
     JButton showall;
     JButton signal;
     JButton verify;
+    JButton infos;
 
 
     public Badge() {
         this.setTitle("OneBuilding");
-        this.setSize(500, 200);
+        this.setSize(600, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         JPanel boutons=new JPanel();
@@ -29,11 +32,17 @@ public class Badge extends JFrame {
 
         boutons.setLayout(new BoxLayout(boutons, BoxLayout.LINE_AXIS));
         showall=new JButton("Afficher toute la liste");
+        showall.addActionListener(this);
         signal=new JButton("Signaler un problème");
+        signal.addActionListener(this);
         verify=new JButton("Vérifier les autorisations");
+        verify.addActionListener(this);
+        infos=new JButton("Informations");
+        infos.addActionListener(this);
         boutons.add(showall);
         boutons.add(signal);
         boutons.add(verify);
+        boutons.add(infos);
 
 
 
@@ -65,8 +74,37 @@ public class Badge extends JFrame {
         this.setVisible(true);
 
     }
+
+
     public static void main (String [] args) {
 
         Badge badge = new Badge();
     }
-}
+
+    @Override
+    public void actionPerformed(ActionEvent evt) {
+        Object source =evt.getSource();
+
+        if (source == showall)
+        {
+            Showall showall=new Showall();
+            showall.setVisible(true);
+        }
+        else if (source == verify) {
+            Verify verif = new Verify();
+        }
+        else if(source == signal) {
+            Problem prob = new Problem();
+            prob.setVisible(true);
+        }
+        else if(source == infos)
+        {
+            Information info = new Information();
+            info.setVisible(true);
+        }
+
+
+    }
+
+
+    }
