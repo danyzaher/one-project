@@ -1,4 +1,4 @@
-package JFrame.Dany;
+package JFrame;
 
 import JFrame.Maxime.HPageEntreprise;
 
