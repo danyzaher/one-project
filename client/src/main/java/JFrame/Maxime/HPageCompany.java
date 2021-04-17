@@ -26,6 +26,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         setVisible(true);
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
+        getMenu();
         JMenu badge = new JMenu("Badge");
 
         jMenu.add(badge);

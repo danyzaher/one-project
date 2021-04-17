@@ -52,6 +52,9 @@ public class MapperRoom extends JFrame implements ActionListener {
         jMenu.add(e1);
         this.setJMenuBar(jMenuBar);
     }
+    public void getEquipement(){
+
+    }
     public void ajouterLesEquippement(){ }
     public void remplirListEquippementDansLaSalle(){}
     public void remplirlistEquippementDisponible(){}
