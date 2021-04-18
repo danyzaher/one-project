@@ -1,6 +1,8 @@
 package JFrame.Maxime;
 
 import Socket.CCSocketTCPbis;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
 import java.awt.*;
@@ -11,34 +13,37 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class HPageCompany extends JFrame implements ActionListener {
-
-
+    private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
     String title;
     JMenu roomlocation = new JMenu("Salles à la location");
     JMenu jMenu = new JMenu("Menu");
     HashMap<JMenu,HashMap<JMenu,ArrayList<JMenuItem>>> jMenus= new HashMap<>();
     ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){
+        logger.info("begin HPageComany "+s);
         title = s;
         setTitle("Page d'accueil de l'entreprise "+s);
         setLayout(new FlowLayout());
         setSize(1000, 900);
         setVisible(true);
         JMenuBar jMenuBar = new JMenuBar();
-        jMenuBar.add(jMenu);
         getMenu();
+        jMenuBar.add(jMenu);
         JMenu badge = new JMenu("Badge");
 
         jMenu.add(badge);
         this.setJMenuBar(jMenuBar);
     }
     public void getMenu(){
+        logger.info("begin getMenu");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add(title);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
+        logger.info("result = " + result);
         for(int k =0; k<result.size()-3;k=k+3){
+            logger.info("in the for "+k);
             JMenuItem r1 = new JMenuItem(result.get(k));
             JMenu r2 = new JMenu(result.get(k+1));
             JMenu r3 = new JMenu(result.get(k+2));
@@ -49,6 +54,7 @@ public class HPageCompany extends JFrame implements ActionListener {
                         //nothing
                     }
                     else{
+                        logger.info("in getMenu if if if ");
                         r2.add(r1);
                         jMenus.get(r3).get(r2).add(r1);
                     }
@@ -62,6 +68,7 @@ public class HPageCompany extends JFrame implements ActionListener {
                     hjmi.put(r2,jmi);
                 }
             } else {
+                logger.info("in get Menu else");
                 r3.add(r2);
                 r2.add(r1);
                 ArrayList<JMenuItem> jmi = new ArrayList<>();
@@ -71,7 +78,7 @@ public class HPageCompany extends JFrame implements ActionListener {
                 jMenus.put(r3,hjmi);
                 roomlocation.add(r3);
             }
-        }
+        } logger.info("end of for");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
