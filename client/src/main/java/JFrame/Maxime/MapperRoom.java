@@ -16,26 +16,26 @@ public class MapperRoom extends JFrame implements ActionListener {
     int numeroSalle;
     JMenuItem e1;
     JMenuItem electrochroma;
-    ArrayList<Equippement> listEquippementDansLaSalle = new ArrayList<>();
-    ArrayList<Capteur> capteurArrayList = new ArrayList<>();
-    ArrayList<Equippement> listEquippementDisponible = new ArrayList<>();
-    ArrayList<Emplacement> emplacementArrayList = new ArrayList<>();
+    ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
+    ArrayList<Capteur> sensorArrayList = new ArrayList<>();
+    ArrayList<Equipement> listEquipementAvailable = new ArrayList<>();
+    ArrayList<Place> placeArrayList = new ArrayList<>();
     public MapperRoom(String nomSalle){
         setTitle(nomSalle);
         setVisible(true);
         setSize(400,300);
-        Equippement equippement1 = new Equippement("equipement 1");
-        listEquippementDansLaSalle.add(equippement1);
-        equippement1.setBounds(50,100,20,15);
-        equippement1.setBackground(Color.GREEN);
-        add(equippement1);
-        Equippement equippement2 = new Equippement("equipement 2");
-        listEquippementDansLaSalle.add(equippement2);
-        equippement2.setBounds(100,100,20,15);
-        add(equippement2);
-        equippement2.setBackground(Color.RED);
+        Equipement equipement1 = new Equipement("equipement 1");
+        listEquipementDansLaSalle.add(equipement1);
+        equipement1.setBounds(50,100,20,15);
+        equipement1.setBackground(Color.GREEN);
+        add(equipement1);
+        Equipement equipement2 = new Equipement("equipement 2");
+        listEquipementDansLaSalle.add(equipement2);
+        equipement2.setBounds(100,100,20,15);
+        add(equipement2);
+        equipement2.setBackground(Color.RED);
         Capteur capteur1 = new Capteur("capteur 1");
-        capteurArrayList.add(capteur1);
+        sensorArrayList.add(capteur1);
         capteur1.setBounds(50,100,20,15);
         capteur1.setBackground(Color.GREEN);
         capteur1.setBorder(capteur1);
@@ -51,6 +51,9 @@ public class MapperRoom extends JFrame implements ActionListener {
         jMenu.add(electrochroma);
         jMenu.add(e1);
         this.setJMenuBar(jMenuBar);
+    }
+    public void getEquipement(){
+
     }
     public void ajouterLesEquippement(){ }
     public void remplirListEquippementDansLaSalle(){}

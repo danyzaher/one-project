@@ -1,7 +1,11 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.*;
 
 public class ConnectionCrud {
     private Connection c;
+    private final static Logger logger = LoggerFactory.getLogger(ConnectionCrud.class.getName());
     public ConnectionCrud() {}
 
     public void setC(Connection c) {
@@ -64,11 +68,14 @@ public class ConnectionCrud {
     }
 
     public String getMenu(String company) throws SQLException{
+        logger.info("in geMenu");
         String sql = "Select room.name, floor.floor_s_number,building.address from floor inner join room on floor.id_floor=room.id_floor inner join building on floor.address=building.address where room.room_s_number in ( Select room_s_number from location inner join company on company.id_company=location.id_company where company.name= '"+company+"');";
+        logger.info(sql);
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
+            logger.info("in the while");
             result += rs.getArray("name") + "\n";
             result += rs.getArray("floor_s_number")+ "\n";
             result += rs.getArray("address") + "\n";

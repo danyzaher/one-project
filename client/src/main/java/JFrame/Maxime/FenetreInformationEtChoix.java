@@ -7,13 +7,13 @@ import java.awt.event.ActionListener;
 
 public class FenetreInformationEtChoix extends JFrame implements ActionListener {
 
-    Equippement equippement;
+    Equipement equipement;
     JButton retirer;
     JButton déplacer;
     JButton information;
-    public FenetreInformationEtChoix(Equippement equippement){
-        this.equippement = equippement;
-        setTitle(equippement.nom);
+    public FenetreInformationEtChoix(Equipement equipement){
+        this.equipement = equipement;
+        setTitle(equipement.nom);
         setVisible(true);
         setSize(500,600);
         setLayout(new FlowLayout());
