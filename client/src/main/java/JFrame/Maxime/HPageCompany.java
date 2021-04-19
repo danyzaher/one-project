@@ -9,13 +9,11 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
 
 public class HPageCompany extends JFrame implements ActionListener {
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
     String title;
-    JMenu roomlocation = new JMenu("Salles à la location");
+    JMenu roomLocation = new JMenu("Salles à la location");
     JMenu jMenu = new JMenu("Menu");
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
@@ -30,7 +28,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         jMenuBar.add(jMenu);
         JMenu badge = new JMenu("Badge");
         getMenu();
-        jMenu.add(roomlocation);
+        jMenu.add(roomLocation);
         jMenu.add(badge);
         this.setJMenuBar(jMenuBar);
     }
@@ -88,7 +86,7 @@ public class HPageCompany extends JFrame implements ActionListener {
                 jMenus.get(jMenus.indexOf(r3)).
                         jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
                         jr.add(r1);
-                roomlocation.add(r3.jb);
+                roomLocation.add(r3.jb);
             }
         } logger.info("end of for");
     }
