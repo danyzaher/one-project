@@ -49,6 +49,7 @@ public class HPageCompany extends JFrame implements ActionListener {
             JMenuFloor r2 = new JMenuFloor(result.get(k+1));
             JMenuBuilding r3 = new JMenuBuilding(result.get(k+2));
             r1.addActionListener(this);
+            //il y a encore une erreur dans les if else
             if (jMenus.contains(r3)){
                 if (jMenus.get(jMenus.indexOf(r3)).contains(r2)){
                     if (jMenus.get(jMenus.indexOf(r3)).contains(r1)){
@@ -98,9 +99,7 @@ public class HPageCompany extends JFrame implements ActionListener {
             for (int i=0;i<jMenus.get(k).jf.size();i++){
                 for(int j=0;j<jMenus.get(k).jf.get(i).jr.size();j++){
                     if(e.getSource()==jMenus.get(k).jf.get(i).jr.get(j)){
-                        String s = jMenus.get(k).jf.get(i).jr.get(j).getName();
-                        logger.info("s = "+s);
-                        MapperRoom mapperRoom = new MapperRoom(jMenus.get(k).jf.get(i).jr.get(j).getName());
+                        MapperRoom mapperRoom = new MapperRoom(jMenus.get(k).jf.get(i).jr.get(j).getText());
                     }
                 }
             }
