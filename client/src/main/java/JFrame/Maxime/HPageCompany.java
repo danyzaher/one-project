@@ -17,7 +17,7 @@ public class HPageCompany extends JFrame implements ActionListener {
     String title;
     JMenu roomlocation = new JMenu("Salles à la location");
     JMenu jMenu = new JMenu("Menu");
-    HashMap<JMenu,HashMap<JMenu,ArrayList<JMenuItem>>> jMenus= new HashMap<>();
+    ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){
         logger.info("begin HPageComany "+s);
@@ -27,10 +27,10 @@ public class HPageCompany extends JFrame implements ActionListener {
         setSize(1000, 900);
         setVisible(true);
         JMenuBar jMenuBar = new JMenuBar();
-        getMenu();
         jMenuBar.add(jMenu);
         JMenu badge = new JMenu("Badge");
-
+        getMenu();
+        jMenu.add(roomlocation);
         jMenu.add(badge);
         this.setJMenuBar(jMenuBar);
     }
@@ -38,6 +38,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         logger.info("begin getMenu");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
+        stringArrayList.add("menu");
         stringArrayList.add(title);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
@@ -45,50 +46,62 @@ public class HPageCompany extends JFrame implements ActionListener {
         for(int k =0; k<result.size()-3;k=k+3){
             logger.info("in the for "+k);
             JMenuItem r1 = new JMenuItem(result.get(k));
-            JMenu r2 = new JMenu(result.get(k+1));
-            JMenu r3 = new JMenu(result.get(k+2));
+            JMenuFloor r2 = new JMenuFloor(result.get(k+1));
+            JMenuBuilding r3 = new JMenuBuilding(result.get(k+2));
             r1.addActionListener(this);
-            if (jMenus.containsKey(r3)){
-                if (jMenus.get(r3).containsKey(r2)){
-                    if (jMenus.get(r3).get(r2).contains(r1)){
+            if (jMenus.contains(r3)){
+                if (jMenus.get(jMenus.indexOf(r3)).contains(r2)){
+                    if (jMenus.get(jMenus.indexOf(r3)).contains(r1)){
                         //nothing
                     }
                     else{
-                        logger.info("in getMenu if if if ");
-                        r2.add(r1);
-                        jMenus.get(r3).get(r2).add(r1);
+                        logger.info("in getMenu if if else ");
+                        jMenus.get(jMenus.indexOf(r3)).
+                                jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
+                                jf.add(r1);
+                        jMenus.get(jMenus.indexOf(r3)).
+                                jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
+                                jr.add(r1);
                     }
                 }
                 else {
-                    r3.add(r2);
-                    r2.add(r1);
-                    ArrayList<JMenuItem> jmi = new ArrayList<>();
-                    jmi.add(r1);
-                    HashMap<JMenu,ArrayList<JMenuItem>> hjmi = new HashMap<>();
-                    hjmi.put(r2,jmi);
+                    logger.info(("in getMenu if else"));
+
+                    r2.jf.add(r1);
+                    jMenus.get(jMenus.indexOf(r3)).
+                            jf.add(r2);
+                    jMenus.get(jMenus.indexOf(r3)).
+                            jb.add(r2.jf);
+                    jMenus.get(jMenus.indexOf(r3)).
+                            jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
+                            jr.add(r1);
                 }
             } else {
                 logger.info("in get Menu else");
-                r3.add(r2);
-                r2.add(r1);
-                ArrayList<JMenuItem> jmi = new ArrayList<>();
-                jmi.add(r1);
-                HashMap<JMenu,ArrayList<JMenuItem>> hjmi = new HashMap<>();
-                hjmi.put(r2,jmi);
-                jMenus.put(r3,hjmi);
-                roomlocation.add(r3);
+                jMenus.add(r3);
+                r3.jb.add(r2.jf);
+                r2.jf.add(r1);
+                jMenus.get(jMenus.indexOf(r3)).
+                        jf.add(r2);
+                jMenus.get(jMenus.indexOf(r3)).
+                        jb.add(r2.jf);
+                jMenus.get(jMenus.indexOf(r3)).
+                        jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
+                        jr.add(r1);
+                roomlocation.add(r3.jb);
             }
         } logger.info("end of for");
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        for (Map.Entry mapentry : jMenus.entrySet()){
-            HashMap<JMenu,ArrayList<JMenuItem>> j = (HashMap<JMenu, ArrayList<JMenuItem>>) mapentry.getValue();
-            for(Map.Entry map : j.entrySet()){
-                ArrayList<JMenuItem> a = (ArrayList<JMenuItem>) map.getValue();
-                for(int k=0 ; k<a.size();k++){
-                    if(e.getSource().equals(a.get(k))){
-                        MapperRoom mapperRoom = new MapperRoom(a.get(k).getName());}
+        for(int k=0; k<jMenus.size();k++){
+            for (int i=0;i<jMenus.get(k).jf.size();i++){
+                for(int j=0;j<jMenus.get(k).jf.get(i).jr.size();j++){
+                    if(e.getSource()==jMenus.get(k).jf.get(i).jr.get(j)){
+                        String s = jMenus.get(k).jf.get(i).jr.get(j).getName();
+                        logger.info("s = "+s);
+                        MapperRoom mapperRoom = new MapperRoom(jMenus.get(k).jf.get(i).jr.get(j).getName());
+                    }
                 }
             }
         }

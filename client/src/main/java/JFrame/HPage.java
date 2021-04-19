@@ -62,7 +62,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         // si l'état du combobox est modifiée
         if (e.getSource() == combobox) {
 
-            l2.setText(" ["+combobox.getSelectedItem()+"]");
+            l2.setText((String) combobox.getSelectedItem());
         }
     }
 
