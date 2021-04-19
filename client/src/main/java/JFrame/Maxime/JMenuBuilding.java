@@ -10,7 +10,11 @@ public class JMenuBuilding {
         this.jb = new JMenu(jb);
     }
     public boolean contains(JMenuFloor j){
-        return jf.contains(j);
+        for(int k=0;k<jf.size();k++){
+            if(jf.get(k).jf.equals(j.jf)){
+                return true;
+            }
+        }return false;
     }
     public boolean contains(JMenuItem j){
         for (int k = 0; k<jf.size();k++){

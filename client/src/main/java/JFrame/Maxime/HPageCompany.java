@@ -49,19 +49,18 @@ public class HPageCompany extends JFrame implements ActionListener {
             JMenuFloor r2 = new JMenuFloor(result.get(k+1));
             JMenuBuilding r3 = new JMenuBuilding(result.get(k+2));
             r1.addActionListener(this);
-            //il y a encore une erreur dans les if else
-            if (jMenus.contains(r3)){
-                if (jMenus.get(jMenus.indexOf(r3)).contains(r2)){
-                    if (jMenus.get(jMenus.indexOf(r3)).contains(r1)){
+            if (this.containsBuilding(r3)){
+                if (containsBuilding(r2)){
+                    if (containsBuilding(r1)){
                         //nothing
                     }
-                    else{
+                    else{//foireux
                         logger.info("in getMenu if if else ");
-                        jMenus.get(jMenus.indexOf(r3)).
-                                jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
+                        jMenus.get(indexBuilding(r3)).
+                                jf.get(indexBuilding(r2)).
                                 jf.add(r1);
-                        jMenus.get(jMenus.indexOf(r3)).
-                                jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
+                        jMenus.get(indexBuilding(r3)).
+                                jf.get(indexBuilding(r2)).
                                 jr.add(r1);
                     }
                 }
@@ -69,12 +68,12 @@ public class HPageCompany extends JFrame implements ActionListener {
                     logger.info(("in getMenu if else"));
 
                     r2.jf.add(r1);
-                    jMenus.get(jMenus.indexOf(r3)).
+                    jMenus.get(indexBuilding(r3)).
                             jf.add(r2);
-                    jMenus.get(jMenus.indexOf(r3)).
+                    jMenus.get(indexBuilding(r3)).
                             jb.add(r2.jf);
-                    jMenus.get(jMenus.indexOf(r3)).
-                            jf.get(jMenus.get(jMenus.indexOf(r3)).jf.indexOf(r2)).
+                    jMenus.get(indexBuilding(r3)).
+                            jf.get(jMenus.get(indexBuilding(r3)).jf.indexOf(r2)).
                             jr.add(r1);
                 }
             } else {
@@ -93,6 +92,54 @@ public class HPageCompany extends JFrame implements ActionListener {
             }
         } logger.info("end of for");
     }
+    public int indexBuilding(JMenuBuilding j){
+        for(int k=0; k<jMenus.size();k++){
+            if (jMenus.get(k).jb.equals(j.jb)){
+                return k;
+            }
+        }
+        return 0;
+    }
+    public int indexBuilding(JMenuFloor j){
+        for(int k=0;k<jMenus.size();k++){
+            for(int i=0;i<jMenus.get(k).jf.size();i++){
+                if (jMenus.get(k).jf.get(i).jf.equals(j.jf)){
+                    return i;
+                }
+            }
+        }return 0;
+    }
+    public boolean containsBuilding(JMenuBuilding j){
+        for(int k=0;k<jMenus.size();k++){
+            String s = jMenus.get(k).jb.getText();
+            String ss = j.jb.getText();
+            if(s.equals(ss)){
+                return true;
+            }
+        }return false;
+    }
+    public boolean containsBuilding(JMenuFloor j){
+        for(int k=0;k<jMenus.size();k++){
+            for (int i=0;i<jMenus.get(k).jf.size();i++){
+                String s = jMenus.get(k).jf.get(i).jf.getText();
+                String ss = j.jf.getText();
+            if(s.equals(ss)){
+                return true;}
+            }
+        }return false;
+    }
+    public boolean containsBuilding(JMenuItem j){
+        for(int k=0;k<jMenus.size();k++){
+            for (int i=0;i<jMenus.get(k).jf.size();i++){
+                for (int m=0;m<jMenus.get(k).jf.get(i).jr.size();m++){
+                String s = jMenus.get(k).jf.get(i).jr.get(m).getText();
+                String ss = j.getText();
+                if(s.equals(ss)){
+                    return true;}}
+            }
+        }return false;
+    }
+
     @Override
     public void actionPerformed(ActionEvent e) {
         for(int k=0; k<jMenus.size();k++){
