@@ -59,6 +59,9 @@ class ServerSocketTCP implements Runnable{
 					if (recu.equals("menu")){
 						listMessage.add(C.getMenu(in.readLine()));
 					}
+					if (recu.equals("equipement")){
+						listMessage.add(C.getEquipement(in.readLine()));
+					}
 				}
 				else{
 					addElementsToTable(in,C);

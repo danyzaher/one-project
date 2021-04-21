@@ -93,5 +93,20 @@ public class ConnectionCrud {
         return result;
     }
 
+    public String getEquipement(String room) throws SQLException{
+        logger.info("in getEquipement");
+        String sql = "Select equipement.type,equipplace.position_x,equipplace.position_y from be_present inner join equipement on be_present.id_equipement=equipement.id_equipement inner join equipplace on be_present.id_equipplace=equipplace.id_equipplace where equipplace.id_room in (Select room_s_number from room where name='"+room+"');";
+        logger.info(sql);
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            logger.info("in the while");
+            result += rs.getArray("type") + "\n";
+            result += rs.getArray("position_x")+ "\n";
+            result += rs.getArray("position_y") + "\n";
+        }
+        return result;
+    }
 
 }
