@@ -13,7 +13,7 @@ public class FenetreListEquipement extends JFrame implements ActionListener, Ite
     JComboBox combobox;
     public FenetreListEquipement(MapperRoom mapperRoom){
         this.mapperRoom = mapperRoom;
-        setTitle("liste des équipement disponible pour la salle " + mapperRoom.numeroSalle);
+        setTitle("liste des équipement disponible pour la salle " + mapperRoom.nomSalle);
         setVisible(true);
         setLayout(new FlowLayout());
         setSize(1000,1000);

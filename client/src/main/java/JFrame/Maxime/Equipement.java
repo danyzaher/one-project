@@ -6,10 +6,13 @@ import java.awt.event.ActionListener;
 
 public class Equipement extends JButton implements ActionListener {
     String nom;
+    final int WIDTH=15;
+    final int HEIGHT=20;
     boolean etat = true;
-    public Equipement(String nom){
+    public Equipement(String nom, int x,int y){
         this.nom = nom;
         addActionListener(this);
+        setBounds(x,y,WIDTH,HEIGHT);
     }
 
     public String getNom() {

@@ -1,6 +1,7 @@
 package JFrame.Maxime;
 
 import JFrame.julien.OptionChroma;
+import Socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -13,25 +14,26 @@ import java.util.ArrayList;
 public class MapperRoom extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("MapperSalle");
     JFrame frame;
-    int numeroSalle;
+    String nomSalle;
     JMenuItem e1;
     JMenuItem electrochroma;
     ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
     ArrayList<Capteur> sensorArrayList = new ArrayList<>();
     ArrayList<Equipement> listEquipementAvailable = new ArrayList<>();
     ArrayList<Place> placeArrayList = new ArrayList<>();
+    ArrayList<String> result = new ArrayList<>();
     public MapperRoom(String nomSalle){
+        this.nomSalle=nomSalle;
         setTitle(nomSalle);
         setVisible(true);
         setSize(400,300);
-        Equipement equipement1 = new Equipement("equipement 1");
+        getEquipement();
+        Equipement equipement1 = new Equipement("equipement 1",100,100);
         listEquipementDansLaSalle.add(equipement1);
-        equipement1.setBounds(50,100,20,15);
         equipement1.setBackground(Color.GREEN);
         add(equipement1);
-        Equipement equipement2 = new Equipement("equipement 2");
+        Equipement equipement2 = new Equipement("equipement 2",100,100);
         listEquipementDansLaSalle.add(equipement2);
-        equipement2.setBounds(100,100,20,15);
         add(equipement2);
         equipement2.setBackground(Color.RED);
         Capteur capteur1 = new Capteur("capteur 1");
@@ -53,7 +55,23 @@ public class MapperRoom extends JFrame implements ActionListener {
         this.setJMenuBar(jMenuBar);
     }
     public void getEquipement(){
-
+        logger.info("begin getEquipement");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("equipement");
+        stringArrayList.add(nomSalle);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.result = ccSocketTCP2.result;
+        for(int k =0; k<result.size()-3;k=k+3){
+            String nom = result.get(k);
+            int position_x = Integer.parseInt(result.get(k+1));
+            int position_y = Integer.parseInt(result.get(k+2));
+            Equipement equipement = new Equipement(nom,position_x,position_y);
+            listEquipementDansLaSalle.add(equipement);
+        }
+        for(int j=0;j<listEquipementDansLaSalle.size();j++){
+            add(listEquipementDansLaSalle.get(j));
+        }
     }
     public void ajouterLesEquippement(){ }
     public void remplirListEquippementDansLaSalle(){}
