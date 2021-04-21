@@ -1,13 +1,22 @@
 package JFrame.julien;
+import JFrame.Maxime.FenetreInformationEtChoix;
+import JFrame.Maxime.HPageCompany;
 import Socket.CCSocketTCPbis;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.util.ArrayList;
 import javax.swing.event.*;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-public class OptionChroma extends JFrame {
+
+public class OptionChroma extends JFrame implements ActionListener {
+    private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
+
 
     /*** Lower part of the frame ***/
 
@@ -16,8 +25,7 @@ public class OptionChroma extends JFrame {
     JLabel ATemp, AStore, AWin;
 
     //Help items
-    Image dispoFenStor;
-    JLabel help;
+    JButton help;
 
     /*** Upper part of the frame ***/
 
@@ -35,8 +43,8 @@ public class OptionChroma extends JFrame {
 
         //dispoFenStor = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Julien CANNOUX\\one-project\\client\\src\\main\\java\\JFrame\\julien\\aide.jpg");
 
-        setSize(320, 400);
-        setResizable(false);
+        setSize(400, 400);
+        //setResizable(false);
         setTitle("Option ElectroChroma");
         setLayout(new FlowLayout());
 
@@ -44,7 +52,7 @@ public class OptionChroma extends JFrame {
 
         numwindow = new JComboBox(windowstore);
         numstore = new JComboBox(windowstore);
-        //numstore.addActionListener(this);
+
 
 
         validation = new JButton("VALIDER");
@@ -54,7 +62,7 @@ public class OptionChroma extends JFrame {
 
         tempext = new JLabel("Temperature à l'exterieur : 5°C \n");
         tempint = new JLabel("Temperature dans la salle : 20°C \n");
-        light = new JLabel("Taux de luminosité dans la salle : 50%\n");
+        light = new JLabel("Taux de luminosité dans la salle : 50 Candella\n");
         add(tempext);
         add(tempint);
         add(light);
@@ -99,19 +107,26 @@ public class OptionChroma extends JFrame {
         eventWin ew = new eventWin();
         window.addChangeListener(ew);
 
+
+
         /********* HELP PICTURE FOR THE USER *************/
 
-        //dispoFenStor = new ImageIcon(getClass().getResource("test.png"));
-        //aide = new JLabel(dispoFenStor);
-        //add(aide);
-        //add(dispoFenStor);
+        help = new JButton("AIDE");
+        help.setSize(100, 100);
 
         add(validation);
+        add(help);
 
         setVisible(true);
 
     }
 
+
+    @Override //HELP BUTTON
+    public void actionPerformed(ActionEvent e) {
+        Help hlp =new Help();
+
+    }
 
     public class eventWin implements ChangeListener {
 
@@ -143,17 +158,19 @@ public class OptionChroma extends JFrame {
     }
 
     public void getWinStore(){
+
         //Show the Windows and store of the room
-        ArrayList<String> stringArrayList = new ArrayList<>();
-        stringArrayList.add("room");
-        stringArrayList.add("room_s_number");
-        stringArrayList.add("name");
+       // ArrayList<String> stringArrayList = new ArrayList<>();
+        //stringArrayList.add("room");
+        //stringArrayList.add("room_s_number");
+        //stringArrayList.add("windows");
+
+        //CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
 
     }
 
-    public static void main(String[] args) {
 
-        OptionChroma opchro = new OptionChroma();
+    public static void main(String[] args) { OptionChroma opchro = new OptionChroma();
 
     }
 }

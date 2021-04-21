@@ -41,6 +41,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
         logger.info("result = " + result);
+
         for(int k =0; k<result.size()-3;k=k+3){
             logger.info("in the for "+k);
             JMenuItem r1 = new JMenuItem(result.get(k));

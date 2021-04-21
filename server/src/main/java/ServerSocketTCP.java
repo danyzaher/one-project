@@ -62,6 +62,9 @@ class ServerSocketTCP implements Runnable{
 					if (recu.equals("equipement")){
 						listMessage.add(C.getEquipement(in.readLine()));
 					}
+					if(recu.equals("opacity")){
+						listMessage.add(C.getOpacityValue(in.readLine()));
+					}
 				}
 				else{
 					addElementsToTable(in,C);

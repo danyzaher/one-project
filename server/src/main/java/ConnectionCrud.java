@@ -84,7 +84,7 @@ public class ConnectionCrud {
     }
 
     public String getWinStore() throws SQLException{
-        String sql = "Select room from Company;"; // To change
+        String sql = ""; // To change
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
@@ -107,6 +107,19 @@ public class ConnectionCrud {
             result += rs.getArray("position_y") + "\n";
         }
         return result;
+    }
+    public String getOpacityValue(String id) throws SQLException{
+        logger.info("in getOpacityValue");
+        String sql ="select valueof from equipement where id_equipement ="+ id +";";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("valueof");
+        }
+        return result;
+
     }
 
 }
