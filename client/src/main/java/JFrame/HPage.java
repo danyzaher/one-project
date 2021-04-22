@@ -18,9 +18,10 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     ArrayList<String> s1 = new ArrayList<>();
     public HPage(){
         setTitle("page d'accueil");
+
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setLayout(new FlowLayout());
-        setSize(1200, 1000);
+        setSize(900, 900);
         setVisible(true);
         listCompany();
         String s2[] = s1.toArray(new String[0]);

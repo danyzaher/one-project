@@ -63,8 +63,12 @@ class ServerSocketTCP implements Runnable{
 						String s = in.readLine();
 						if (s.equals("available")){
 							listMessage.add(C.getEquipementAvailable(in.readLine()));
-						}else {
-						listMessage.add(C.getEquipement(s));}
+						}
+						if(s.equals("etat")){
+							listMessage.add(C.getEtat(in.readLine()));
+						}
+						if(s.equals("dansSalle")){
+						listMessage.add(C.getEquipement(in.readLine()));}
 					}
 					if(recu.equals("opacity")){
 						listMessage.add(C.getOpacityValue(in.readLine()));

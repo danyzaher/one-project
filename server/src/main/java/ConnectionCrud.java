@@ -134,5 +134,17 @@ public class ConnectionCrud {
         }
         return result;
     }
+    public String getEtat(String id) throws SQLException{
+        logger.info("in getEtat");
+        String sql = "select animated from equipement where id_equipement="+id+";";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("animated");
+        }
+        return result;
+    }
 
 }

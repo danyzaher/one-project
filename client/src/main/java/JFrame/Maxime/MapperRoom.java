@@ -51,6 +51,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("equipement");
+        stringArrayList.add("dansSalle");
         stringArrayList.add(nomSalle);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
@@ -67,8 +68,6 @@ public class MapperRoom extends JFrame implements ActionListener {
         }
     }
     public void ajouterLesEquippement(){ }
-    public void remplirListEquippementDansLaSalle(){}
-    public void remplirlistEquippementDisponible(){}
     public static void main(String[] args){
         new MapperRoom("salle numéro 3");
     }
@@ -79,7 +78,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         if (e.getSource()==e1){
         WindowListEquipement windowListEquipement = new WindowListEquipement(this);}
         if (e.getSource()==electrochroma){
-            OptionChroma optionChroma = new OptionChroma();
+            OptionChroma optionChroma = new OptionChroma(nomSalle);
         }
     }
 }
