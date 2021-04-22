@@ -109,7 +109,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getOpacityValue(String id) throws SQLException{
+    public String getOpacityValue(String id) throws SQLException {
         logger.info("in getOpacityValue");
         String sql ="select valueof from equipement where id_equipement ="+ id +";";
         Statement smt = c.createStatement();
@@ -146,5 +146,10 @@ public class ConnectionCrud {
         }
         return result;
     }
+
+
+
+
+
 
 }

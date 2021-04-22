@@ -6,6 +6,8 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.util.ArrayList;
 
@@ -17,27 +19,50 @@ public class ElectroChromaManu extends JFrame {
 
     ArrayList<String> result;
     JSlider opac;
+    JLabel Aopacvalue;
+
 
 
     public ElectroChromaManu(String id) {
-        opac = new JSlider(JSlider.HORIZONTAL, 0, 5, 5);
-        opac.setMajorTickSpacing(1);
-        opac.setPaintTicks(true);
-        add(opac);
+
+
 
         this.id = id;
         setSize(400, 400);
         setResizable(false);
         setTitle("Parametre manuel de l'option electrochroma");
         setLayout(new FlowLayout());
-        setVisible(true);
+
         getOpacityValue();
+        opac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
+        opac.setMajorTickSpacing(1);
+        opac.setPaintTicks(true);
+
+
+        Aopacvalue = new JLabel("Opacité souhaitée dans les salles : "+ opacity);
+
+        add(Aopacvalue);
+        add(opac);
+        eventOpac eo = new eventOpac();
+        opac.addChangeListener(eo);
 
 
 
+        setVisible(true);
+
+    }
+    public class eventOpac implements ChangeListener {
+
+        @Override
+        public void stateChanged(ChangeEvent eo) {
+
+            int valueopacity = opac.getValue();
+            Aopacvalue.setText("Opacité de la fenetre selectionnée souhaité  : " + valueopacity);
+        }
     }
 
     public void getOpacityValue(){
+
 
         logger.info("begin getOpacityValue");
         ArrayList<String> stringArrayList = new ArrayList<>();
@@ -48,6 +73,7 @@ public class ElectroChromaManu extends JFrame {
         this.result = ccSocketTCP2.result;
         opacity = Integer.parseInt(result.get(0));
         logger.info("id = " + opacity);
+
 
     }
 }
