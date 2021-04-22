@@ -19,8 +19,8 @@ public class HPageCompany extends JFrame implements ActionListener {
     JMenu roomLocation = new JMenu("Salles à la location");
     JMenu jMenu = new JMenu("Menu");
     JMenuItem badge = new JMenuItem("Badge");
-    JMenuItem location = new JMenuItem("effectuer une nouvelle location");
-    JMenuItem chromatique = new JMenuItem("programmer la luminosité et la température général");
+    JMenuItem location = new JMenuItem("Effectuer une nouvelle location");
+    JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température général");
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){

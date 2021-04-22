@@ -14,31 +14,32 @@ import java.util.ArrayList;
 public class ElectroChromaManu extends JFrame {
 
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
+
     int opacity;
     String id;
-
     ArrayList<String> result;
+
     JSlider opac;
-    JLabel Aopacvalue;
+    JLabel Aopacvalue, ATempExt, ATempInt,ALightInt;
 
 
 
     public ElectroChromaManu(String id) {
 
-
-
         this.id = id;
         setSize(400, 400);
         setResizable(false);
-        setTitle("Parametre manuel de l'option electrochroma");
+        setTitle("Parametres manuels de l'option electrochroma");
         setLayout(new FlowLayout());
 
-        getOpacityValue();
+        getOpacityValue(); //Get values of the opacity of the window
+
+        ATempExt = new JLabel("Temperature Externe :");
+        add(ATempExt);
+
         opac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
         opac.setMajorTickSpacing(1);
         opac.setPaintTicks(true);
-
-
         Aopacvalue = new JLabel("Opacité souhaitée dans les salles : "+ opacity);
 
         add(Aopacvalue);

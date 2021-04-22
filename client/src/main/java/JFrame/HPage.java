@@ -17,7 +17,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     JLabel l1, l2;
     ArrayList<String> s1 = new ArrayList<>();
     public HPage(){
-        setTitle("page d'accueil");
+        setTitle("Page d'Accueil");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -30,7 +30,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         combobox = new JComboBox(s2);
         combobox.addItemListener(this);
 
-        l1 = new JLabel("choisissez une société ");
+        l1 = new JLabel("Choisissez une société ");
         l2 = new JLabel(s1.get(0));
 
         l2.setForeground(Color.blue);
@@ -40,7 +40,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         p.add(combobox);
         p.add(l2);
         add(p);
-        JButton jButton = new JButton("Confirmer");
+        JButton jButton = new JButton("CONFIRMER");
         add(jButton);
         jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);

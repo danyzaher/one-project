@@ -38,11 +38,11 @@ public class MapperRoom extends JFrame implements ActionListener {
         JMenu jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
-        e1 = new JMenuItem("liste des équipement à ajouter");
+        e1 = new JMenuItem("Liste des équipement à ajouter");
         e1.addActionListener(this);
-        electrochroma = new JMenuItem("option électrochromatique");
-        electrochroma.addActionListener(this);
-        jMenu.add(electrochroma);
+       // electrochroma = new JMenuItem("Option électrochromatique");
+       // electrochroma.addActionListener(this);
+       // jMenu.add(electrochroma);
         jMenu.add(e1);
         this.setJMenuBar(jMenuBar);
     }
