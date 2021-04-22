@@ -20,9 +20,11 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         setTitle("page d'accueil");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+        setSize(800, 300);
+        setResizable(false);
         setLayout(new FlowLayout());
-        setSize(900, 900);
-        setVisible(true);
+
         listCompany();
         String s2[] = s1.toArray(new String[0]);
         combobox = new JComboBox(s2);
@@ -42,6 +44,8 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         add(jButton);
         jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
+
+        setVisible(true);
 
     }
     public static void main(String[] args){
