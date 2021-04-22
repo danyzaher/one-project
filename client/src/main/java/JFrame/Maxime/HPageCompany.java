@@ -1,5 +1,7 @@
 package JFrame.Maxime;
 
+import JFrame.Yassir.Badge;
+import JFrame.danyter.Search;
 import Socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,6 +17,8 @@ public class HPageCompany extends JFrame implements ActionListener {
     String title;
     JMenu roomLocation = new JMenu("Salles à la location");
     JMenu jMenu = new JMenu("Menu");
+    JMenuItem badge = new JMenuItem("Badge");
+    JMenuItem location = new JMenuItem("effectuer une nouvelle location");
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){
@@ -26,10 +30,12 @@ public class HPageCompany extends JFrame implements ActionListener {
         setVisible(true);
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
-        JMenu badge = new JMenu("Badge");
         getMenu();
         jMenu.add(roomLocation);
         jMenu.add(badge);
+        jMenu.add(location);
+        badge.addActionListener(this);
+        location.addActionListener(this);
         this.setJMenuBar(jMenuBar);
     }
     public void getMenu(){
@@ -149,6 +155,12 @@ public class HPageCompany extends JFrame implements ActionListener {
                     }
                 }
             }
+        }
+        if (e.getSource().equals(badge)){
+            Badge badge = new Badge(title);
+        }
+        if (e.getSource().equals(location)){
+            Search search = new Search();
         }
         this.setVisible(false);
     }

@@ -10,9 +10,10 @@ public class Badge extends JFrame implements ActionListener {
     JButton signal;
     JButton verify;
     JButton infos;
+    String companyName;
 
-
-    public Badge() {
+    public Badge(String companyName) {
+        this.companyName=companyName;
         this.setTitle("OneBuilding");
         this.setSize(600, 200);
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,7 +79,7 @@ public class Badge extends JFrame implements ActionListener {
 
     public static void main (String [] args) {
 
-        Badge badge = new Badge();
+        Badge badge = new Badge("Fritel Inc.");
     }
 
     @Override
