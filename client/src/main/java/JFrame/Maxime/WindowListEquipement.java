@@ -1,29 +1,37 @@
 package JFrame.Maxime;
 
+import Socket.CCSocketTCPbis;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
+import java.util.ArrayList;
 
-public class FenetreListEquipement extends JFrame implements ActionListener, ItemListener {
+public class WindowListEquipement extends JFrame implements ActionListener, ItemListener {
+    public static Logger logger = LoggerFactory.getLogger("FenetreListEquipement");
     MapperRoom mapperRoom;
     JLabel l1, l2;
     JComboBox combobox;
-    public FenetreListEquipement(MapperRoom mapperRoom){
+    ArrayList<String> s1 = new ArrayList<>() ;
+    ArrayList<String> result = new ArrayList<>();
+    public WindowListEquipement(MapperRoom mapperRoom){
         this.mapperRoom = mapperRoom;
         setTitle("liste des équipement disponible pour la salle " + mapperRoom.nomSalle);
         setVisible(true);
         setLayout(new FlowLayout());
         setSize(1000,1000);
-        String s1[] = { "équipement 21", "équipement 34", "équipement 43" };
-
-        combobox = new JComboBox(s1);
+        getListEquipementAvailable();
+        String s2[] = s1.toArray(new String[0]);
+        combobox = new JComboBox(s2);
         combobox.addItemListener(this);
 
         l1 = new JLabel("choisissez un équipement à ajouter ");
-        l2 = new JLabel("équipement 21");
+        l2 = new JLabel();
 
         l2.setForeground(Color.blue);
 
@@ -37,7 +45,19 @@ public class FenetreListEquipement extends JFrame implements ActionListener, Ite
         jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
     }
-
+    public void getListEquipementAvailable(){
+        logger.info("begin getListEquipementAvailable");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("equipement");
+        stringArrayList.add("available");
+        stringArrayList.add(mapperRoom.nomSalle);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.result = ccSocketTCP2.result;
+        for(int k=0 ; k<result.size();k++){
+            s1.add(result.get(k));
+        }
+    }
 
 
     @Override

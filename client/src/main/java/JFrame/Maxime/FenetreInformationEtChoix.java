@@ -13,7 +13,7 @@ public class FenetreInformationEtChoix extends JFrame implements ActionListener 
     JButton information;
     public FenetreInformationEtChoix(Equipement equipement){
         this.equipement = equipement;
-        setTitle(equipement.nom);
+        setTitle(equipement.name);
         setVisible(true);
         setSize(500,600);
         setLayout(new FlowLayout());

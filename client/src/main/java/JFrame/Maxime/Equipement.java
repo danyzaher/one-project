@@ -5,28 +5,16 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Equipement extends JButton implements ActionListener {
-    String nom;
+    String name;
     final int WIDTH=15;
     final int HEIGHT=20;
     boolean etat = true;
     int id;
-    public Equipement(String nom, int x,int y,int id){
+    public Equipement(String name, int x,int y,int id){
         this.id=id;
-        this.nom = nom;
+        this.name = name;
         addActionListener(this);
         setBounds(x,y,WIDTH,HEIGHT);
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public boolean isEtat() {
-        return etat;
     }
 
     @Override

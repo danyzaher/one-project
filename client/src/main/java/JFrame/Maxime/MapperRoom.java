@@ -77,7 +77,7 @@ public class MapperRoom extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()==e1){
-        FenetreListEquipement fenetreListEquipement = new FenetreListEquipement(this);}
+        WindowListEquipement windowListEquipement = new WindowListEquipement(this);}
         if (e.getSource()==electrochroma){
             OptionChroma optionChroma = new OptionChroma();
         }
