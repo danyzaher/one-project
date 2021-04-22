@@ -22,19 +22,16 @@ public class Equipement extends JButton implements ActionListener {
         getEtat();
         setBounds(x,y,WIDTH,HEIGHT);
     }
-    public void getEtat(){
+    public void getEtat() {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("equipement");
         stringArrayList.add("etat");
-        stringArrayList.add(""+id);
+        stringArrayList.add("" + id);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
-        etat=result.get(0).equals("true");
-        if(etat){
-            this.setBackground(Color.GREEN);
-        }else {this.setBackground(Color.RED);}
-        }
+        etat = result.get(0).equals("t");
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
