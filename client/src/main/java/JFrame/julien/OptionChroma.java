@@ -38,9 +38,9 @@ public class OptionChroma extends JFrame implements ActionListener {
     JButton validation;
 
     String windowstore[] = {"1", "2", "3"};
-
-    public OptionChroma() {
-
+    String companyName;
+    public OptionChroma( String companyName) {
+        this.companyName=companyName;
         //dispoFenStor = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Julien CANNOUX\\one-project\\client\\src\\main\\java\\JFrame\\julien\\aide.jpg");
 
         setSize(400, 400);
@@ -170,7 +170,7 @@ public class OptionChroma extends JFrame implements ActionListener {
     }
 
 
-    public static void main(String[] args) { OptionChroma opchro = new OptionChroma();
+    public static void main(String[] args) { OptionChroma opchro = new OptionChroma("Fritel Inc.");
 
     }
 }

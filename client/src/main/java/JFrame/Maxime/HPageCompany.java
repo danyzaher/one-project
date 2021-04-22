@@ -2,6 +2,7 @@ package JFrame.Maxime;
 
 import JFrame.Yassir.Badge;
 import JFrame.danyter.Search;
+import JFrame.julien.OptionChroma;
 import Socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,7 @@ public class HPageCompany extends JFrame implements ActionListener {
     JMenu jMenu = new JMenu("Menu");
     JMenuItem badge = new JMenuItem("Badge");
     JMenuItem location = new JMenuItem("effectuer une nouvelle location");
+    JMenuItem chromatique = new JMenuItem("programmer la luminosité et la température général");
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){
@@ -34,8 +36,10 @@ public class HPageCompany extends JFrame implements ActionListener {
         jMenu.add(roomLocation);
         jMenu.add(badge);
         jMenu.add(location);
+        jMenu.add(chromatique);
         badge.addActionListener(this);
         location.addActionListener(this);
+        chromatique.addActionListener(this);
         this.setJMenuBar(jMenuBar);
     }
     public void getMenu(){
@@ -161,6 +165,9 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         if (e.getSource().equals(location)){
             Search search = new Search();
+        }
+        if (e.getSource().equals(chromatique)){
+            OptionChroma optionChroma= new OptionChroma(title);
         }
         this.setVisible(false);
     }

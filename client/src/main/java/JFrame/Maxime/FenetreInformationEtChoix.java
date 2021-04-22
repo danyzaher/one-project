@@ -1,5 +1,7 @@
 package JFrame.Maxime;
 
+import JFrame.julien.ElectroChromaManu;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -26,12 +28,14 @@ public class FenetreInformationEtChoix extends JFrame implements ActionListener 
         information = new JButton("information à propos de l'equipement");
         information.setBounds(50,300,30,50);
         add(information);
+        information.addActionListener(this);
 
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if (e.getSource()==retirer){
+        if (e.getSource()==information){
+            ElectroChromaManu electroChromaManu = new ElectroChromaManu(""+equipement.id);
         }
     }
 }
