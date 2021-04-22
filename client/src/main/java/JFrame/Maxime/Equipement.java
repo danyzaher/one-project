@@ -9,7 +9,9 @@ public class Equipement extends JButton implements ActionListener {
     final int WIDTH=15;
     final int HEIGHT=20;
     boolean etat = true;
-    public Equipement(String nom, int x,int y){
+    int id;
+    public Equipement(String nom, int x,int y,int id){
+        this.id=id;
         this.nom = nom;
         addActionListener(this);
         setBounds(x,y,WIDTH,HEIGHT);

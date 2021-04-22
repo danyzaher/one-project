@@ -28,14 +28,6 @@ public class MapperRoom extends JFrame implements ActionListener {
         setVisible(true);
         setSize(400,300);
         getEquipement();
-        Equipement equipement1 = new Equipement("equipement 1",100,100);
-        listEquipementDansLaSalle.add(equipement1);
-        equipement1.setBackground(Color.GREEN);
-        add(equipement1);
-        Equipement equipement2 = new Equipement("equipement 2",100,100);
-        listEquipementDansLaSalle.add(equipement2);
-        add(equipement2);
-        equipement2.setBackground(Color.RED);
         Capteur capteur1 = new Capteur("capteur 1");
         sensorArrayList.add(capteur1);
         capteur1.setBounds(50,100,20,15);
@@ -62,11 +54,12 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add(nomSalle);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
-        for(int k =0; k<result.size()-3;k=k+3){
-            String nom = result.get(k);
-            int position_x = Integer.parseInt(result.get(k+1));
-            int position_y = Integer.parseInt(result.get(k+2));
-            Equipement equipement = new Equipement(nom,position_x,position_y);
+        for(int k =0; k<result.size()-4;k=k+4){
+            int id = Integer.parseInt(result.get(k));
+            String nom = result.get(k+1);
+            int position_x = Integer.parseInt(result.get(k+2));
+            int position_y = Integer.parseInt(result.get(k+3));
+            Equipement equipement = new Equipement(nom,position_x,position_y,id);
             listEquipementDansLaSalle.add(equipement);
         }
         for(int j=0;j<listEquipementDansLaSalle.size();j++){
