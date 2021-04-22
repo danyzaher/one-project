@@ -10,8 +10,8 @@ import java.awt.event.ActionListener;
 public class FenetreInformationEtChoix extends JFrame implements ActionListener {
 
     Equipement equipement;
-    JButton retirer;
-    JButton déplacer;
+    JButton delete;
+    JButton move;
     JButton information;
     public FenetreInformationEtChoix(Equipement equipement){
         this.equipement = equipement;
@@ -19,16 +19,17 @@ public class FenetreInformationEtChoix extends JFrame implements ActionListener 
         setVisible(true);
         setSize(500,600);
         setLayout(new FlowLayout());
-        retirer = new JButton("retirer l'equipement");
-        retirer.setBounds(50,100,30,50);
-        add(retirer);
-        déplacer = new JButton("deplacer l'equipement");
-        déplacer.setBounds(50,200,30,50);
-        add(déplacer);
+        delete = new JButton("retirer l'equipement");
+        delete.setBounds(50,100,30,50);
+        add(delete);
+        move = new JButton("deplacer l'equipement");
+        move.setBounds(50,200,30,50);
+        add(move);
+        if(equipement.name.equals("fenêtre électrochromatique")){
         information = new JButton("information à propos de l'equipement");
         information.setBounds(50,300,30,50);
         add(information);
-        information.addActionListener(this);
+        information.addActionListener(this);}
 
     }
 
