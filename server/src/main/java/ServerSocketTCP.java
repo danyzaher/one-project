@@ -74,9 +74,10 @@ class ServerSocketTCP implements Runnable{
 						listMessage.add(C.getOpacityValue(in.readLine()));
 					}
 				}
-				else{
-					addElementsToTable(in,C);
-					listMessage.add(C.showElement("produit"));}
+				if(recu.equals("delete")){
+					delete(in,C);
+					listMessage.add("element deleted");
+				}
 				Datasource.setConnection(C.getC());
 			} else{
 				listMessage.add("no more connection come back later");
@@ -88,13 +89,13 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	public synchronized void addElementsToTable(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
-		logger.info("addElementsToTable");
-		ObjectMapper mapper = new ObjectMapper();
-		for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
-			JsonNode jn = mapper.readTree(recu);
-			C.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
+	public synchronized void delete(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+		logger.info("delete");
+		String recu = in.readLine();
+		if(recu.equals("be_present")){
+			C.deleteBePresent(in.readLine());
 		}
+
 	}
 	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
