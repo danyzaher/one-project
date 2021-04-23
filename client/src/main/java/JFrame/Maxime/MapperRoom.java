@@ -60,7 +60,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             String nom = result.get(k+1);
             int position_x = Integer.parseInt(result.get(k+2));
             int position_y = Integer.parseInt(result.get(k+3));
-            Equipement equipement = new Equipement(nom,position_x,position_y,id);
+            Equipement equipement = new Equipement(nom,position_x,position_y,id,nomSalle);
             listEquipementDansLaSalle.add(equipement);
         }
         for(int j=0;j<listEquipementDansLaSalle.size();j++){
