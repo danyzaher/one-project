@@ -9,9 +9,11 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class ElectroChromaManu extends JFrame {
+public class ElectroChromaManu extends JFrame implements ActionListener {
 
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
 
@@ -20,11 +22,15 @@ public class ElectroChromaManu extends JFrame {
     ArrayList<String> result;
 
     JSlider opac;
-    JLabel Aopacvalue, ATempExt, ATempInt,ALightInt;
-
+    JLabel Aopacvalue, ATempExt, ATempInt, ALightInt;
+    JButton validation;
 
 
     public ElectroChromaManu(String id) {
+
+        validation = new JButton("VALIDER");
+
+        validation.addActionListener(this);
 
         this.id = id;
         setSize(400, 400);
@@ -40,18 +46,36 @@ public class ElectroChromaManu extends JFrame {
         opac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
         opac.setMajorTickSpacing(1);
         opac.setPaintTicks(true);
-        Aopacvalue = new JLabel("Opacité souhaitée dans les salles : "+ opacity);
+        Aopacvalue = new JLabel("Opacité souhaitée dans les salles : " + opacity);
 
         add(Aopacvalue);
         add(opac);
+        add(validation);
+
         eventOpac eo = new eventOpac();
         opac.addChangeListener(eo);
-
 
 
         setVisible(true);
 
     }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+
+        if(e.getSource().equals(validation)) {
+
+        logger.info("begin validation");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("update");
+        stringArrayList.add("opacity");
+        stringArrayList.add(id);
+        stringArrayList.add(opac.getValue() + "");
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+
+    }
+}
+
     public class eventOpac implements ChangeListener {
 
         @Override

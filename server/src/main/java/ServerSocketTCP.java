@@ -83,6 +83,10 @@ class ServerSocketTCP implements Runnable{
 						listMessage.add(C.getPlace(in.readLine(),s));
 					}
 				}
+				if(recu.equals("update")){
+					update(in,C);
+					listMessage.add("update element");
+				}
 				if(recu.equals("delete")){
 					delete(in,C);
 					listMessage.add("element deleted");
@@ -120,6 +124,17 @@ class ServerSocketTCP implements Runnable{
 		}
 
 	}
+
+	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+		logger.info("update");
+		String recu = in.readLine();
+		if(recu.equals("opacity")){
+			String s = in.readLine(); //id
+			C.updateOpacity(s,in.readLine());//in.readLine() --> opacity by the connection crud
+		}
+
+	}
+
 	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException, InterruptedException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		while(!listMessage.isEmpty()){
