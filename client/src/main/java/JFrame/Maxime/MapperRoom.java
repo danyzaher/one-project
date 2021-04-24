@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class MapperRoom extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("MapperSalle");
-    JFrame frame;
+    String type;
     String nomSalle;
     JMenuItem e1;
     JMenuItem electrochroma;
@@ -76,6 +76,40 @@ public class MapperRoom extends JFrame implements ActionListener {
     public void ajouterLesEquippement(){ }
     public static void main(String[] args){
         new MapperRoom("salle numéro 3");
+    }
+    public void getEmplacement(String type){
+        logger.info("begin getEmplacement");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("emplacement");
+        stringArrayList.add(nomSalle);
+        stringArrayList.add(type);
+        this.type=type;
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.result = ccSocketTCP2.result;
+        for (int k=0;k<result.size()-3;k=k+3){
+            int id = Integer.parseInt(result.get(k));
+            int position_x = Integer.parseInt(result.get(k+1));
+            int position_y = Integer.parseInt(result.get(k+2));
+            Place place = new Place(position_x,position_y,id,this);
+            placeArrayList.add(place);
+        }
+        for(int k=0;k<placeArrayList.size();k++){
+            add(placeArrayList.get(k));
+            placeArrayList.get(k).setBounds(placeArrayList.get(k).x,placeArrayList.get(k).y,10,10);
+            placeArrayList.get(k).setBackground(Color.ORANGE);
+        }
+    }
+    public void setEquipement(Place p){
+        logger.info("begin setEquipement");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("insert");
+        stringArrayList.add("be_present");
+        stringArrayList.add(p.id+"");
+        stringArrayList.add(type);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.setVisible(false);
+        MapperRoom mapperRoom = new MapperRoom(nomSalle);
     }
 
     @Override

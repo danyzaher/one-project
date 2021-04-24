@@ -73,10 +73,18 @@ class ServerSocketTCP implements Runnable{
 					if(recu.equals("opacity")){
 						listMessage.add(C.getOpacityValue(in.readLine()));
 					}
+					if(recu.equals("emplacement")){
+						String s = in.readLine();
+						listMessage.add(C.getPlace(in.readLine(),s));
+					}
 				}
 				if(recu.equals("delete")){
 					delete(in,C);
 					listMessage.add("element deleted");
+				}
+				if(recu.equals("insert")){
+					insert(in,C);
+					listMessage.add("element added");
 				}
 				Datasource.setConnection(C.getC());
 			} else{
@@ -85,10 +93,20 @@ class ServerSocketTCP implements Runnable{
 			constructOutputStream(socket,listMessage);
 			socket.close();
 
-		} catch (IOException | SQLException e) {
+		} catch (IOException | SQLException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
+
+	private synchronized void insert(BufferedReader in, ConnectionCrud c) throws IOException, SQLException {
+		logger.info("insert");
+		String recu = in.readLine();
+		if(recu.equals("be_present")){
+			String s = in.readLine();
+			c.insertBePresent(s,in.readLine());
+		}
+	}
+
 	public synchronized void delete(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
 		logger.info("delete");
 		String recu = in.readLine();
@@ -97,7 +115,7 @@ class ServerSocketTCP implements Runnable{
 		}
 
 	}
-	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException {
+	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException, InterruptedException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		while(!listMessage.isEmpty()){
 			logger.info("+1");

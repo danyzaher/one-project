@@ -16,6 +16,7 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
     public static Logger logger = LoggerFactory.getLogger("FenetreListEquipement");
     MapperRoom mapperRoom;
     JLabel l1, l2;
+    JButton jButton;
     JComboBox combobox;
     ArrayList<String> s1 = new ArrayList<>() ;
     ArrayList<String> result = new ArrayList<>();
@@ -40,7 +41,7 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
         p.add(combobox);
         p.add(l2);
         add(p);
-        JButton jButton = new JButton("Confirmer");
+        jButton = new JButton("Confirmer");
         add(jButton);
         jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
@@ -62,7 +63,9 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        if(e.getSource()==jButton){
+            mapperRoom.getEmplacement((String) combobox.getSelectedItem());
+        }
     }
 
     public void itemStateChanged(ItemEvent e)

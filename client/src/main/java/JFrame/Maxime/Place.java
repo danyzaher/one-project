@@ -7,9 +7,11 @@ import java.awt.event.ActionListener;
 public class Place extends JButton implements ActionListener {
     int x;
     int y;
-    boolean etat = true;
-
-    public Place(int x, int y){
+    int id;
+    MapperRoom mapperRoom;
+    public Place(int x, int y, int id,MapperRoom mapperRoom){
+        this.mapperRoom=mapperRoom;
+        this.id=id;
         this.x = x;
         this.y = y;
         addActionListener(this);
@@ -17,6 +19,6 @@ public class Place extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        mapperRoom.setEquipement(this);
     }
 }
