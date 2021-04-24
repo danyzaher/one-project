@@ -1,7 +1,5 @@
 package jFrame.maxime.window;
 
-import jFrame.julien.ElectroChromaManu;
-import jFrame.maxime.button.Equipement;
 import jFrame.maxime.button.Sensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
