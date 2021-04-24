@@ -1,4 +1,4 @@
-package jFrame.yassir;
+package jFrame.Yassir;
 
 import javax.swing.*;
 
@@ -10,7 +10,6 @@ public class Verify extends JFrame {
     public Verify(){
         this.setTitle("OneBuilding");
         this.setSize(500, 200);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
         String s[]={"capteur 22","équipement 23","capteur21"};
         String s1[]={"A12A","A13A","B25A"};

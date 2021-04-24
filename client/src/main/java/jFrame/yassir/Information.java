@@ -7,8 +7,8 @@ public class Information extends JFrame {
     public Information() {
         this.setTitle("OneBuilding");
         this.setSize(900, 300);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
+        JButton modif = new JButton("Modifier");
 
         JPanel fenetre = new JPanel();
 
@@ -19,6 +19,8 @@ public class Information extends JFrame {
         fenetre.add(niveau1);
         fenetre.add(niveau2);
         fenetre.add(niveau3);
+        fenetre.add(modif);
+
 
         this.getContentPane().add(fenetre);
 
