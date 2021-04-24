@@ -1,6 +1,6 @@
 package jFrame.julien;
 
-import jFrame.maxime.window.HPageCompany;
+import jFrame.HPageCompany;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

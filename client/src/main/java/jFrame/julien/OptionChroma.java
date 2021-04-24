@@ -1,5 +1,5 @@
 package jFrame.julien;
-import jFrame.maxime.window.HPageCompany;
+import jFrame.HPageCompany;
 
 import javax.swing.*;
 import java.awt.*;

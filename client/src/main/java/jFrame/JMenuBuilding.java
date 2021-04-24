@@ -1,4 +1,4 @@
-package jFrame.maxime.window;
+package jFrame;
 
 import javax.swing.*;
 import java.util.ArrayList;

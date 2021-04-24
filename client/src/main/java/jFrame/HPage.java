@@ -1,6 +1,5 @@
 package jFrame;
 
-import jFrame.maxime.window.HPageCompany;
 import socket.CCSocketTCPbis;
 
 import javax.swing.*;

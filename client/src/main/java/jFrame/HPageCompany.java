@@ -1,5 +1,6 @@
-package jFrame.maxime.window;
+package jFrame;
 
+import jFrame.maxime.window.MapperRoom;
 import jFrame.yassir.Badge;
 import jFrame.danyter.Search;
 import jFrame.julien.OptionChroma;
