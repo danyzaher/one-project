@@ -1,5 +1,6 @@
-package JFrame.Maxime;
+package JFrame.Maxime.Button;
 
+import JFrame.Maxime.Window.WindowEquipement;
 import Socket.CCSocketTCPbis;
 
 import javax.swing.*;
@@ -8,13 +9,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Equipement extends JButton implements ActionListener {
-    String name;
+    public String name;
     final int WIDTH=13;
     final int HEIGHT=13;
-    boolean etat;
-    int id;
+    public boolean etat;
+    public int id;
     ArrayList<String> result;
-    String nomSalle;
+    public String nomSalle;
     public Equipement(String name, int x,int y,int id,String nomSalle){
         this.nomSalle=nomSalle;
         this.id=id;
@@ -36,6 +37,6 @@ public class Equipement extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        FenetreInformationEtChoix fenetreInformationEtChoix =new FenetreInformationEtChoix(this);
+        WindowEquipement windowEquipement =new WindowEquipement(this);
     }
 }

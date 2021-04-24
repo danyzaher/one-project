@@ -1,14 +1,10 @@
 package JFrame.julien;
-import JFrame.Maxime.FenetreInformationEtChoix;
-import JFrame.Maxime.HPageCompany;
-import Socket.CCSocketTCPbis;
+import JFrame.Maxime.Window.HPageCompany;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.util.ArrayList;
 import javax.swing.event.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

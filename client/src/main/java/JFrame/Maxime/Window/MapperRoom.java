@@ -1,5 +1,8 @@
-package JFrame.Maxime;
+package JFrame.Maxime.Window;
 
+import JFrame.Maxime.Button.Place;
+import JFrame.Maxime.Button.Sensor;
+import JFrame.Maxime.Button.Equipement;
 import JFrame.julien.OptionChroma;
 import Socket.CCSocketTCPbis;
 import org.slf4j.Logger;

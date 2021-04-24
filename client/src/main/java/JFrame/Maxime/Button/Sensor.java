@@ -1,4 +1,4 @@
-package JFrame.Maxime;
+package JFrame.Maxime.Button;
 
 import javax.swing.*;
 import javax.swing.border.Border;
@@ -11,7 +11,7 @@ public class Sensor extends JButton implements ActionListener, Border {
     String name;
     final int WIDTH=11;
     final int HEIGHT=11;
-    boolean etat;
+    public boolean etat;
     int id;
     ArrayList<String> result;
     private int r = 15;

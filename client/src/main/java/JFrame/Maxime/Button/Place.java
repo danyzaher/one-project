@@ -1,13 +1,15 @@
-package JFrame.Maxime;
+package JFrame.Maxime.Button;
+
+import JFrame.Maxime.Window.MapperRoom;
 
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class Place extends JButton implements ActionListener {
-    int x;
-    int y;
-    int id;
+    public int x;
+    public int y;
+    public int id;
     MapperRoom mapperRoom;
     public Place(int x, int y, int id,MapperRoom mapperRoom){
         this.mapperRoom=mapperRoom;

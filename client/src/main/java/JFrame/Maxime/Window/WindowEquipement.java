@@ -1,5 +1,6 @@
-package JFrame.Maxime;
+package JFrame.Maxime.Window;
 
+import JFrame.Maxime.Button.Equipement;
 import JFrame.julien.ElectroChromaManu;
 import Socket.CCSocketTCPbis;
 import org.slf4j.Logger;
@@ -11,13 +12,13 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class FenetreInformationEtChoix extends JFrame implements ActionListener {
+public class WindowEquipement extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("FenetreInformationEtChoix");
     Equipement equipement;
     JButton delete;
     JButton move;
     JButton information;
-    public FenetreInformationEtChoix(Equipement equipement){
+    public WindowEquipement(Equipement equipement){
         this.equipement = equipement;
         setTitle(equipement.name);
         setVisible(true);

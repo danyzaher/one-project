@@ -1,4 +1,4 @@
-package JFrame.Maxime;
+package JFrame.Maxime.Window;
 
 import Socket.CCSocketTCPbis;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package JFrame.Maxime;
+package JFrame.Maxime.Window;
 
 import JFrame.Yassir.Badge;
 import JFrame.danyter.Search;
