@@ -70,6 +70,11 @@ class ServerSocketTCP implements Runnable{
 						if(s.equals("dansSalle")){
 						listMessage.add(C.getEquipement(in.readLine()));}
 					}
+					if(recu.equals("sensor")){
+						String s = in.readLine();
+						if(s.equals("dansSalle")){
+							listMessage.add(C.getSensor(in.readLine()));}
+					}
 					if(recu.equals("opacity")){
 						listMessage.add(C.getOpacityValue(in.readLine()));
 					}

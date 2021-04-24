@@ -172,4 +172,20 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
+    public String getSensor(String room) throws SQLException{
+        logger.info("in getSensor");
+        String sql = "Select sensor.id_sensor,sensor.description,equipplace.position_x,equipplace.position_y from be_present inner join sensor on be_present.id_sensor=sensor.id_sensor inner join equipplace on be_present.id_equipplace=equipplace.id_equipplace where equipplace.id_room in (Select room_s_number from room where name='"+room+"');";
+        logger.info(sql);
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            logger.info("in the while");
+            result += rs.getArray("id_sensor")+ "\n";
+            result += rs.getArray("description") + "\n";
+            result += rs.getArray("position_x")+ "\n";
+            result += rs.getArray("position_y") + "\n";
+        }
+        return result;
+    }
 }
