@@ -24,13 +24,15 @@ public class HPageCompany extends JFrame implements ActionListener {
     JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température général");
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
+
     public HPageCompany(String s){
         logger.info("begin HPageComany "+s);
         title = s;
         setTitle("Page d'accueil de l'entreprise "+s);
         setLayout(new FlowLayout());
-        setSize(1000, 900);
+        setSize(800, 300);
         setVisible(true);
+        setResizable(false);
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
         getMenu();
