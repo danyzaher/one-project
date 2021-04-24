@@ -8,17 +8,17 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Sensor extends JButton implements ActionListener, Border {
-    String name;
+    public String name;
     final int WIDTH=11;
     final int HEIGHT=11;
     public boolean etat;
-    int id;
+    public int id;
     ArrayList<String> result;
     private int r = 15;
-    String nomSalle;
-    public Sensor(String name,int x,int y,int id,String nomSalle){
+     public String roomName;
+    public Sensor(String name,int x,int y,int id,String roomName){
         this.name = name;
-        this.nomSalle=nomSalle;
+        this.roomName = roomName;
         this.id=id;
         addActionListener(this);
         this.setBorder(this);
