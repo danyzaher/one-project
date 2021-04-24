@@ -4,14 +4,15 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 public class ConnectionCrud {
+
     private Connection c;
     private final static Logger logger = LoggerFactory.getLogger(ConnectionCrud.class.getName());
+
     public ConnectionCrud() {}
 
     public void setC(Connection c) {
         this.c = c;
     }
-
     public Connection getC() {
         return c;
     }
@@ -31,7 +32,6 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
-
     public  void deleteElement( String Table, String idcolumn) throws SQLException {
         String sql = "delete from \"" + Table + "\" where " + idcolumn + " = (select max(" + idcolumn + ") from \"" + Table + "\");";
         Statement smt = c.createStatement();
@@ -66,7 +66,6 @@ public class ConnectionCrud {
             result += rs.getArray("name")+ "\n";}
         return result;
     }
-
     public String getMenu(String company) throws SQLException{
         logger.info("in geMenu");
         String sql = "Select room.name, floor.floor_s_number,building.address from floor inner join room on floor.id_floor=room.id_floor inner join building on floor.address=building.address where room.room_s_number in ( Select room_s_number from location inner join company on company.id_company=location.id_company where company.name= '"+company+"');";
@@ -82,17 +81,6 @@ public class ConnectionCrud {
         }
         return result;
     }
-
-    public String getWinStore() throws SQLException{
-        String sql = ""; // To change
-        Statement smt = c.createStatement();
-        ResultSet rs = smt.executeQuery(sql);
-        String result = "";
-        while (rs.next()) {
-            result += rs.getArray("name");}
-        return result;
-    }
-
     public String getEquipement(String room) throws SQLException{
         logger.info("in getEquipement");
         String sql = "Select equipement.id_equipement,equipement.type,equipplace.position_x,equipplace.position_y from be_present inner join equipement on be_present.id_equipement=equipement.id_equipement inner join equipplace on be_present.id_equipplace=equipplace.id_equipplace where equipplace.id_room in (Select room_s_number from room where name='"+room+"');";
