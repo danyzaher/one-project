@@ -1,8 +1,6 @@
 package jFrame.maxime.window;
 
-import jFrame.maxime.button.Place;
-import jFrame.maxime.button.Sensor;
-import jFrame.maxime.button.Equipement;
+import jFrame.maxime.button.*;
 import jFrame.julien.OptionChroma;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
@@ -17,17 +15,16 @@ import java.util.ArrayList;
 public class MapperRoom extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("MapperSalle");
     String type;
-    String nomSalle;
+    String nameRoom;
     JMenuItem e1;
     JMenuItem electrochroma;
     ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
     ArrayList<Sensor> sensorArrayList = new ArrayList<>();
-    ArrayList<Equipement> listEquipementAvailable = new ArrayList<>();
     ArrayList<Place> placeArrayList = new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
-    public MapperRoom(String nomSalle){
-        this.nomSalle=nomSalle;
-        setTitle(nomSalle);
+    public MapperRoom(String nameRoom){
+        this.nameRoom = nameRoom;
+        setTitle(nameRoom);
         setVisible(true);
         setSize(400,300);
         getEquipement();
@@ -49,7 +46,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add("show");
         stringArrayList.add("equipement");
         stringArrayList.add("dansSalle");
-        stringArrayList.add(nomSalle);
+        stringArrayList.add(nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
         for(int k =0; k<result.size()-4;k=k+4){
@@ -57,7 +54,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             String nom = result.get(k+1);
             int position_x = Integer.parseInt(result.get(k+2));
             int position_y = Integer.parseInt(result.get(k+3));
-            Equipement equipement = new Equipement(nom,position_x,position_y,id,nomSalle);
+            Equipement equipement = new Equipement(nom,position_x,position_y,id, nameRoom);
             listEquipementDansLaSalle.add(equipement);
         }
         for(int j=0;j<listEquipementDansLaSalle.size();j++){
@@ -77,7 +74,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add("show");
         stringArrayList.add("sensor");
         stringArrayList.add("dansSalle");
-        stringArrayList.add(nomSalle);
+        stringArrayList.add(nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
         for(int k =0; k<result.size()-4;k=k+4){
@@ -85,7 +82,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             String nom = result.get(k+1);
             int position_x = Integer.parseInt(result.get(k+2));
             int position_y = Integer.parseInt(result.get(k+3));
-            Sensor sensor = new Sensor(nom,position_x,position_y,id,nomSalle);
+            Sensor sensor = new Sensor(nom,position_x,position_y,id, nameRoom);
             sensorArrayList.add(sensor);
         }
         for(int j=0;j<sensorArrayList.size();j++){
@@ -95,7 +92,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             }else{sensorArrayList.get(j).setBackground(Color.PINK);}
         }
     }
-    public void ajouterLesEquippement(){ }
+
     public static void main(String[] args){
         new MapperRoom("salle numéro 3");
     }
@@ -104,7 +101,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("emplacement");
-        stringArrayList.add(nomSalle);
+        stringArrayList.add(nameRoom);
         stringArrayList.add(type);
         this.type=type;
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
@@ -131,7 +128,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add(type);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.setVisible(false);
-        MapperRoom mapperRoom = new MapperRoom(nomSalle);
+        MapperRoom mapperRoom = new MapperRoom(nameRoom);
     }
 
     @Override
@@ -140,7 +137,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         if (e.getSource()==e1){
         WindowListEquipement windowListEquipement = new WindowListEquipement(this);}
         if (e.getSource()==electrochroma){
-            OptionChroma optionChroma = new OptionChroma(nomSalle);
+            OptionChroma optionChroma = new OptionChroma(nameRoom);
         }
     }
 }

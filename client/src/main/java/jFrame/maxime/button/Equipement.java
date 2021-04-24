@@ -15,9 +15,9 @@ public class Equipement extends JButton implements ActionListener {
     public boolean etat;
     public int id;
     ArrayList<String> result;
-    public String nomSalle;
-    public Equipement(String name, int x,int y,int id,String nomSalle){
-        this.nomSalle=nomSalle;
+    public String roomName;
+    public Equipement(String name, int x,int y,int id,String roomName){
+        this.roomName = roomName;
         this.id=id;
         this.name = name;
         addActionListener(this);

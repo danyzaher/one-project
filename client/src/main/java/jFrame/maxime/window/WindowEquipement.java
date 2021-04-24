@@ -13,7 +13,7 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class WindowEquipement extends JFrame implements ActionListener {
-    public static Logger logger = LoggerFactory.getLogger("FenetreInformationEtChoix");
+    public static Logger logger = LoggerFactory.getLogger("WindowEquipement");
     Equipement equipement;
     JButton delete;
     JButton move;
@@ -50,9 +50,10 @@ public class WindowEquipement extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==information){
             ElectroChromaManu electroChromaManu = new ElectroChromaManu(""+equipement.id);
+            this.setVisible(false);
         }
         if (e.getSource()==delete){
-            String s = equipement.nomSalle;
+            String s = equipement.roomName;
             delete();
             MapperRoom m= new MapperRoom(s);
             this.setVisible(false);

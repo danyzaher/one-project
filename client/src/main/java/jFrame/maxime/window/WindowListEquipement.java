@@ -13,7 +13,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 public class WindowListEquipement extends JFrame implements ActionListener, ItemListener {
-    public static Logger logger = LoggerFactory.getLogger("FenetreListEquipement");
+    public static Logger logger = LoggerFactory.getLogger("WindowListEquipement");
     MapperRoom mapperRoom;
     JLabel l1, l2;
     JButton jButton;
@@ -22,7 +22,7 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
     ArrayList<String> result = new ArrayList<>();
     public WindowListEquipement(MapperRoom mapperRoom){
         this.mapperRoom = mapperRoom;
-        setTitle("liste des équipement disponible pour la salle " + mapperRoom.nomSalle);
+        setTitle("liste des équipement disponible pour la salle " + mapperRoom.nameRoom);
         setVisible(true);
         setLayout(new FlowLayout());
         setSize(1000,1000);
@@ -52,7 +52,7 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
         stringArrayList.add("show");
         stringArrayList.add("equipement");
         stringArrayList.add("available");
-        stringArrayList.add(mapperRoom.nomSalle);
+        stringArrayList.add(mapperRoom.nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
         for(int k=0 ; k<result.size();k++){
