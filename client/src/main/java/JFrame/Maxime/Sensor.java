@@ -5,28 +5,25 @@ import javax.swing.border.Border;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
-public class Capteur extends JButton implements ActionListener, Border {
-    String nom;
-    boolean etat = true;
-    public Capteur(String nom){
-        this.nom = nom;
-        addActionListener(this);
-    }
-
-    public String getNom() {
-        return nom;
-    }
-
-    public void setNom(String nom) {
-        this.nom = nom;
-    }
-
-    public boolean isEtat() {
-        return etat;
-    }
-
+public class Sensor extends JButton implements ActionListener, Border {
+    String name;
+    final int WIDTH=11;
+    final int HEIGHT=11;
+    boolean etat;
+    int id;
+    ArrayList<String> result;
     private int r = 15;
+    String nomSalle;
+    public Sensor(String name,int x,int y,int id,String nomSalle){
+        this.name = name;
+        this.nomSalle=nomSalle;
+        this.id=id;
+        addActionListener(this);
+        this.setBorder(this);
+        setBounds(x,y,WIDTH,HEIGHT);
+    }
 
     public Insets getBorderInsets(Component c) {
         return new Insets(this.r+1, this.r+1, this.r+2, this.r);

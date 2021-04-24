@@ -18,7 +18,7 @@ public class MapperRoom extends JFrame implements ActionListener {
     JMenuItem e1;
     JMenuItem electrochroma;
     ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
-    ArrayList<Capteur> sensorArrayList = new ArrayList<>();
+    ArrayList<Sensor> sensorArrayList = new ArrayList<>();
     ArrayList<Equipement> listEquipementAvailable = new ArrayList<>();
     ArrayList<Place> placeArrayList = new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
@@ -28,12 +28,6 @@ public class MapperRoom extends JFrame implements ActionListener {
         setVisible(true);
         setSize(400,300);
         getEquipement();
-        Capteur capteur1 = new Capteur("capteur 1");
-        sensorArrayList.add(capteur1);
-        capteur1.setBounds(50,100,20,15);
-        capteur1.setBackground(Color.GREEN);
-        capteur1.setBorder(capteur1);
-        add(capteur1);
         setLayout(null);
         JMenu jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();
@@ -71,6 +65,31 @@ public class MapperRoom extends JFrame implements ActionListener {
             if(listEquipementDansLaSalle.get(j).name.equals("fenêtre électrochromatique")){
                 listEquipementDansLaSalle.get(j).setBackground(Color.GRAY);
             }
+        }
+
+    }
+    public void getSensor(){
+        logger.info("begin getSensor");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("sensor");
+        stringArrayList.add("dansSalle");
+        stringArrayList.add(nomSalle);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.result = ccSocketTCP2.result;
+        for(int k =0; k<result.size()-4;k=k+4){
+            int id = Integer.parseInt(result.get(k));
+            String nom = result.get(k+1);
+            int position_x = Integer.parseInt(result.get(k+2));
+            int position_y = Integer.parseInt(result.get(k+3));
+            Sensor sensor = new Sensor(nom,position_x,position_y,id,nomSalle);
+            sensorArrayList.add(sensor);
+        }
+        for(int j=0;j<sensorArrayList.size();j++){
+            add(sensorArrayList.get(j));
+            if(sensorArrayList.get(j).etat){
+                sensorArrayList.get(j).setBackground(Color.CYAN);
+            }else{sensorArrayList.get(j).setBackground(Color.PINK);}
         }
     }
     public void ajouterLesEquippement(){ }

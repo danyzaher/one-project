@@ -9,8 +9,8 @@ import java.util.ArrayList;
 
 public class Equipement extends JButton implements ActionListener {
     String name;
-    final int WIDTH=15;
-    final int HEIGHT=20;
+    final int WIDTH=13;
+    final int HEIGHT=13;
     boolean etat;
     int id;
     ArrayList<String> result;
