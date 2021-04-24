@@ -54,10 +54,8 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
         stringArrayList.add("available");
         stringArrayList.add(mapperRoom.nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
-        this.result = ccSocketTCP2.result;
-        for(int k=0 ; k<result.size();k++){
-            s1.add(result.get(k));
-        }
+        s1 = ccSocketTCP2.result;
+
     }
 
 

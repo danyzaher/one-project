@@ -130,7 +130,7 @@ public class ConnectionCrud {
         String result = "";
         while(rs.next()){
             logger.info("in the while");
-            result += rs.getArray("type");
+            result += rs.getArray("type")+ "\n";
         }
         return result;
     }

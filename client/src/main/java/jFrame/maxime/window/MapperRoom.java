@@ -63,6 +63,7 @@ public class MapperRoom extends JFrame implements ActionListener {
                 listEquipementDansLaSalle.get(j).setBackground(Color.GREEN);
             }else{listEquipementDansLaSalle.get(j).setBackground(Color.RED);}
             if(listEquipementDansLaSalle.get(j).name.equals("fenêtre électrochromatique")){
+                logger.info("coloré en gris");
                 listEquipementDansLaSalle.get(j).setBackground(Color.GRAY);
             }
         }

@@ -31,7 +31,7 @@ public class WindowEquipement extends JFrame implements ActionListener {
         move = new JButton("Deplacer l'equipement");
         move.setBounds(50,200,30,50);
         add(move);
-        if(equipement.name.equals("Fenêtre électrochromatique")){
+        if(equipement.name.equals("fenêtre électrochromatique")){
         information = new JButton("Information à propos de l'equipement");
         information.setBounds(50,300,30,50);
         add(information);
