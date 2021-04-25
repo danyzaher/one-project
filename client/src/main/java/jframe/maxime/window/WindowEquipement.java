@@ -1,7 +1,7 @@
 package jframe.maxime.window;
 
 import jframe.maxime.button.Equipement;
-import jframe.julien.ElectroChromaManu;
+import jframe.julien.ElectroChromaManuOpa;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -50,7 +50,7 @@ public class WindowEquipement extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==information){
-            ElectroChromaManu electroChromaManu = new ElectroChromaManu(""+equipement.id);
+            ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(""+equipement.id);
             this.setVisible(false);
         }
         if (e.getSource()==delete){
