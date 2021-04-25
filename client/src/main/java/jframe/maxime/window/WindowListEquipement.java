@@ -62,7 +62,7 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==jButton){
-            mapperRoom.getEmplacement((String) combobox.getSelectedItem());
+            mapperRoom.getEmplacement((String) combobox.getSelectedItem(), true);
         }
     }
 

@@ -15,6 +15,7 @@ import java.util.ArrayList;
 public class MapperRoom extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("MapperSalle");
     String type;
+    boolean sensorOrequipement;
     String nameRoom;
     JMenuItem e1;
     JMenuItem electrochroma;
@@ -63,7 +64,8 @@ public class MapperRoom extends JFrame implements ActionListener {
             if(listEquipementDansLaSalle.get(j).etat){
                 listEquipementDansLaSalle.get(j).setBackground(Color.GREEN);
             }else{listEquipementDansLaSalle.get(j).setBackground(Color.RED);}
-            if(listEquipementDansLaSalle.get(j).name.equals("fenêtre électrochromatique")){
+            if((listEquipementDansLaSalle.get(j).name.equals("fenêtre électrochromatique"))
+            | (listEquipementDansLaSalle.get(j).name.equals("Store"))){
                 logger.info("coloré en gris");
                 listEquipementDansLaSalle.get(j).setBackground(Color.GRAY);
             }
@@ -98,11 +100,16 @@ public class MapperRoom extends JFrame implements ActionListener {
     public static void main(String[] args){
         new MapperRoom("salle numéro 3");
     }
-    public void getEmplacement(String type){
+    public void getEmplacement(String type, boolean b){
         logger.info("begin getEmplacement");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("emplacement");
+        if(b){
+            stringArrayList.add("equipement");
+            sensorOrequipement = true;
+        } else {stringArrayList.add("sensor");
+        sensorOrequipement = false;}
         stringArrayList.add(nameRoom);
         stringArrayList.add(type);
         this.type=type;
@@ -126,6 +133,9 @@ public class MapperRoom extends JFrame implements ActionListener {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("insert");
         stringArrayList.add("be_present");
+        if (sensorOrequipement){
+            stringArrayList.add("equipement");
+        } else {stringArrayList.add("sensor");}
         stringArrayList.add(p.id+"");
         stringArrayList.add(type);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
