@@ -1,7 +1,7 @@
 package jframe.maxime.window;
 
 import jframe.maxime.button.*;
-import jframe.julien.OptionChroma;
+import jframe.julien.ElectroChromaAuto;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -139,7 +139,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         if (e.getSource()==e1){
         WindowListEquipement windowListEquipement = new WindowListEquipement(this);}
         if (e.getSource()==electrochroma){
-            OptionChroma optionChroma = new OptionChroma(nameRoom);
+            ElectroChromaAuto electroChromaAuto = new ElectroChromaAuto(nameRoom);
         }
     }
 }

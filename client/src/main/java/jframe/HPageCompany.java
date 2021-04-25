@@ -3,7 +3,7 @@ package jframe;
 import jframe.maxime.window.MapperRoom;
 import jframe.yassir.Badge;
 import jframe.danyter.Search;
-import jframe.julien.OptionChroma;
+import jframe.julien.ElectroChromaAuto;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -170,7 +170,7 @@ public class HPageCompany extends JFrame implements ActionListener {
             Search search = new Search();
         }
         if (e.getSource().equals(chromatique)){
-            OptionChroma optionChroma= new OptionChroma(title);
+            ElectroChromaAuto electroChromaAuto = new ElectroChromaAuto(title);
         }
         this.setVisible(false);
     }

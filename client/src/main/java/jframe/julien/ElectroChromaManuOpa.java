@@ -50,10 +50,10 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         setTitle("Parametres manuels de l'option electrochroma");
         setLayout(new FlowLayout());
 
-        /** METHODS **/
+        /** METHOD **/
         getOpacityValue(); //Get value of the opacity of the window
 
-        /** SLIDERS **/
+        /** SLIDER **/
 
         //Opacity
         opac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
@@ -70,7 +70,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         eventOpac eo = new eventOpac();
         opac.addChangeListener(eo);
-
 
         setVisible(true);
 

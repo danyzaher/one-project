@@ -10,7 +10,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
-public class OptionChroma extends JFrame implements ActionListener {
+public class ElectroChromaAuto extends JFrame implements ActionListener {
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
 
 
@@ -35,7 +35,7 @@ public class OptionChroma extends JFrame implements ActionListener {
 
     String windowstore[] = {"1", "2", "3"};
     String companyName;
-    public OptionChroma( String companyName) {
+    public ElectroChromaAuto(String companyName) {
         this.companyName=companyName;
         //dispoFenStor = Toolkit.getDefaultToolkit().getImage("C:\\Users\\Julien CANNOUX\\one-project\\client\\src\\main\\java\\JFrame\\julien\\aide.jpg");
 
@@ -117,12 +117,11 @@ public class OptionChroma extends JFrame implements ActionListener {
 
     }
 
-
-    @Override //HELP BUTTON
+    @Override
     public void actionPerformed(ActionEvent e) {
-        Help hlp =new Help();
-
+        
     }
+
 
     public class eventWin implements ChangeListener {
 
@@ -166,7 +165,7 @@ public class OptionChroma extends JFrame implements ActionListener {
     }
 
 
-    public static void main(String[] args) { OptionChroma opchro = new OptionChroma("Fritel Inc.");
+    public static void main(String[] args) { ElectroChromaAuto opchro = new ElectroChromaAuto("Fritel Inc.");
 
     }
 }
