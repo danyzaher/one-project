@@ -1,14 +1,15 @@
 package jframe.yassir;
 
 import javax.swing.*;
+import java.awt.event.ActionListener;
 
-public class Show extends JFrame {
+public class Show extends JFrame  {
     JButton prec;
+    JButton modif1;
 
     public Show() {
         this.setTitle("OneBuilding");
         this.setSize(500, 300);
-        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setLocationRelativeTo(null);
 
         JPanel num = new JPanel();
@@ -33,7 +34,9 @@ public class Show extends JFrame {
         JPanel num4 = new JPanel();
         num4.setLayout(new BoxLayout(num4, BoxLayout.PAGE_AXIS));
         prec=new JButton("Précedent");
+        modif1=new JButton("Modifier niveau d'accès");
 
+        num4.add(modif1);
         num4.add(prec);
 
 

@@ -1,4 +1,6 @@
-package jframe.yassir;
+package jFrame.yassir;
+import jFrame.Yassir.Verify;
+
 import javax.swing.* ;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -23,6 +25,7 @@ public class Badge extends JFrame implements ActionListener {
         JPanel nume=new JPanel();
         JPanel fenetre=new JPanel();
 
+
         JLabel search;
         JLabel num;
         JLabel name;
@@ -31,7 +34,7 @@ public class Badge extends JFrame implements ActionListener {
         JTextField name1=new JTextField() ;
         name1.setPreferredSize(new Dimension(100,20));
 
-        boutons.setLayout(new BoxLayout(boutons, BoxLayout.LINE_AXIS));
+         
         showall=new JButton("Afficher toute la liste");
         showall.addActionListener(this);
         signal=new JButton("Signaler un problème");
@@ -85,6 +88,10 @@ public class Badge extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent evt) {
         Object source =evt.getSource();
+        if (source == show)
+        {
+            Show show = new Show();
+        }
 
         if (source == showall)
         {
@@ -92,7 +99,7 @@ public class Badge extends JFrame implements ActionListener {
             showall.setVisible(true);
         }
         else if (source == verify) {
-            Verify verif = new Verify();
+            Verify  verif = new Verify() ;
         }
         else if(source == signal) {
             Problem prob = new Problem();
