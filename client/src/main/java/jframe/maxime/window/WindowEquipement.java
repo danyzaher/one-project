@@ -1,5 +1,6 @@
 package jframe.maxime.window;
 
+import jframe.julien.ElectroChromaManuHigh;
 import jframe.maxime.button.Equipement;
 import jframe.julien.ElectroChromaManuOpa;
 import socket.CCSocketTCPbis;
@@ -31,7 +32,7 @@ public class WindowEquipement extends JFrame implements ActionListener {
         move = new JButton("Deplacer l'equipement");
         move.setBounds(50,200,30,50);
         add(move);
-        if(equipement.name.equals("fenêtre électrochromatique")){
+        if(equipement.name.equals("fenêtre électrochromatique") | equipement.name.equals("Store")){
         information = new JButton("Information à propos de l'equipement");
         information.setBounds(50,300,30,50);
         add(information);
@@ -50,7 +51,11 @@ public class WindowEquipement extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==information){
-            ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(""+equipement.id);
+            if(equipement.name.equals("fenêtre électrochromatique")){
+            ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(""+equipement.id);}
+            if(equipement.name.equals("Store")){
+                ElectroChromaManuHigh electroChromaManuHigh = new ElectroChromaManuHigh(equipement.id+"");
+            }
             this.setVisible(false);
         }
         if (e.getSource()==delete){
