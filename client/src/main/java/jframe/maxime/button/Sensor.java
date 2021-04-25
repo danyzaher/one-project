@@ -26,6 +26,7 @@ public class Sensor extends JButton implements ActionListener, Border {
         addActionListener(this);
         this.setBorder(this);
         setBounds(x,y,WIDTH,HEIGHT);
+        getEtat();
     }
 
     public void getEtat() {
