@@ -108,7 +108,6 @@ public class ConnectionCrud {
             result += rs.getArray("valueof");
         }
         return result;
-
     }
     public String getStoreHighValue(String id) throws SQLException {
         logger.info("in getStoreHighValue");
