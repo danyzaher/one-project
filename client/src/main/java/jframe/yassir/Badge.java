@@ -1,4 +1,4 @@
-package jFrame.yassir;
+package jframe.yassir;
 import jFrame.Yassir.Verify;
 
 import javax.swing.* ;
