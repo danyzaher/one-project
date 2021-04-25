@@ -125,7 +125,13 @@ class ServerSocketTCP implements Runnable{
 		logger.info("delete");
 		String recu = in.readLine();
 		if(recu.equals("be_present")){
-			C.deleteBePresent(in.readLine());
+			recu = in.readLine();
+			if(recu.equals("equipement")){
+			    C.deleteBePresentEquipement(in.readLine());
+			}
+			if(recu.equals("sensor")){
+				C.deleteBePresentSensor(in.readLine());
+			}
 		}
 
 	}

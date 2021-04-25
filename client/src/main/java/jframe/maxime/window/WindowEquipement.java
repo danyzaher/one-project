@@ -43,6 +43,7 @@ public class WindowEquipement extends JFrame implements ActionListener {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("delete");
         stringArrayList.add("be_present");
+        stringArrayList.add("equipement");
         stringArrayList.add(equipement.id+"");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
     }

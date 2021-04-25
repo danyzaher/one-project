@@ -32,7 +32,7 @@ public class WindowSensor extends JFrame implements ActionListener {
 
     }
     public void delete(){
-        logger.info("begin getEquipement");
+        logger.info("begin delete sensor");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("delete");
         stringArrayList.add("be_present");
