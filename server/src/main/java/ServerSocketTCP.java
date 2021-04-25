@@ -126,8 +126,10 @@ class ServerSocketTCP implements Runnable{
 		if(recu.equals("be_present")){
 			String s = in.readLine();
 			if(s.equals("equipement")){
+				s = in.readLine();
 			c.insertBePresentEquipement(s,in.readLine());}
 			if(s.equals("sensor")){
+				s = in.readLine();
 				c.insertBePresentSensor(s,in.readLine());
 			}
 		}

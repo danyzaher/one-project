@@ -160,13 +160,13 @@ public class ConnectionCrud {
     }
     public void insertBePresentEquipement(String idPlace, String type) throws SQLException{
         logger.info("in insert equipement");
-        String sql = "insert into be_present (id_equipement,id_equipplace) values((Select id_equipement from equipement where type='"+type+"' and id_equipement not in (Select id_equipement from be_present where id_equipement is not null) limit 1),"+idPlace+");";
+        String sql = "insert into be_present values ((Select equipement.id_equipement from equipement where equipement.type='"+type+"' and equipement.id_equipement not in (Select be_present.id_equipement from be_present where be_present.id_equipement is not null) limit 1),"+idPlace+",null);";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
     public void insertBePresentSensor(String idPlace, String type) throws SQLException{
         logger.info("in insert sensor");
-        String sql = "insert into be_present (id_sensor,id_equipplace) values ((Select id_sensor from sensor where (description='"+type+"') and (id_sensor not in (Select id_sensor from be_present where id_sensor is not null)) limit 1),"+idPlace+");";
+        String sql = "insert into be_present values (null,"+idPlace+",(Select sensor.id_sensor from sensor where (sensor.description='"+type+"') and (sensor.id_sensor not in (Select be_present.id_sensor from be_present where be_present.id_sensor is not null)) limit 1));";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
