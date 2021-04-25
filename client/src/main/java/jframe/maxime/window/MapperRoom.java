@@ -28,6 +28,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         setVisible(true);
         setSize(400,300);
         getEquipement();
+        getSensor();
         setLayout(null);
         JMenu jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();

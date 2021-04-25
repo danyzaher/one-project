@@ -122,8 +122,8 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getEtat(String id) throws SQLException{
-        logger.info("in getEtat");
+    public String getEtatEquipement(String id) throws SQLException{
+        logger.info("in getEtatEquipement");
         String sql = "select animated from equipement where id_equipement="+id+";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
@@ -181,5 +181,17 @@ public class ConnectionCrud {
         String sql = "update equipement set valueof = " + valueopacity + " where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
+    }
+    public String getEtatSensor(String id) throws SQLException{
+        logger.info("in getEtatSensor");
+        String sql = "select animated from sensor where id_sensor="+id+";";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("animated");
+        }
+        return result;
     }
 }

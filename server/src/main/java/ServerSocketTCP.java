@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.slf4j.Logger;
@@ -65,13 +64,16 @@ class ServerSocketTCP implements Runnable{
 							listMessage.add(C.getEquipementAvailable(in.readLine()));
 						}
 						if(s.equals("etat")){
-							listMessage.add(C.getEtat(in.readLine()));
+							listMessage.add(C.getEtatEquipement(in.readLine()));
 						}
 						if(s.equals("dansSalle")){
 						listMessage.add(C.getEquipement(in.readLine()));}
 					}
 					if(recu.equals("sensor")){
 						String s = in.readLine();
+						if(s.equals("etat")){
+							listMessage.add(C.getEtatSensor(in.readLine()));
+						}
 						if(s.equals("dansSalle")){
 							listMessage.add(C.getSensor(in.readLine()));}
 					}
@@ -148,7 +150,11 @@ class ServerSocketTCP implements Runnable{
 		logger.info("new Client");
 		Socket socket = socketClient;
 		analyseInputStream(socket);
-
+		try {
+			socket.close();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 
 	private Thread currentThread() {

@@ -1,5 +1,8 @@
 package jframe.maxime.button;
 
+import jframe.maxime.window.WindowSensor;
+import socket.CCSocketTCPbis;
+
 import javax.swing.*;
 import javax.swing.border.Border;
 import java.awt.*;
@@ -25,6 +28,17 @@ public class Sensor extends JButton implements ActionListener, Border {
         setBounds(x,y,WIDTH,HEIGHT);
     }
 
+    public void getEtat() {
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("sensor");
+        stringArrayList.add("etat");
+        stringArrayList.add("" + id);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.result = ccSocketTCP2.result;
+        etat = result.get(0).equals("t");
+    }
+
     public Insets getBorderInsets(Component c) {
         return new Insets(this.r+1, this.r+1, this.r+2, this.r);
     }
@@ -38,6 +52,6 @@ public class Sensor extends JButton implements ActionListener, Border {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
+        WindowSensor windowSensor = new WindowSensor(this);
     }
 }
