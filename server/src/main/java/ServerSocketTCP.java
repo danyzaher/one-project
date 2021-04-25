@@ -80,6 +80,9 @@ class ServerSocketTCP implements Runnable{
 					if(recu.equals("opacity")){
 						listMessage.add(C.getOpacityValue(in.readLine()));
 					}
+					if(recu.equals("strhigh")){
+						listMessage.add(C.getStoreHighValue(in.readLine()));
+					}
 					if(recu.equals("emplacement")){
 						String s = in.readLine();
 						listMessage.add(C.getPlace(in.readLine(),s));
