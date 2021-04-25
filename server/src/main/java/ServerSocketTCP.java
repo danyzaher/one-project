@@ -84,8 +84,13 @@ class ServerSocketTCP implements Runnable{
 						listMessage.add(C.getStoreHighValue(in.readLine()));
 					}
 					if(recu.equals("emplacement")){
+						recu = in.readLine();
 						String s = in.readLine();
-						listMessage.add(C.getPlace(in.readLine(),s));
+						if (recu.equals("equipement")){
+						listMessage.add(C.getPlaceEquip(in.readLine(),s));}
+						if (recu.equals("sensor")){
+							listMessage.add(C.getPlaceSensor(in.readLine(),s));
+						}
 					}
 				}
 				if(recu.equals("update")){
@@ -117,7 +122,11 @@ class ServerSocketTCP implements Runnable{
 		String recu = in.readLine();
 		if(recu.equals("be_present")){
 			String s = in.readLine();
-			c.insertBePresent(s,in.readLine());
+			if(s.equals("equipement")){
+			c.insertBePresentEquipement(s,in.readLine());}
+			if(s.equals("sensor")){
+				c.insertBePresentSensor(s,in.readLine());
+			}
 		}
 	}
 
