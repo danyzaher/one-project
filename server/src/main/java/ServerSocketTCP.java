@@ -71,6 +71,9 @@ class ServerSocketTCP implements Runnable{
 					}
 					if(recu.equals("sensor")){
 						String s = in.readLine();
+						if (s.equals("available")){
+							listMessage.add(C.getSensorAvailable(in.readLine()));
+						}
 						if(s.equals("etat")){
 							listMessage.add(C.getEtatSensor(in.readLine()));
 						}

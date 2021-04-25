@@ -22,16 +22,6 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
-    public void addElement(String Table, String column, String column1, Object value, Object value1) throws SQLException {
-        String sql = "INSERT INTO \"" + Table + "\"(" + column + "," + column1+ ") " + "VALUES ('" + value + "','" + value1 + "');";
-        Statement smt = c.createStatement();
-        smt.executeUpdate(sql);
-    }
-    public void eraseElement( String Table, String idcolumn, String id) throws SQLException {
-        String sql = "DELETE FROM \"" + Table + "\" WHERE " + idcolumn + " = " + id + ";";
-        Statement smt = c.createStatement();
-        smt.executeUpdate(sql);
-    }
     public  void deleteElement( String Table, String idcolumn) throws SQLException {
         String sql = "delete from \"" + Table + "\" where " + idcolumn + " = (select max(" + idcolumn + ") from \"" + Table + "\");";
         Statement smt = c.createStatement();
@@ -44,16 +34,6 @@ public class ConnectionCrud {
         String result = null;
         while (rs.next()) {
             result += rs.getArray(idcolumn) + "   " + rs.getArray(columna);
-        }
-        return result;
-    }
-    public  String showElement(String Table) throws SQLException {
-        String sql = "select * from \"" + Table + "\";";
-        Statement smt = c.createStatement();
-        ResultSet rs = smt.executeQuery(sql);
-        String result = null;
-        while (rs.next()) {
-            result += rs.getArray(1) + "        |               " + rs.getArray(2) + "            |       "  + rs.getArray(3) + "\n";
         }
         return result;
     }
@@ -124,13 +104,25 @@ public class ConnectionCrud {
     }
     public String getEquipementAvailable(String roomName) throws SQLException{
         logger.info("in getEquipementAvailable");
-        String sql = "select distinct equipement.type from compatible inner join equipplace on equipplace.id_equipplace=compatible.id_equipplace inner join equipement on equipement.type= compatible.type_equip where equipplace.id_equipplace not in (Select id_equipplace from be_present) and equipement.id_equipement not in (Select id_equipement from be_present) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
+        String sql = "select distinct equipement.type from compatible inner join equipplace on equipplace.id_equipplace=compatible.id_equipplace inner join equipement on equipement.type= compatible.type_equip where equipplace.id_equipplace not in (Select id_equipplace from be_present) and equipement.id_equipement not in (Select id_equipement from be_present where id_equipement is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while(rs.next()){
             logger.info("in the while");
             result += rs.getArray("type")+ "\n";
+        }
+        return result;
+    }
+    public String getSensorAvailable(String roomName) throws SQLException{
+        logger.info("in getSensorAvailable");
+        String sql = "select distinct sensor.description from compatible_sensor inner join equipplace on equipplace.id_equipplace=compatible_sensor.id_equipplace inner join sensor on sensor.description= compatible_sensor.description where equipplace.id_equipplace not in (Select id_equipplace from be_present) and sensor.id_sensor not in (Select id_sensor from be_present where id_sensor is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("description")+ "\n";
         }
         return result;
     }
@@ -167,14 +159,14 @@ public class ConnectionCrud {
         return result;
     }
     public void insertBePresentEquipement(String idPlace, String type) throws SQLException{
-        logger.info("in delete");
-        String sql = "insert into be_present (id_equipement,id_equipplace) values((Select id_equipement from equipement where type='"+type+"' and id_equipement not in (Select id_equipement from be_present) limit 1),"+idPlace+");";
+        logger.info("in insert equipement");
+        String sql = "insert into be_present (id_equipement,id_equipplace) values((Select id_equipement from equipement where type='"+type+"' and id_equipement not in (Select id_equipement from be_present where id_equipement is not null) limit 1),"+idPlace+");";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
     public void insertBePresentSensor(String idPlace, String type) throws SQLException{
-        logger.info("in delete");
-        String sql = "insert into be_present (id_sensor,id_equipplace) values ((Select id_sensor from sensor where description='"+type+"' and id_sensor not in (Select id_sensor from be_present) limit 1),"+idPlace+");";
+        logger.info("in insert sensor");
+        String sql = "insert into be_present (id_sensor,id_equipplace) values ((Select id_sensor from sensor where (description='"+type+"') and (id_sensor not in (Select id_sensor from be_present where id_sensor is not null)) limit 1),"+idPlace+");";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
@@ -213,7 +205,7 @@ public class ConnectionCrud {
         return result;
     }
     public void deleteBePresentSensor(String id) throws SQLException{
-        logger.info("in delete");
+        logger.info("in delete sensor");
         String sql = "delete from be_present where id_sensor="+id+";";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));

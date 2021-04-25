@@ -26,7 +26,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         setVisible(true);
         setLayout(new FlowLayout());
         setSize(1000,1000);
-        getListEquipementAvailable();
+        getListSensorAvailable();
         String s2[] = s1.toArray(new String[0]);
         combobox = new JComboBox(s2);
         combobox.addItemListener(this);
@@ -46,7 +46,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
     }
-    public void getListEquipementAvailable(){
+    public void getListSensorAvailable(){
         logger.info("begin getListEquipementAvailable");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
@@ -55,6 +55,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         stringArrayList.add(mapperRoom.nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         s1 = ccSocketTCP2.result;
+        logger.info("s1= "+s1.toString());
 
     }
 

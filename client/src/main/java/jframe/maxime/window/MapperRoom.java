@@ -18,6 +18,7 @@ public class MapperRoom extends JFrame implements ActionListener {
     boolean sensorOrequipement;
     String nameRoom;
     JMenuItem e1;
+    JMenuItem e2;
     JMenuItem electrochroma;
     ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
     ArrayList<Sensor> sensorArrayList = new ArrayList<>();
@@ -36,10 +37,13 @@ public class MapperRoom extends JFrame implements ActionListener {
         jMenuBar.add(jMenu);
         e1 = new JMenuItem("Liste des équipement à ajouter");
         e1.addActionListener(this);
+        e2 = new JMenuItem("Liste des capteurs à ajouter");
+        e2.addActionListener(this);
        // electrochroma = new JMenuItem("Option électrochromatique");
        // electrochroma.addActionListener(this);
        // jMenu.add(electrochroma);
         jMenu.add(e1);
+        jMenu.add(e2);
         this.setJMenuBar(jMenuBar);
     }
     public void getEquipement(){
@@ -148,6 +152,9 @@ public class MapperRoom extends JFrame implements ActionListener {
 
         if (e.getSource()==e1){
         WindowListEquipement windowListEquipement = new WindowListEquipement(this);}
+        if(e.getSource()==e2){
+            WindowListSensor windowListSensor = new WindowListSensor(this);
+        }
         if (e.getSource()==electrochroma){
             ElectroChromaAuto electroChromaAuto = new ElectroChromaAuto(nameRoom);
         }
