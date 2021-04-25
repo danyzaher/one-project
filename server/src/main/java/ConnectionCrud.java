@@ -134,7 +134,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public void deleteBePresent(String id) throws SQLException{
+    public void deleteBePresentEquipement(String id) throws SQLException{
         logger.info("in delete");
         String sql = "delete from be_present where id_equipement="+id+";";
         Statement smt = c.createStatement();
@@ -193,5 +193,11 @@ public class ConnectionCrud {
             result += rs.getArray("animated");
         }
         return result;
+    }
+    public void deleteBePresentSensor(String id) throws SQLException{
+        logger.info("in delete");
+        String sql = "delete from be_present where id_sensor="+id+";";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
 }
