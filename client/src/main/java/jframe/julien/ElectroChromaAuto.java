@@ -5,9 +5,11 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 import javax.swing.event.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import socket.CCSocketTCPbis;
 
 
 public class ElectroChromaAuto extends JFrame implements ActionListener {
@@ -76,7 +78,20 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {
+    public void actionPerformed(ActionEvent e) { //--> Work in progress
+
+        if(e.getSource().equals(validation)) {
+
+            logger.info("begin validation for automatic ElectroChroma settings ");
+            ArrayList<String> stringArrayList = new ArrayList<>();
+            stringArrayList.add("update");
+            stringArrayList.add("temperature");
+            stringArrayList.add("light");
+            stringArrayList.add(Stemp.getValue() + "");
+            stringArrayList.add(Slight.getValue() + "");
+            CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+
+        }
     }
 
 
