@@ -26,12 +26,15 @@ public class MapperRoom extends JFrame implements ActionListener {
     ArrayList<String> result = new ArrayList<>();
     JMenu jMenu;
     GoBackMenu goBackMenu;
+    int width;
+    int height;
     public MapperRoom(String nameRoom){
 
         this.nameRoom = nameRoom;
         setTitle(nameRoom);
         setVisible(true);
-        setSize(400,300);
+        getSizeBis();
+        setSize(width,height);
         getEquipement();
         getSensor();
         setLayout(null);
@@ -151,7 +154,17 @@ public class MapperRoom extends JFrame implements ActionListener {
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
     }
-
+    public void getSizeBis(){
+        logger.info("begin getSize");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("size");
+        stringArrayList.add(nameRoom);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.result = ccSocketTCP2.result;
+        width = Integer.parseInt(result.get(0))*10;
+        height = Integer.parseInt(result.get(1))*15;
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
 

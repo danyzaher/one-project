@@ -224,4 +224,18 @@ public class ConnectionCrud {
         }
         return result;
     }
+    public String getSizeRoom(String roomName) throws SQLException{
+        logger.info("in getSizeRoom");
+        String sql = "select width, height from room where name='"+roomName+"';";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("width")+ "\n";
+            result += rs.getArray("height") + "\n";
+
+        }
+        return result;
+    }
 }
