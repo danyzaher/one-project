@@ -11,7 +11,6 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class MapperRoom extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("MapperSalle");
@@ -25,7 +24,10 @@ public class MapperRoom extends JFrame implements ActionListener {
     ArrayList<Sensor> sensorArrayList = new ArrayList<>();
     ArrayList<Place> placeArrayList = new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
+    JMenu jMenu;
+    GoBackMenu goBackMenu;
     public MapperRoom(String nameRoom){
+
         this.nameRoom = nameRoom;
         setTitle(nameRoom);
         setVisible(true);
@@ -33,7 +35,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         getEquipement();
         getSensor();
         setLayout(null);
-        JMenu jMenu = new JMenu("Menu");
+        jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
         e1 = new JMenuItem("Liste des équipement à ajouter");
@@ -61,7 +63,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             String nom = result.get(k+1);
             int position_x = Integer.parseInt(result.get(k+2));
             int position_y = Integer.parseInt(result.get(k+3));
-            Equipement equipement = new Equipement(nom,position_x,position_y,id, nameRoom);
+            Equipement equipement = new Equipement(nom,position_x,position_y,id, nameRoom,this);
             listEquipementDansLaSalle.add(equipement);
         }
         for(int j=0;j<listEquipementDansLaSalle.size();j++){
@@ -91,7 +93,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             String nom = result.get(k+1);
             int position_x = Integer.parseInt(result.get(k+2));
             int position_y = Integer.parseInt(result.get(k+3));
-            Sensor sensor = new Sensor(nom,position_x,position_y,id, nameRoom);
+            Sensor sensor = new Sensor(nom,position_x,position_y,id, nameRoom,this);
             sensorArrayList.add(sensor);
         }
         for(int j=0;j<sensorArrayList.size();j++){
@@ -101,9 +103,12 @@ public class MapperRoom extends JFrame implements ActionListener {
             }else{sensorArrayList.get(j).setBackground(Color.PINK);}
         }
     }
-
+    public void newGoBack(JFrame j){
+        goBackMenu = new GoBackMenu(this,j);
+        jMenu.add(goBackMenu);
+    }
     public static void main(String[] args){
-        new MapperRoom("salle numéro 3");
+        new MapperRoom("A122");
     }
     public void getEmplacement(String type, boolean b){
         logger.info("begin getEmplacement");
@@ -144,7 +149,6 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add(p.id+"");
         stringArrayList.add(type);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
-        this.setVisible(false);
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
     }
 
@@ -152,9 +156,11 @@ public class MapperRoom extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()==e1){
-        WindowListEquipement windowListEquipement = new WindowListEquipement(this);}
+        WindowListEquipement windowListEquipement = new WindowListEquipement(this);
+        windowListEquipement.newGoBack(this);}
         if(e.getSource()==e2){
             WindowListSensor windowListSensor = new WindowListSensor(this);
+            windowListSensor.newGoBack(this);
         }
         if (e.getSource()==electrochroma){
             ElectroChromaAuto electroChromaAuto = new ElectroChromaAuto(nameRoom);

@@ -1,5 +1,6 @@
 package jframe.maxime.window;
 
+import jframe.maxime.button.GoBackButton;
 import jframe.maxime.button.Sensor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +17,9 @@ public class WindowSensor extends JFrame implements ActionListener {
     Sensor sensor;
     JButton delete;
     JButton move;
+    GoBackButton goBackButton;
     public WindowSensor(Sensor sensor){
+
         this.sensor = sensor;
         setTitle(sensor.name);
         setVisible(true);
@@ -39,6 +42,10 @@ public class WindowSensor extends JFrame implements ActionListener {
         stringArrayList.add("sensor");
         stringArrayList.add(sensor.id+"");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+    }
+    public void newGoBack(JFrame j){
+        goBackButton = new GoBackButton(this,j);
+        add(goBackButton);
     }
     @Override
     public void actionPerformed(ActionEvent e) {

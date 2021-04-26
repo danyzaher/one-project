@@ -74,5 +74,6 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     public void actionPerformed(ActionEvent e) {
         String s = l2.getText();
         HPageCompany hPageCompany = new HPageCompany(s);
+        hPageCompany.newGoBack(this);
     }
 }

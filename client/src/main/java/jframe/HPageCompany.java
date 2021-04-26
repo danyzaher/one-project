@@ -1,5 +1,6 @@
 package jframe;
 
+import jframe.maxime.button.GoBackMenu;
 import jframe.maxime.window.MapperRoom;
 import jframe.yassir.Badge;
 import jframe.danyter.Search;
@@ -19,12 +20,12 @@ public class HPageCompany extends JFrame implements ActionListener {
     String title;
     JMenu roomLocation = new JMenu("Salles à la location");
     JMenu jMenu = new JMenu("Menu");
+    GoBackMenu goBackMenu;
     JMenuItem badge = new JMenuItem("Badge");
     JMenuItem location = new JMenuItem("Effectuer une nouvelle location");
     JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température général");
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
-
     public HPageCompany(String s){
         logger.info("begin HPageComany "+s);
         title = s;
@@ -151,7 +152,10 @@ public class HPageCompany extends JFrame implements ActionListener {
             }
         }return false;
     }
-
+    public void newGoBack(JFrame j){
+        goBackMenu = new GoBackMenu(this,j);
+        jMenu.add(goBackMenu);
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         for(int k=0; k<jMenus.size();k++){
@@ -159,6 +163,7 @@ public class HPageCompany extends JFrame implements ActionListener {
                 for(int j=0;j<jMenus.get(k).jf.get(i).jr.size();j++){
                     if(e.getSource()==jMenus.get(k).jf.get(i).jr.get(j)){
                         MapperRoom mapperRoom = new MapperRoom(jMenus.get(k).jf.get(i).jr.get(j).getText());
+                        mapperRoom.newGoBack(this);
                     }
                 }
             }
@@ -174,4 +179,6 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         this.setVisible(false);
     }
+
+
 }

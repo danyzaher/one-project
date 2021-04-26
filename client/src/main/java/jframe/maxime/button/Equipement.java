@@ -1,5 +1,6 @@
 package jframe.maxime.button;
 
+import jframe.maxime.window.MapperRoom;
 import jframe.maxime.window.WindowEquipement;
 import socket.CCSocketTCPbis;
 
@@ -16,7 +17,9 @@ public class Equipement extends JButton implements ActionListener {
     public int id;
     ArrayList<String> result;
     public String roomName;
-    public Equipement(String name, int x,int y,int id,String roomName){
+    MapperRoom mapperRoom;
+    public Equipement(String name, int x, int y, int id, String roomName, MapperRoom m){
+        this.mapperRoom=m;
         this.roomName = roomName;
         this.id=id;
         this.name = name;
@@ -38,5 +41,6 @@ public class Equipement extends JButton implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         WindowEquipement windowEquipement =new WindowEquipement(this);
+        windowEquipement.newGoBack(mapperRoom);
     }
 }

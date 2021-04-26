@@ -1,5 +1,7 @@
 package jframe.maxime.window;
 
+import jframe.maxime.button.GoBackButton;
+import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -20,7 +22,9 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
     JComboBox combobox;
     ArrayList<String> s1 = new ArrayList<>() ;
     ArrayList<String> result = new ArrayList<>();
+    GoBackButton goBackButton;
     public WindowListSensor(MapperRoom mapperRoom){
+
         this.mapperRoom = mapperRoom;
         setTitle("liste des capteurs disponible pour la salle " + mapperRoom.nameRoom);
         setVisible(true);
@@ -58,12 +62,16 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         logger.info("s1= "+s1.toString());
 
     }
-
+    public void newGoBack(JFrame j){
+        goBackButton = new GoBackButton(this,j);
+        add(goBackButton);
+    }
 
     @Override
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==jButton){
-            mapperRoom.getEmplacement((String) combobox.getSelectedItem(),false);
+            MapperRoom mapperRoom2 = new MapperRoom(mapperRoom.nameRoom);
+            mapperRoom2.getEmplacement((String) combobox.getSelectedItem(),false);
         }
     }
 

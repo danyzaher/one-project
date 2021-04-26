@@ -3,6 +3,8 @@ package jframe.maxime.window;
 import jframe.julien.ElectroChromaManuHigh;
 import jframe.maxime.button.Equipement;
 import jframe.julien.ElectroChromaManuOpa;
+import jframe.maxime.button.GoBackButton;
+import jframe.maxime.button.GoBackMenu;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +21,7 @@ public class WindowEquipement extends JFrame implements ActionListener {
     JButton delete;
     JButton move;
     JButton information;
+    GoBackButton goBackButton;
     public WindowEquipement(Equipement equipement){
         this.equipement = equipement;
         setTitle(equipement.name);
@@ -38,6 +41,10 @@ public class WindowEquipement extends JFrame implements ActionListener {
         add(information);
         information.addActionListener(this);}
 
+    }
+    public void newGoBack(JFrame j){
+        goBackButton = new GoBackButton(this,j);
+        add(goBackButton);
     }
     public void delete(){
         logger.info("begin getEquipement");

@@ -1,5 +1,6 @@
 package jframe.maxime.button;
 
+import jframe.maxime.window.MapperRoom;
 import jframe.maxime.window.WindowSensor;
 import socket.CCSocketTCPbis;
 
@@ -19,7 +20,9 @@ public class Sensor extends JButton implements ActionListener, Border {
     ArrayList<String> result;
     private int r = 15;
      public String roomName;
-    public Sensor(String name,int x,int y,int id,String roomName){
+     MapperRoom mapperRoom;
+    public Sensor(String name,int x,int y,int id,String roomName, MapperRoom mapperRoom){
+        this.mapperRoom=mapperRoom;
         this.name = name;
         this.roomName = roomName;
         this.id=id;
@@ -54,5 +57,6 @@ public class Sensor extends JButton implements ActionListener, Border {
     @Override
     public void actionPerformed(ActionEvent e) {
         WindowSensor windowSensor = new WindowSensor(this);
+        windowSensor.newGoBack(mapperRoom);
     }
 }
