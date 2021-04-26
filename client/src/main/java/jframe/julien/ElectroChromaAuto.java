@@ -24,6 +24,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     JLabel ATemp;
     JLabel ALight;
 
+
     /*** BUTTON ***/
 
     JButton validation;

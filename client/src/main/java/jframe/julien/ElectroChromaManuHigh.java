@@ -25,6 +25,16 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     JSlider storehigh; // --> In progress
     JLabel Astorevalue; // --> In progress
 
+    /** TEMPERATURES AND LIGHT VALUES **/
+    int temperatureext = 0;
+    int temperatureint = 1;
+    int lightint = 500;
+
+    JLabel Atempext;
+    JLabel Atempint;
+    JLabel Alightint;
+
+    /** BUTTON **/
     JButton validation;
 
     public ElectroChromaManuHigh(String id){
@@ -51,6 +61,12 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         storehigh.setPaintTicks(true);
         Astorevalue = new JLabel("Hauteur du store souhaitée : "+ strhigh);
 
+        /** TEMPERATURES AND LIGHT **/
+
+        Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
+        //Atempint = new JLabel("")
+
+
         /** FRAME ADD **/
 
         add(Astorevalue);
@@ -65,7 +81,6 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-
 
         if (e.getSource().equals(validation)) {
 
