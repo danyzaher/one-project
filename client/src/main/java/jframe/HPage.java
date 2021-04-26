@@ -9,9 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
+import java.util.LinkedList;
 
 public class HPage extends JFrame implements ItemListener, ActionListener{
-
     JComboBox combobox;
     JLabel l1, l2;
     ArrayList<String> s1 = new ArrayList<>();
