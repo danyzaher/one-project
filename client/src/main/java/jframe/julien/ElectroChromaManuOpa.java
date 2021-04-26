@@ -30,9 +30,15 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     JSlider opac; //--> Check
     JLabel Aopacvalue; //-->Check
 
-    JLabel ATempExt;
-    JLabel ATempInt;
-    JLabel ALightInt;
+    /** TEMPERATURES AND LIGHT VALUES **/
+
+    int temperatureext = 0;
+    int temperatureint = 1;
+    int lightint = 500;
+
+    JLabel Atempext;
+    JLabel Atempint;
+    JLabel Alightint;
 
     JButton validation;
 
@@ -61,9 +67,20 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         opac.setPaintTicks(true);
         Aopacvalue = new JLabel("Opacité souhaitée dans les salles : " + opacity);
 
+        /** TEMPERATURES AND LIGHT **/
+
+        Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
+        Atempint = new JLabel("Temperature interieur :" + temperatureint + " °C");
+        Alightint = new JLabel("Luminosité intérieur de la pièce:"+ lightint + " lux");
 
         /** FRAME ADD **/
 
+        //General information
+        add(Atempext);
+        add(Atempint);
+        add(Alightint);
+
+        //Modification part
         add(Aopacvalue);
         add(opac);
         add(validation);
