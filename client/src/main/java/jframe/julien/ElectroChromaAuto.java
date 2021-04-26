@@ -50,7 +50,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         Stemp.setPaintTicks(true);
 
 
-        ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature);
+        ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + "°C");
         add(ATemp);
         add(Stemp);
         eventTemp et = new eventTemp();
@@ -59,14 +59,15 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         //Light part
 
         Slight = new JSlider(JSlider.HORIZONTAL, 0, 5000, light);
-        Slight.setMajorTickSpacing(10);
+        Slight.setMajorTickSpacing(100);
         Slight.setPaintTicks(true);
 
 
-        ALight = new JLabel("Eclairage souhaitée dans les salles : " + light);
+        ALight = new JLabel("Eclairage souhaitée dans les salles : " + light + " lux");
         add(ALight);
         add(Slight);
-        eventTemp el = new eventTemp();
+        add(validation);
+        eventLight el = new eventLight();
         Slight.addChangeListener(el);
 
         setVisible(true);
@@ -84,7 +85,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         public void stateChanged(ChangeEvent et) {
 
             int valuetemp = Stemp.getValue();
-            ATemp.setText("Temperature dans les salles souhaitée : " + valuetemp + "° C");
+            ATemp.setText("Temperature dans les salles souhaitée : " + valuetemp + " ° C");
         }
     }
 
