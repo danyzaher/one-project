@@ -23,7 +23,10 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     ArrayList<String> result;
 
     /** TEMPERATURES AND LIGHT INTENSITY VARIABLES **/
-    int tempext;
+
+    int temperatureext;
+    String idtemp;
+    ArrayList<String> tempresult;
     int tempint;
     int lightintensity;
 
@@ -32,7 +35,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
     /** TEMPERATURES AND LIGHT VALUES **/
 
-    int temperatureext = 0;
+
     int temperatureint = 1;
     int lightint = 500;
 
@@ -51,6 +54,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         /** FRAME SETTINGS **/
         this.id = id;
+        this.idtemp = id;
         setSize(400, 400);
         setResizable(false);
         setTitle("Parametres manuels de l'option electrochroma");
@@ -58,7 +62,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         /** METHOD **/
         getOpacityValue(); //Get value of the opacity of the window
-
+        getTempExt();
         /** SLIDER **/
 
         //Opacity
@@ -109,7 +113,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 }
 
     public class eventOpac implements ChangeListener {
-
         @Override
         public void stateChanged(ChangeEvent eo) {
 
@@ -119,7 +122,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     }
 
     public void getOpacityValue(){
-
 
         logger.info("begin getOpacityValue");
         ArrayList<String> stringArrayList = new ArrayList<>();
@@ -133,6 +135,18 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
 
     }
+    public void getTempExt(){
 
+        logger.info("begin getTempExt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("temperatureext");
+        stringArrayList.add(idtemp);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.tempresult = ccSocketTCP2.result;
+        temperatureext = Integer.parseInt(result.get(0));
+        logger.info("temperatureext = " + temperatureext);
+
+    }
 
 }

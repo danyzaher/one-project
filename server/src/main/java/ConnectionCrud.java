@@ -102,6 +102,21 @@ public class ConnectionCrud {
         return result;
 
     }
+    public String getTempExt(String temperatureext) throws SQLException {
+
+        logger.info("in getTempExt");
+
+        String sql ="SELECT value_of FROM MEASURE WHERE id_sensor = 2 ORDER BY - id_measure limit 1";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("value_of");
+        }
+        return result;
+
+    }
     public String getEquipementAvailable(String roomName) throws SQLException{
         logger.info("in getEquipementAvailable");
         String sql = "select distinct equipement.type from compatible inner join equipplace on equipplace.id_equipplace=compatible.id_equipplace inner join equipement on equipement.type= compatible.type_equip where equipplace.id_equipplace not in (Select id_equipplace from be_present) and equipement.id_equipement not in (Select id_equipement from be_present where id_equipement is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";

@@ -89,6 +89,9 @@ class ServerSocketTCP implements Runnable{
 					if(recu.equals("strhigh")){
 						listMessage.add(C.getStoreHighValue(in.readLine()));
 					}
+					if(recu.equals("temperatureext")){
+						listMessage.add(C.getTempExt(in.readLine()));
+					}
 					if(recu.equals("emplacement")){
 						recu = in.readLine();
 						String s = in.readLine();
