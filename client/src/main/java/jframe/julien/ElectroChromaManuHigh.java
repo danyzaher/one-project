@@ -64,11 +64,18 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         /** TEMPERATURES AND LIGHT **/
 
         Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
-        //Atempint = new JLabel("")
+        Atempint = new JLabel("Temperature interieur :" + temperatureint + " °C");
+        Alightint = new JLabel("Luminosité intérieur de la pièce:"+ lightint + " lux");
 
 
         /** FRAME ADD **/
 
+        //General information
+        add(Atempext);
+        add(Atempint);
+        add(Alightint);
+
+        //Modification part
         add(Astorevalue);
         add(storehigh);
         add(validation);
