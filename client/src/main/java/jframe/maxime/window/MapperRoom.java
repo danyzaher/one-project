@@ -153,6 +153,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add(type);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
+        this.setVisible(false);
     }
     public void getSizeBis(){
         logger.info("begin getSize");
