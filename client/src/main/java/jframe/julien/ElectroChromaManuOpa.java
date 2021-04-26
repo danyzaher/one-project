@@ -65,7 +65,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         opac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
         opac.setMajorTickSpacing(1);
         opac.setPaintTicks(true);
-        Aopacvalue = new JLabel("Opacité souhaitée dans les salles : " + opacity);
+        Aopacvalue = new JLabel("Opacité actuelle de la fenetre : " + opacity);
 
         /** TEMPERATURES AND LIGHT **/
 
@@ -114,7 +114,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         public void stateChanged(ChangeEvent eo) {
 
             int valueopacity = opac.getValue();
-            Aopacvalue.setText("Opacité de la fenetre selectionnée souhaité : " + valueopacity);
+            Aopacvalue.setText("Opacité de la fenetre souhaitée : " + valueopacity);
         }
     }
 
