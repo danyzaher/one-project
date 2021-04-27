@@ -100,10 +100,8 @@ public class ConnectionCrud {
             result += rs.getArray("valueof");
         }
         return result;
-
     }
-    public String getTempExt(String temperatureext) throws SQLException {
-
+    public String getTempExt(String s) throws SQLException {
         logger.info("in getTempExt");
 
         String sql ="SELECT value_of FROM MEASURE WHERE id_sensor = 2 ORDER BY - id_measure limit 1";

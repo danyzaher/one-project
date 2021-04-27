@@ -61,7 +61,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         /** METHOD **/
         getOpacityValue(); //Get value of the opacity of the window
-        getTempExt();
+        getTempExt(); //Get value of the temperature ext
         /** SLIDER **/
 
         //Opacity
@@ -140,10 +140,9 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("temperatureext");
-        stringArrayList.add(idtemp);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.tempresult = ccSocketTCP2.result;
-        temperatureext = Integer.parseInt(result.get(0));
+        temperatureext = Integer.parseInt(tempresult.get(0));
         logger.info("temperatureext = " + temperatureext);
 
     }
