@@ -18,19 +18,22 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     int temperature;
     int light;
 
-    /*** SLIDERS ***/
+    /*** COMPONENTS FOR MODIFICATION OF THE TEMPERATURES IN ROOMS ***/
     JSlider Stemp;
-    JSlider Slight;
+    JLabel ATemp;
 
     /*** LABELS ***/
-    JLabel ATemp;
+    JSlider Slight;
     JLabel ALight;
 
+    /** VARIABLES FOR EXTERN TEMPERATURE **/
+    int temperatureext;
+    ArrayList<String> tempresult;
+    JLabel Atempext;
 
     /*** BUTTON ***/
 
     JButton validation;
-
     String companyName;
 
     public ElectroChromaAuto(String companyName) {
@@ -46,12 +49,13 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         validation = new JButton("VALIDER");
         validation.setSize(100, 100);
 
-        //Temperature part
+        Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
+
+        //Temperature modification part
 
         Stemp = new JSlider(JSlider.HORIZONTAL, 0, 30, temperature);
         Stemp.setMajorTickSpacing(1);
         Stemp.setPaintTicks(true);
-
 
         ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + "°C");
         add(ATemp);
@@ -67,6 +71,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
 
         ALight = new JLabel("Eclairage souhaitée dans les salles : " + light + " lux");
+
         add(ALight);
         add(Slight);
         add(validation);
