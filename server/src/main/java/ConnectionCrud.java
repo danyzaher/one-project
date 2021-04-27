@@ -207,6 +207,12 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
+    public void updateStoreHigh(String id, String valuehighstore) throws SQLException {
+        logger.info("in update");
+        String sql = "update equipement set valueof = " + valuehighstore + " where id_equipement =" + id + ";";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
+    }
     public String getEtatSensor(String id) throws SQLException{
         logger.info("in getEtatSensor");
         String sql = "select animated from sensor where id_sensor="+id+";";

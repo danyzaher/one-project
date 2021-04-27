@@ -22,7 +22,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     String id;
     ArrayList<String> result;
 
-    JSlider storehigh; // --> In progress
+    JSlider Sstorehigh; // --> In progress
     JLabel Astorevalue; // --> In progress
 
     /** TEMPERATURES AND LIGHT VALUES **/
@@ -45,6 +45,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         validation.addActionListener(this);
 
         /** FRAME SETTINGS **/
+
         this.id = id;
         setSize(400, 400);
         setResizable(false);
@@ -56,9 +57,9 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
 
         /** SLIDER **/
 
-        storehigh = new JSlider(JSlider.HORIZONTAL, 0, 5,strhigh);
-        storehigh.setMajorTickSpacing(1);
-        storehigh.setPaintTicks(true);
+        Sstorehigh = new JSlider(JSlider.HORIZONTAL, 0, 5,strhigh);
+        Sstorehigh.setMajorTickSpacing(1);
+        Sstorehigh.setPaintTicks(true);
         Astorevalue = new JLabel("Hauteur du store souhaitée : "+ strhigh);
 
         /** TEMPERATURES AND LIGHT **/
@@ -77,11 +78,11 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
 
         //Modification part
         add(Astorevalue);
-        add(storehigh);
+        add(Sstorehigh);
         add(validation);
 
         eventStore es = new eventStore();
-        storehigh.addChangeListener(es);
+        Sstorehigh.addChangeListener(es);
         setVisible(true);
 
     }
@@ -96,17 +97,16 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
             stringArrayList.add("update");
             stringArrayList.add("strhigh");
             stringArrayList.add(id);
-            stringArrayList.add(storehigh.getValue() + "");
+            stringArrayList.add(Sstorehigh.getValue() + "");
             CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         }
     }
-
     public class eventStore implements ChangeListener {
 
         @Override
         public void stateChanged(ChangeEvent es) {
 
-            int valuehighstore = storehigh.getValue();
+            int valuehighstore = Sstorehigh.getValue();
             Astorevalue.setText("Hauteur du store selectionné souhaitée : " + valuehighstore);
         }
     }

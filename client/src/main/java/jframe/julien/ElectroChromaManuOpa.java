@@ -54,7 +54,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         /** FRAME SETTINGS **/
         this.id = id;
-        this.idtemp = id;
         setSize(400, 400);
         setResizable(false);
         setTitle("Parametres manuels de l'option electrochroma");
@@ -101,13 +100,13 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         if(e.getSource().equals(validation)) {
 
-        logger.info("begin validation");
-        ArrayList<String> stringArrayList = new ArrayList<>();
-        stringArrayList.add("update");
-        stringArrayList.add("opacity");
-        stringArrayList.add(id);
-        stringArrayList.add(opac.getValue() + "");
-        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+            logger.info("begin validation");
+            ArrayList<String> stringArrayList = new ArrayList<>();
+            stringArrayList.add("update");
+            stringArrayList.add("opacity");
+            stringArrayList.add(id);
+            stringArrayList.add(opac.getValue() + "");
+            CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
 
     }
 }

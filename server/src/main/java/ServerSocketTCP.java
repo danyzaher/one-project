@@ -159,9 +159,14 @@ class ServerSocketTCP implements Runnable{
 	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
 		logger.info("update");
 		String recu = in.readLine();
+
 		if(recu.equals("opacity")){
 			String s = in.readLine(); //id
 			C.updateOpacity(s,in.readLine());//in.readLine() --> opacity by the connection crud
+		}
+		if(recu.equals("strhigh")){
+			String s = in.readLine(); //id
+			C.updateStoreHigh(s,in.readLine());//in.readLine() --> strhigh by the connection crud
 		}
 
 	}
