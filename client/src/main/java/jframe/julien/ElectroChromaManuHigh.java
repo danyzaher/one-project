@@ -26,7 +26,11 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     JLabel Astorevalue; // --> In progress
 
     /** TEMPERATURES AND LIGHT VALUES **/
-    int temperatureext = 0;
+    //Ext Temp
+    int temperatureext;
+    ArrayList<String> tempresult;
+
+    //Int Temp
     int temperatureint = 1;
     int lightint = 500;
 
@@ -54,7 +58,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
 
         /** METHOD **/
         getStoreHighValue(); //Get value of the store high
-
+        getTempExt();
         /** SLIDER **/
 
         Sstorehigh = new JSlider(JSlider.HORIZONTAL, 0, 5,strhigh);
@@ -121,5 +125,17 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         this.result = ccSocketTCP2.result;
         strhigh = Integer.parseInt(result.get(0));
         logger.info("id = " + strhigh);
+    }
+    public void getTempExt(){
+
+        logger.info("begin getTempExt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("temperatureext");
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.tempresult = ccSocketTCP2.result;
+        temperatureext = Integer.parseInt(tempresult.get(0));
+        logger.info("temperatureext = " + temperatureext);
+
     }
 }
