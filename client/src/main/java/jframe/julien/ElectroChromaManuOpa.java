@@ -110,7 +110,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
     }
 }
-
     public class eventOpac implements ChangeListener {
         @Override
         public void stateChanged(ChangeEvent eo) {
@@ -131,7 +130,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         this.result = ccSocketTCP2.result;
         opacity = Integer.parseInt(result.get(0));
         logger.info("id = " + opacity);
-
 
     }
     public void getTempExt(){
