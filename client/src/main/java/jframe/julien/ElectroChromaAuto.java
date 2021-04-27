@@ -22,7 +22,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     JSlider Stemp;
     JLabel ATemp;
 
-    /*** LABELS ***/
+    /*** COMPONENTS FOR MODIFICATION OF THE LIGHTS IN ROOMS ***/
     JSlider Slight;
     JLabel ALight;
 
@@ -32,8 +32,9 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     JLabel Atempext;
 
     /*** BUTTON ***/
-
     JButton validation;
+
+    //Others
     String companyName;
 
     public ElectroChromaAuto(String companyName) {
@@ -58,23 +59,37 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         Stemp.setPaintTicks(true);
 
         ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + "°C");
-        add(ATemp);
-        add(Stemp);
+
         eventTemp et = new eventTemp();
         Stemp.addChangeListener(et);
 
         //Light part
 
         Slight = new JSlider(JSlider.HORIZONTAL, 0, 5000, light);
-        Slight.setMajorTickSpacing(100);
+        Slight.setMajorTickSpacing(500);
         Slight.setPaintTicks(true);
 
+        /** METHODS **/
+        getTempExt();
 
+        /** TEMPERATURES AND LIGHT **/
+
+        Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
         ALight = new JLabel("Eclairage souhaitée dans les salles : " + light + " lux");
 
+        /** FRAME ADD **/
+
+        //General information
+        add(Atempext);
+
+        //Modification part
+
+        add(ATemp);
+        add(Stemp);
         add(ALight);
         add(Slight);
         add(validation);
+
         eventLight el = new eventLight();
         Slight.addChangeListener(el);
 
@@ -119,5 +134,16 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             ALight.setText("Eclairage dans les salles souhaité : " + valuelight + " lux");
         }
     }
+    public void getTempExt(){
 
+        logger.info("begin getTempExt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("temperatureext");
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.tempresult = ccSocketTCP2.result;
+        temperatureext = Integer.parseInt(tempresult.get(0));
+        logger.info("temperatureext = " + temperatureext);
+
+    }
 }
