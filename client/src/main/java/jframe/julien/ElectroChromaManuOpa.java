@@ -21,9 +21,10 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     /** OPACITY VARIABLES **/
     int opacity;
     String id; //ID de la fenetre qu'on met en local
+    String roomName;
     ArrayList<String> result;
 
-    String roomName;
+
 
     /** TEMPERATURES AND LIGHT INTENSITY VARIABLES **/
 
@@ -53,13 +54,16 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
 
     public ElectroChromaManuOpa(Equipement equipement) {
-        this.roomName = equipement.roomName; //recupération nom de la salle
+
+        this.roomName = equipement.roomName; //RECUPERATION NAME ROOM
+        this.id = equipement.id+""; //RECUPERATION ID EQUIPMENT
+
         /** VALIDATION BUTTON **/
         validation = new JButton("VALIDER");
         validation.addActionListener(this);
 
         /** FRAME SETTINGS **/
-        this.id = equipement.id+""; //recuperation id equipement
+
         setSize(400, 400);
         setResizable(false);
         setTitle("Parametres manuels de l'option electrochroma");
@@ -70,6 +74,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         getTempExt(); //Get value of the temperature ext
         getTempInt(); //Get value of the temperature int
         getLightInt(); // Get value of the light int
+
         /** SLIDER **/
 
         //Opacity
@@ -78,13 +83,13 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         opac.setPaintTicks(true);
         Aopacvalue = new JLabel("Opacité actuelle de la fenetre : " + opacity);
 
-        /** TEMPERATURES AND LIGHT **/
+        /** TEMPERATURES AND LIGHT LABELS **/
 
         Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
         Atempint = new JLabel("Temperature interieur :" + temperatureint + " °C");
         Alightint = new JLabel("Luminosité intérieur de la pièce:"+ lightint + " lux");
 
-        /** FRAME ADD **/
+        /** ADDING PART **/
 
         //General information
         add(Atempext);
