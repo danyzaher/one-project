@@ -1,6 +1,9 @@
 package jframe.julien;
 
 import jframe.HPageCompany;
+import jframe.maxime.button.Equipement;
+import jframe.maxime.button.GoBackButton;
+import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -20,20 +23,27 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     /** HIGH STORE VARIABLES **/
     int strhigh;
     String id;
+    String roomName;
     ArrayList<String> result;
 
-    JSlider Sstorehigh; // --> In progress
-    JLabel Astorevalue; // --> In progress
+    JSlider Sstorehigh;
+    JLabel Astorevalue;
 
     /** TEMPERATURES AND LIGHT VALUES **/
-    //Ext Temp
+
+    //TEMP EXTERN
     int temperatureext;
-    ArrayList<String> tempresult;
+    ArrayList<String> tempextresult;
 
-    //Int Temp
-    int temperatureint = 1;
-    int lightint = 500;
+    //TEMP INTERN
+    String temperatureint;
+    ArrayList<String> tempintresult;
 
+    //LIGHT INTERN
+    String lightintensity;
+    ArrayList<String> lightint;
+
+    //LABELS
     JLabel Atempext;
     JLabel Atempint;
     JLabel Alightint;
@@ -41,7 +51,12 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     /** BUTTON **/
     JButton validation;
 
-    public ElectroChromaManuHigh(String id){
+    GoBackButton goBackButton;
+
+    public ElectroChromaManuHigh(Equipement equipement){
+
+        this.roomName = equipement.roomName; //RECUPERATION NAME ROOM
+        this.id = equipement.id+""; //RECUPERATION ID EQUIPMENT
 
         /** VALIDATION BUTTON **/
 
@@ -50,15 +65,18 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
 
         /** FRAME SETTINGS **/
 
-        this.id = id;
         setSize(400, 400);
         setResizable(false);
         setTitle("Parametres manuels de l'option electrochroma");
         setLayout(new FlowLayout());
 
         /** METHOD **/
+
         getStoreHighValue(); //Get value of the store high
-        getTempExt();
+        getTempExt(); //Get value of the temperature ext
+        getTempInt(); //Get value of the temperature int
+        getLightInt(); // Get value of the light int
+
         /** SLIDER **/
 
         Sstorehigh = new JSlider(JSlider.HORIZONTAL, 0, 5,strhigh);
@@ -72,8 +90,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         Atempint = new JLabel("Temperature interieur :" + temperatureint + " °C");
         Alightint = new JLabel("Luminosité intérieur de la pièce:"+ lightint + " lux");
 
-
-        /** FRAME ADD **/
+        /** ADDING PART **/
 
         //General information
         add(Atempext);
@@ -114,6 +131,8 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
             Astorevalue.setText("Hauteur du store selectionné souhaitée : " + valuehighstore);
         }
     }
+
+    //OBTAIN VALUES
     public void getStoreHighValue(){
 
         logger.info("begin getStoreHighValue");
@@ -133,9 +152,40 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         stringArrayList.add("show");
         stringArrayList.add("temperatureext");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
-        this.tempresult = ccSocketTCP2.result;
-        temperatureext = Integer.parseInt(tempresult.get(0));
+        this.tempextresult = ccSocketTCP2.result;
+        temperatureext = Integer.parseInt(tempextresult.get(0));
         logger.info("temperatureext = " + temperatureext);
 
     }
+    public void getTempInt(){
+
+        logger.info("begin getTempInt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("temperatureint");
+        stringArrayList.add(roomName);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.tempintresult = ccSocketTCP2.result;
+        temperatureint = tempintresult.get(0);
+        logger.info("temperatureint = " + temperatureint);
+
+    }
+    public void getLightInt(){
+
+        logger.info("begin getLightInt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("lightint");
+        stringArrayList.add(roomName);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.lightint= ccSocketTCP2.result;
+        lightintensity = lightint.get(0);
+        logger.info("lightint = " + lightintensity);
+    }
+    public void newGoBack(JFrame j){
+        goBackButton = new GoBackButton(this,j);
+        add(goBackButton);
+    }
+
+
 }

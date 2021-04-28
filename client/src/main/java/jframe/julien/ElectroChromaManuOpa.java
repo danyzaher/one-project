@@ -19,12 +19,11 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
 
     /** OPACITY VARIABLES **/
+
     int opacity;
     String id; //ID de la fenetre qu'on met en local
     String roomName;
     ArrayList<String> result;
-
-
 
     /** TEMPERATURES AND LIGHT INTENSITY VARIABLES **/
 
@@ -41,7 +40,8 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     ArrayList<String> lightint;
 
     //SLIDERS AND LABELS
-    JSlider opac; //--> Check
+
+    JSlider Sopac; //--> Check
     JLabel Aopacvalue; //-->Check
 
     /** TEMPERATURES AND LIGHT VALUES **/
@@ -51,7 +51,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     JLabel Alightint;
 
     JButton validation;
-
 
     public ElectroChromaManuOpa(Equipement equipement) {
 
@@ -70,6 +69,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         setLayout(new FlowLayout());
 
         /** METHOD **/
+
         getOpacityValue(); //Get value of the opacity of the window
         getTempExt(); //Get value of the temperature ext
         getTempInt(); //Get value of the temperature int
@@ -78,9 +78,10 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         /** SLIDER **/
 
         //Opacity
-        opac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
-        opac.setMajorTickSpacing(1);
-        opac.setPaintTicks(true);
+
+        Sopac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
+        Sopac.setMajorTickSpacing(1);
+        Sopac.setPaintTicks(true);
         Aopacvalue = new JLabel("Opacité actuelle de la fenetre : " + opacity);
 
         /** TEMPERATURES AND LIGHT LABELS **/
@@ -98,12 +99,11 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         //Modification part
         add(Aopacvalue);
-        add(opac);
+        add(Sopac);
         add(validation);
 
         eventOpac eo = new eventOpac();
-        opac.addChangeListener(eo);
-
+        Sopac.addChangeListener(eo);
         setVisible(true);
 
     }
@@ -118,7 +118,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
             stringArrayList.add("update");
             stringArrayList.add("opacity");
             stringArrayList.add(id);
-            stringArrayList.add(opac.getValue() + "");
+            stringArrayList.add(Sopac.getValue() + "");
             CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
 
     }
@@ -127,11 +127,12 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         @Override
         public void stateChanged(ChangeEvent eo) {
 
-            int valueopacity = opac.getValue();
+            int valueopacity = Sopac.getValue();
             Aopacvalue.setText("Opacité de la fenetre souhaitée : " + valueopacity);
         }
     }
 
+    //OBTAIN VALUES
     public void getOpacityValue(){
 
         logger.info("begin getOpacityValue");
