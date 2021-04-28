@@ -24,7 +24,7 @@ public class WindowEquipement extends JFrame implements ActionListener {
     GoBackButton goBackButton;
     public WindowEquipement(Equipement equipement){
         this.equipement = equipement;
-        setTitle(equipement.name);
+        setTitle(equipement.name+" "+equipement.id);
         setVisible(true);
         setSize(500,600);
         setLayout(new FlowLayout());

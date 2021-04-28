@@ -5,7 +5,6 @@ import jframe.julien.ElectroChromaAuto;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -13,12 +12,13 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MapperRoom extends JFrame implements ActionListener {
-    public static Logger logger = LoggerFactory.getLogger("MapperSalle");
+    public static Logger logger = LoggerFactory.getLogger("MapperRoom");
     String type;
     boolean sensorOrequipement;
     String nameRoom;
     JMenuItem e1;
     JMenuItem e2;
+    JPanel center = new JPanel();
     JMenuItem electrochroma;
     ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
     ArrayList<Sensor> sensorArrayList = new ArrayList<>();
@@ -28,19 +28,20 @@ public class MapperRoom extends JFrame implements ActionListener {
     GoBackMenu goBackMenu;
     int width;
     int height;
+    Legende legende = new Legende();
     public MapperRoom(String nameRoom){
-
         this.nameRoom = nameRoom;
         setTitle(nameRoom);
         setVisible(true);
         getSizeBis();
-        setSize(width,height);
+        setSize(800,800);
         getEquipement();
         getSensor();
         setLayout(null);
         jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
+        jMenuBar.add(legende);
         e1 = new JMenuItem("Liste des équipement à ajouter");
         e1.addActionListener(this);
         e2 = new JMenuItem("Liste des capteurs à ajouter");
@@ -100,7 +101,8 @@ public class MapperRoom extends JFrame implements ActionListener {
             sensorArrayList.add(sensor);
         }
         for(int j=0;j<sensorArrayList.size();j++){
-            add(sensorArrayList.get(j));
+            Component add = center.add(sensorArrayList.get(j));
+            add(add);
             if(sensorArrayList.get(j).etat){
                 sensorArrayList.get(j).setBackground(Color.CYAN);
             }else{sensorArrayList.get(j).setBackground(Color.PINK);}
@@ -136,7 +138,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             placeArrayList.add(place);
         }
         for(int k=0;k<placeArrayList.size();k++){
-            add(placeArrayList.get(k));
+            center.add(placeArrayList.get(k));
             placeArrayList.get(k).setBounds(placeArrayList.get(k).x,placeArrayList.get(k).y,10,10);
             placeArrayList.get(k).setBackground(Color.ORANGE);
         }

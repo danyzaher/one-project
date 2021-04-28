@@ -28,7 +28,7 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
         setTitle("liste des équipement disponible pour la salle " + mapperRoom.nameRoom);
         setVisible(true);
         setLayout(new FlowLayout());
-        setSize(1000,1000);
+        setSize(700,700);
         getListEquipementAvailable();
         String s2[] = s1.toArray(new String[0]);
         combobox = new JComboBox(s2);

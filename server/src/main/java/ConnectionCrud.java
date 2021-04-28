@@ -4,19 +4,15 @@ import org.slf4j.LoggerFactory;
 import java.sql.*;
 
 public class ConnectionCrud {
-
     private Connection c;
     private final static Logger logger = LoggerFactory.getLogger(ConnectionCrud.class.getName());
-
     public ConnectionCrud() {}
-
     public void setC(Connection c) {
         this.c = c;
     }
     public Connection getC() {
         return c;
     }
-
     public void addElement(String Table, String column, Object value) throws SQLException {
         String sql = "INSERT INTO \"" + Table + "\"(" + column + ") " + "VALUES ('" + value + "');";
         Statement smt = c.createStatement();

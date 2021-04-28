@@ -29,7 +29,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         setTitle("liste des capteurs disponible pour la salle " + mapperRoom.nameRoom);
         setVisible(true);
         setLayout(new FlowLayout());
-        setSize(1000,1000);
+        setSize(700,700);
         getListSensorAvailable();
         String s2[] = s1.toArray(new String[0]);
         combobox = new JComboBox(s2);

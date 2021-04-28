@@ -21,7 +21,7 @@ public class WindowSensor extends JFrame implements ActionListener {
     public WindowSensor(Sensor sensor){
 
         this.sensor = sensor;
-        setTitle(sensor.name);
+        setTitle(sensor.name+" "+sensor.id);
         setVisible(true);
         setSize(500,600);
         setLayout(new FlowLayout());
