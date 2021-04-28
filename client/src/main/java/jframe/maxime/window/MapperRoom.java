@@ -34,7 +34,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         setTitle(nameRoom);
         setVisible(true);
         getSizeBis();
-        setSize(800,800);
+        setSize(width,height);
         getEquipement();
         getSensor();
         setLayout(null);
@@ -101,8 +101,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             sensorArrayList.add(sensor);
         }
         for(int j=0;j<sensorArrayList.size();j++){
-            Component add = center.add(sensorArrayList.get(j));
-            add(add);
+            add(sensorArrayList.get(j));
             if(sensorArrayList.get(j).etat){
                 sensorArrayList.get(j).setBackground(Color.CYAN);
             }else{sensorArrayList.get(j).setBackground(Color.PINK);}
@@ -138,7 +137,7 @@ public class MapperRoom extends JFrame implements ActionListener {
             placeArrayList.add(place);
         }
         for(int k=0;k<placeArrayList.size();k++){
-            center.add(placeArrayList.get(k));
+            add(placeArrayList.get(k));
             placeArrayList.get(k).setBounds(placeArrayList.get(k).x,placeArrayList.get(k).y,10,10);
             placeArrayList.get(k).setBackground(Color.ORANGE);
         }
