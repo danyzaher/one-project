@@ -42,8 +42,8 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
     //SLIDERS AND LABELS
 
-    JSlider Sopac; //--> Check
-    JLabel Aopacvalue; //-->Check
+    JSlider Sopac;
+    JLabel Aopacvalue;
 
     /** TEMPERATURES AND LIGHT VALUES **/
 
@@ -52,6 +52,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     JLabel Alightint;
 
     /** BUTTON **/
+
     GoBackButton goBackButton;
     JButton validation;
 
@@ -89,9 +90,9 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
         /** TEMPERATURES AND LIGHT LABELS **/
 
-        Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
-        Atempint = new JLabel("Temperature interieur :" + temperatureint + " °C");
-        Alightint = new JLabel("Luminosité intérieur de la pièce:"+ lightint + " lux");
+        Atempext = new JLabel("Temperature exterieur : " + temperatureext + " °C");
+        Atempint = new JLabel("Temperature interieur : " + temperatureint + " °C");
+        Alightint = new JLabel("Luminosité intérieur de la pièce : "+ lightintensity + " lux");
 
         /** ADDING PART **/
 
