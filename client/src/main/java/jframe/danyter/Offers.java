@@ -11,8 +11,8 @@ public class Offers extends JFrame implements ActionListener {
     JPanel pan = new JPanel();
     JLabel title = new JLabel("Choisissez une offre");
     int nboffers;
-    ArrayList<OneOffer> offers;
-    public Offers(ArrayList<OneOffer> list) {
+    ArrayList<jframe.danyter.OneOffer> offers;
+    public Offers(ArrayList<jframe.danyter.OneOffer> list) {
         offers = list;
         setTitle("Offres");
         setSize(400,300);
@@ -21,7 +21,7 @@ public class Offers extends JFrame implements ActionListener {
         nboffers = 5;
         pan.setLayout(new BoxLayout(pan,BoxLayout.PAGE_AXIS));
         pan.add(title);
-        for (OneOffer offer : offers) {
+        for (jframe.danyter.OneOffer offer : offers) {
             pan.add(offer);
         }
 
@@ -29,6 +29,11 @@ public class Offers extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-
+        for (int i = 0; i < offers.size(); i++) {
+            if (actionEvent.getSource() == offers.get(i).getButton()) {
+                OfferSelected of = new OfferSelected(offers.get(i));
+                break;
+            }
+        }
     }
 }

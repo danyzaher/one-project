@@ -11,5 +11,7 @@ public class Success extends JFrame {
         setSize(400,300);
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         pan.add(success);
+        pan.setLayout(new BoxLayout(pan,BoxLayout.PAGE_AXIS));
+        this.add(pan);
     }
 }

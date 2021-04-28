@@ -1,10 +1,15 @@
 package jframe.danyter;
 
+import socket.CCSocketTCPbis;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.Stack;
 
 public class Search  extends JFrame implements ActionListener {
     JPanel bigpan = new JPanel();
@@ -69,21 +74,102 @@ public class Search  extends JFrame implements ActionListener {
         bigpan.add(done);
         bigpan.setLayout(new BoxLayout(bigpan,BoxLayout.PAGE_AXIS));
         this.add(bigpan);
+        done.addActionListener(this);
     }
 
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == done) {
-            Offers of = new Offers(this.getOffers());
+            System.out.println("Nombre employés : " + nbpeople.getText());
+            System.out.println("Budget min : " + bmin.getText() + " Budget max : " + bmax.getText());
+            System.out.println("Fenetres electrochromatiques : " + electrofen.isSelected());
+            System.out.println("Soleil important : " + sun.isSelected());
+            System.out.println("Hauteur importante : " + height.isSelected());
+            String command = "getroominb(" + bmin.getText() + "," + bmax.getText() + "," + electrofen.isSelected() + ");";
+            ArrayList<String> commands = new ArrayList<>();
+            ArrayList<String> values;
+            commands.add(command);
+            socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
+            commands.clear();
+            values = cc.result;
+            if (sun.isSelected() && height.isSelected()) {
+                for (String value : values) {
+                    command = "setgradesunheight(" + value + ");";
+                    commands.add(command);
+                    new socket.CCSocketTCPbis(commands);
+                    commands.clear();
+
+                }
+            }
+            if (sun.isSelected() && !height.isSelected()) {
+                for (String value : values) {
+                    command = "setgradesun(" + value + ");";
+                    commands.add(command);
+                    new socket.CCSocketTCPbis(commands);
+                    commands.clear();
+
+                }
+            }
+            if (!sun.isSelected() && height.isSelected()) {
+                for (String value : values) {
+                    command = "setgradeheight(" + value + ");";
+                    commands.add(command);
+                    new socket.CCSocketTCPbis(commands);
+                    commands.clear();
+                }
+            }
+            if (!sun.isSelected() && !height.isSelected()) {
+                for (String value : values) {
+                    command = "setgrade(" + value + ");";
+                    commands.add(command);
+                    new socket.CCSocketTCPbis(commands);
+                    commands.clear();
+
+                }
+            }
+            command = " room_s_number from room  where room_s_number in (select getroominb(" + bmin.getText() + "," + bmax.getText() + ")) order by grade asc;";
+            String command1 = " capacity from room  where room_s_number in (select getroominb(" + bmin.getText() + "," + bmax.getText() + ")) order by grade asc;";
+            commands.add(command);
+            CCSocketTCPbis cc2 = new CCSocketTCPbis(commands);
+            commands.clear();
+            commands.add(command1);
+            CCSocketTCPbis cc3 = new CCSocketTCPbis(commands);
+            Stack<String> idroom = new Stack<>();
+            Stack<String> capacities = new Stack<>();
+            for (int i = 0; i < cc3.result.size(); i++) {
+                idroom.add(cc2.result.get(i));
+                capacities.add(cc2.result.get(i));
+            }
+            int people = 0;
+            ArrayList<ArrayList<String>> offers = new ArrayList<>();
+            ArrayList<String> offer = new ArrayList<>();
+            while (!idroom.isEmpty() && !capacities.isEmpty()) {
+                while (people < Integer.parseInt(nbpeople.getText())) {
+                    offer.add(idroom.peek());
+                    people += Integer.parseInt(capacities.peek());
+                    idroom.pop();capacities.pop();
+                }
+                offers.add(offer);
+                offer.clear();
+                people = 0;
+            }
+            for (ArrayList<String> list: offers) {
+                System.out.println(list);
+                System.out.println("############## fin d'offre #################");
+            }
         }
     }
 
     public static void main(String[] args) {
         Search fen = new Search();
     }
-    public ArrayList<OneOffer> getOffers() {
-        ArrayList<OneOffer> list = new ArrayList<>();
 
+    public ArrayList<jframe.danyter.OneOffer> getOffers() {
+        ArrayList<jframe.danyter.OneOffer> list = new ArrayList<>();
+        String command = "getroominb(" + bmin.getText() + "," + bmax.getText() + ");";
+        ArrayList<String> commands = new ArrayList<>(); commands.add(command);
+        socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
+        System.out.println(cc.result);
         return list;
     }
 }
