@@ -26,6 +26,7 @@ public class MapperRoom extends JFrame implements ActionListener {
     ArrayList<String> result = new ArrayList<>();
     JMenu jMenu;
     GoBackMenu goBackMenu;
+    GoBackMenuTotal goBackMenuTotal = new GoBackMenuTotal(this);
     int width;
     int height;
     Legende legende = new Legende();
@@ -51,6 +52,7 @@ public class MapperRoom extends JFrame implements ActionListener {
        // jMenu.add(electrochroma);
         jMenu.add(e1);
         jMenu.add(e2);
+        jMenu.add(goBackMenuTotal);
         this.setJMenuBar(jMenuBar);
     }
     public void getEquipement(){
@@ -111,6 +113,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         goBackMenu = new GoBackMenu(this,j);
         jMenu.add(goBackMenu);
     }
+
     public static void main(String[] args){
         new MapperRoom("A122");
     }
