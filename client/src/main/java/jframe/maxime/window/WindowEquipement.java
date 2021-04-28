@@ -59,8 +59,8 @@ public class WindowEquipement extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==information){
             if(equipement.name.equals("fenêtre électrochromatique")){
-            ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(equipement);
-            //electroChromaManuOpa.newGoBack(this);
+                ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(equipement);
+                electroChromaManuOpa.newGoBack(this);
             }
             if(equipement.name.equals("Store")){
                 ElectroChromaManuHigh electroChromaManuHigh = new ElectroChromaManuHigh(equipement);

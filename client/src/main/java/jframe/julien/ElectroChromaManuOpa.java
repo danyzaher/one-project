@@ -2,6 +2,7 @@ package jframe.julien;
 
 import jframe.HPageCompany;
 import jframe.maxime.button.Equipement;
+import jframe.maxime.button.GoBackButton;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,11 +33,11 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     ArrayList<String> tempextresult;
 
     //TEMP INTERN
-    int temperatureint;
+    String temperatureint;
     ArrayList<String> tempintresult;
 
     //LIGHT INTERN
-    int lightintensity;
+    String lightintensity;
     ArrayList<String> lightint;
 
     //SLIDERS AND LABELS
@@ -50,6 +51,8 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     JLabel Atempint;
     JLabel Alightint;
 
+    /** BUTTON **/
+    GoBackButton goBackButton;
     JButton validation;
 
     public ElectroChromaManuOpa(Equipement equipement) {
@@ -167,7 +170,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         stringArrayList.add(roomName);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.tempintresult = ccSocketTCP2.result;
-        temperatureint = Integer.parseInt(tempintresult.get(0));
+        temperatureint = tempintresult.get(0);
         logger.info("temperatureint = " + temperatureint);
 
     }
@@ -180,8 +183,13 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         stringArrayList.add(roomName);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.lightint= ccSocketTCP2.result;
-        lightintensity = Integer.parseInt(lightint.get(0));
+        lightintensity = lightint.get(0);
         logger.info("lightint = " + lightintensity);
     }
+    public void newGoBack(JFrame j){
+        goBackButton = new GoBackButton(this,j);
+        add(goBackButton);
+    }
+
 
 }

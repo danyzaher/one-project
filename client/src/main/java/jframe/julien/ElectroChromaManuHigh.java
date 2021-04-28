@@ -50,7 +50,6 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
 
     /** BUTTON **/
     JButton validation;
-
     GoBackButton goBackButton;
 
     public ElectroChromaManuHigh(Equipement equipement){
