@@ -1,6 +1,7 @@
 package jframe.julien;
 
 import jframe.HPageCompany;
+import jframe.maxime.button.Equipement;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,26 +20,30 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
     /** OPACITY VARIABLES **/
     int opacity;
-    String id;
+    String id; //ID de la fenetre qu'on met en local
     ArrayList<String> result;
+
+    String roomName;
 
     /** TEMPERATURES AND LIGHT INTENSITY VARIABLES **/
 
+    //TEMP EXTERN
     int temperatureext;
-    ArrayList<String> tempresult;
+    ArrayList<String> tempextresult;
 
+    //TEMP INTERN
+    int temperatureint;
+    ArrayList<String> tempintresult;
 
-    int tempint;
+    //LIGHT INTERN
     int lightintensity;
+    ArrayList<String> lightint;
 
+    //SLIDERS AND LABELS
     JSlider opac; //--> Check
     JLabel Aopacvalue; //-->Check
 
     /** TEMPERATURES AND LIGHT VALUES **/
-
-
-    int temperatureint = 1;
-    int lightint = 500;
 
     JLabel Atempext;
     JLabel Atempint;
@@ -47,14 +52,14 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     JButton validation;
 
 
-    public ElectroChromaManuOpa(String id) {
-
+    public ElectroChromaManuOpa(Equipement equipement) {
+        this.roomName = equipement.roomName; //recupération nom de la salle
         /** VALIDATION BUTTON **/
         validation = new JButton("VALIDER");
         validation.addActionListener(this);
 
         /** FRAME SETTINGS **/
-        this.id = id;
+        this.id = equipement.id+""; //recuperation id equipement
         setSize(400, 400);
         setResizable(false);
         setTitle("Parametres manuels de l'option electrochroma");
@@ -63,6 +68,8 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         /** METHOD **/
         getOpacityValue(); //Get value of the opacity of the window
         getTempExt(); //Get value of the temperature ext
+        getTempInt(); //Get value of the temperature int
+        getLightInt(); // Get value of the light int
         /** SLIDER **/
 
         //Opacity
@@ -140,10 +147,35 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         stringArrayList.add("show");
         stringArrayList.add("temperatureext");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
-        this.tempresult = ccSocketTCP2.result;
-        temperatureext = Integer.parseInt(tempresult.get(0));
+        this.tempextresult = ccSocketTCP2.result;
+        temperatureext = Integer.parseInt(tempextresult.get(0));
         logger.info("temperatureext = " + temperatureext);
 
+    }
+    public void getTempInt(){
+
+        logger.info("begin getTempInt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("temperatureint");
+        stringArrayList.add(roomName);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.tempintresult = ccSocketTCP2.result;
+        temperatureint = Integer.parseInt(tempintresult.get(0));
+        logger.info("temperatureint = " + temperatureint);
+
+    }
+    public void getLightInt(){
+
+        logger.info("begin getLightInt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("lightint");
+        stringArrayList.add(roomName);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.lightint= ccSocketTCP2.result;
+        lightintensity = Integer.parseInt(lightint.get(0));
+        logger.info("lightint = " + lightintensity);
     }
 
 }

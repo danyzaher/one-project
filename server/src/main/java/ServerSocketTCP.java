@@ -92,6 +92,12 @@ class ServerSocketTCP implements Runnable{
 					if(recu.equals("temperatureext")){
 						listMessage.add(C.getTempExt(in.readLine()));
 					}
+					if(recu.equals("lightint")){
+						listMessage.add(C.getLightInt(in.readLine()));
+					}
+					if(recu.equals("temperatureint")){
+						listMessage.add(C.getTempInt(in.readLine()));
+					}
 					if(recu.equals("emplacement")){
 						recu = in.readLine();
 						String s = in.readLine();
