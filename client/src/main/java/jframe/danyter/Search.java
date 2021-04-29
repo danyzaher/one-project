@@ -153,10 +153,24 @@ public class Search  extends JFrame implements ActionListener {
                 offer.clear();
                 people = 0;
             }
+            ArrayList<OneOffer> finaloffers = new ArrayList<>();
+            commands.clear();
+            String command2 = "";
             for (ArrayList<String> list: offers) {
                 System.out.println(list);
                 System.out.println("############## fin d'offre #################");
+                for (String id: list) {
+                    
+                    command = "show"; command1 = "room"; command2 = id;
+                    commands.add(command); commands.add(command1); commands.add(command2);
+                    CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
+                    commands.clear();
+                    command = "getprice(" + id + ");"; commands.add(command);
+                    CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
+                    finaloffers.add(new OneOffer(cc4.result.get(0),cc5.result.get(0)));
+                }         
             }
+            this.add(new Offers(new OneOffer(finaloffers)));
         }
     }
 
