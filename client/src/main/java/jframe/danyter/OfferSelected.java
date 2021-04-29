@@ -36,12 +36,12 @@ public class OfferSelected extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == rent) {
             ArrayList<String> al = new ArrayList<>();
-            al.add("update");
+            al.add("insert");
             al.add("location");
             al.add(oneOffer.getPrice());
-            al.add(IDCOMPANY);
+            al.add(companyName);
             al.add(oneOffer.getId());
-            CCSocketTCPbis cc = new CCSocketTCPbis(al);
+            new CCSocketTCPbis(al);
             jframe.danyter.Success s = new jframe.danyter.Success();
         }
     }

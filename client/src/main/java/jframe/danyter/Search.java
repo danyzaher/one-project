@@ -6,9 +6,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.lang.reflect.Array;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.Stack;
 
 public class Search  extends JFrame implements ActionListener {
@@ -91,7 +89,6 @@ public class Search  extends JFrame implements ActionListener {
 
             String command = "getroominb(" + bmin.getText() + "," + bmax.getText() + "," + electrofen.isSelected() + ");";
             ArrayList<String> commands = new ArrayList<>();
-            ArrayList<String> values;
             commands.add(command);
             socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
             commands.clear();
