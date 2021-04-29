@@ -98,6 +98,9 @@ class ServerSocketTCP implements Runnable{
 					if(recu.equals("temperatureint")){
 						listMessage.add(C.getTempInt(in.readLine()));
 					}
+					if(recu.equals("temperatureGint")){
+						listMessage.add(C.getGeneralTempInt(in.readLine()));
+					}
 					if(recu.equals("emplacement")){
 						recu = in.readLine();
 						String s = in.readLine();
@@ -105,6 +108,11 @@ class ServerSocketTCP implements Runnable{
 						listMessage.add(C.getPlaceEquip(in.readLine(),s));}
 						if (recu.equals("sensor")){
 							listMessage.add(C.getPlaceSensor(in.readLine(),s));
+						}
+					}
+					if(recu.equals("room")) {
+						if(recu.equals("name")) {
+							listMessage.add(C.getRoomName(in.readLine()))
 						}
 					}
 				}
@@ -173,6 +181,9 @@ class ServerSocketTCP implements Runnable{
 		if(recu.equals("strhigh")){
 			String s = in.readLine(); //id
 			C.updateStoreHigh(s,in.readLine());//in.readLine() --> strhigh by the connection crud
+		}
+		if(recu.equals("location")) {
+			C.setTaken(in.readLine(),in.readLine(),in.readLine());
 		}
 
 	}

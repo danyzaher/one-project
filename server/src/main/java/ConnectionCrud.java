@@ -97,6 +97,15 @@ public class ConnectionCrud {
         }
         return result;
     }
+    public String getRoomName(String id) throws SQLException {
+        String sql = "Select name from room;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("name")+ "\n";}
+        return result;
+    }
     public String getTempExt(String s) throws SQLException {
         logger.info("in getTempExt");
 
@@ -137,6 +146,18 @@ public class ConnectionCrud {
         }
         return tempint;
 
+    }
+    public String getGeneralTempInt(String s) throws SQLException{
+        logger.info("in getGeneralTempInt");
+        String sql ="SELECT temperature FROM PARAMETER_OF ORDER BY - id_parameter limit 1";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("temperature");
+        }
+        return result;
     }
     public String getEquipementAvailable(String roomName) throws SQLException{
         logger.info("in getEquipementAvailable");
@@ -245,6 +266,12 @@ public class ConnectionCrud {
             result += rs.getArray("animated");
         }
         return result;
+    }
+    public void setTaken(int rent, int idcompany, int idroom) {
+        logger.info("in settaken");
+        String sql = "insert into location(room_s_number,id_company,rent,Date_contract) values (" + idroom + "," + idcompany + "," + rent + ", CURRENT_DATE);";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
     public void deleteBePresentSensor(String id) throws SQLException{
         logger.info("in delete sensor");
