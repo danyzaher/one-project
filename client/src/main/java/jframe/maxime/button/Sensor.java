@@ -20,7 +20,7 @@ public class Sensor extends JButton implements ActionListener, Border {
     ArrayList<String> result;
     private int r = 15;
      public String roomName;
-     MapperRoom mapperRoom;
+     public MapperRoom mapperRoom;
     public Sensor(String name,int x,int y,int id,String roomName, MapperRoom mapperRoom){
         this.mapperRoom=mapperRoom;
         this.name = name;

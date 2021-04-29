@@ -181,7 +181,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         width = Integer.parseInt(result.get(0))*150;
         height = Integer.parseInt(result.get(1))*150;
     }
-    public void getMoveEquip(String id,boolean b){
+    public void getMoveEquip(String id, boolean b, String type){
         logger.info("begin getMoveEquip");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
@@ -191,7 +191,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         } else {stringArrayList.add("sensor");
             sensorOrequipement = false;}
         stringArrayList.add(nameRoom);
-        stringArrayList.add(id);
+        stringArrayList.add(type);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
         for (int k=0;k<result.size()-3;k=k+3){
