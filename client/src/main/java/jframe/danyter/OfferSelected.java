@@ -1,9 +1,12 @@
 package jframe.danyter;
 
+import socket.CCSocketTCPbis;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 public class OfferSelected extends JFrame implements ActionListener {
     JPanel bigpan = new JPanel();
@@ -31,8 +34,12 @@ public class OfferSelected extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == rent) {
             ArrayList<String> al = new ArrayList<>();
-            al.add("update"); al.add("location"); al.add(oneOffer.getPrice()); al.add(IDCOMPANY); al.add(oneOffer.getId());
-            CCSocketTCPbis cc = new CCSocketTCPbis()
+            al.add("update");
+            al.add("location");
+            al.add(oneOffer.getPrice());
+            al.add(IDCOMPANY);
+            al.add(oneOffer.getId());
+            CCSocketTCPbis cc = new CCSocketTCPbis(al);
             jframe.danyter.Success s = new jframe.danyter.Success();
         }
     }
