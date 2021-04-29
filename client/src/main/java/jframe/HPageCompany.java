@@ -172,7 +172,7 @@ public class HPageCompany extends JFrame implements ActionListener {
             Badge badge = new Badge(title);
         }
         if (e.getSource().equals(location)){
-            Search search = new Search();
+            Search search = new Search(title);
         }
         if (e.getSource().equals(chromatique)){
             ElectroChromaAuto electroChromaAuto = new ElectroChromaAuto(title);

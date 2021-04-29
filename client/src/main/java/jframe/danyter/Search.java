@@ -34,8 +34,9 @@ public class Search  extends JFrame implements ActionListener {
     JCheckBox electrofen = new JCheckBox();
     JCheckBox height = new JCheckBox();
     JButton done = new JButton("Rechercher");
-
-    public Search() {
+    String companyName;
+    public Search(String companyName) {
+        this.companyName=companyName;
         setTitle("Recherche");
         setVisible(true);
         setSize(400,300);
