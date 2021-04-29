@@ -85,15 +85,19 @@ public class Search  extends JFrame implements ActionListener {
             System.out.println("Fenetres electrochromatiques : " + electrofen.isSelected());
             System.out.println("Soleil important : " + sun.isSelected());
             System.out.println("Hauteur importante : " + height.isSelected());
+
+            // GET ALL ROOMS IN THE CLIENTS'S BUDGET
+
             String command = "getroominb(" + bmin.getText() + "," + bmax.getText() + "," + electrofen.isSelected() + ");";
             ArrayList<String> commands = new ArrayList<>();
             ArrayList<String> values;
             commands.add(command);
             socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
             commands.clear();
-            values = cc.result;
+            // SET A GRADE FOR EACH IDs
+
             if (sun.isSelected() && height.isSelected()) {
-                for (String value : values) {
+                for (String value : cc.result) {
                     command = "setgradesunheight(" + value + ");";
                     commands.add(command);
                     new socket.CCSocketTCPbis(commands);
@@ -102,7 +106,7 @@ public class Search  extends JFrame implements ActionListener {
                 }
             }
             if (sun.isSelected() && !height.isSelected()) {
-                for (String value : values) {
+                for (String value : cc.result) {
                     command = "setgradesun(" + value + ");";
                     commands.add(command);
                     new socket.CCSocketTCPbis(commands);
@@ -111,7 +115,7 @@ public class Search  extends JFrame implements ActionListener {
                 }
             }
             if (!sun.isSelected() && height.isSelected()) {
-                for (String value : values) {
+                for (String value : cc.result) {
                     command = "setgradeheight(" + value + ");";
                     commands.add(command);
                     new socket.CCSocketTCPbis(commands);
@@ -119,7 +123,7 @@ public class Search  extends JFrame implements ActionListener {
                 }
             }
             if (!sun.isSelected() && !height.isSelected()) {
-                for (String value : values) {
+                for (String value : cc.result) {
                     command = "setgrade(" + value + ");";
                     commands.add(command);
                     new socket.CCSocketTCPbis(commands);
@@ -127,6 +131,8 @@ public class Search  extends JFrame implements ActionListener {
 
                 }
             }
+
+            // GET IDs AND THE ROOM'S CAPACITY ORDERED BY THEIR GRADE - ASC BECAUSE THE STACK WILL REVERSE THE ORDER
             command = " room_s_number from room  where room_s_number in (select getroominb(" + bmin.getText() + "," + bmax.getText() + ")) order by grade asc;";
             String command1 = " capacity from room  where room_s_number in (select getroominb(" + bmin.getText() + "," + bmax.getText() + ")) order by grade asc;";
             commands.add(command);
@@ -134,6 +140,8 @@ public class Search  extends JFrame implements ActionListener {
             commands.clear();
             commands.add(command1);
             CCSocketTCPbis cc3 = new CCSocketTCPbis(commands);
+
+            // USE STACK TO ONLY USE EACH IDs ONE TIME
             Stack<String> idroom = new Stack<>();
             Stack<String> capacities = new Stack<>();
             for (int i = 0; i < cc3.result.size(); i++) {
@@ -143,6 +151,8 @@ public class Search  extends JFrame implements ActionListener {
             int people = 0;
             ArrayList<ArrayList<String>> offers = new ArrayList<>();
             ArrayList<String> offer = new ArrayList<>();
+
+            // BUILDING LISTS OF IDs - EACH LIST WILL GIVE AN OFFER
             while (!idroom.isEmpty() && !capacities.isEmpty()) {
                 while (people < Integer.parseInt(nbpeople.getText())) {
                     offer.add(idroom.peek());
@@ -156,6 +166,8 @@ public class Search  extends JFrame implements ActionListener {
             ArrayList<OneOffer> finaloffers = new ArrayList<>();
             commands.clear();
             String command2 = "";
+
+            // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
             for (ArrayList<String> list: offers) {
                 System.out.println(list);
                 System.out.println("############## fin d'offre #################");
@@ -167,23 +179,16 @@ public class Search  extends JFrame implements ActionListener {
                     commands.clear();
                     command = "getprice(" + id + ");"; commands.add(command);
                     CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
-                    finaloffers.add(new OneOffer(cc4.result.get(0),cc5.result.get(0)));
+                    finaloffers.add(new OneOffer(id,cc4.result.get(0),cc5.result.get(0)));
                 }         
             }
-            this.add(new Offers(new OneOffer(finaloffers)));
+
+            // ADD ALL ONEOFFERs IN A LIST AND GO TO THE NEXT PAGE WITH
+            Offers ofpage = new Offers(new OneOffer(finaloffers)));
         }
     }
 
     public static void main(String[] args) {
         Search fen = new Search();
-    }
-
-    public ArrayList<jframe.danyter.OneOffer> getOffers() {
-        ArrayList<jframe.danyter.OneOffer> list = new ArrayList<>();
-        String command = "getroominb(" + bmin.getText() + "," + bmax.getText() + ");";
-        ArrayList<String> commands = new ArrayList<>(); commands.add(command);
-        socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
-        System.out.println(cc.result);
-        return list;
     }
 }
