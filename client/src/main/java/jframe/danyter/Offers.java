@@ -33,7 +33,7 @@ public class Offers extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent actionEvent) {
         for (int i = 0; i < offers.size(); i++) {
             if (actionEvent.getSource() == offers.get(i).getButton()) {
-                OfferSelected of = new OfferSelected(offers.get(i));
+                OfferSelected of = new OfferSelected(offers.get(i),companyName);
                 break;
             }
         }

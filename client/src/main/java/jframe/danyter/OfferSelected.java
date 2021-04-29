@@ -15,7 +15,9 @@ public class OfferSelected extends JFrame implements ActionListener {
     JPanel left = new JPanel();
     JButton rent = new JButton("Louer");
     jframe.danyter.OneOffer oneOffer;
-    public OfferSelected(jframe.danyter.OneOffer on) {
+    String companyName;
+    public OfferSelected(jframe.danyter.OneOffer on,String companyName) {
+        this.companyName=companyName;
         oneOffer = on;
         setTitle("Détails de l'offre");
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
