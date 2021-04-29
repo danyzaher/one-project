@@ -3,7 +3,7 @@ package jframe;
 import jframe.maxime.button.GoBackMenu;
 import jframe.maxime.window.MapperRoom;
 import jframe.yassir.Badge;
-import jframe.danyter.Search;
+import jframe.dany.Search;
 import jframe.julien.ElectroChromaAuto;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;

@@ -1,4 +1,4 @@
-package jframe.danyter;
+package jframe.dany;
 
 import javax.swing.*;
 

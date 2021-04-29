@@ -1,4 +1,4 @@
-package jframe.danyter;
+package jframe.dany;
 
 import socket.CCSocketTCPbis;
 
@@ -32,6 +32,7 @@ public class Search  extends JFrame implements ActionListener {
     JCheckBox electrofen = new JCheckBox();
     JCheckBox height = new JCheckBox();
     JButton done = new JButton("Rechercher");
+
      public String companyName;
     public Search(String companyName) {
         this.companyName=companyName;

@@ -1,4 +1,4 @@
-package jframe.danyter;
+package jframe.dany;
 
 
 import javax.swing.*;
@@ -11,9 +11,9 @@ public class Offers extends JFrame implements ActionListener {
     JPanel pan = new JPanel();
     JLabel title = new JLabel("Choisissez une offre");
     int nboffers;
-    ArrayList<jframe.danyter.OneOffer> offers;
+    ArrayList<jframe.dany.OneOffer> offers;
     String companyName;
-    public Offers(ArrayList<jframe.danyter.OneOffer> list,String companyName) {
+    public Offers(ArrayList<jframe.dany.OneOffer> list, String companyName) {
         this.companyName = companyName;
         offers = list;
         setTitle("Offres");
@@ -23,7 +23,7 @@ public class Offers extends JFrame implements ActionListener {
         nboffers = 5;
         pan.setLayout(new BoxLayout(pan,BoxLayout.PAGE_AXIS));
         pan.add(title);
-        for (jframe.danyter.OneOffer offer : offers) {
+        for (jframe.dany.OneOffer offer : offers) {
             pan.add(offer);
         }
 
