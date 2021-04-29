@@ -1,7 +1,6 @@
 package jframe.maxime.window;
 
 import jframe.maxime.button.GoBackButton;
-import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -21,7 +20,6 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
     JButton jButton;
     JComboBox combobox;
     ArrayList<String> s1 = new ArrayList<>() ;
-    ArrayList<String> result = new ArrayList<>();
     GoBackButton goBackButton;
     public WindowListSensor(MapperRoom mapperRoom){
 
@@ -31,7 +29,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         setLayout(new FlowLayout());
         setSize(700,700);
         getListSensorAvailable();
-        String s2[] = s1.toArray(new String[0]);
+        String[] s2 = s1.toArray(new String[0]);
         combobox = new JComboBox(s2);
         combobox.addItemListener(this);
 

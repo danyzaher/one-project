@@ -20,7 +20,6 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
     JButton jButton;
     JComboBox combobox;
     ArrayList<String> s1 = new ArrayList<>() ;
-    ArrayList<String> result = new ArrayList<>();
     GoBackButton goBackButton;
     public WindowListEquipement(MapperRoom mapperRoom){
 
@@ -30,7 +29,7 @@ public class WindowListEquipement extends JFrame implements ActionListener, Item
         setLayout(new FlowLayout());
         setSize(700,700);
         getListEquipementAvailable();
-        String s2[] = s1.toArray(new String[0]);
+        String[] s2 = s1.toArray(new String[0]);
         combobox = new JComboBox(s2);
         combobox.addItemListener(this);
 

@@ -41,7 +41,7 @@ public class WindowSensor extends JFrame implements ActionListener {
         stringArrayList.add("be_present");
         stringArrayList.add("sensor");
         stringArrayList.add(sensor.id+"");
-        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        new CCSocketTCPbis(stringArrayList);
     }
     public void newGoBack(JFrame j){
         goBackButton = new GoBackButton(this,j);

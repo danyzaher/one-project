@@ -244,7 +244,7 @@ public class ConnectionCrud {
         return result;
     }
     public void updateOpacity(String id, String valueopacity) throws SQLException {
-        logger.info("in update");
+        logger.info("in update opacity");
         String sql = "update equipement set valueof = " + valueopacity + " where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
@@ -306,6 +306,18 @@ public class ConnectionCrud {
 
         }
         return result;
+    }
+    public void updateBePresentEquip(String idplace, String idEquip) throws SQLException {
+        logger.info("in update be_presentEquip");
+        String sql = "update be_present set id_equipplace = " + idplace + " where id_equipement =" + idEquip + ";";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
+    }
+    public void updateBePresentSensor(String idplace, String idEquip) throws SQLException {
+        logger.info("in update be_presentSensor");
+        String sql = "update be_present set id_equipplace = " + idplace + " where id_sensor =" + idEquip + ";";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
 
 }
