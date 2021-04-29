@@ -34,7 +34,7 @@ public class Search  extends JFrame implements ActionListener {
     JCheckBox electrofen = new JCheckBox();
     JCheckBox height = new JCheckBox();
     JButton done = new JButton("Rechercher");
-    String companyName;
+     public String companyName;
     public Search(String companyName) {
         this.companyName=companyName;
         setTitle("Recherche");
@@ -185,7 +185,7 @@ public class Search  extends JFrame implements ActionListener {
             }
 
             // ADD ALL ONEOFFERs IN A LIST AND GO TO THE NEXT PAGE WITH
-            Offers ofpage = new Offers(new OneOffer(finaloffers)));
+            Offers ofpage = new Offers(finaloffers,companyName);
         }
     }
 

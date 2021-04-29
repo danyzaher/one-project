@@ -12,7 +12,9 @@ public class Offers extends JFrame implements ActionListener {
     JLabel title = new JLabel("Choisissez une offre");
     int nboffers;
     ArrayList<jframe.danyter.OneOffer> offers;
-    public Offers(ArrayList<jframe.danyter.OneOffer> list) {
+    String companyName;
+    public Offers(ArrayList<jframe.danyter.OneOffer> list,String companyName) {
+        this.companyName = companyName;
         offers = list;
         setTitle("Offres");
         setSize(400,300);
