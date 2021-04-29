@@ -190,6 +190,6 @@ public class Search  extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        Search fen = new Search();
+        Search fen = new Search("Fritel Inc.");
     }
 }

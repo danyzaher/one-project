@@ -267,7 +267,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public void setTaken(int rent, int idcompany, int idroom) throws SQLException {
+    public void setTaken(String rent, String idcompany, String idroom) throws SQLException {
         logger.info("in settaken");
         String sql = "insert into location(room_s_number,id_company,rent,Date_contract) values (" + idroom + "," + idcompany + "," + rent + ", CURRENT_DATE);";
         Statement smt = c.createStatement();
