@@ -18,11 +18,11 @@ public class MapperRoom extends JFrame implements ActionListener {
     String nameRoom;
     JMenuItem e1;
     JMenuItem e2;
-    JPanel center = new JPanel();
     JMenuItem electrochroma;
     ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
     ArrayList<Sensor> sensorArrayList = new ArrayList<>();
     ArrayList<Place> placeArrayList = new ArrayList<>();
+    ArrayList<PlaceMove> placeMoveArrayList = new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
     JMenu jMenu;
     GoBackMenu goBackMenu;
@@ -30,6 +30,7 @@ public class MapperRoom extends JFrame implements ActionListener {
     int width;
     int height;
     Legende legende = new Legende();
+    String idMove;
     public MapperRoom(String nameRoom){
         this.nameRoom = nameRoom;
         setTitle(nameRoom);
@@ -47,9 +48,6 @@ public class MapperRoom extends JFrame implements ActionListener {
         e1.addActionListener(this);
         e2 = new JMenuItem("Liste des capteurs à ajouter");
         e2.addActionListener(this);
-       // electrochroma = new JMenuItem("Option électrochromatique");
-       // electrochroma.addActionListener(this);
-       // jMenu.add(electrochroma);
         jMenu.add(e1);
         jMenu.add(e2);
         jMenu.add(goBackMenuTotal);
@@ -72,15 +70,17 @@ public class MapperRoom extends JFrame implements ActionListener {
             Equipement equipement = new Equipement(nom,position_x,position_y,id, nameRoom,this);
             listEquipementDansLaSalle.add(equipement);
         }
-        for(int j=0;j<listEquipementDansLaSalle.size();j++){
-            add(listEquipementDansLaSalle.get(j));
-            if(listEquipementDansLaSalle.get(j).etat){
-                listEquipementDansLaSalle.get(j).setBackground(Color.GREEN);
-            }else{listEquipementDansLaSalle.get(j).setBackground(Color.RED);}
-            if((listEquipementDansLaSalle.get(j).name.equals("fenêtre électrochromatique"))
-            | (listEquipementDansLaSalle.get(j).name.equals("Store"))){
+        for (Equipement equipement : listEquipementDansLaSalle) {
+            add(equipement);
+            if (equipement.etat) {
+                equipement.setBackground(Color.GREEN);
+            } else {
+                equipement.setBackground(Color.RED);
+            }
+            if ((equipement.name.equals("fenêtre électrochromatique"))
+                    | (equipement.name.equals("Store"))) {
                 logger.info("coloré en gris");
-                listEquipementDansLaSalle.get(j).setBackground(Color.GRAY);
+                equipement.setBackground(Color.GRAY);
             }
         }
 
@@ -138,10 +138,10 @@ public class MapperRoom extends JFrame implements ActionListener {
             Place place = new Place(position_x,position_y,id,this);
             placeArrayList.add(place);
         }
-        for(int k=0;k<placeArrayList.size();k++){
-            add(placeArrayList.get(k));
-            placeArrayList.get(k).setBounds(placeArrayList.get(k).x,placeArrayList.get(k).y,10,10);
-            placeArrayList.get(k).setBackground(Color.ORANGE);
+        for (Place place : placeArrayList) {
+            add(place);
+            place.setBounds(place.x, place.y, 10, 10);
+            place.setBackground(Color.ORANGE);
         }
     }
     public void setEquipement(Place p){
@@ -154,7 +154,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         } else {stringArrayList.add("sensor");}
         stringArrayList.add(p.id+"");
         stringArrayList.add(type);
-        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        new CCSocketTCPbis(stringArrayList);
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
         this.setVisible(false);
     }
@@ -168,6 +168,33 @@ public class MapperRoom extends JFrame implements ActionListener {
         this.result = ccSocketTCP2.result;
         width = Integer.parseInt(result.get(0))*150;
         height = Integer.parseInt(result.get(1))*150;
+    }
+    public void getMoveEquip(String id,boolean b){
+        this.idMove=id;
+        logger.info("begin getMoveEquip");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("emplacement");
+        if(b){ stringArrayList.add("equipement");
+            sensorOrequipement = true;
+        } else {stringArrayList.add("sensor");
+            sensorOrequipement = false;}
+        stringArrayList.add(nameRoom);
+        stringArrayList.add(id);
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.result = ccSocketTCP2.result;
+        for (int k=0;k<result.size()-3;k=k+3){
+            int id2 = Integer.parseInt(result.get(k));
+            int position_x = Integer.parseInt(result.get(k+1));
+            int position_y = Integer.parseInt(result.get(k+2));
+            Place place = new Place(position_x,position_y,id2,this);
+            placeArrayList.add(place);
+        }
+        for (Place place : placeArrayList) {
+            add(place);
+            place.setBounds(place.x, place.y, 10, 10);
+            place.setBackground(Color.ORANGE);
+        }
     }
     @Override
     public void actionPerformed(ActionEvent e) {
