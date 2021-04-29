@@ -31,6 +31,10 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     ArrayList<String> tempresult;
     JLabel Atempext;
 
+    /** VARIABLES FOR EXTERN TEMPERATURE **/
+    String temperatureint;
+    ArrayList<String> tempintresult;
+
     /*** BUTTON ***/
     JButton validation;
 
@@ -50,6 +54,8 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         validation = new JButton("VALIDER");
         validation.setSize(100, 100);
 
+        //Temperature ext part
+
         Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
 
         //Temperature modification part
@@ -57,8 +63,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         Stemp = new JSlider(JSlider.HORIZONTAL, 0, 30, temperature);
         Stemp.setMajorTickSpacing(1);
         Stemp.setPaintTicks(true);
-
-        ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + "°C");
 
         eventTemp et = new eventTemp();
         Stemp.addChangeListener(et);
@@ -71,9 +75,10 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
         /** METHODS **/
         getTempExt();
-
+        getGeneralTempInt();
         /** TEMPERATURES AND LIGHT **/
 
+        ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + "°C");
         Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
         ALight = new JLabel("Eclairage souhaitée dans les salles : " + light + " lux");
 
@@ -114,7 +119,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         }
     }
 
-
     public class eventTemp implements ChangeListener {
 
         @Override
@@ -124,7 +128,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             ATemp.setText("Temperature dans les salles souhaitée : " + valuetemp + " ° C");
         }
     }
-
     public class eventLight implements ChangeListener {
 
         @Override
@@ -134,6 +137,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             ALight.setText("Eclairage dans les salles souhaité : " + valuelight + " lux");
         }
     }
+
     public void getTempExt(){
 
         logger.info("begin getTempExt");
@@ -144,6 +148,17 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         this.tempresult = ccSocketTCP2.result;
         temperatureext = Integer.parseInt(tempresult.get(0));
         logger.info("temperatureext = " + temperatureext);
+
+    }
+    public void getGeneralTempInt(){
+        logger.info("begin getGTempInt");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("show");
+        stringArrayList.add("temperatureGint");
+        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        this.tempintresult = ccSocketTCP2.result;
+        temperatureint = tempintresult.get(0);
+        logger.info("temperatureint = " + temperatureint);
 
     }
 }
