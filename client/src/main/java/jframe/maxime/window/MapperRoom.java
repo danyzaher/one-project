@@ -30,7 +30,6 @@ public class MapperRoom extends JFrame implements ActionListener {
     int width;
     int height;
     Legende legende = new Legende();
-    String idMove;
     public MapperRoom(String nameRoom){
         this.nameRoom = nameRoom;
         setTitle(nameRoom);
@@ -102,11 +101,10 @@ public class MapperRoom extends JFrame implements ActionListener {
             Sensor sensor = new Sensor(nom,position_x,position_y,id, nameRoom,this);
             sensorArrayList.add(sensor);
         }
-        for(int j=0;j<sensorArrayList.size();j++){
-            add(sensorArrayList.get(j));
-            if(sensorArrayList.get(j).etat){
-                sensorArrayList.get(j).setBackground(Color.CYAN);
-            }else{sensorArrayList.get(j).setBackground(Color.PINK);}
+        for (Sensor sensor : sensorArrayList) {
+            add(sensor);
+            if (sensor.etat) sensor.setBackground(Color.CYAN);
+            else sensor.setBackground(Color.PINK);
         }
     }
     public void newGoBack(JFrame j){
@@ -158,6 +156,20 @@ public class MapperRoom extends JFrame implements ActionListener {
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
         this.setVisible(false);
     }
+    public void setEquipement(PlaceMove p){
+        logger.info("begin setEquipement");
+        ArrayList<String> stringArrayList = new ArrayList<>();
+        stringArrayList.add("update");
+        stringArrayList.add("be_present");
+        if (sensorOrequipement){
+            stringArrayList.add("equipement");
+        } else {stringArrayList.add("sensor");}
+        stringArrayList.add(p.id); //id equip or sensor
+        stringArrayList.add(p.id2+""); //id place
+        new CCSocketTCPbis(stringArrayList);
+        MapperRoom mapperRoom = new MapperRoom(nameRoom);
+        this.setVisible(false);
+    }
     public void getSizeBis(){
         logger.info("begin getSize");
         ArrayList<String> stringArrayList = new ArrayList<>();
@@ -170,7 +182,6 @@ public class MapperRoom extends JFrame implements ActionListener {
         height = Integer.parseInt(result.get(1))*150;
     }
     public void getMoveEquip(String id,boolean b){
-        this.idMove=id;
         logger.info("begin getMoveEquip");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
@@ -187,13 +198,13 @@ public class MapperRoom extends JFrame implements ActionListener {
             int id2 = Integer.parseInt(result.get(k));
             int position_x = Integer.parseInt(result.get(k+1));
             int position_y = Integer.parseInt(result.get(k+2));
-            Place place = new Place(position_x,position_y,id2,this);
-            placeArrayList.add(place);
+            PlaceMove place = new PlaceMove(position_x,position_y,id2,this,id);
+            placeMoveArrayList.add(place);
         }
-        for (Place place : placeArrayList) {
-            add(place);
-            place.setBounds(place.x, place.y, 10, 10);
-            place.setBackground(Color.ORANGE);
+        for (PlaceMove placeMove : placeMoveArrayList) {
+            add(placeMove);
+            placeMove.setBounds(placeMove.x, placeMove.y, 10, 10);
+            placeMove.setBackground(Color.ORANGE);
         }
     }
     @Override

@@ -208,11 +208,7 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 
-	private Thread currentThread() {
-		return this.currentThread();
-	}
-
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException {
 		logger.info("Server is running");
 		ServerSocket socketServer = new ServerSocket(sc.getPort());
 		while (true){

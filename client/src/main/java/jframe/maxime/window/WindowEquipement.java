@@ -4,7 +4,6 @@ import jframe.julien.ElectroChromaManuHigh;
 import jframe.maxime.button.Equipement;
 import jframe.julien.ElectroChromaManuOpa;
 import jframe.maxime.button.GoBackButton;
-import jframe.maxime.button.GoBackMenu;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -53,7 +52,7 @@ public class WindowEquipement extends JFrame implements ActionListener {
         stringArrayList.add("be_present");
         stringArrayList.add("equipement");
         stringArrayList.add(equipement.id+"");
-        CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+        new CCSocketTCPbis(stringArrayList);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
