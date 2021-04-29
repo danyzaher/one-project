@@ -164,8 +164,8 @@ public class MapperRoom extends JFrame implements ActionListener {
         if (sensorOrequipement){
             stringArrayList.add("equipement");
         } else {stringArrayList.add("sensor");}
-        stringArrayList.add(p.id); //id equip or sensor
         stringArrayList.add(p.id2+""); //id place
+        stringArrayList.add(p.id); //id equip or sensor
         new CCSocketTCPbis(stringArrayList);
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
         this.setVisible(false);

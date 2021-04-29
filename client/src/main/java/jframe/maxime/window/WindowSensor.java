@@ -56,7 +56,6 @@ public class WindowSensor extends JFrame implements ActionListener {
             this.setVisible(false);
         }
         if (e.getSource()==move){
-            String s = sensor.roomName;
             MapperRoom m= sensor.mapperRoom;
             m.getMoveEquip(sensor.id+"",
                     false,

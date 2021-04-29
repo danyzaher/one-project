@@ -74,7 +74,6 @@ public class WindowEquipement extends JFrame implements ActionListener {
             this.setVisible(false);
         }
         if (e.getSource()==move){
-            String s = equipement.roomName;
             MapperRoom m= equipement.mapperRoom;
             m.getMoveEquip(equipement.id+"",
                     true,
