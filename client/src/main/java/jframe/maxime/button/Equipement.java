@@ -37,7 +37,6 @@ public class Equipement extends JButton implements ActionListener {
         this.result = ccSocketTCP2.result;
         etat = result.get(0).equals("t");
     }
-
     @Override
     public void actionPerformed(ActionEvent e) {
         WindowEquipement windowEquipement =new WindowEquipement(this);

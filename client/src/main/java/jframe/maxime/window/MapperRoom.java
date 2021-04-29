@@ -113,7 +113,6 @@ public class MapperRoom extends JFrame implements ActionListener {
         goBackMenu = new GoBackMenu(this,j);
         jMenu.add(goBackMenu);
     }
-
     public static void main(String[] args){
         new MapperRoom("A122");
     }
@@ -167,8 +166,8 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add(nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
-        width = Integer.parseInt(result.get(0))*10;
-        height = Integer.parseInt(result.get(1))*15;
+        width = Integer.parseInt(result.get(0))*150;
+        height = Integer.parseInt(result.get(1))*150;
     }
     @Override
     public void actionPerformed(ActionEvent e) {
