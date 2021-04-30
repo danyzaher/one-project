@@ -14,7 +14,7 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 public class WindowListSensor extends JFrame implements ActionListener, ItemListener {
-    public static Logger logger = LoggerFactory.getLogger("WindowListEquipement");
+    public static Logger logger = LoggerFactory.getLogger("WindowListEquipment");
     MapperRoom mapperRoom;
     JLabel l1, l2;
     JButton jButton;

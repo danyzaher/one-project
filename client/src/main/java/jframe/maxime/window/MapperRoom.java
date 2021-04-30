@@ -211,8 +211,8 @@ public class MapperRoom extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource()==e1){
-        WindowListEquipement windowListEquipement = new WindowListEquipement(this);
-        windowListEquipement.newGoBack(this);}
+        WindowListEquipment windowListEquipment = new WindowListEquipment(this);
+        windowListEquipment.newGoBack(this);}
         if(e.getSource()==e2){
             WindowListSensor windowListSensor = new WindowListSensor(this);
             windowListSensor.newGoBack(this);

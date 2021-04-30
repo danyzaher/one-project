@@ -13,15 +13,15 @@ import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
-public class WindowListEquipement extends JFrame implements ActionListener, ItemListener {
-    public static Logger logger = LoggerFactory.getLogger("WindowListEquipement");
+public class WindowListEquipment extends JFrame implements ActionListener, ItemListener {
+    public static Logger logger = LoggerFactory.getLogger("WindowListEquipment");
     MapperRoom mapperRoom;
     JLabel l1, l2;
     JButton jButton;
     JComboBox combobox;
     ArrayList<String> s1 = new ArrayList<>() ;
     GoBackButton goBackButton;
-    public WindowListEquipement(MapperRoom mapperRoom){
+    public WindowListEquipment(MapperRoom mapperRoom){
 
         this.mapperRoom = mapperRoom;
         setTitle("liste des équipement disponible pour la salle " + mapperRoom.nameRoom);
