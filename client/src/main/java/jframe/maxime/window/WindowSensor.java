@@ -33,6 +33,10 @@ public class WindowSensor extends JFrame implements ActionListener {
         move.setBounds(50,200,30,50);
         add(move);
         move.addActionListener(this);
+        JLabel jLabel= new JLabel("position en x du capteur = " +sensor.x );
+        JLabel jLabel2 = new JLabel("position en y du capteur = "+sensor.y);
+        add(jLabel);
+        add(jLabel2);
 
     }
     public void delete(){
