@@ -32,6 +32,7 @@ public class WindowSensor extends JFrame implements ActionListener {
         move = new JButton("Deplacer le capteur");
         move.setBounds(50,200,30,50);
         add(move);
+        move.addActionListener(this);
 
     }
     public void delete(){
