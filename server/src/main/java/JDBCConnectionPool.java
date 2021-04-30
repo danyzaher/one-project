@@ -11,7 +11,7 @@ public class JDBCConnectionPool {
     public static Logger logger = LoggerFactory.getLogger("JDBCConnectionPool");
 
         private final ArrayList<Connection> collection;
-        private Connectioninfo cf;
+    public final Connectioninfo cf;
 
     public JDBCConnectionPool(int nboneco) {
         cf = new Connectioninfo();
@@ -56,8 +56,8 @@ public class JDBCConnectionPool {
             for (int i = 0; i < collection.size(); i++) {
                 try {
                     getConnection().close();
-                } catch (SQLException throwables) {
-                    throwables.printStackTrace();
+                } catch (SQLException throwable) {
+                    throwable.printStackTrace();
                 }
             }
         }
