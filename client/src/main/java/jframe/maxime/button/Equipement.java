@@ -18,7 +18,11 @@ public class Equipement extends JButton implements ActionListener {
     ArrayList<String> result;
     public String roomName;
     public MapperRoom mapperRoom;
+    public int x;
+    public int y;
     public Equipement(String name, int x, int y, int id, String roomName, MapperRoom m){
+        this.x=x;
+        this.y=y;
         this.mapperRoom=m;
         this.roomName = roomName;
         this.id=id;

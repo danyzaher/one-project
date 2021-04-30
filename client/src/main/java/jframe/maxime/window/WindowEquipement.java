@@ -40,6 +40,10 @@ public class WindowEquipement extends JFrame implements ActionListener {
         information.setBounds(50,300,30,50);
         add(information);
         information.addActionListener(this);}
+        JLabel jLabel= new JLabel("position en x de l'équipement = " +equipement.x );
+        JLabel jLabel2 = new JLabel("position en y de l'équipement = "+equipement.y);
+        add(jLabel);
+        add(jLabel2);
 
     }
     public void newGoBack(JFrame j){
