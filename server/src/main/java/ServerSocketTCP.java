@@ -64,13 +64,13 @@ class ServerSocketTCP implements Runnable{
 					if (recu.equals("equipement")){
 						String s = in.readLine();
 						if (s.equals("available")){
-							listMessage.add(C.getEquipementAvailable(in.readLine()));
+							listMessage.add(C.getEquipmentAvailable(in.readLine()));
 						}
 						if(s.equals("etat")){
-							listMessage.add(C.getEtatEquipement(in.readLine()));
+							listMessage.add(C.getEtatEquipment(in.readLine()));
 						}
 						if(s.equals("dansSalle")){
-						listMessage.add(C.getEquipement(in.readLine()));}
+						listMessage.add(C.getEquipment(in.readLine()));}
 					}
 					if(recu.equals("sensor")){
 						String s = in.readLine();
@@ -147,7 +147,7 @@ class ServerSocketTCP implements Runnable{
 			String s = in.readLine();
 			if(s.equals("equipement")){
 				s = in.readLine();
-			c.insertBePresentEquipement(s,in.readLine());}
+			c.insertBePresentEquipment(s,in.readLine());}
 			if(s.equals("sensor")){
 				s = in.readLine();
 				c.insertBePresentSensor(s,in.readLine());
@@ -161,7 +161,7 @@ class ServerSocketTCP implements Runnable{
 		if(recu.equals("be_present")){
 			recu = in.readLine();
 			if(recu.equals("equipement")){
-			    C.deleteBePresentEquipement(in.readLine());
+			    C.deleteBePresentEquipment(in.readLine());
 			}
 			if(recu.equals("sensor")){
 				C.deleteBePresentSensor(in.readLine());
