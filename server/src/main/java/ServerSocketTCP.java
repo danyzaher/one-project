@@ -44,24 +44,24 @@ class ServerSocketTCP implements Runnable{
 				ConnectionCrud C = new ConnectionCrud();
 				C.setC(Datasource.getConnection());
 				logger.info("Connection available = " + source.size());
-				String recu = in.readLine();
-				logger.info("recu = "+recu);
-				if (recu.equals("show")){
-					recu = in.readLine();
-					if (recu.equals("company")){
-						recu = in.readLine();
-						if (recu.equals("name")){
+				String received = in.readLine();
+				logger.info("received = "+received);
+				if (received.equals("show")){
+					received = in.readLine();
+					if (received.equals("company")){
+						received = in.readLine();
+						if (received.equals("name")){
 							logger.info("last if");
 							listMessage.add(C.getCompanyName());
 						}
 					}
-					if (recu.equals("size")){
+					if (received.equals("size")){
 						listMessage.add(C.getSizeRoom(in.readLine()));
 					}
-					if (recu.equals("menu")){
+					if (received.equals("menu")){
 						listMessage.add(C.getMenu(in.readLine()));
 					}
-					if (recu.equals("equipement")){
+					if (received.equals("equipment")){
 						String s = in.readLine();
 						if (s.equals("available")){
 							listMessage.add(C.getEquipmentAvailable(in.readLine()));
@@ -72,7 +72,7 @@ class ServerSocketTCP implements Runnable{
 						if(s.equals("dansSalle")){
 						listMessage.add(C.getEquipment(in.readLine()));}
 					}
-					if(recu.equals("sensor")){
+					if(received.equals("sensor")){
 						String s = in.readLine();
 						if (s.equals("available")){
 							listMessage.add(C.getSensorAvailable(in.readLine()));
@@ -83,48 +83,48 @@ class ServerSocketTCP implements Runnable{
 						if(s.equals("dansSalle")){
 							listMessage.add(C.getSensor(in.readLine()));}
 					}
-					if(recu.equals("opacity")){
+					if(received.equals("opacity")){
 						listMessage.add(C.getOpacityValue(in.readLine()));
 					}
-					if(recu.equals("strhigh")){
+					if(received.equals("strhigh")){
 						listMessage.add(C.getStoreHighValue(in.readLine()));
 					}
-					if(recu.equals("temperatureext")){
+					if(received.equals("temperatureext")){
 						listMessage.add(C.getTempExt(in.readLine()));
 					}
-					if(recu.equals("lightint")){
+					if(received.equals("lightint")){
 						listMessage.add(C.getLightInt(in.readLine()));
 					}
-					if(recu.equals("temperatureint")){
+					if(received.equals("temperatureint")){
 						listMessage.add(C.getTempInt(in.readLine()));
 					}
-					if(recu.equals("temperatureGint")){
+					if(received.equals("temperatureGint")){
 						listMessage.add(C.getGeneralTempInt(in.readLine()));
 					}
-					if(recu.equals("emplacement")){
-						recu = in.readLine();
+					if(received.equals("emplacement")){
+						received = in.readLine();
 						String s = in.readLine();
-						if (recu.equals("equipement")){
+						if (received.equals("equipment")){
 						listMessage.add(C.getPlaceEquip(in.readLine(),s));}
-						if (recu.equals("sensor")){
+						if (received.equals("sensor")){
 							listMessage.add(C.getPlaceSensor(in.readLine(),s));
 						}
 					}
-					if(recu.equals("room")) {
-						if(recu.equals("name")) {
+					if(received.equals("room")) {
+						if(received.equals("name")) {
 							listMessage.add(C.getRoomName());
 						}
 					}
 				}
-				if(recu.equals("update")){
+				if(received.equals("update")){
 					update(in,C);
 					listMessage.add("update element");
 				}
-				if(recu.equals("delete")){
+				if(received.equals("delete")){
 					delete(in,C);
 					listMessage.add("element deleted");
 				}
-				if(recu.equals("insert")){
+				if(received.equals("insert")){
 					insert(in,C);
 					listMessage.add("element added");
 				}
@@ -142,10 +142,10 @@ class ServerSocketTCP implements Runnable{
 
 	private synchronized void insert(BufferedReader in, ConnectionCrud c) throws IOException, SQLException {
 		logger.info("insert");
-		String recu = in.readLine();
-		if(recu.equals("be_present")){
+		String received = in.readLine();
+		if(received.equals("be_present")){
 			String s = in.readLine();
-			if(s.equals("equipement")){
+			if(s.equals("equipment")){
 				s = in.readLine();
 			c.insertBePresentEquipment(s,in.readLine());}
 			if(s.equals("sensor")){
@@ -160,7 +160,7 @@ class ServerSocketTCP implements Runnable{
 		String recu = in.readLine();
 		if(recu.equals("be_present")){
 			recu = in.readLine();
-			if(recu.equals("equipement")){
+			if(recu.equals("equipment")){
 			    C.deleteBePresentEquipment(in.readLine());
 			}
 			if(recu.equals("sensor")){
