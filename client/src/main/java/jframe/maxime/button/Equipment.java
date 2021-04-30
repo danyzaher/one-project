@@ -13,7 +13,7 @@ public class Equipment extends JButton implements ActionListener {
     public String name;
     final int WIDTH=13;
     final int HEIGHT=13;
-    public boolean etat;
+    public boolean animated;
     public int id;
     ArrayList<String> result;
     public String roomName;
@@ -28,18 +28,18 @@ public class Equipment extends JButton implements ActionListener {
         this.id=id;
         this.name = name;
         addActionListener(this);
-        getEtat();
+        getAnimated();
         setBounds(x,y,WIDTH,HEIGHT);
     }
-    public void getEtat() {
+    public void getAnimated() {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("equipment");
-        stringArrayList.add("etat");
+        stringArrayList.add("animated");
         stringArrayList.add("" + id);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
-        etat = result.get(0).equals("t");
+        animated = result.get(0).equals("t");
     }
     @Override
     public void actionPerformed(ActionEvent e) {

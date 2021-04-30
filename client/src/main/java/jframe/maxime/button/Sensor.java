@@ -15,10 +15,10 @@ public class Sensor extends JButton implements ActionListener, Border {
     public String name;
     final int WIDTH=11;
     final int HEIGHT=11;
-    public boolean etat;
+    public boolean animated;
     public int id;
     ArrayList<String> result;
-    private int r = 15;
+    private final int r = 15;
      public String roomName;
      public MapperRoom mapperRoom;
      public int x;
@@ -33,18 +33,18 @@ public class Sensor extends JButton implements ActionListener, Border {
         addActionListener(this);
         this.setBorder(this);
         setBounds(x,y,WIDTH,HEIGHT);
-        getEtat();
+        getAnimated();
     }
 
-    public void getEtat() {
+    public void getAnimated() {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("sensor");
-        stringArrayList.add("etat");
+        stringArrayList.add("animated");
         stringArrayList.add("" + id);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
-        etat = result.get(0).equals("t");
+        animated = result.get(0).equals("t");
     }
 
     public Insets getBorderInsets(Component c) {

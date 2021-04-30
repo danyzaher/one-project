@@ -18,7 +18,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
     MapperRoom mapperRoom;
     JLabel l1, l2;
     JButton jButton;
-    JComboBox combobox;
+    JComboBox jComboBox;
     ArrayList<String> s1 = new ArrayList<>() ;
     GoBackButton goBackButton;
     public WindowListSensor(MapperRoom mapperRoom){
@@ -30,8 +30,8 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         setSize(700,700);
         getListSensorAvailable();
         String[] s2 = s1.toArray(new String[0]);
-        combobox = new JComboBox(s2);
-        combobox.addItemListener(this);
+        jComboBox = new JComboBox(s2);
+        jComboBox.addItemListener(this);
 
         l1 = new JLabel("choisissez un capteur à ajouter ");
         l2 = new JLabel();
@@ -40,7 +40,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
 
         JPanel p = new JPanel();
         p.add(l1);
-        p.add(combobox);
+        p.add(jComboBox);
         p.add(l2);
         add(p);
         jButton = new JButton("Confirmer");
@@ -49,7 +49,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         jButton.addActionListener(this);
     }
     public void getListSensorAvailable(){
-        logger.info("begin getListEquipementAvailable");
+        logger.info("begin getListSensorAvailable");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("sensor");
@@ -69,16 +69,16 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
     public void actionPerformed(ActionEvent e) {
         if(e.getSource()==jButton){
             MapperRoom mapperRoom2 = new MapperRoom(mapperRoom.nameRoom);
-            mapperRoom2.getEmplacement((String) combobox.getSelectedItem(),false);
+            mapperRoom2.getEmplacement((String) jComboBox.getSelectedItem(),false);
         }
     }
 
     public void itemStateChanged(ItemEvent e)
     {
         // si l'état du combobox est modifiée
-        if (e.getSource() == combobox) {
+        if (e.getSource() == jComboBox) {
 
-            l2.setText(" ["+combobox.getSelectedItem()+"]");
+            l2.setText(" ["+ jComboBox.getSelectedItem()+"]");
         }
     }
 }

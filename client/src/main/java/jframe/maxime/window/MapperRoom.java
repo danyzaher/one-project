@@ -29,7 +29,7 @@ public class MapperRoom extends JFrame implements ActionListener {
     GoBackMenuTotal goBackMenuTotal = new GoBackMenuTotal(this);
     int width;
     int height;
-    Legende legende = new Legende();
+    Legend legend = new Legend();
     public MapperRoom(String nameRoom){
         this.nameRoom = nameRoom;
         setTitle(nameRoom);
@@ -42,7 +42,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         jMenu = new JMenu("Menu");
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
-        jMenuBar.add(legende);
+        jMenuBar.add(legend);
         e1 = new JMenuItem("Liste des équipement à ajouter");
         e1.addActionListener(this);
         e2 = new JMenuItem("Liste des capteurs à ajouter");
@@ -53,11 +53,11 @@ public class MapperRoom extends JFrame implements ActionListener {
         this.setJMenuBar(jMenuBar);
     }
     public void getEquipment(){
-        logger.info("begin getEquipement");
+        logger.info("begin getEquipment");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("equipment");
-        stringArrayList.add("dansSalle");
+        stringArrayList.add("inRoom");
         stringArrayList.add(nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
@@ -71,7 +71,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         }
         for (Equipment equipment : listEquipmentInRoom) {
             add(equipment);
-            if (equipment.etat) {
+            if (equipment.animated) {
                 equipment.setBackground(Color.GREEN);
             } else {
                 equipment.setBackground(Color.RED);
@@ -89,7 +89,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("sensor");
-        stringArrayList.add("dansSalle");
+        stringArrayList.add("inRoom");
         stringArrayList.add(nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
@@ -103,7 +103,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         }
         for (Sensor sensor : sensorArrayList) {
             add(sensor);
-            if (sensor.etat) sensor.setBackground(Color.CYAN);
+            if (sensor.animated) sensor.setBackground(Color.CYAN);
             else sensor.setBackground(Color.PINK);
         }
     }
@@ -157,7 +157,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         this.setVisible(false);
     }
     public void setEquipment(PlaceMove p){
-        logger.info("begin setEquipement");
+        logger.info("begin setEquipment");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("update");
         stringArrayList.add("be_present");

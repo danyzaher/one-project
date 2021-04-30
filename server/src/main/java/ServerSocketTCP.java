@@ -66,10 +66,10 @@ class ServerSocketTCP implements Runnable{
 						if (s.equals("available")){
 							listMessage.add(C.getEquipmentAvailable(in.readLine()));
 						}
-						if(s.equals("etat")){
+						if(s.equals("animated")){
 							listMessage.add(C.getEtatEquipment(in.readLine()));
 						}
-						if(s.equals("dansSalle")){
+						if(s.equals("inRoom")){
 						listMessage.add(C.getEquipment(in.readLine()));}
 					}
 					if(received.equals("sensor")){
@@ -77,10 +77,10 @@ class ServerSocketTCP implements Runnable{
 						if (s.equals("available")){
 							listMessage.add(C.getSensorAvailable(in.readLine()));
 						}
-						if(s.equals("etat")){
+						if(s.equals("animated")){
 							listMessage.add(C.getEtatSensor(in.readLine()));
 						}
-						if(s.equals("dansSalle")){
+						if(s.equals("inRoom")){
 							listMessage.add(C.getSensor(in.readLine()));}
 					}
 					if(received.equals("opacity")){
