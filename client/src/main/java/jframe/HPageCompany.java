@@ -27,7 +27,7 @@ public class HPageCompany extends JFrame implements ActionListener {
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){
-        logger.info("begin HPageComany "+s);
+        logger.info("begin HPageCompany "+s);
         title = s;
         setTitle("Page d'accueil de l'entreprise "+s);
         setLayout(new FlowLayout());
@@ -64,10 +64,7 @@ public class HPageCompany extends JFrame implements ActionListener {
             r1.addActionListener(this);
             if (this.containsBuilding(r3)){
                 if (containsBuilding(r2)){
-                    if (containsBuilding(r1)){
-                        //nothing
-                    }
-                    else{//foireux
+                    if (!containsBuilding(r1)){
                         logger.info("in getMenu if if else ");
                         jMenus.get(indexBuilding(r3)).
                                 jf.get(indexBuilding(r2)).
@@ -114,43 +111,50 @@ public class HPageCompany extends JFrame implements ActionListener {
         return 0;
     }
     public int indexBuilding(JMenuFloor j){
-        for(int k=0;k<jMenus.size();k++){
-            for(int i=0;i<jMenus.get(k).jf.size();i++){
-                if (jMenus.get(k).jf.get(i).jf.equals(j.jf)){
+        for (JMenuBuilding menu : jMenus) {
+            for (int i = 0; i < menu.jf.size(); i++) {
+                if (menu.jf.get(i).jf.equals(j.jf)) {
                     return i;
                 }
             }
-        }return 0;
+        }
+        return 0;
     }
     public boolean containsBuilding(JMenuBuilding j){
-        for(int k=0;k<jMenus.size();k++){
-            String s = jMenus.get(k).jb.getText();
+        for (JMenuBuilding menu : jMenus) {
+            String s = menu.jb.getText();
             String ss = j.jb.getText();
-            if(s.equals(ss)){
+            if (s.equals(ss)) {
                 return true;
             }
-        }return false;
+        }
+        return false;
     }
     public boolean containsBuilding(JMenuFloor j){
-        for(int k=0;k<jMenus.size();k++){
-            for (int i=0;i<jMenus.get(k).jf.size();i++){
-                String s = jMenus.get(k).jf.get(i).jf.getText();
+        for (JMenuBuilding menu : jMenus) {
+            for (int i = 0; i < menu.jf.size(); i++) {
+                String s = menu.jf.get(i).jf.getText();
                 String ss = j.jf.getText();
-            if(s.equals(ss)){
-                return true;}
+                if (s.equals(ss)) {
+                    return true;
+                }
             }
-        }return false;
+        }
+        return false;
     }
     public boolean containsBuilding(JMenuItem j){
-        for(int k=0;k<jMenus.size();k++){
-            for (int i=0;i<jMenus.get(k).jf.size();i++){
-                for (int m=0;m<jMenus.get(k).jf.get(i).jr.size();m++){
-                String s = jMenus.get(k).jf.get(i).jr.get(m).getText();
-                String ss = j.getText();
-                if(s.equals(ss)){
-                    return true;}}
+        for (JMenuBuilding menu : jMenus) {
+            for (int i = 0; i < menu.jf.size(); i++) {
+                for (int m = 0; m < menu.jf.get(i).jr.size(); m++) {
+                    String s = menu.jf.get(i).jr.get(m).getText();
+                    String ss = j.getText();
+                    if (s.equals(ss)) {
+                        return true;
+                    }
+                }
             }
-        }return false;
+        }
+        return false;
     }
     public void newGoBack(JFrame j){
         goBackMenu = new GoBackMenu(this,j);
@@ -158,11 +162,11 @@ public class HPageCompany extends JFrame implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        for(int k=0; k<jMenus.size();k++){
-            for (int i=0;i<jMenus.get(k).jf.size();i++){
-                for(int j=0;j<jMenus.get(k).jf.get(i).jr.size();j++){
-                    if(e.getSource()==jMenus.get(k).jf.get(i).jr.get(j)){
-                        MapperRoom mapperRoom = new MapperRoom(jMenus.get(k).jf.get(i).jr.get(j).getText());
+        for (JMenuBuilding menu : jMenus) {
+            for (int i = 0; i < menu.jf.size(); i++) {
+                for (int j = 0; j < menu.jf.get(i).jr.size(); j++) {
+                    if (e.getSource() == menu.jf.get(i).jr.get(j)) {
+                        MapperRoom mapperRoom = new MapperRoom(menu.jf.get(i).jr.get(j).getText());
                         mapperRoom.newGoBack(this);
                     }
                 }
