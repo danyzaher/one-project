@@ -42,7 +42,43 @@ public class ConnectionCrud {
             result += rs.getArray("name")+ "\n";}
         return result;
     }
-    public String getMenu(String company) throws SQLException{
+    public String getCompanyId(String name) throws SQLException{
+        String sql = "Select address from Company where name=" + name + ";";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("address")+ "\n";}
+        return result;
+    }
+    public String getRoomInOrder(String min, String max) throws SQLException {
+        String sql = "Select room_s_number from room  where room_s_number in (select getroominb(" + min + "," + max + ")) order by grade asc;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("room_s_number")+ "\n";}
+        return result;
+    }
+    public String getCapacityInOrder(String min, String max) throws SQLException {
+        String sql = "Select capacity from room  where room_s_number in (select getroominb(" + min + "," + max + ")) order by grade asc;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("capacity")+ "\n";}
+        return result;
+    }
+    public String getPrice(String id, String electro) throws SQLException {
+        String sql = "Select getprice(" + id + "," + electro + ") as price;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result = rs.getArray("price")+ "\n";}
+        return result;
+    }
+    public String getMenu(String company) throws  SQLException{
         logger.info("in geMenu");
         String sql = "Select room.name, floor.floor_s_number,building.address from floor inner join room on floor.id_floor=room.id_floor inner join building on floor.address=building.address where room.room_s_number in ( Select room_s_number from location inner join company on company.id_company=location.id_company where company.name= '"+company+"');";
         logger.info(sql);

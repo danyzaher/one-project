@@ -19,7 +19,6 @@ public class Offers extends JFrame implements ActionListener {
         setTitle("Offres");
         setSize(400,300);
         setLayout(new FlowLayout());
-        setDefaultCloseOperation(EXIT_ON_CLOSE);
         nboffers = 5;
         pan.setLayout(new BoxLayout(pan,BoxLayout.PAGE_AXIS));
         pan.add(title);
