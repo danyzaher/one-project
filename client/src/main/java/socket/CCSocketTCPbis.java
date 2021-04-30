@@ -32,6 +32,7 @@ public class CCSocketTCPbis {
         }
         Socket socket = null;
         try {
+            assert sc != null;
             socket = new Socket(sc.getIp(), sc.getPort());
         } catch (IOException e) {
             e.printStackTrace();
@@ -40,6 +41,7 @@ public class CCSocketTCPbis {
 
         BufferedReader plec = null;
         try {
+            assert socket != null;
             plec = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
             e.printStackTrace();
@@ -51,16 +53,18 @@ public class CCSocketTCPbis {
             e.printStackTrace();
         }
 
-        for (int i = 0; i < strings.size(); i++) {
-            pred.println(strings.get(i));
+        for (String string : strings) {
+            assert pred != null;
+            pred.println(string);
         }
+        assert pred != null;
         pred.println("end");
         try {
-            String recu = null;
+            String received;
             clientLog.info("Starting receiving data");
-            while ((recu = plec.readLine()) != null) {
-                clientLog.info(recu);
-                result.add(recu);
+            while ((received = plec.readLine()) != null) {
+                clientLog.info(received);
+                result.add(received);
             }
         } catch (Exception e) {
             e.printStackTrace();
