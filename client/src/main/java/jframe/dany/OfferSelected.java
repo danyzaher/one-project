@@ -20,7 +20,7 @@ public class OfferSelected extends JFrame implements ActionListener {
         this.companyName=companyName;
         oneOffer = on;
         setTitle("Détails de l'offre");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
         setSize(800, 300);
         setResizable(false);
         setLayout(new FlowLayout());
@@ -35,14 +35,22 @@ public class OfferSelected extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == rent) {
-            ArrayList<String> al = new ArrayList<>();
-            al.add("insert");
-            al.add("location");
-            al.add(oneOffer.getPrice());
-            al.add(companyName);
-            al.add(oneOffer.getId());
-            new CCSocketTCPbis(al);
-            jframe.dany.Success s = new jframe.dany.Success();
+            for (int i = 0; i < oneOffer.getId().size(); i++) {
+                ArrayList<String> commands = new ArrayList<>();
+                commands.add("show");
+                commands.add("company");
+                commands.add("id");
+                commands.add(oneOffer.getId().get(i));
+                CCSocketTCPbis cc = new CCSocketTCPbis(commands);
+                ArrayList<String> al = new ArrayList<>();
+                al.add("insert");
+                al.add("location");
+                al.add(oneOffer.getPrice());
+                al.add(cc.result.get(0));
+                al.add(oneOffer.getId().get(i));
+                new CCSocketTCPbis(al);
+            }
+            Success s = new Success();
         }
     }
 }

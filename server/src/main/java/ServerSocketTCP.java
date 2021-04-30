@@ -54,6 +54,9 @@ class ServerSocketTCP implements Runnable{
 							logger.info("last if");
 							listMessage.add(C.getCompanyName());
 						}
+						if (recu.equals("id")) {
+							listMessage.add(C.getCompanyId(in.readLine()));
+						}
 					}
 					if (recu.equals("size")){
 						listMessage.add(C.getSizeRoom(in.readLine()));
@@ -111,8 +114,18 @@ class ServerSocketTCP implements Runnable{
 						}
 					}
 					if(recu.equals("room")) {
+						recu = in.readLine();
+						if(recu.equals("id")) {
+							listMessage.add(C.getRoomInOrder(in.readLine(),in.readLine()));
+						}
+						if(recu.equals("capacity")) {
+							listMessage.add(C.getCapacityInOrder(in.readLine(),in.readLine()));
+						}
 						if(recu.equals("name")) {
 							listMessage.add(C.getRoomName());
+						}
+						if(recu.equals("price")) {
+							listMessage.add(C.getPrice(in.readLine(),in.readLine()));
 						}
 					}
 				}
