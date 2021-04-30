@@ -1,7 +1,7 @@
 package jframe.maxime.button;
 
 import jframe.maxime.window.MapperRoom;
-import jframe.maxime.window.WindowEquipement;
+import jframe.maxime.window.WindowEquipment;
 import socket.CCSocketTCPbis;
 
 import javax.swing.*;
@@ -9,7 +9,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class Equipement extends JButton implements ActionListener {
+public class Equipment extends JButton implements ActionListener {
     public String name;
     final int WIDTH=13;
     final int HEIGHT=13;
@@ -20,7 +20,7 @@ public class Equipement extends JButton implements ActionListener {
     public MapperRoom mapperRoom;
     public int x;
     public int y;
-    public Equipement(String name, int x, int y, int id, String roomName, MapperRoom m){
+    public Equipment(String name, int x, int y, int id, String roomName, MapperRoom m){
         this.x=x;
         this.y=y;
         this.mapperRoom=m;
@@ -34,7 +34,7 @@ public class Equipement extends JButton implements ActionListener {
     public void getEtat() {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
-        stringArrayList.add("equipement");
+        stringArrayList.add("equipment");
         stringArrayList.add("etat");
         stringArrayList.add("" + id);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
@@ -43,7 +43,7 @@ public class Equipement extends JButton implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent e) {
-        WindowEquipement windowEquipement =new WindowEquipement(this);
-        windowEquipement.newGoBack(mapperRoom);
+        WindowEquipment windowEquipment =new WindowEquipment(this);
+        windowEquipment.newGoBack(mapperRoom);
     }
 }

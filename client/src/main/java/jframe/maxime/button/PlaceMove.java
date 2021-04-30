@@ -22,7 +22,7 @@ public class PlaceMove extends JButton implements ActionListener {
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) {mapperRoom.setEquipement(this);}
+    public void actionPerformed(ActionEvent e) {mapperRoom.setEquipment(this);}
 
     }
 

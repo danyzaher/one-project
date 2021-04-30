@@ -14,12 +14,12 @@ import java.util.ArrayList;
 public class MapperRoom extends JFrame implements ActionListener {
     public static Logger logger = LoggerFactory.getLogger("MapperRoom");
     String type;
-    boolean sensorOrequipement;
+    boolean sensorEquipment;
     String nameRoom;
     JMenuItem e1;
     JMenuItem e2;
     JMenuItem electrochroma;
-    ArrayList<Equipement> listEquipementDansLaSalle = new ArrayList<>();
+    ArrayList<Equipment> listEquipmentInRoom = new ArrayList<>();
     ArrayList<Sensor> sensorArrayList = new ArrayList<>();
     ArrayList<Place> placeArrayList = new ArrayList<>();
     ArrayList<PlaceMove> placeMoveArrayList = new ArrayList<>();
@@ -36,7 +36,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         setVisible(true);
         getSizeBis();
         setSize(width,height);
-        getEquipement();
+        getEquipment();
         getSensor();
         setLayout(null);
         jMenu = new JMenu("Menu");
@@ -52,11 +52,11 @@ public class MapperRoom extends JFrame implements ActionListener {
         jMenu.add(goBackMenuTotal);
         this.setJMenuBar(jMenuBar);
     }
-    public void getEquipement(){
+    public void getEquipment(){
         logger.info("begin getEquipement");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
-        stringArrayList.add("equipement");
+        stringArrayList.add("equipment");
         stringArrayList.add("dansSalle");
         stringArrayList.add(nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
@@ -66,20 +66,20 @@ public class MapperRoom extends JFrame implements ActionListener {
             String nom = result.get(k+1);
             int position_x = Integer.parseInt(result.get(k+2));
             int position_y = Integer.parseInt(result.get(k+3));
-            Equipement equipement = new Equipement(nom,position_x,position_y,id, nameRoom,this);
-            listEquipementDansLaSalle.add(equipement);
+            Equipment equipment = new Equipment(nom,position_x,position_y,id, nameRoom,this);
+            listEquipmentInRoom.add(equipment);
         }
-        for (Equipement equipement : listEquipementDansLaSalle) {
-            add(equipement);
-            if (equipement.etat) {
-                equipement.setBackground(Color.GREEN);
+        for (Equipment equipment : listEquipmentInRoom) {
+            add(equipment);
+            if (equipment.etat) {
+                equipment.setBackground(Color.GREEN);
             } else {
-                equipement.setBackground(Color.RED);
+                equipment.setBackground(Color.RED);
             }
-            if ((equipement.name.equals("fenêtre électrochromatique"))
-                    | (equipement.name.equals("Store"))) {
+            if ((equipment.name.equals("fenêtre électrochromatique"))
+                    | (equipment.name.equals("Store"))) {
                 logger.info("coloré en gris");
-                equipement.setBackground(Color.GRAY);
+                equipment.setBackground(Color.GRAY);
             }
         }
 
@@ -120,10 +120,10 @@ public class MapperRoom extends JFrame implements ActionListener {
         stringArrayList.add("show");
         stringArrayList.add("emplacement");
         if(b){
-            stringArrayList.add("equipement");
-            sensorOrequipement = true;
+            stringArrayList.add("equipment");
+            sensorEquipment = true;
         } else {stringArrayList.add("sensor");
-        sensorOrequipement = false;}
+        sensorEquipment = false;}
         stringArrayList.add(nameRoom);
         stringArrayList.add(type);
         this.type=type;
@@ -142,13 +142,13 @@ public class MapperRoom extends JFrame implements ActionListener {
             place.setBackground(Color.ORANGE);
         }
     }
-    public void setEquipement(Place p){
-        logger.info("begin setEquipement");
+    public void setEquipment(Place p){
+        logger.info("begin setEquipment");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("insert");
         stringArrayList.add("be_present");
-        if (sensorOrequipement){
-            stringArrayList.add("equipement");
+        if (sensorEquipment){
+            stringArrayList.add("equipment");
         } else {stringArrayList.add("sensor");}
         stringArrayList.add(p.id+"");
         stringArrayList.add(type);
@@ -156,13 +156,13 @@ public class MapperRoom extends JFrame implements ActionListener {
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
         this.setVisible(false);
     }
-    public void setEquipement(PlaceMove p){
+    public void setEquipment(PlaceMove p){
         logger.info("begin setEquipement");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("update");
         stringArrayList.add("be_present");
-        if (sensorOrequipement){
-            stringArrayList.add("equipement");
+        if (sensorEquipment){
+            stringArrayList.add("equipment");
         } else {stringArrayList.add("sensor");}
         stringArrayList.add(p.id2+""); //id place
         stringArrayList.add(p.id); //id equip or sensor
@@ -186,10 +186,10 @@ public class MapperRoom extends JFrame implements ActionListener {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("emplacement");
-        if(b){ stringArrayList.add("equipement");
-            sensorOrequipement = true;
+        if(b){ stringArrayList.add("equipment");
+            sensorEquipment = true;
         } else {stringArrayList.add("sensor");
-            sensorOrequipement = false;}
+            sensorEquipment = false;}
         stringArrayList.add(nameRoom);
         stringArrayList.add(type);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
