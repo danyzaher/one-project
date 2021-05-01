@@ -147,8 +147,8 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getRoomName() throws SQLException {
-        String sql = "Select name from room;";
+    public String getRoomName(String id) throws SQLException {
+        String sql = "Select name from room where room_s_number = " + id + ";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";

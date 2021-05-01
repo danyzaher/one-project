@@ -122,7 +122,7 @@ class ServerSocketTCP implements Runnable{
 							listMessage.add(C.getCapacityInOrder());
 						}
 						if(recu.equals("name")) {
-							listMessage.add(C.getRoomName());
+							listMessage.add(C.getRoomName(in.readLine()));
 						}
 						if(recu.equals("price")) {
 							listMessage.add(C.getPrice(in.readLine(),in.readLine()));

@@ -8,9 +8,8 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Offers extends JFrame implements ActionListener {
-    JPanel pan = new JPanel();
+    JPanel bigpan = new JPanel();
     JLabel title = new JLabel("Choisissez une offre");
-    int nboffers;
     ArrayList<jframe.dany.OneOffer> offers;
     String companyName;
     public Offers(ArrayList<jframe.dany.OneOffer> list, String companyName) {
@@ -19,13 +18,12 @@ public class Offers extends JFrame implements ActionListener {
         setTitle("Offres");
         setSize(400,300);
         setLayout(new FlowLayout());
-        nboffers = 5;
-        pan.setLayout(new BoxLayout(pan,BoxLayout.PAGE_AXIS));
-        pan.add(title);
+        bigpan.setLayout(new BoxLayout(bigpan,BoxLayout.PAGE_AXIS));
+        bigpan.add(title);
         for (jframe.dany.OneOffer offer : offers) {
-            pan.add(offer);
+            bigpan.add(offer);
         }
-
+        this.add(bigpan);
         setVisible(true);
     }
     @Override

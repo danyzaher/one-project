@@ -8,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -171,8 +172,8 @@ public class Search  extends JFrame implements ActionListener {
                 // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
 
                 for (ArrayList<String> list : offers) {
-                    System.out.println("############## debut d'offre #################");
-                    System.out.println(list);
+                    SearchLog.info("############## debut d'offre #################");
+                    SearchLog.info(String.valueOf(list));
                     ArrayList<String> ids = new ArrayList<>();
                     int finalprice = 0;
                     StringBuilder finaltitle = new StringBuilder();
@@ -185,16 +186,15 @@ public class Search  extends JFrame implements ActionListener {
                         commands.clear();
                         commands.add("show"); commands.add("room"); commands.add("price"); commands.add(id); commands.add(String.valueOf(electrofen.isSelected()));
                         CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
-
-                        finaltitle.append(cc4.result);
+                        finaltitle.append(cc4.result.get(0)).append(" - ");
                         ids.add(id);
                         finalprice += Integer.parseInt(cc5.result.get(0));
-
+                        commands.clear();
                     }
                     // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
-                    double min = Integer.parseInt(bmin.getText()) - Integer.parseInt(bmin.getText())*(10/100);
-                    double max = Integer.parseInt(bmax.getText()) + Integer.parseInt(bmax.getText())*(10/100);
-                    if (finalprice > min && finalprice < max )
+                    double min = Integer.parseInt(bmin.getText());
+                    double max = Integer.parseInt(bmax.getText());
+                    if (finalprice > min && finalprice < max)
                         finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice)));
                 }
             if (finaloffers.isEmpty()) {
@@ -202,6 +202,9 @@ public class Search  extends JFrame implements ActionListener {
                 JLabel notfound = new JLabel("no offers found retry");
                 notfound.setLayout(new BoxLayout(notfound,BoxLayout.LINE_AXIS));
                 notfound.add(bigpan);
+                this.add(bigpan);
+                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
+                Search fen = new Search(companyName);
             } else {
                 for (OneOffer offer : finaloffers) {
                     System.out.println(offer);
