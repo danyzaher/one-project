@@ -70,12 +70,13 @@ public class ConnectionCrud {
         return result;
     }
     public String getPrice(String id, String electro) throws SQLException {
-        String sql = "Select getprice(" + id + "," + electro + ") as price;";
+        String sql = "Select getprice(" + id + "," + electro + ");";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            result = rs.getArray("price")+ "\n";}
+            result = rs.getArray(1)+ "\n";
+            System.out.println(result);}
         return result;
     }
     public String getMenu(String company) throws  SQLException{
