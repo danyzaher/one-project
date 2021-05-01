@@ -35,6 +35,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         setTitle(nameRoom);
         setVisible(true);
         getSizeBis();
+        setResizable(false);
         setSize(width,height);
         getEquipment();
         getSensor();
