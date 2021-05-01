@@ -184,6 +184,9 @@ class ServerSocketTCP implements Runnable{
 		logger.info(" FONCTION update");
 		String recu = in.readLine();
 
+		if(recu.equals("manualmode")){
+			C.PassToManualMode(in.readLine());
+		}
 		if(recu.equals("opacity")){
 			String s = in.readLine(); //id
 			C.updateOpacity(s,in.readLine());//in.readLine() --> opacity by the connection crud
