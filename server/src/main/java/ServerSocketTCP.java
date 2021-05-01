@@ -8,6 +8,7 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -31,8 +32,11 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
+
 	static Datasource source = new Datasource(sc.getNboneco());
 	static Socket socketClient;
+	static AutoModeElectro autoModeElectro = new AutoModeElectro();
+	static ConnectionCrud C1 = new ConnectionCrud();
 	public ServerSocketTCP() {
 	}
 	public void analyseInputStream(Socket socket){
@@ -40,12 +44,15 @@ class ServerSocketTCP implements Runnable{
 			logger.info("Connexion avec : " + socket.getInetAddress());
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			LinkedList<String> listMessage = new LinkedList<>();
-			if (source.size() > 0) {
+			if (Datasource.size() > 0) {
 				ConnectionCrud C = new ConnectionCrud();
 				C.setC(Datasource.getConnection());
-				logger.info("Connection available = " + source.size());
+				logger.info("Connection available = " + Datasource.size());
 				String received = in.readLine();
 				logger.info("received = "+received);
+				if (received.equals("automatic")){
+					autoModeElectro.BrainElectroChroma(C);
+				}
 				if (received.equals("show")){
 					received = in.readLine();
 					if (received.equals("company")){
@@ -125,7 +132,9 @@ class ServerSocketTCP implements Runnable{
 					insert(in,C);
 					listMessage.add("element added");
 				}
+
 				Datasource.setConnection(C.getC());
+
 			} else{
 				listMessage.add("no more connection come back later");
 			}
@@ -214,8 +223,8 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 
-	public static void main(String[] args) throws IOException {
-		logger.info("Server is running");
+	public static void main(String[] args) throws IOException, SQLException {
+		logger.info("Server is running...");
 		ServerSocket socketServer = new ServerSocket(sc.getPort());
 		while (true){
 

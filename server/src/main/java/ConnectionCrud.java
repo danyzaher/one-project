@@ -194,7 +194,7 @@ public class ConnectionCrud {
         while(rs.next()){
             logger.info("in the while");
             result.add(rs.getArray("temperature")+"");
-            result.add(rs.getArray("light")+"");
+            result.add(rs.getArray("luminosity")+"");
         }
         return result;
     }

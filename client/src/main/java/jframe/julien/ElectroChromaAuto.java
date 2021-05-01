@@ -75,7 +75,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
         /** METHODS **/
         getTempExt();
-        getGeneralTempInt();
+
         /** TEMPERATURES AND LIGHT **/
 
         ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + "°C");

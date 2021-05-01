@@ -45,6 +45,10 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
 
         setVisible(true);
 
+        ArrayList<String> client = new ArrayList<>();
+        client.add("automatic");
+        new CCSocketTCPbis(client);
+
     }
     public static void main(String[] args){
          HPage h = new HPage();
