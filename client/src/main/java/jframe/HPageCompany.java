@@ -23,7 +23,7 @@ public class HPageCompany extends JFrame implements ActionListener {
     GoBackMenu goBackMenu;
     JMenuItem badge = new JMenuItem("Badge");
     JMenuItem location = new JMenuItem("Effectuer une nouvelle location");
-    JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température général");
+    JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température générale");
     ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
     ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){

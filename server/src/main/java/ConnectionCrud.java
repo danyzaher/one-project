@@ -111,13 +111,13 @@ public class ConnectionCrud {
         return result;
     }
     public String getOpacityValue(String id) throws SQLException {
-        logger.info("in getOpacityValue");
+       // logger.info("in getOpacityValue");
         String sql ="select valueof from equipement where id_equipement ="+ id +";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while(rs.next()){
-            logger.info("in the while");
+          //  logger.info("in the while");
             result += rs.getArray("valueof");
         }
         return result;
@@ -184,63 +184,63 @@ public class ConnectionCrud {
         return tempint;
 
     }
+
     public ArrayList<String> getGeneralTempLigInt(String id) throws SQLException{
 
-        logger.info("in getGeneralTempLigInt");
+       // logger.info("in getGeneralTempLigInt");
         String sql ="select temperature, luminosity from parameter_of where id_equipement="+id+";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
-            logger.info("in the while");
+            //logger.info("in the while");
             result.add(rs.getArray("temperature")+"");
             result.add(rs.getArray("luminosity")+"");
         }
         return result;
     }
     public ArrayList<String> getLastTempInRoom(String id) throws SQLException {
-        logger.info("in getLastTempInRoom");
+        //logger.info("in getLastTempInRoom");
         String sql ="Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +")) and sensor.description='capteur de température' limit 1;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
-            logger.info("in the while");
+     //       logger.info("in the while");
             result.add(rs.getArray("value_of")+"");
         }return result;
     }
     public ArrayList<String> getLastLightInRoom(String id) throws SQLException {
-        logger.info("in getLastLightInRoom");
+     //   logger.info("in getLastLightInRoom");
         String sql =" Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +"))and sensor.description='capteur de luminosité' limit 1;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
-            logger.info("in the while");
+        //    logger.info("in the while");
             result.add(rs.getArray("value_of")+"");
         }return result;
     }
-
     public ArrayList<String> getIdFenetre() throws SQLException{
-        logger.info("in getIdFenetre");
+      //  logger.info("in getIdFenetre");
         String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='fenêtre électrochromatique');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
-            logger.info("in the while");
+        //    logger.info("in the while");
             result.add(rs.getArray("id_equipement")+"");
         }return result;
 
     }
     public ArrayList<String> getIdStore() throws SQLException{
-        logger.info("in getIdFenetre");
+      //  logger.info("in getIdFenetre");
         String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='Store');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
-            logger.info("in the while");
+          //  logger.info("in the while");
             result.add(rs.getArray("id_equipement")+"");
         }return result;
 
@@ -342,6 +342,19 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
+    public void updateGeneralTempInt(String temp, String company) throws SQLException{
+        logger.info("in update GeneralTempInt");
+        String sql = "update parameter_of set temperature ="+ temp +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
+    }
+    public void updateGeneralLigInt(String light, String company) throws SQLException{
+        logger.info("in update GeneralTempLigInt");
+        String sql = "update parameter_of set luminosity ="+ light +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
+    }
+
     public String getEtatSensor(String id) throws SQLException{
         logger.info("in getEtatSensor");
         String sql = "select animated from sensor where id_sensor="+id+";";

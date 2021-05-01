@@ -37,6 +37,8 @@ class ServerSocketTCP implements Runnable{
 	static Socket socketClient;
 	static AutoModeElectro autoModeElectro = new AutoModeElectro();
 	static ConnectionCrud C1 = new ConnectionCrud();
+	static int compt = 1; //Automatic button
+
 	public ServerSocketTCP() {
 	}
 	public void analyseInputStream(Socket socket){
@@ -50,7 +52,8 @@ class ServerSocketTCP implements Runnable{
 				logger.info("Connection available = " + Datasource.size());
 				String received = in.readLine();
 				logger.info("received = "+received);
-				if (received.equals("automatic")){
+				if (received.equals("automatic") && compt==1){
+					compt+=1;
 					autoModeElectro.BrainElectroChroma(C);
 				}
 				if (received.equals("show")){
@@ -121,6 +124,7 @@ class ServerSocketTCP implements Runnable{
 					}
 				}
 				if(received.equals("update")){
+					logger.info("ON EST DANS LE UPDATE GENERAL");
 					update(in,C);
 					listMessage.add("update element");
 				}
@@ -177,7 +181,7 @@ class ServerSocketTCP implements Runnable{
 	}
 
 	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
-		logger.info("update");
+		logger.info(" FONCTION update");
 		String recu = in.readLine();
 
 		if(recu.equals("opacity")){
@@ -190,6 +194,15 @@ class ServerSocketTCP implements Runnable{
 		}
 		if(recu.equals("location")) {
 			C.setTaken(in.readLine(),in.readLine(),in.readLine());
+		}
+		if(recu.equals("parameters")) {
+
+			String s1 = in.readLine();
+			String s2 = in.readLine();
+			String s3 = in.readLine();
+
+			C.updateGeneralTempInt(s1,s3);
+			C.updateGeneralLigInt(s2,s3);
 		}
 		if(recu.equals("be_present")){
 			String s = in.readLine();

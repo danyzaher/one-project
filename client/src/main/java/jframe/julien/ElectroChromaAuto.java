@@ -42,6 +42,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     String companyName;
 
     public ElectroChromaAuto(String companyName) {
+
         this.companyName = companyName;
 
         /** FRAME SETUP **/
@@ -53,6 +54,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
         validation = new JButton("VALIDER");
         validation.setSize(100, 100);
+        validation.addActionListener(this);
 
         //Temperature ext part
 
@@ -109,10 +111,10 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             logger.info("begin validation for automatic ElectroChroma settings ");
             ArrayList<String> stringArrayList = new ArrayList<>();
             stringArrayList.add("update");
-            stringArrayList.add("temperature");
-            stringArrayList.add("light");
+            stringArrayList.add("parameters");
             stringArrayList.add(Stemp.getValue() + "");
             stringArrayList.add(Slight.getValue() + "");
+            stringArrayList.add(companyName);
             CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
 
         }

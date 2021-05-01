@@ -57,6 +57,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     JButton validation;
 
     public ElectroChromaManuOpa(Equipment equipment) {
+        logger.debug("IN ELECTROCHROMA MANU OPA");
 
         this.roomName = equipment.roomName; //RECUPERATION NAME ROOM
         this.id = equipment.id+""; //RECUPERATION ID EQUIPMENT
@@ -73,26 +74,29 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         setLayout(new FlowLayout());
 
         /** METHOD **/
-
+        logger.debug("DO METHODS...");
         getOpacityValue(); //Get value of the opacity of the window
         getTempExt(); //Get value of the temperature ext
         getTempInt(); //Get value of the temperature int
         getLightInt(); // Get value of the light int
+        logger.debug("METHODS ARE DONE...");
 
         /** SLIDER **/
 
         //Opacity
-
         Sopac = new JSlider(JSlider.HORIZONTAL, 0, 5, opacity);
         Sopac.setMajorTickSpacing(1);
         Sopac.setPaintTicks(true);
         Aopacvalue = new JLabel("Opacité actuelle de la fenetre : " + opacity);
+        logger.debug("DISPLAY SLIDERS AND LABEL FOR SOPAC...");
 
         /** TEMPERATURES AND LIGHT LABELS **/
 
         Atempext = new JLabel("Temperature exterieur : " + temperatureext + " °C");
         Atempint = new JLabel("Temperature interieur : " + temperatureint + " °C");
         Alightint = new JLabel("Luminosité intérieur de la pièce : "+ lightintensity + " lux");
+
+        logger.debug("DISPLAY LABEL TEMP AND LIGHT FOR SOPAC...");
 
         /** ADDING PART **/
 
@@ -146,6 +150,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         stringArrayList.add(id);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.result = ccSocketTCP2.result;
+        logger.debug("result"+result);
         opacity = Integer.parseInt(result.get(0));
         logger.info("id = " + opacity);
 
