@@ -21,10 +21,10 @@ public class AutoModeElectro {
 
                 for(String id_f :id_fenetre){
 
-                    String T0 = "";
-                    String T = "";
-                    String L0 = "";
-                    String L = "";
+                    String T0 = "0";
+                    String T = "0";
+                    String L0 = "0";
+                    String L = "0";
                     ArrayList<String> general = C.getGeneralTempLigInt(id_f);
                     ArrayList<String> requeteT = C.getLastTempInRoom(id_f);
                     ArrayList<String> requeteL = C.getLastLightInRoom(id_f);
@@ -44,6 +44,12 @@ public class AutoModeElectro {
                     else{
                         L=L0;
                     }
+
+                    int t =Integer.parseInt(T);
+                    int t0 = Integer.parseInt(T0);
+                    int l =Integer.parseInt(L);
+                    int l0 = Integer.parseInt(L0);
+
                 }
             }
         }
