@@ -36,7 +36,7 @@ public class CCSocketTCPbis {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        clientLog.info("SOCKET = " + socket);
+//        clientLog.info("SOCKET = " + socket);
 
         BufferedReader plec = null;
         try {
@@ -57,16 +57,16 @@ public class CCSocketTCPbis {
         pred.println("end");
         try {
             String recu = null;
-            clientLog.info("Starting receiving data");
+//            clientLog.info("Starting receiving data");
             while ((recu = plec.readLine()) != null) {
-                clientLog.info(recu);
+//                clientLog.info(recu);
                 result.add(recu);
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        clientLog.info("END");
+//        clientLog.info("END");
     }
 
 

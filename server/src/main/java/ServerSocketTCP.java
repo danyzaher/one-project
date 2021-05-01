@@ -116,10 +116,10 @@ class ServerSocketTCP implements Runnable{
 					if(recu.equals("room")) {
 						recu = in.readLine();
 						if(recu.equals("id")) {
-							listMessage.add(C.getRoomInOrder(in.readLine(),in.readLine()));
+							listMessage.add(C.getRoomInOrder());
 						}
 						if(recu.equals("capacity")) {
-							listMessage.add(C.getCapacityInOrder(in.readLine(),in.readLine()));
+							listMessage.add(C.getCapacityInOrder());
 						}
 						if(recu.equals("name")) {
 							listMessage.add(C.getRoomName());

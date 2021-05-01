@@ -1,5 +1,7 @@
 package jframe.dany;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
 
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Search  extends JFrame implements ActionListener {
+    protected static Logger SearchLog  = LoggerFactory.getLogger("Search");
     JPanel bigpan = new JPanel();
     JPanel pan1 = new JPanel();
     JPanel pan2 = new JPanel();
@@ -80,23 +83,11 @@ public class Search  extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == done) {
-            System.out.println("Nombre employés : " + nbpeople.getText());
-            System.out.println("Budget min : " + bmin.getText() + " Budget max : " + bmax.getText());
-            System.out.println("Fenetres electrochromatiques : " + electrofen.isSelected());
-            System.out.println("Soleil important : " + sun.isSelected());
-            System.out.println("Hauteur importante : " + height.isSelected());
-
-            // GET ALL ROOMS IN THE CLIENTS'S BUDGET
-
-
             ArrayList<String> commands = new ArrayList<>();
             commands.add("show");
             commands.add("room");
             commands.add("id");
-            commands.add(bmin.getText());
-            commands.add(bmax.getText());
             socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
-            System.out.println("GETROOMINB" + cc.result);
             commands.clear();
             // SET A GRADE FOR EACH IDs
 
@@ -136,31 +127,24 @@ public class Search  extends JFrame implements ActionListener {
             commands.add("show");
             commands.add("room");
             commands.add("id");
-            commands.add(bmin.getText());
-            commands.add(bmax.getText());
+
             CCSocketTCPbis cc2 = new CCSocketTCPbis(commands);
             commands.clear();
             commands.add("show");
             commands.add("room");
             commands.add("capacity");
-            commands.add(bmin.getText());
-            commands.add(bmax.getText());
+
             CCSocketTCPbis cc3 = new CCSocketTCPbis(commands);
             commands.clear();
             // USE STACK TO ONLY USE EACH IDs ONE TIME
             Stack<String> idroom = new Stack<>();
             Stack<String> capacities = new Stack<>();
-            for (int i = 0; i < cc3.result.size(); i++) {
+            for (int i = 0; i < cc3.result.size()-1; i++) {
                 idroom.add(cc2.result.get(i));
                 capacities.add(cc3.result.get(i));
             }
 
-            System.out.println("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
-            if (idroom.isEmpty()) {
-                System.out.println("no offers found retry");
-            } else {
-                idroom.pop();
-                capacities.pop();
+
                 int people = 0;
                 ArrayList<ArrayList<String>> offers = new ArrayList<>();
 
@@ -177,9 +161,7 @@ public class Search  extends JFrame implements ActionListener {
                             break;
                         }
                     }
-                    System.out.println(offer);
                     if (!offer.isEmpty() && people >= Integer.parseInt(nbpeople.getText())) {
-                        System.out.println("adding an offer size :" + offer.size());
                         offers.add(offer);
                     }
                     people = 0;
@@ -187,7 +169,7 @@ public class Search  extends JFrame implements ActionListener {
                 ArrayList<OneOffer> finaloffers = new ArrayList<>();
                 commands.clear();
                 // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
-                System.out.println(offers.size());
+
                 for (ArrayList<String> list : offers) {
                     System.out.println("############## debut d'offre #################");
                     System.out.println(list);
@@ -201,18 +183,31 @@ public class Search  extends JFrame implements ActionListener {
                         commands.add(id);
                         CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
                         commands.clear();
-                        commands.add("room"); commands.add("price"); commands.add(id); commands.add(String.valueOf(electrofen.isSelected()));
+                        commands.add("show"); commands.add("room"); commands.add("price"); commands.add(id); commands.add(String.valueOf(electrofen.isSelected()));
                         CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
 
-                        System.out.println(cc5.result);
                         finaltitle.append(cc4.result);
                         ids.add(id);
                         finalprice += Integer.parseInt(cc5.result.get(0));
+
                     }
-                    finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice)));
+                    // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
+                    double min = Integer.parseInt(bmin.getText()) - Integer.parseInt(bmin.getText())*(10/100);
+                    double max = Integer.parseInt(bmax.getText()) + Integer.parseInt(bmax.getText())*(10/100);
+                    if (finalprice > min && finalprice < max )
+                        finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice)));
+                }
+            if (finaloffers.isEmpty()) {
+                SearchLog.info("no offers found retry");
+                JLabel notfound = new JLabel("no offers found retry");
+                notfound.setLayout(new BoxLayout(notfound,BoxLayout.LINE_AXIS));
+                notfound.add(bigpan);
+            } else {
+                for (OneOffer offer : finaloffers) {
+                    System.out.println(offer);
                 }
 
-                // ADD ALL ONEOFFERs IN A LIST AND GO TO THE NEXT PAGE WITH
+                // GO TP THE NEXT PAGE
                 Offers ofpage = new Offers(finaloffers, companyName);
             }
         }

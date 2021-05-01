@@ -51,8 +51,8 @@ public class ConnectionCrud {
             result += rs.getArray("address")+ "\n";}
         return result;
     }
-    public String getRoomInOrder(String min, String max) throws SQLException {
-        String sql = "Select room_s_number from room  where room_s_number in (select getroominb(" + min + "," + max + ")) order by grade asc;";
+    public String getRoomInOrder() throws SQLException {
+        String sql = "Select room_s_number from room  where room_s_number in (select getroomavailable()) order by grade asc;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
@@ -60,8 +60,8 @@ public class ConnectionCrud {
             result += rs.getArray("room_s_number")+ "\n";}
         return result;
     }
-    public String getCapacityInOrder(String min, String max) throws SQLException {
-        String sql = "Select capacity from room  where room_s_number in (select getroominb(" + min + "," + max + ")) order by grade asc;";
+    public String getCapacityInOrder() throws SQLException {
+        String sql = "Select capacity from room  where room_s_number in (select getroomavailable()) order by grade asc;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
@@ -69,18 +69,21 @@ public class ConnectionCrud {
             result += rs.getArray("capacity")+ "\n";}
         return result;
     }
+
     public String getPrice(String id, String electro) throws SQLException {
-        String sql = "Select getprice(" + id + "," + electro + ");";
+        logger.info("in getPrice");
+        String sql = "Select getprice(" + id + "," + electro + ") as price;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            result = rs.getArray(1)+ "\n";
-            System.out.println(result);}
+            result = rs.getArray("price")+ "\n";
+        }
         return result;
     }
+
     public String getMenu(String company) throws  SQLException{
-        logger.info("in geMenu");
+        logger.info("in getMenu");
         String sql = "Select room.name, floor.floor_s_number,building.address from floor inner join room on floor.id_floor=room.id_floor inner join building on floor.address=building.address where room.room_s_number in ( Select room_s_number from location inner join company on company.id_company=location.id_company where company.name= '"+company+"');";
         logger.info(sql);
         Statement smt = c.createStatement();
@@ -120,6 +123,16 @@ public class ConnectionCrud {
             logger.info("in the while");
             result += rs.getArray("valueof");
         }
+        return result;
+    }
+    public String getRoomAvailable() throws SQLException {
+        logger.info("in getRoomAvailable");
+        String sql = "Select getroomavailable() as room;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("room")+ "\n";}
         return result;
     }
     public String getStoreHighValue(String id) throws SQLException {
