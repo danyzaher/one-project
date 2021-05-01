@@ -1,5 +1,6 @@
 package jframe.dany;
 
+import org.apache.maven.shared.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -45,7 +46,7 @@ public class Search  extends JFrame implements ActionListener {
         setSize(400,300);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        setLocationRelativeTo(null);
         pan1.add(title);
         pan4.add(lsun);
         pan5.add(lfelectro);
@@ -176,7 +177,7 @@ public class Search  extends JFrame implements ActionListener {
                     SearchLog.info(String.valueOf(list));
                     ArrayList<String> ids = new ArrayList<>();
                     int finalprice = 0;
-                    StringBuilder finaltitle = new StringBuilder();
+                    String finaltitle = "";
                     for (String id : list) {
                         commands.add("show");
                         commands.add("room");
@@ -186,11 +187,13 @@ public class Search  extends JFrame implements ActionListener {
                         commands.clear();
                         commands.add("show"); commands.add("room"); commands.add("price"); commands.add(id); commands.add(String.valueOf(electrofen.isSelected()));
                         CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
-                        finaltitle.append(cc4.result.get(0)).append(" - ");
+                        finaltitle+=cc4.result.get(0) + " - ";
+
                         ids.add(id);
                         finalprice += Integer.parseInt(cc5.result.get(0));
                         commands.clear();
                     }
+                    finaltitle = finaltitle.substring(0, finaltitle.length()-1);
                     // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
                     double min = Integer.parseInt(bmin.getText());
                     double max = Integer.parseInt(bmax.getText());
@@ -203,8 +206,7 @@ public class Search  extends JFrame implements ActionListener {
                 notfound.setLayout(new BoxLayout(notfound,BoxLayout.LINE_AXIS));
                 notfound.add(bigpan);
                 this.add(bigpan);
-                this.dispatchEvent(new WindowEvent(this, WindowEvent.WINDOW_CLOSING));
-                Search fen = new Search(companyName);
+
             } else {
                 for (OneOffer offer : finaloffers) {
                     System.out.println(offer);
