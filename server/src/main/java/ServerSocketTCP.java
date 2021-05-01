@@ -35,7 +35,6 @@ class ServerSocketTCP implements Runnable{
 	static Datasource source = new Datasource(sc.getNboneco());
 	static Socket socketClient;
 	static AutoModeElectro autoModeElectro = new AutoModeElectro();
-	static ConnectionCrud C1 = new ConnectionCrud();
 	static int compt = 1; //Automatic button
 
 	public ServerSocketTCP() {
@@ -238,7 +237,7 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 
-	public static void main(String[] args) throws IOException, SQLException {
+	public static void main(String[] args) throws IOException {
 		logger.info("Server is running...");
 		ServerSocket socketServer = new ServerSocket(sc.getPort());
 		while (true){
