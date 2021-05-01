@@ -8,7 +8,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.LinkedList;
 
 
@@ -209,7 +208,7 @@ class ServerSocketTCP implements Runnable{
 		}
 		if(recu.equals("be_present")){
 			String s = in.readLine();
-			if(s.equals("equipement")){
+			if(s.equals("equipment")){
 				C.updateBePresentEquip(in.readLine(),in.readLine());
 			}
 			if(s.equals("sensor")){
