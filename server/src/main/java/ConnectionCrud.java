@@ -184,17 +184,17 @@ public class ConnectionCrud {
         return tempint;
 
     }
-    public String getGeneralTempLigInt(String id) throws SQLException{
+    public ArrayList<String> getGeneralTempLigInt(String id) throws SQLException{
 
         logger.info("in getGeneralTempLigInt");
         String sql ="select temperature, luminosity from parameter_of where id_equipement="+id+";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
-        String result = "";
+        ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
             logger.info("in the while");
-            result += rs.getArray("temperature")+"\n";
-            result += rs.getArray("light")+"\n";
+            result.add(rs.getArray("temperature")+"");
+            result.add(rs.getArray("light")+"");
         }
         return result;
     }
