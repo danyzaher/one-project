@@ -220,6 +220,31 @@ public class ConnectionCrud {
         }return result;
     }
 
+    public String getIdFenetre() throws SQLException{
+        logger.info("in getIdFenetre");
+        String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='fenêtre électrochromatique');";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("id_equipement")+"\n";
+        }return result;
+
+    }
+    public String getIdStore() throws SQLException{
+        logger.info("in getIdFenetre");
+        String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='Store');";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("id_equipement")+"\n";
+        }return result;
+
+    }
+
     public String getEquipmentAvailable(String roomName) throws SQLException{
         logger.info("in getEquipementAvailable");
         String sql = "select distinct equipement.type from compatible inner join equipplace on equipplace.id_equipplace=compatible.id_equipplace inner join equipement on equipement.type= compatible.type_equip where equipplace.id_equipplace not in (Select id_equipplace from be_present) and equipement.id_equipement not in (Select id_equipement from be_present where id_equipement is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
