@@ -153,14 +153,13 @@ public class Search  extends JFrame implements ActionListener {
                 idroom.add(cc2.result.get(i));
                 capacities.add(cc3.result.get(i));
             }
-            idroom.pop();
-            capacities.pop();
+
             System.out.println("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
             if (idroom.isEmpty()) {
                 System.out.println("no offers found retry");
-                idroom.clear();
-                capacities.clear();
             } else {
+                idroom.pop();
+                capacities.pop();
                 int people = 0;
                 ArrayList<ArrayList<String>> offers = new ArrayList<>();
 
@@ -194,7 +193,7 @@ public class Search  extends JFrame implements ActionListener {
                     System.out.println(list);
                     ArrayList<String> ids = new ArrayList<>();
                     int finalprice = 0;
-                    String finaltitle = "";
+                    StringBuilder finaltitle = new StringBuilder();
                     for (String id : list) {
                         commands.add("show");
                         commands.add("room");
@@ -202,18 +201,17 @@ public class Search  extends JFrame implements ActionListener {
                         commands.add(id);
                         CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
                         commands.clear();
-                        command = "getprice('" + id + "'," + electrofen.isSelected() + ");";
-                        commands.add(command);
+                        commands.add("show");commands.add("room");commands.add("price");commands.add(id); commands.add(String.valueOf(electrofen.isSelected()));
                         CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
-
-
-                        finaltitle += cc4.result;
+                        finaltitle.append(cc4.result);
                         ids.add(id);
+                        System.out.println(cc4.result);
+                        System.out.println(cc5.result);
                         finalprice += Integer.parseInt(cc5.result.get(0));
                     }
-                    finaloffers.add(new OneOffer(ids, finaltitle, String.valueOf(finalprice)));
+                    finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice)));
                 }
-
+                System.out.println(finaloffers.size());
                 // ADD ALL ONEOFFERs IN A LIST AND GO TO THE NEXT PAGE WITH
                 Offers ofpage = new Offers(finaloffers, companyName);
             }

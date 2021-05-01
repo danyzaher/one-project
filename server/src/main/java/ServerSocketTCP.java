@@ -111,8 +111,15 @@ class ServerSocketTCP implements Runnable{
 						}
 					}
 					if(received.equals("room")) {
+						received = in.readLine();
 						if(received.equals("name")) {
 							listMessage.add(C.getRoomName());
+						}
+						if(received.equals("capacity")) {
+							listMessage.add(C.getCapacityInOrder(in.readLine(),in.readLine()));
+						}
+						if(received.equals("id")) {
+							listMessage.add(C.getRoomInOrder(in.readLine(),in.readLine()));
 						}
 					}
 				}
