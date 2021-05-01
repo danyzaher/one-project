@@ -25,9 +25,13 @@ public class AutoModeElectro {
                     String T = "0";
                     String L0 = "0";
                     String L = "0";
+                    String A ="0";
+
                     ArrayList<String> general = C.getGeneralTempLigInt(id_f);
                     ArrayList<String> requeteT = C.getLastTempInRoom(id_f);
                     ArrayList<String> requeteL = C.getLastLightInRoom(id_f);
+                    A = C.getOpacityValue(id_f);
+
                     if (!general.isEmpty()){
                         T0=general.get(0);
                         L0=general.get(1);
@@ -49,6 +53,8 @@ public class AutoModeElectro {
                     int t0 = Integer.parseInt(T0);
                     int l =Integer.parseInt(L);
                     int l0 = Integer.parseInt(L0);
+                    int a = Integer.parseInt(A);
+
 
                 }
             }
