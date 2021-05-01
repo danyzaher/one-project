@@ -14,9 +14,11 @@ public class OneOffer extends JPanel implements ActionListener {
     JLabel price;
     JButton button = new JButton("choisir");
     ArrayList<String> idroom;
-    public OneOffer (ArrayList<String> id, String ti, String pri) {
+    String companyName;
+    public OneOffer (ArrayList<String> id, String ti, String pri, String cp) {
+        companyName=cp;
         title = new JLabel("SALLES : " + ti);
-    
+        button.addActionListener(this);
         price = new JLabel("PRIX : " + pri);
         idroom=id;
         left.setLayout(new BoxLayout(left,BoxLayout.LINE_AXIS));
@@ -42,6 +44,10 @@ public class OneOffer extends JPanel implements ActionListener {
     }
     public int count() {return idroom.size();}
 
+    public String getTitle() {
+        return title.getText();
+    }
+
     @Override
     public String toString() {
         return "OneOffer{" +
@@ -52,24 +58,6 @@ public class OneOffer extends JPanel implements ActionListener {
     }
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
-        if (actionEvent.getSource() == button) {
-            for (String value : idroom) {
-                System.out.println("ACTION PERFORMED");
-                ArrayList<String> commands = new ArrayList<>();
-                commands.add("show");
-                commands.add("company");
-                commands.add("id");
-                commands.add(value);
-                CCSocketTCPbis cc = new CCSocketTCPbis(commands);
-                ArrayList<String> al = new ArrayList<>();
-                al.add("insert");
-                al.add("location");
-                al.add(price.getText());
-                al.add(cc.result.get(0));
-                al.add(value);
-                new CCSocketTCPbis(al);
-            }
-            Success s = new Success();
-        }
+        OfferSelected of = new OfferSelected(this,companyName);
     }
 }

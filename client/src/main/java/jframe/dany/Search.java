@@ -193,12 +193,12 @@ public class Search  extends JFrame implements ActionListener {
                         finalprice += Integer.parseInt(cc5.result.get(0));
                         commands.clear();
                     }
-                    finaltitle = finaltitle.substring(0, finaltitle.length()-1);
+                    finaltitle = finaltitle.substring(0, finaltitle.length()-1);finaltitle = finaltitle.substring(0, finaltitle.length()-1);
                     // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
                     double min = Integer.parseInt(bmin.getText());
                     double max = Integer.parseInt(bmax.getText());
                     if (finalprice > min && finalprice < max)
-                        finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice)));
+                        finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice),companyName));
                 }
             if (finaloffers.isEmpty()) {
                 SearchLog.info("no offers found retry");
