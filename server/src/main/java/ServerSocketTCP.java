@@ -98,9 +98,6 @@ class ServerSocketTCP implements Runnable{
 					if(received.equals("temperatureint")){
 						listMessage.add(C.getTempInt(in.readLine()));
 					}
-					if(received.equals("temperatureGint")){
-						listMessage.add(C.getGeneralTempInt(in.readLine()));
-					}
 					if(received.equals("emplacement")){
 						received = in.readLine();
 						String s = in.readLine();

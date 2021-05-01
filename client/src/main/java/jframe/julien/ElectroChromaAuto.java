@@ -99,11 +99,10 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         Slight.addChangeListener(el);
 
         setVisible(true);
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) { //--> Work in progress
+    public void actionPerformed(ActionEvent e) {
 
         if(e.getSource().equals(validation)) {
 
@@ -150,11 +149,12 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         logger.info("temperatureext = " + temperatureext);
 
     }
-    public void getGeneralTempInt(){
-        logger.info("begin getGTempInt");
+    public void getGeneralTempLigInt(){
+
+        logger.info("begin getGeneralTempLigInt");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
-        stringArrayList.add("temperatureGint");
+        stringArrayList.add("temperatureGeneralTempLigint");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.tempintresult = ccSocketTCP2.result;
         temperatureint = tempintresult.get(0);

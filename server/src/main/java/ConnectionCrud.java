@@ -183,18 +183,43 @@ public class ConnectionCrud {
         return tempint;
 
     }
-    public String getGeneralTempInt(String s) throws SQLException{
-        logger.info("in getGeneralTempInt");
-        String sql ="SELECT temperature FROM PARAMETER_OF ORDER BY - id_parameter limit 1";
+    public String getGeneralTempLigInt(String id) throws SQLException{
+
+        logger.info("in getGeneralTempLigInt");
+        String sql ="select temperature, luminosity from parameter_of where id_equipement="+id+";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while(rs.next()){
             logger.info("in the while");
-            result += rs.getArray("temperature");
+            result += rs.getArray("temperature")+"\n";
+            result += rs.getArray("light")+"\n";
         }
         return result;
     }
+    public String getLastTempInRoom(String id) throws SQLException {
+        logger.info("in getLastTempLigInt");
+        String sql ="Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id+")) and sensor.description='capteur de température' limit 1;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("value_of")+"\n";
+        }return result;
+    }
+    public String getLastLightInRoom(String id) throws SQLException {
+        logger.info("in getGeneralTempLigInt");
+        String sql ="Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id+")) and sensor.description='capteur de température' limit 1;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            logger.info("in the while");
+            result += rs.getArray("value_of")+"\n";
+        }return result;
+    }
+
     public String getEquipmentAvailable(String roomName) throws SQLException{
         logger.info("in getEquipementAvailable");
         String sql = "select distinct equipement.type from compatible inner join equipplace on equipplace.id_equipplace=compatible.id_equipplace inner join equipement on equipement.type= compatible.type_equip where equipplace.id_equipplace not in (Select id_equipplace from be_present) and equipement.id_equipement not in (Select id_equipement from be_present where id_equipement is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
