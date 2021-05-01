@@ -2,6 +2,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.sql.*;
+import java.util.ArrayList;
 
 public class ConnectionCrud {
     private Connection c;
@@ -197,50 +198,50 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getLastTempInRoom(String id) throws SQLException {
+    public ArrayList<String> getLastTempInRoom(String id) throws SQLException {
         logger.info("in getLastTempInRoom");
         String sql ="Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +")) and sensor.description='capteur de température' limit 1;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
-        String result = "";
+        ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
             logger.info("in the while");
-            result += rs.getArray("value_of")+"\n";
+            result.add(rs.getArray("value_of")+"");
         }return result;
     }
-    public String getLastLightInRoom(String id) throws SQLException {
+    public ArrayList<String> getLastLightInRoom(String id) throws SQLException {
         logger.info("in getLastLightInRoom");
         String sql =" Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +"))and sensor.description='capteur de luminosité' limit 1;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
-        String result = "";
+        ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
             logger.info("in the while");
-            result += rs.getArray("value_of")+"\n";
+            result.add(rs.getArray("value_of")+"");
         }return result;
     }
 
-    public String getIdFenetre() throws SQLException{
+    public ArrayList<String> getIdFenetre() throws SQLException{
         logger.info("in getIdFenetre");
         String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='fenêtre électrochromatique');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
-        String result = "";
+        ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
             logger.info("in the while");
-            result += rs.getArray("id_equipement")+"\n";
+            result.add(rs.getArray("id_equipement")+"");
         }return result;
 
     }
-    public String getIdStore() throws SQLException{
+    public ArrayList<String> getIdStore() throws SQLException{
         logger.info("in getIdFenetre");
         String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='Store');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
-        String result = "";
+        ArrayList<String> result = new ArrayList<>();
         while(rs.next()){
             logger.info("in the while");
-            result += rs.getArray("id_equipement")+"\n";
+            result.add(rs.getArray("id_equipement")+"");
         }return result;
 
     }
