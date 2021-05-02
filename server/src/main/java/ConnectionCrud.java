@@ -354,7 +354,7 @@ public class ConnectionCrud {
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
     public void updateStoreHigh(String id, String valuehighstore) throws SQLException {
-        logger.info("in update");
+        logger.info("in update store");
         String sql = "update equipement set valueof = " + valuehighstore + " where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
@@ -364,17 +364,16 @@ public class ConnectionCrud {
         String sql = "update parameter_of set temperature ="+ temp +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
-        String sql2 = "update parameter_of set automanu = false where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
+        String sql2 = "update parameter_of set automanu = true where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
         Statement smt2 = c.createStatement();
         logger.info(String.valueOf(smt2.executeUpdate(sql2)));
     }
     public void updateGeneralLigInt(String light, String company) throws SQLException{
-        logger.info("in update GeneralTempLigInt");
+        logger.info("in update GeneralLigInt");
         String sql = "update parameter_of set luminosity ="+ light +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
-
     public String getEtatSensor(String id) throws SQLException{
         logger.info("in getEtatSensor");
         String sql = "select animated from sensor where id_sensor="+id+";";
