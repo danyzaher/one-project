@@ -1,4 +1,4 @@
-import com.fasterxml.jackson.annotation.JsonGetter;
+package socket;
 
 public class SocketConfig {
     private int port;
@@ -14,7 +14,7 @@ public class SocketConfig {
 
     @Override
     public String toString() {
-        return "SocketConfig{" +
+        return "Socket.SocketConfig{" +
                 "port=" + port +
                 ", ip=" + ip +
                 '}';

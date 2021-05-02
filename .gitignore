@@ -6,7 +6,7 @@ target/
 */.class
 */META-INF/
 *.iml
-*.iml
+*.form
 *.lst
 *.ist
 */*.iml

@@ -1,0 +1,28 @@
+package jframe.maxime.window;
+
+import javax.swing.*;
+import java.awt.*;
+
+public class Legend extends JMenu {
+    JMenuItem green = new JMenuItem("équipements opérationnel");
+    JMenuItem red = new JMenuItem("équipements  non opérationnel");
+    JMenuItem blue = new JMenuItem("capteurs opérationnel");
+    JMenuItem pink = new JMenuItem("capteur non opérationnel");
+    JMenuItem gray = new JMenuItem("fenêtre ou store");
+    JMenuItem yellow = new JMenuItem("emplacement");
+    public Legend(){
+        add(green);
+        add(red);
+        add(blue);
+        add(pink);
+        add(gray);
+        add(yellow);
+        yellow.setBackground(Color.orange);
+        green.setBackground(Color.GREEN);
+        red.setBackground(Color.RED);
+        blue.setBackground(Color.CYAN);
+        pink.setBackground(Color.PINK);
+        gray.setBackground(Color.GRAY);
+        setText("Légende");
+    }
+}

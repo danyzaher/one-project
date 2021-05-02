@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.slf4j.Logger;
@@ -45,8 +44,104 @@ class ServerSocketTCP implements Runnable{
 				ConnectionCrud C = new ConnectionCrud();
 				C.setC(Datasource.getConnection());
 				logger.info("Connection available = " + source.size());
-				addElementsToTable(in,C);
-				listMessage.add(C.showElement("produit"));
+				String received = in.readLine();
+				logger.info("received = "+received);
+				if (received.equals("show")){
+					received = in.readLine();
+					if (received.equals("company")){
+						received = in.readLine();
+						if (received.equals("name")){
+							logger.info("last if");
+							listMessage.add(C.getCompanyName());
+						}
+						if(received.equals("id")) {
+							listMessage.add(C.getCompanyId(in.readLine()));
+						}
+					}
+					if (received.equals("size")){
+						listMessage.add(C.getSizeRoom(in.readLine()));
+					}
+					if (received.equals("menu")){
+						listMessage.add(C.getMenu(in.readLine()));
+					}
+					if (received.equals("equipment")){
+						String s = in.readLine();
+						if (s.equals("available")){
+							listMessage.add(C.getEquipmentAvailable(in.readLine()));
+						}
+						if(s.equals("animated")){
+							listMessage.add(C.getEtatEquipment(in.readLine()));
+						}
+						if(s.equals("inRoom")){
+						listMessage.add(C.getEquipment(in.readLine()));}
+					}
+					if(received.equals("sensor")){
+						String s = in.readLine();
+						if (s.equals("available")){
+							listMessage.add(C.getSensorAvailable(in.readLine()));
+						}
+						if(s.equals("animated")){
+							listMessage.add(C.getEtatSensor(in.readLine()));
+						}
+						if(s.equals("inRoom")){
+							listMessage.add(C.getSensor(in.readLine()));}
+					}
+					if(received.equals("opacity")){
+						listMessage.add(C.getOpacityValue(in.readLine()));
+					}
+					if(received.equals("strhigh")){
+						listMessage.add(C.getStoreHighValue(in.readLine()));
+					}
+					if(received.equals("temperatureext")){
+						listMessage.add(C.getTempExt(in.readLine()));
+					}
+					if(received.equals("lightint")){
+						listMessage.add(C.getLightInt(in.readLine()));
+					}
+					if(received.equals("temperatureint")){
+						listMessage.add(C.getTempInt(in.readLine()));
+					}
+					if(received.equals("temperatureGint")){
+						listMessage.add(C.getGeneralTempInt(in.readLine()));
+					}
+					if(received.equals("emplacement")){
+						received = in.readLine();
+						String s = in.readLine();
+						if (received.equals("equipment")){
+						listMessage.add(C.getPlaceEquip(in.readLine(),s));}
+						if (received.equals("sensor")){
+							listMessage.add(C.getPlaceSensor(in.readLine(),s));
+						}
+					}
+					if(received.equals("room")) {
+						received = in.readLine();
+						if(received.equals("name")) {
+							listMessage.add(C.getRoomName(in.readLine()));
+						}
+						if(received.equals("capacity")) {
+							listMessage.add(C.getCapacityInOrder());
+						}
+						if(received.equals("id")) {
+							listMessage.add(C.getRoomInOrder());
+
+						}
+						if(received.equals("price")) {
+							listMessage.add(C.getPrice(in.readLine(), in.readLine()));
+						}
+					}
+				}
+				if(received.equals("update")){
+					update(in,C);
+					listMessage.add("update element");
+				}
+				if(received.equals("delete")){
+					delete(in,C);
+					listMessage.add("element deleted");
+				}
+				if(received.equals("insert")){
+					insert(in,C);
+					listMessage.add("element added");
+				}
 				Datasource.setConnection(C.getC());
 			} else{
 				listMessage.add("no more connection come back later");
@@ -54,21 +149,76 @@ class ServerSocketTCP implements Runnable{
 			constructOutputStream(socket,listMessage);
 			socket.close();
 
-		} catch (IOException | SQLException e) {
+		} catch (IOException | SQLException | InterruptedException e) {
 			e.printStackTrace();
 		}
 	}
-	public synchronized void addElementsToTable(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
-		logger.info("addElementsToTable");
-		ObjectMapper mapper = new ObjectMapper();
-		for (String recu = in.readLine(); !recu.equals("end"); recu = in.readLine()) {
-			JsonNode jn = mapper.readTree(recu);
-			C.addElement("produit", "nom", "prix", jn.get("nom").asText(), jn.get("prix").asInt());
+
+	private synchronized void insert(BufferedReader in, ConnectionCrud c) throws IOException, SQLException {
+		logger.info("insert");
+		String received = in.readLine();
+		if(received.equals("be_present")){
+			String s = in.readLine();
+			if(s.equals("equipment")){
+				s = in.readLine();
+			c.insertBePresentEquipment(s,in.readLine());}
+			if(s.equals("sensor")){
+				s = in.readLine();
+				c.insertBePresentSensor(s,in.readLine());
+			}
+		}
+		if(received.equals("location")) {
+			c.insertLocation(in.readLine(),in.readLine(),in.readLine());
 		}
 	}
-	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException {
+
+	public synchronized void delete(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+		logger.info("delete");
+		String recu = in.readLine();
+		if(recu.equals("be_present")){
+			recu = in.readLine();
+			if(recu.equals("equipment")){
+			    C.deleteBePresentEquipment(in.readLine());
+			}
+			if(recu.equals("sensor")){
+				C.deleteBePresentSensor(in.readLine());
+			}
+		}
+
+	}
+
+	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+		logger.info("update");
+		String recu = in.readLine();
+
+		if(recu.equals("opacity")){
+			String s = in.readLine(); //id
+			C.updateOpacity(s,in.readLine());//in.readLine() --> opacity by the connection crud
+		}
+		if(recu.equals("strhigh")){
+			String s = in.readLine(); //id
+			C.updateStoreHigh(s,in.readLine());//in.readLine() --> strhigh by the connection crud
+		}
+		if(recu.equals("location")) {
+			C.setTaken(in.readLine(),in.readLine(),in.readLine());
+		}
+		if(recu.equals("be_present")){
+			String s = in.readLine();
+			if(s.equals("equipement")){
+				C.updateBePresentEquip(in.readLine(),in.readLine());
+			}
+			if(s.equals("sensor")){
+				C.updateBePresentSensor(in.readLine(),in.readLine());
+			}
+		}
+
+	}
+
+	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException, InterruptedException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		while(!listMessage.isEmpty()){
+			logger.info("+1");
+			logger.info(listMessage.get(0));
 			out.println(listMessage.poll());
 		}
 		logger.info("message envoyé");
@@ -76,20 +226,15 @@ class ServerSocketTCP implements Runnable{
 	public void run() {
 		logger.info("new Client");
 		Socket socket = socketClient;
+		analyseInputStream(socket);
 		try {
-			this.wait(1000);
-		} catch (InterruptedException e) {
+			socket.close();
+		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		analyseInputStream(socket);
-		currentThread().interrupt();
 	}
 
-	private Thread currentThread() {
-		return this.currentThread();
-	}
-
-	public static void main(String[] args) throws IOException, InterruptedException {
+	public static void main(String[] args) throws IOException {
 		logger.info("Server is running");
 		ServerSocket socketServer = new ServerSocket(sc.getPort());
 		while (true){
