@@ -43,17 +43,17 @@ public class ConnectionCrud {
             result += rs.getArray("name")+ "\n";}
         return result;
     }
-    public String getCompanyId(String name) throws SQLException{
-        String sql = "Select address from Company where name=" + name + ";";
+    public String getCompanyId(String n) throws SQLException{
+        String sql = "Select getcompanyid('" + n + "');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            result += rs.getArray("address")+ "\n";}
+            result += rs.getArray("getcompanyid")+ "\n";}
         return result;
     }
-    public String getRoomInOrder(String min, String max) throws SQLException {
-        String sql = "Select room_s_number from room  where room_s_number in (select getroominb(" + min + "," + max + ")) order by grade asc;";
+    public String getRoomInOrder() throws SQLException {
+        String sql = "Select room_s_number from room  where room_s_number in (select getroomavailable()) order by grade asc;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
@@ -61,8 +61,8 @@ public class ConnectionCrud {
             result += rs.getArray("room_s_number")+ "\n";}
         return result;
     }
-    public String getCapacityInOrder(String min, String max) throws SQLException {
-        String sql = "Select capacity from room  where room_s_number in (select getroominb(" + min + "," + max + ")) order by grade asc;";
+    public String getCapacityInOrder() throws SQLException {
+        String sql = "Select capacity from room  where room_s_number in (select getroomavailable()) order by grade asc;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
@@ -70,17 +70,21 @@ public class ConnectionCrud {
             result += rs.getArray("capacity")+ "\n";}
         return result;
     }
+
     public String getPrice(String id, String electro) throws SQLException {
+        logger.info("in getPrice");
         String sql = "Select getprice(" + id + "," + electro + ") as price;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            result = rs.getArray("price")+ "\n";}
+            result = rs.getArray("price")+ "\n";
+        }
         return result;
     }
+
     public String getMenu(String company) throws  SQLException{
-        logger.info("in geMenu");
+        logger.info("in getMenu");
         String sql = "Select room.name, floor.floor_s_number,building.address from floor inner join room on floor.id_floor=room.id_floor inner join building on floor.address=building.address where room.room_s_number in ( Select room_s_number from location inner join company on company.id_company=location.id_company where company.name= '"+company+"');";
         logger.info(sql);
         Statement smt = c.createStatement();
@@ -134,8 +138,8 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getRoomName() throws SQLException {
-        String sql = "Select name from room;";
+    public String getRoomName(String id) throws SQLException {
+        String sql = "Select name from room where room_s_number = " + id + ";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
@@ -344,6 +348,12 @@ public class ConnectionCrud {
     public void updateOpacity(String id, String valueopacity) throws SQLException {
         logger.info("in update opacity");
         String sql = "update equipement set valueof = " + valueopacity + " where id_equipement =" + id + ";";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
+    }
+    public void insertLocation(String idroom, String idcompany, String price) throws SQLException {
+        logger.info("in insert location");
+        String sql = "insert into location values (" + idroom + "," + idcompany + "," + price + ", CURRENT_DATE);";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }

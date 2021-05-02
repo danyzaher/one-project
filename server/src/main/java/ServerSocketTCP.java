@@ -62,6 +62,9 @@ class ServerSocketTCP implements Runnable{
 							logger.info("last if");
 							listMessage.add(C.getCompanyName());
 						}
+						if(received.equals("id")) {
+							listMessage.add(C.getCompanyId(in.readLine()));
+						}
 					}
 					if (received.equals("size")){
 						listMessage.add(C.getSizeRoom(in.readLine()));
@@ -116,8 +119,19 @@ class ServerSocketTCP implements Runnable{
 						}
 					}
 					if(received.equals("room")) {
+						received = in.readLine();
 						if(received.equals("name")) {
-							listMessage.add(C.getRoomName());
+							listMessage.add(C.getRoomName(in.readLine()));
+						}
+						if(received.equals("capacity")) {
+							listMessage.add(C.getCapacityInOrder());
+						}
+						if(received.equals("id")) {
+							listMessage.add(C.getRoomInOrder());
+
+						}
+						if(received.equals("price")) {
+							listMessage.add(C.getPrice(in.readLine(), in.readLine()));
 						}
 					}
 				}
@@ -160,6 +174,9 @@ class ServerSocketTCP implements Runnable{
 				s = in.readLine();
 				c.insertBePresentSensor(s,in.readLine());
 			}
+		}
+		if(received.equals("location")) {
+			c.insertLocation(in.readLine(),in.readLine(),in.readLine());
 		}
 	}
 

@@ -8,24 +8,26 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class Offers extends JFrame implements ActionListener {
-    JPanel pan = new JPanel();
-    JLabel title = new JLabel("Choisissez une offre");
-    int nboffers;
+    JPanel bigpan = new JPanel();
+    JPanel pantitle = new JPanel();
+    JLabel title = new JLabel("CHOISISSEZ UNE OFFRE");
     ArrayList<jframe.dany.OneOffer> offers;
     String companyName;
     public Offers(ArrayList<jframe.dany.OneOffer> list, String companyName) {
         this.companyName = companyName;
         offers = list;
         setTitle("Offres");
-        setSize(400,300);
         setLayout(new FlowLayout());
-        nboffers = 5;
-        pan.setLayout(new BoxLayout(pan,BoxLayout.PAGE_AXIS));
-        pan.add(title);
+        setLocationRelativeTo(null);
+        pantitle.add(title);
+        pantitle.setLayout(new BoxLayout(pantitle,BoxLayout.LINE_AXIS));
+        bigpan.setLayout(new BoxLayout(bigpan,BoxLayout.PAGE_AXIS));
+        bigpan.add(pantitle);
         for (jframe.dany.OneOffer offer : offers) {
-            pan.add(offer);
+            bigpan.add(offer);
         }
-
+        this.add(bigpan);
+        setSize(50*title.getText().length(),100+50*list.size());
         setVisible(true);
     }
     @Override

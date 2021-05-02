@@ -7,10 +7,11 @@ public class Success extends JFrame {
     JLabel success = new JLabel("Votre demande de location a bien été enregistrée");
     public Success() {
         setTitle("Succès");
-        setVisible(true);
+        setLocationRelativeTo(null);
         setSize(400,300);
         pan.add(success);
         pan.setLayout(new BoxLayout(pan,BoxLayout.PAGE_AXIS));
         this.add(pan);
+        setVisible(true);
     }
 }

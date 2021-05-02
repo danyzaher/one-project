@@ -1,5 +1,7 @@
 package jframe.dany;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
 
 import javax.swing.*;
@@ -10,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Stack;
 
 public class Search  extends JFrame implements ActionListener {
+    protected static Logger SearchLog  = LoggerFactory.getLogger("Search");
     JPanel bigpan = new JPanel();
     JPanel pan1 = new JPanel();
     JPanel pan2 = new JPanel();
@@ -29,7 +32,7 @@ public class Search  extends JFrame implements ActionListener {
     JTextField bmax = new JTextField();
     JTextField nbpeople = new JTextField();
     JCheckBox sun = new JCheckBox();
-    JCheckBox electrofen = new JCheckBox();
+    JCheckBox electrowin = new JCheckBox();
     JCheckBox height = new JCheckBox();
     JButton done = new JButton("Rechercher");
 
@@ -41,7 +44,7 @@ public class Search  extends JFrame implements ActionListener {
         setSize(400,300);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
-
+        setLocationRelativeTo(null);
         pan1.add(title);
         pan4.add(lsun);
         pan5.add(lfelectro);
@@ -53,7 +56,7 @@ public class Search  extends JFrame implements ActionListener {
         pan3.add(bmax);
         pan7.add(nbpeople);
         pan4.add(sun);
-        pan5.add(electrofen);
+        pan5.add(electrowin);
         pan6.add(height);
 
         bmin.setSize(30,30);
@@ -80,25 +83,17 @@ public class Search  extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == done) {
-            System.out.println("Nombre employés : " + nbpeople.getText());
-            System.out.println("Budget min : " + bmin.getText() + " Budget max : " + bmax.getText());
-            System.out.println("Fenetres electrochromatiques : " + electrofen.isSelected());
-            System.out.println("Soleil important : " + sun.isSelected());
-            System.out.println("Hauteur importante : " + height.isSelected());
-
-            // GET ALL ROOMS IN THE CLIENTS'S BUDGET
-
-            String command = "getroominb(" + bmin.getText() + "," + bmax.getText() + "," + electrofen.isSelected() + ");";
             ArrayList<String> commands = new ArrayList<>();
-            commands.add(command);
+            commands.add("show");
+            commands.add("room");
+            commands.add("id");
             socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
             commands.clear();
             // SET A GRADE FOR EACH IDs
 
             if (sun.isSelected() && height.isSelected()) {
                 for (String value : cc.result) {
-                    command = "setgradesunheight(" + value + ");";
-                    commands.add(command);
+                    commands.add("setgradesunheight(" + value + ");");
                     new socket.CCSocketTCPbis(commands);
                     commands.clear();
 
@@ -106,8 +101,7 @@ public class Search  extends JFrame implements ActionListener {
             }
             if (sun.isSelected() && !height.isSelected()) {
                 for (String value : cc.result) {
-                    command = "setgradesun(" + value + ");";
-                    commands.add(command);
+                    commands.add("setgradesun(" + value + ");");
                     new socket.CCSocketTCPbis(commands);
                     commands.clear();
 
@@ -115,16 +109,14 @@ public class Search  extends JFrame implements ActionListener {
             }
             if (!sun.isSelected() && height.isSelected()) {
                 for (String value : cc.result) {
-                    command = "setgradeheight(" + value + ");";
-                    commands.add(command);
+                    commands.add("setgradeheight(" + value + ");");
                     new socket.CCSocketTCPbis(commands);
                     commands.clear();
                 }
             }
             if (!sun.isSelected() && !height.isSelected()) {
                 for (String value : cc.result) {
-                    command = "setgrade(" + value + ");";
-                    commands.add(command);
+                    commands.add("setgrade(" + value + ");");
                     new socket.CCSocketTCPbis(commands);
                     commands.clear();
 
@@ -135,52 +127,49 @@ public class Search  extends JFrame implements ActionListener {
             commands.add("show");
             commands.add("room");
             commands.add("id");
-            commands.add(bmin.getText());
-            commands.add(bmax.getText());
+
             CCSocketTCPbis cc2 = new CCSocketTCPbis(commands);
             commands.clear();
             commands.add("show");
             commands.add("room");
             commands.add("capacity");
-            commands.add(bmin.getText());
-            commands.add(bmax.getText());
+
             CCSocketTCPbis cc3 = new CCSocketTCPbis(commands);
             commands.clear();
             // USE STACK TO ONLY USE EACH IDs ONE TIME
-            Stack<String> idRoom = new Stack<>();
+            Stack<String> idroom = new Stack<>();
             Stack<String> capacities = new Stack<>();
-            for (int i = 0; i < cc3.result.size(); i++) {
-                idRoom.add(cc2.result.get(i));
+
+            for (int i = 0; i < cc3.result.size() - 1; i++) {
+                idroom.add(cc2.result.get(i));
                 capacities.add(cc3.result.get(i));
             }
-            //Maxime : ça n'a aucun sens
-            idRoom.pop();
-            capacities.pop();
-            System.out.println("IDROOM SIZE : " + idRoom.size() + "  CAPACITIES SIZE : " + capacities.size());
-            if (idRoom.isEmpty()) {
+
+
+            System.out.println("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
+            if (idroom.isEmpty()) {
                 System.out.println("no offers found retry");
-                idRoom.clear();
-                capacities.clear();
+
             } else {
+                idroom.pop();
+                capacities.pop();
                 int people = 0;
                 ArrayList<ArrayList<String>> offers = new ArrayList<>();
 
                 // BUILDING LISTS OF IDs - EACH LIST WILL GIVE AN OFFER
-                while (!idRoom.isEmpty() && !capacities.isEmpty()) {
+                while (!idroom.isEmpty() && !capacities.isEmpty()) {
                     ArrayList<String> offer = new ArrayList<>();
                     while (people < Integer.parseInt(nbpeople.getText())) {
-                        if (!idRoom.isEmpty() && !capacities.isEmpty()) {
-                            offer.add(idRoom.peek());
+                        if (!idroom.isEmpty() && !capacities.isEmpty()) {
+                            offer.add(idroom.peek());
                             people += Integer.parseInt(capacities.peek());
-                            idRoom.pop();
+                            idroom.pop();
                             capacities.pop();
                         } else {
                             break;
                         }
                     }
-                    System.out.println(offer);
                     if (!offer.isEmpty() && people >= Integer.parseInt(nbpeople.getText())) {
-                        System.out.println("adding an offer size :" + offer.size());
                         offers.add(offer);
                     }
                     people = 0;
@@ -188,14 +177,13 @@ public class Search  extends JFrame implements ActionListener {
                 ArrayList<OneOffer> finaloffers = new ArrayList<>();
                 commands.clear();
                 // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
-                System.out.println(offers.size());
-                System.out.println(offers.get(1).size());
+
                 for (ArrayList<String> list : offers) {
-                    System.out.println("############## debut d'offre #################");
-                    System.out.println(list);
+                    SearchLog.info("############## begin offer #################");
+                    SearchLog.info(String.valueOf(list));
                     ArrayList<String> ids = new ArrayList<>();
                     int finalprice = 0;
-                    StringBuilder finaltitle = new StringBuilder();
+                    String finaltitle = "";
                     for (String id : list) {
                         commands.add("show");
                         commands.add("room");
@@ -203,25 +191,54 @@ public class Search  extends JFrame implements ActionListener {
                         commands.add(id);
                         CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
                         commands.clear();
-                        command = "getprice('" + id + "'," + electrofen.isSelected() + ");";
-                        commands.add(command);
+                        commands.add("show");
+                        commands.add("room");
+                        commands.add("price");
+                        commands.add(id);
+                        commands.add(String.valueOf(electrowin.isSelected()));
                         CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
+                        finaltitle += cc4.result.get(0) + " - ";
 
 
-                        finaltitle.append(cc4.result);
                         ids.add(id);
+                        System.out.println(cc4.result);
+                        System.out.println(cc5.result);
                         finalprice += Integer.parseInt(cc5.result.get(0));
+                        commands.clear();
                     }
-                    finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice)));
-                }
 
-                // ADD ALL ONEOFFERs IN A LIST AND GO TO THE NEXT PAGE WITH
-                Offers ofpage = new Offers(finaloffers, companyName);
+
+
+                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
+                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
+                    // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
+                    double min = Integer.parseInt(bmin.getText());
+                    double max = Integer.parseInt(bmax.getText());
+                    if (finalprice > min && finalprice < max)
+                        finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice), companyName));
+
+                }
+                if (finaloffers.isEmpty()) {
+                    SearchLog.info("no offers found retry");
+                    JLabel notfound = new JLabel("no offers found retry");
+                    notfound.setLayout(new BoxLayout(notfound, BoxLayout.LINE_AXIS));
+                    notfound.add(bigpan);
+                    this.add(bigpan);
+
+                } else {
+                    for (OneOffer offer : finaloffers) {
+                        System.out.println(offer);
+                    }
+
+                    // GO TP THE NEXT PAGE
+
+                    Offers ofpage = new Offers(finaloffers, companyName);
+                }
             }
         }
     }
 
     public static void main(String[] args) {
-        Search fen = new Search("Fritel Inc.");
+        Search fen = new Search("Apple");
     }
 }

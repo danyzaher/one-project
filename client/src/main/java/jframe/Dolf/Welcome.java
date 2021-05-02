@@ -8,7 +8,7 @@ import java.awt.event.ActionListener;
 public class Welcome {
 
     public Welcome() {
-        JFrame Dolf = new JFrame();
+        JFrame frame = new JFrame();
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
         JPanel pane = new JPanel(new BorderLayout());

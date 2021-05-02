@@ -37,7 +37,7 @@ public class CCSocketTCPbis {
         } catch (IOException e) {
             e.printStackTrace();
         }
-        clientLog.info("SOCKET = " + socket);
+//        clientLog.info("SOCKET = " + socket);
 
         BufferedReader plec = null;
         try {
@@ -70,7 +70,7 @@ public class CCSocketTCPbis {
             e.printStackTrace();
         }
 
-        clientLog.info("END");
+//        clientLog.info("END");
     }
 
 
