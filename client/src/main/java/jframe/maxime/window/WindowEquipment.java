@@ -1,7 +1,7 @@
 package jframe.maxime.window;
 
 import jframe.julien.ElectroChromaManuHigh;
-import jframe.maxime.button.Equipement;
+import jframe.maxime.button.Equipment;
 import jframe.julien.ElectroChromaManuOpa;
 import jframe.maxime.button.GoBackButton;
 import socket.CCSocketTCPbis;
@@ -14,34 +14,34 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
-public class WindowEquipement extends JFrame implements ActionListener {
-    public static Logger logger = LoggerFactory.getLogger("WindowEquipement");
-    Equipement equipement;
+public class WindowEquipment extends JFrame implements ActionListener {
+    public static Logger logger = LoggerFactory.getLogger("WindowEquipment");
+    Equipment equipment;
     JButton delete;
     JButton move;
     JButton information;
     GoBackButton goBackButton;
-    public WindowEquipement(Equipement equipement){
-        this.equipement = equipement;
-        setTitle(equipement.name+" "+equipement.id);
+    public WindowEquipment(Equipment equipment){
+        this.equipment = equipment;
+        setTitle(equipment.name+" "+ equipment.id);
         setVisible(true);
         setSize(500,600);
         setLayout(new FlowLayout());
-        delete = new JButton("Retirer l'equipement");
+        delete = new JButton("Retirer l'équipement");
         delete.setBounds(50,100,30,50);
         add(delete);
         delete.addActionListener(this);
-        move = new JButton("Deplacer l'equipement");
+        move = new JButton("Déplacer l'équipement");
         move.setBounds(50,200,30,50);
         add(move);
         move.addActionListener(this);
-        if(equipement.name.equals("fenêtre électrochromatique") | equipement.name.equals("Store")){
-        information = new JButton("Information à propos de l'equipement");
+        if(equipment.name.equals("fenêtre électrochromatique") | equipment.name.equals("Store")){
+        information = new JButton("Information à propos de l'équipement");
         information.setBounds(50,300,30,50);
         add(information);
         information.addActionListener(this);}
-        JLabel jLabel= new JLabel("position en x de l'équipement = " +equipement.x );
-        JLabel jLabel2 = new JLabel("position en y de l'équipement = "+equipement.y);
+        JLabel jLabel= new JLabel("position en x de l'équipement = " + equipment.x );
+        JLabel jLabel2 = new JLabel("position en y de l'équipement = "+ equipment.y);
         add(jLabel);
         add(jLabel2);
 
@@ -51,38 +51,38 @@ public class WindowEquipement extends JFrame implements ActionListener {
         add(goBackButton);
     }
     public void delete(){
-        logger.info("begin getEquipement");
+        logger.info("begin delete");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("delete");
         stringArrayList.add("be_present");
-        stringArrayList.add("equipement");
-        stringArrayList.add(equipement.id+"");
+        stringArrayList.add("equipment");
+        stringArrayList.add(equipment.id+"");
         new CCSocketTCPbis(stringArrayList);
     }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==information){
-            if(equipement.name.equals("fenêtre électrochromatique")){
-                ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(equipement);
+            if(equipment.name.equals("fenêtre électrochromatique")){
+                ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(equipment);
                 electroChromaManuOpa.newGoBack(this);
             }
-            if(equipement.name.equals("Store")){
-                ElectroChromaManuHigh electroChromaManuHigh = new ElectroChromaManuHigh(equipement);
+            if(equipment.name.equals("Store")){
+                ElectroChromaManuHigh electroChromaManuHigh = new ElectroChromaManuHigh(equipment);
                 electroChromaManuHigh.newGoBack(this);
             }
             this.setVisible(false);
         }
         if (e.getSource()==delete){
-            String s = equipement.roomName;
+            String s = equipment.roomName;
             delete();
             MapperRoom m= new MapperRoom(s);
             this.setVisible(false);
         }
         if (e.getSource()==move){
-            MapperRoom m= equipement.mapperRoom;
-            m.getMoveEquip(equipement.id+"",
+            MapperRoom m= equipment.mapperRoom;
+            m.getMoveEquip(equipment.id+"",
                     true,
-                    equipement.name);
+                    equipment.name);
             m.setVisible(true);
             this.setVisible(false);
         }

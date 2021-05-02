@@ -3,14 +3,14 @@ package jframe.maxime.window;
 import javax.swing.*;
 import java.awt.*;
 
-public class Legende extends JMenu {
+public class Legend extends JMenu {
     JMenuItem green = new JMenuItem("équipements opérationnel");
     JMenuItem red = new JMenuItem("équipements  non opérationnel");
     JMenuItem blue = new JMenuItem("capteurs opérationnel");
     JMenuItem pink = new JMenuItem("capteur non opérationnel");
     JMenuItem gray = new JMenuItem("fenêtre ou store");
     JMenuItem yellow = new JMenuItem("emplacement");
-    public Legende(){
+    public Legend(){
         add(green);
         add(red);
         add(blue);

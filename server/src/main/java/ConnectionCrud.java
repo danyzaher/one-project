@@ -23,13 +23,13 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
-    public String showElement(String Table, String idcolumn, String columna) throws SQLException {
+    public String showElement(String Table, String idcolumn, String column) throws SQLException {
         String sql = "select * from \"" + Table + "\";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = null;
         while (rs.next()) {
-            result += rs.getArray(idcolumn) + "   " + rs.getArray(columna);
+            result += rs.getArray(idcolumn) + "   " + rs.getArray(column);
         }
         return result;
     }
@@ -97,7 +97,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getEquipement(String room) throws SQLException{
+    public String getEquipment(String room) throws SQLException{
         logger.info("in getEquipement");
         String sql = "Select equipement.id_equipement,equipement.type,equipplace.position_x,equipplace.position_y from be_present inner join equipement on be_present.id_equipement=equipement.id_equipement inner join equipplace on be_present.id_equipplace=equipplace.id_equipplace where equipplace.id_room in (Select room_s_number from room where name='"+room+"');";
         logger.info(sql);
@@ -209,7 +209,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getEquipementAvailable(String roomName) throws SQLException{
+    public String getEquipmentAvailable(String roomName) throws SQLException{
         logger.info("in getEquipementAvailable");
         String sql = "select distinct equipement.type from compatible inner join equipplace on equipplace.id_equipplace=compatible.id_equipplace inner join equipement on equipement.type= compatible.type_equip where equipplace.id_equipplace not in (Select id_equipplace from be_present) and equipement.id_equipement not in (Select id_equipement from be_present where id_equipement is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
         Statement smt = c.createStatement();
@@ -233,7 +233,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getEtatEquipement(String id) throws SQLException{
+    public String getEtatEquipment(String id) throws SQLException{
         logger.info("in getEtatEquipement");
         String sql = "select animated from equipement where id_equipement="+id+";";
         Statement smt = c.createStatement();
@@ -245,7 +245,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public void deleteBePresentEquipement(String id) throws SQLException{
+    public void deleteBePresentEquipment(String id) throws SQLException{
         logger.info("in delete");
         String sql = "delete from be_present where id_equipement="+id+";";
         Statement smt = c.createStatement();
@@ -265,7 +265,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public void insertBePresentEquipement(String idPlace, String type) throws SQLException{
+    public void insertBePresentEquipment(String idPlace, String type) throws SQLException{
         logger.info("in insert equipement");
         String sql = "insert into be_present values ((Select equipement.id_equipement from equipement where equipement.type='"+type+"' and equipement.id_equipement not in (Select be_present.id_equipement from be_present where be_present.id_equipement is not null) limit 1),"+idPlace+",null);";
         Statement smt = c.createStatement();
@@ -323,9 +323,9 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public void setTaken(String rent, String companyName, String idroom) throws SQLException {
+    public void setTaken(String rent, String companyName, String idRoom) throws SQLException {
         logger.info("in settaken");
-        String sql = "insert into location values (" + idroom + ",(Select id_company from company where name ='"+ companyName+"') ," + rent + ", CURRENT_DATE);";
+        String sql = "insert into location values (" + idRoom + ",(Select id_company from company where name ='"+ companyName+"') ," + rent + ", CURRENT_DATE);";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }

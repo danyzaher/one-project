@@ -9,10 +9,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.util.ArrayList;
-import java.util.LinkedList;
 
 public class HPage extends JFrame implements ItemListener, ActionListener{
-    JComboBox combobox;
+    JComboBox jComboBox;
     JLabel l1, l2;
     ArrayList<String> s1 = new ArrayList<>();
     public HPage(){
@@ -25,9 +24,9 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         setLayout(new FlowLayout());
 
         listCompany();
-        String s2[] = s1.toArray(new String[0]);
-        combobox = new JComboBox(s2);
-        combobox.addItemListener(this);
+        String[] s2 = s1.toArray(new String[0]);
+        jComboBox = new JComboBox(s2);
+        jComboBox.addItemListener(this);
 
         l1 = new JLabel("Choisissez une société ");
         l2 = new JLabel(s1.get(0));
@@ -36,7 +35,7 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
 
         JPanel p = new JPanel();
         p.add(l1);
-        p.add(combobox);
+        p.add(jComboBox);
         p.add(l2);
         add(p);
         JButton jButton = new JButton("CONFIRMER");
@@ -64,9 +63,9 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     public void itemStateChanged(ItemEvent e)
     {
         // si l'état du combobox est modifiée
-        if (e.getSource() == combobox) {
+        if (e.getSource() == jComboBox) {
 
-            l2.setText((String) combobox.getSelectedItem());
+            l2.setText((String) jComboBox.getSelectedItem());
         }
     }
 

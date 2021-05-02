@@ -139,12 +139,18 @@ public class Search  extends JFrame implements ActionListener {
             // USE STACK TO ONLY USE EACH IDs ONE TIME
             Stack<String> idroom = new Stack<>();
             Stack<String> capacities = new Stack<>();
-            for (int i = 0; i < cc3.result.size()-1; i++) {
+            for (int i = 0; i < cc3.result.size() - 1; i++) {
                 idroom.add(cc2.result.get(i));
                 capacities.add(cc3.result.get(i));
             }
 
 
+            System.out.println("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
+            if (idroom.isEmpty()) {
+                System.out.println("no offers found retry");
+            } else {
+                idroom.pop();
+                capacities.pop();
                 int people = 0;
                 ArrayList<ArrayList<String>> offers = new ArrayList<>();
 
@@ -183,35 +189,46 @@ public class Search  extends JFrame implements ActionListener {
                         commands.add(id);
                         CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
                         commands.clear();
-                        commands.add("show"); commands.add("room"); commands.add("price"); commands.add(id); commands.add(String.valueOf(electrowin.isSelected()));
+                        commands.add("show");
+                        commands.add("room");
+                        commands.add("price");
+                        commands.add(id);
+                        commands.add(String.valueOf(electrowin.isSelected()));
                         CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
-                        finaltitle+=cc4.result.get(0) + " - ";
+                        finaltitle += cc4.result.get(0) + " - ";
+
 
                         ids.add(id);
+                        System.out.println(cc4.result);
+                        System.out.println(cc5.result);
                         finalprice += Integer.parseInt(cc5.result.get(0));
                         commands.clear();
                     }
-                    finaltitle = finaltitle.substring(0, finaltitle.length()-1);finaltitle = finaltitle.substring(0, finaltitle.length()-1);
+
+                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
+                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
                     // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
                     double min = Integer.parseInt(bmin.getText());
                     double max = Integer.parseInt(bmax.getText());
                     if (finalprice > min && finalprice < max)
-                        finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice),companyName));
+                        finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice), companyName));
                 }
-            if (finaloffers.isEmpty()) {
-                SearchLog.info("no offers found retry");
-                JLabel notfound = new JLabel("no offers found retry");
-                notfound.setLayout(new BoxLayout(notfound,BoxLayout.LINE_AXIS));
-                notfound.add(bigpan);
-                this.add(bigpan);
+                if (finaloffers.isEmpty()) {
+                    SearchLog.info("no offers found retry");
+                    JLabel notfound = new JLabel("no offers found retry");
+                    notfound.setLayout(new BoxLayout(notfound, BoxLayout.LINE_AXIS));
+                    notfound.add(bigpan);
+                    this.add(bigpan);
 
-            } else {
-                for (OneOffer offer : finaloffers) {
-                    System.out.println(offer);
+                } else {
+                    for (OneOffer offer : finaloffers) {
+                        System.out.println(offer);
+                    }
+
+                    // GO TP THE NEXT PAGE
+
+                    Offers ofpage = new Offers(finaloffers, companyName);
                 }
-
-                // GO TP THE NEXT PAGE
-                Offers ofpage = new Offers(finaloffers, companyName);
             }
         }
     }

@@ -1,7 +1,7 @@
 package jframe.julien;
 
 import jframe.HPageCompany;
-import jframe.maxime.button.Equipement;
+import jframe.maxime.button.Equipment;
 import jframe.maxime.button.GoBackButton;
 import socket.CCSocketTCPbis;
 import org.slf4j.Logger;
@@ -56,10 +56,10 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     GoBackButton goBackButton;
     JButton validation;
 
-    public ElectroChromaManuOpa(Equipement equipement) {
+    public ElectroChromaManuOpa(Equipment equipment) {
 
-        this.roomName = equipement.roomName; //RECUPERATION NAME ROOM
-        this.id = equipement.id+""; //RECUPERATION ID EQUIPMENT
+        this.roomName = equipment.roomName; //RECUPERATION NAME ROOM
+        this.id = equipment.id+""; //RECUPERATION ID EQUIPMENT
 
         /** VALIDATION BUTTON **/
         validation = new JButton("VALIDER");

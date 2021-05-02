@@ -21,6 +21,6 @@ public class Place extends JButton implements ActionListener {
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        mapperRoom.setEquipement(this);
+        mapperRoom.setEquipment(this);
     }
 }
