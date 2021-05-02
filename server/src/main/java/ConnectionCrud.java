@@ -245,17 +245,11 @@ public class ConnectionCrud {
         }return result;
 
     }
-    public String PassToManualMode(String id) throws SQLException{
+    public void PassToManualMode(String id) throws SQLException {
         logger.info("in PassToManualMode");
-        String sql = "update parameter_of set automanu =false where id_equipement ="+id+";";
+        String sql = "update parameter_of set automanu =false where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
-        ResultSet rs = smt.executeQuery(sql);
-        String result = "";
-        while (rs.next()) {
-            logger.info("in the while");
-            result += rs.getArray("automanu");
-        }
-        return result;
+        smt.executeUpdate(sql);
     }
     public String getEquipmentAvailable(String roomName) throws SQLException{
         logger.info("in getEquipementAvailable");
