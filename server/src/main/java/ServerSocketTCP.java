@@ -101,7 +101,7 @@ class ServerSocketTCP implements Runnable{
 						listMessage.add(C.getStoreHighValue(in.readLine()));
 					}
 					if(received.equals("temperatureext")){
-						listMessage.add(C.getTempExt(in.readLine()));
+						listMessage.add(C.getTempExt());
 					}
 					if(received.equals("lightint")){
 						listMessage.add(C.getLightInt(in.readLine()));
@@ -136,7 +136,6 @@ class ServerSocketTCP implements Runnable{
 					}
 				}
 				if(received.equals("update")){
-					logger.info("ON EST DANS LE UPDATE GENERAL");
 					update(in,C);
 					listMessage.add("update element");
 				}
