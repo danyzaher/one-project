@@ -57,7 +57,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     JButton validation;
 
     public ElectroChromaManuOpa(Equipment equipment) {
-        logger.debug("IN ELECTROCHROMA MANU OPA");
 
         this.roomName = equipment.roomName; //RECUPERATION NAME ROOM
         this.id = equipment.id+""; //RECUPERATION ID EQUIPMENT
@@ -74,12 +73,10 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         setLayout(new FlowLayout());
 
         /** METHOD **/
-        logger.debug("DO METHODS...");
         getOpacityValue(); //Get value of the opacity of the window
         getTempExt(); //Get value of the temperature ext
         getTempInt(); //Get value of the temperature int
         getLightInt(); // Get value of the light int
-        logger.debug("METHODS ARE DONE...");
 
         /** SLIDER **/
 
@@ -88,7 +85,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         Sopac.setMajorTickSpacing(1);
         Sopac.setPaintTicks(true);
         Aopacvalue = new JLabel("Opacité actuelle de la fenetre : " + opacity);
-        logger.debug("DISPLAY SLIDERS AND LABEL FOR SOPAC...");
 
         /** TEMPERATURES AND LIGHT LABELS **/
 
@@ -96,7 +92,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         Atempint = new JLabel("Temperature interieur : " + temperatureint + " °C");
         Alightint = new JLabel("Luminosité intérieur de la pièce : "+ lightintensity + " lux");
 
-        logger.debug("DISPLAY LABEL TEMP AND LIGHT FOR SOPAC...");
 
         /** ADDING PART **/
 
@@ -117,6 +112,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     }
 
     @Override
+    //BUTTON CHANGER
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource().equals(validation)) {
@@ -137,6 +133,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
 
     }
 }
+    //SLIDER CHANGER
     public class eventOpac implements ChangeListener {
         @Override
         public void stateChanged(ChangeEvent eo) {
@@ -198,6 +195,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         lightintensity = lightint.get(0);
         logger.info("lightint = " + lightintensity);
     }
+    //RETURN BUTTON
     public void newGoBack(JFrame j){
         goBackButton = new GoBackButton(this,j);
         add(goBackButton);

@@ -19,7 +19,8 @@ public class AutoModeElectro {
 
     }
     public void ManualButtonFunction(ConnectionCrud C) throws SQLException {
-        ArrayList<String> id_fenetre = C.getIdFenetre();
+
+        ArrayList<String> id_fenetre = C.getIdWindow();
         ArrayList<String> id_store = C.getIdStore();
 
         for (String id_f : id_fenetre) {
@@ -108,7 +109,7 @@ public class AutoModeElectro {
             if (value >5){
                 value = 5;
             }
-            }//to retake
+            }
             C.updateStoreHigh(id_s, value + "");
 
         }

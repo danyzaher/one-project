@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.event.*;
+
+import jframe.maxime.button.GoBackButton;
+import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -17,6 +20,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
     int temperature;
     int light;
+    String companyName;
 
     /*** COMPONENTS FOR MODIFICATION OF THE TEMPERATURES IN ROOMS ***/
     JSlider Stemp;
@@ -37,9 +41,9 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
     /*** BUTTON ***/
     JButton validation;
+    GoBackButton goBackButton;
 
-    //Others
-    String companyName;
+
 
     public ElectroChromaAuto(String companyName) {
 
@@ -104,6 +108,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     }
 
     @Override
+    //BUTTON CHANGER
     public void actionPerformed(ActionEvent e) {
 
         if(e.getSource().equals(validation)) {
@@ -119,7 +124,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
         }
     }
-
+    //SLIDERS CHANGERS
     public class eventTemp implements ChangeListener {
 
         @Override
@@ -139,6 +144,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         }
     }
 
+    //OBTAIN VALUES
     public void getTempExt(){
 
         logger.info("begin getTempExt");
@@ -162,5 +168,11 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         temperatureint = tempintresult.get(0);
         logger.info("temperatureint = " + temperatureint);
 
+    }
+
+    //RETURN BUTTON
+    public void newGoBack(JFrame j){
+        goBackButton = new GoBackButton(this,j);
+        add(goBackButton);
     }
 }

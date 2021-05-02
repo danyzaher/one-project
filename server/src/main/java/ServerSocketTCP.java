@@ -78,7 +78,7 @@ class ServerSocketTCP implements Runnable{
 							listMessage.add(C.getEquipmentAvailable(in.readLine()));
 						}
 						if(s.equals("animated")){
-							listMessage.add(C.getEtatEquipment(in.readLine()));
+							listMessage.add(C.getAvailableEquipment(in.readLine()));
 						}
 						if(s.equals("inRoom")){
 						listMessage.add(C.getEquipment(in.readLine()));}
@@ -89,7 +89,7 @@ class ServerSocketTCP implements Runnable{
 							listMessage.add(C.getSensorAvailable(in.readLine()));
 						}
 						if(s.equals("animated")){
-							listMessage.add(C.getEtatSensor(in.readLine()));
+							listMessage.add(C.getAvailableSensor(in.readLine()));
 						}
 						if(s.equals("inRoom")){
 							listMessage.add(C.getSensor(in.readLine()));}
@@ -101,7 +101,7 @@ class ServerSocketTCP implements Runnable{
 						listMessage.add(C.getStoreHighValue(in.readLine()));
 					}
 					if(received.equals("temperatureext")){
-						listMessage.add(C.getTempExt(in.readLine()));
+						listMessage.add(C.getTempExt());
 					}
 					if(received.equals("lightint")){
 						listMessage.add(C.getLightInt(in.readLine()));
@@ -136,7 +136,6 @@ class ServerSocketTCP implements Runnable{
 					}
 				}
 				if(received.equals("update")){
-					logger.info("ON EST DANS LE UPDATE GENERAL");
 					update(in,C);
 					listMessage.add("update element");
 				}
@@ -196,7 +195,7 @@ class ServerSocketTCP implements Runnable{
 	}
 
 	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
-		logger.info(" FONCTION update");
+		logger.info(" in update");
 		String recu = in.readLine();
 
 		if(recu.equals("manualmode")){
@@ -214,7 +213,7 @@ class ServerSocketTCP implements Runnable{
 			C.setTaken(in.readLine(),in.readLine(),in.readLine());
 		}
 		if(recu.equals("parameters")) {
-
+			logger.info(" dans parameters");
 			String s1 = in.readLine();
 			String s2 = in.readLine();
 			String s3 = in.readLine();
@@ -237,7 +236,6 @@ class ServerSocketTCP implements Runnable{
 	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException, InterruptedException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		while(!listMessage.isEmpty()){
-			logger.info("+1");
 			logger.info(listMessage.get(0));
 			out.println(listMessage.poll());
 		}
