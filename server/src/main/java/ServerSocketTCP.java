@@ -214,7 +214,7 @@ class ServerSocketTCP implements Runnable{
 			C.setTaken(in.readLine(),in.readLine(),in.readLine());
 		}
 		if(recu.equals("parameters")) {
-
+			logger.info(" dans parameters");
 			String s1 = in.readLine();
 			String s2 = in.readLine();
 			String s3 = in.readLine();

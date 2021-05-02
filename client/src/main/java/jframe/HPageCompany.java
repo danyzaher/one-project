@@ -180,6 +180,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         if (e.getSource().equals(chromatique)){
             ElectroChromaAuto electroChromaAuto = new ElectroChromaAuto(title);
+            electroChromaAuto.newGoBack(this);
         }
         this.setVisible(false);
     }

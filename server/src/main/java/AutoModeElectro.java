@@ -19,6 +19,7 @@ public class AutoModeElectro {
 
     }
     public void ManualButtonFunction(ConnectionCrud C) throws SQLException {
+
         ArrayList<String> id_fenetre = C.getIdFenetre();
         ArrayList<String> id_store = C.getIdStore();
 
