@@ -47,7 +47,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     JLabel Atempint;
     JLabel Alightint;
 
-    /** BUTTON **/
+    /** BUTTONS **/
     JButton validation;
     GoBackButton goBackButton;
 
@@ -107,6 +107,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     }
 
     @Override
+    //BUTTON CHANGER
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource().equals(validation)) {
@@ -127,6 +128,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
             ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         }
     }
+    //SLIDER CHANGER
     public class eventStore implements ChangeListener {
 
         @Override
@@ -187,6 +189,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         lightintensity = lightint.get(0);
         logger.info("lightint = " + lightintensity);
     }
+    //RETURN BUTTON
     public void newGoBack(JFrame j){
         goBackButton = new GoBackButton(this,j);
         add(goBackButton);
