@@ -256,6 +256,30 @@ public class ConnectionCrud {
         }
         return result;
     }
+    public String getAutoTempParameters(String companyName) throws SQLException{
+
+        logger.info("in getAutoTempLigParameters");
+        String sql = "select temperature from parameter_of where automanu= true and id_equipement in (select id_equipement from be_present where id_equipplace in (Select id_equipplace from equipplace where id_room in (select room_s_number from location where id_company in (select id_company from company where name = '"+companyName +"')))) limit 1;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            result += rs.getArray("temperature");
+        }
+        return result;
+    }
+    public String getAutoLigParameters(String companyName) throws SQLException{
+
+        logger.info("in getAutoTempLigParameters");
+        String sql = "select luminosity from parameter_of where automanu= true and id_equipement in (select id_equipement from be_present where id_equipplace in (Select id_equipplace from equipplace where id_room in (select room_s_number from location where id_company in (select id_company from company where name = '"+companyName +"')))) limit 1;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            result += rs.getArray("luminosity");
+        }
+        return result;
+    }
     public String getSensorAvailable(String roomName) throws SQLException{
         logger.info("in getSensorAvailable");
         String sql = "select distinct sensor.description from compatible_sensor inner join equipplace on equipplace.id_equipplace=compatible_sensor.id_equipplace inner join sensor on sensor.description= compatible_sensor.description where equipplace.id_equipplace not in (Select id_equipplace from be_present) and sensor.id_sensor not in (Select id_sensor from be_present where id_sensor is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
