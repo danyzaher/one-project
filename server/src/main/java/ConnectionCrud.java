@@ -125,16 +125,6 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getRoomAvailable() throws SQLException {
-        logger.info("in getRoomAvailable");
-        String sql = "Select getroomavailable() as room;";
-        Statement smt = c.createStatement();
-        ResultSet rs = smt.executeQuery(sql);
-        String result = "";
-        while (rs.next()) {
-            result += rs.getArray("room")+ "\n";}
-        return result;
-    }
     public String getStoreHighValue(String id) throws SQLException {
         logger.info("in getStoreHighValue");
         String sql ="select valueof from equipement where id_equipement ="+ id +";";
