@@ -7,6 +7,9 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import javax.swing.event.*;
+
+import jframe.maxime.button.GoBackButton;
+import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -37,6 +40,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
     /*** BUTTON ***/
     JButton validation;
+    GoBackButton goBackButton;
 
     //Others
     String companyName;
@@ -162,5 +166,10 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         temperatureint = tempintresult.get(0);
         logger.info("temperatureint = " + temperatureint);
 
+    }
+
+    public void newGoBack(JFrame j){
+        goBackButton = new GoBackButton(this,j);
+        add(goBackButton);
     }
 }
