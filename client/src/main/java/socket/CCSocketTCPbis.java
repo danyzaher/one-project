@@ -5,6 +5,7 @@ import com.fasterxml.jackson.dataformat.yaml.YAMLFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import javax.swing.*;
 import java.io.*;
 import java.net.Socket;
 import java.nio.file.Files;
@@ -63,6 +64,9 @@ public class CCSocketTCPbis {
             String received;
             clientLog.info("Starting receiving data");
             while ((received = plec.readLine()) != null) {
+                if(received.equals("no more connection come back later")){
+                    JOptionPane.showMessageDialog(new JPanel(), "Le serveur est momentanément indisponible. Veuillez relancer l’application. ", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
                 clientLog.info(received);
                 result.add(received);
             }
