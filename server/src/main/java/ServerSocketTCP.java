@@ -237,7 +237,6 @@ class ServerSocketTCP implements Runnable{
 	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException, InterruptedException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		while(!listMessage.isEmpty()){
-			logger.info("+1");
 			logger.info(listMessage.get(0));
 			out.println(listMessage.poll());
 		}
