@@ -281,7 +281,7 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public String getEtatEquipment(String id) throws SQLException{
+    public String getAvailableEquipment(String id) throws SQLException{
         logger.info("in getEtatEquipement");
         String sql = "select animated from equipement where id_equipement="+id+";";
         Statement smt = c.createStatement();
@@ -374,7 +374,7 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
-    public String getEtatSensor(String id) throws SQLException{
+    public String getAvailableSensor(String id) throws SQLException{
         logger.info("in getEtatSensor");
         String sql = "select animated from sensor where id_sensor="+id+";";
         Statement smt = c.createStatement();
@@ -426,15 +426,15 @@ public class ConnectionCrud {
         }
         return result;
     }
-    public void updateBePresentEquip(String idplace, String idEquip) throws SQLException {
+    public void updateBePresentEquip(String idPlace, String idEquip) throws SQLException {
         logger.info("in update be_presentEquip");
-        String sql = "update be_present set id_equipplace = " + idplace + " where id_equipement =" + idEquip + ";";
+        String sql = "update be_present set id_equipplace = " + idPlace + " where id_equipement =" + idEquip + ";";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
-    public void updateBePresentSensor(String idplace, String idEquip) throws SQLException {
+    public void updateBePresentSensor(String idPlace, String idEquip) throws SQLException {
         logger.info("in update be_presentSensor");
-        String sql = "update be_present set id_equipplace = " + idplace + " where id_sensor =" + idEquip + ";";
+        String sql = "update be_present set id_equipplace = " + idPlace + " where id_sensor =" + idEquip + ";";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }

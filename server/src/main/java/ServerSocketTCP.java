@@ -78,7 +78,7 @@ class ServerSocketTCP implements Runnable{
 							listMessage.add(C.getEquipmentAvailable(in.readLine()));
 						}
 						if(s.equals("animated")){
-							listMessage.add(C.getEtatEquipment(in.readLine()));
+							listMessage.add(C.getAvailableEquipment(in.readLine()));
 						}
 						if(s.equals("inRoom")){
 						listMessage.add(C.getEquipment(in.readLine()));}
@@ -89,7 +89,7 @@ class ServerSocketTCP implements Runnable{
 							listMessage.add(C.getSensorAvailable(in.readLine()));
 						}
 						if(s.equals("animated")){
-							listMessage.add(C.getEtatSensor(in.readLine()));
+							listMessage.add(C.getAvailableSensor(in.readLine()));
 						}
 						if(s.equals("inRoom")){
 							listMessage.add(C.getSensor(in.readLine()));}
