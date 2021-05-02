@@ -31,8 +31,12 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
+
 	static Datasource source = new Datasource(sc.getNboneco());
 	static Socket socketClient;
+	static AutoModeElectro autoModeElectro = new AutoModeElectro();
+	static int compt = 1; //Automatic button
+
 	public ServerSocketTCP() {
 	}
 	public void analyseInputStream(Socket socket){
@@ -40,12 +44,16 @@ class ServerSocketTCP implements Runnable{
 			logger.info("Connexion avec : " + socket.getInetAddress());
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
 			LinkedList<String> listMessage = new LinkedList<>();
-			if (source.size() > 0) {
+			if (Datasource.size() > 0) {
 				ConnectionCrud C = new ConnectionCrud();
 				C.setC(Datasource.getConnection());
-				logger.info("Connection available = " + source.size());
+				logger.info("Connection available = " + Datasource.size());
 				String received = in.readLine();
 				logger.info("received = "+received);
+				if (received.equals("automatic") && compt==1){
+					compt+=1;
+					autoModeElectro.BrainElectroChroma(C);
+				}
 				if (received.equals("show")){
 					received = in.readLine();
 					if (received.equals("company")){
@@ -101,9 +109,6 @@ class ServerSocketTCP implements Runnable{
 					if(received.equals("temperatureint")){
 						listMessage.add(C.getTempInt(in.readLine()));
 					}
-					if(received.equals("temperatureGint")){
-						listMessage.add(C.getGeneralTempInt(in.readLine()));
-					}
 					if(received.equals("emplacement")){
 						received = in.readLine();
 						String s = in.readLine();
@@ -131,6 +136,7 @@ class ServerSocketTCP implements Runnable{
 					}
 				}
 				if(received.equals("update")){
+					logger.info("ON EST DANS LE UPDATE GENERAL");
 					update(in,C);
 					listMessage.add("update element");
 				}
@@ -142,7 +148,9 @@ class ServerSocketTCP implements Runnable{
 					insert(in,C);
 					listMessage.add("element added");
 				}
+
 				Datasource.setConnection(C.getC());
+
 			} else{
 				listMessage.add("no more connection come back later");
 			}
@@ -188,9 +196,12 @@ class ServerSocketTCP implements Runnable{
 	}
 
 	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
-		logger.info("update");
+		logger.info(" FONCTION update");
 		String recu = in.readLine();
 
+		if(recu.equals("manualmode")){
+			C.PassToManualMode(in.readLine());
+		}
 		if(recu.equals("opacity")){
 			String s = in.readLine(); //id
 			C.updateOpacity(s,in.readLine());//in.readLine() --> opacity by the connection crud
@@ -202,9 +213,18 @@ class ServerSocketTCP implements Runnable{
 		if(recu.equals("location")) {
 			C.setTaken(in.readLine(),in.readLine(),in.readLine());
 		}
+		if(recu.equals("parameters")) {
+
+			String s1 = in.readLine();
+			String s2 = in.readLine();
+			String s3 = in.readLine();
+
+			C.updateGeneralTempInt(s1,s3);
+			C.updateGeneralLigInt(s2,s3);
+		}
 		if(recu.equals("be_present")){
 			String s = in.readLine();
-			if(s.equals("equipement")){
+			if(s.equals("equipment")){
 				C.updateBePresentEquip(in.readLine(),in.readLine());
 			}
 			if(s.equals("sensor")){
@@ -235,7 +255,7 @@ class ServerSocketTCP implements Runnable{
 	}
 
 	public static void main(String[] args) throws IOException {
-		logger.info("Server is running");
+		logger.info("Server is running...");
 		ServerSocket socketServer = new ServerSocket(sc.getPort());
 		while (true){
 

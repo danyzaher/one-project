@@ -42,6 +42,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     String companyName;
 
     public ElectroChromaAuto(String companyName) {
+
         this.companyName = companyName;
 
         /** FRAME SETUP **/
@@ -53,6 +54,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
         validation = new JButton("VALIDER");
         validation.setSize(100, 100);
+        validation.addActionListener(this);
 
         //Temperature ext part
 
@@ -75,7 +77,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
         /** METHODS **/
         getTempExt();
-        getGeneralTempInt();
+
         /** TEMPERATURES AND LIGHT **/
 
         ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + "°C");
@@ -99,21 +101,20 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         Slight.addChangeListener(el);
 
         setVisible(true);
-
     }
 
     @Override
-    public void actionPerformed(ActionEvent e) { //--> Work in progress
+    public void actionPerformed(ActionEvent e) {
 
         if(e.getSource().equals(validation)) {
 
             logger.info("begin validation for automatic ElectroChroma settings ");
             ArrayList<String> stringArrayList = new ArrayList<>();
             stringArrayList.add("update");
-            stringArrayList.add("temperature");
-            stringArrayList.add("light");
+            stringArrayList.add("parameters");
             stringArrayList.add(Stemp.getValue() + "");
             stringArrayList.add(Slight.getValue() + "");
+            stringArrayList.add(companyName);
             CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
 
         }
@@ -150,11 +151,12 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         logger.info("temperatureext = " + temperatureext);
 
     }
-    public void getGeneralTempInt(){
-        logger.info("begin getGTempInt");
+    public void getGeneralTempLigInt(){
+
+        logger.info("begin getGeneralTempLigInt");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
-        stringArrayList.add("temperatureGint");
+        stringArrayList.add("temperatureGeneralTempLigint");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.tempintresult = ccSocketTCP2.result;
         temperatureint = tempintresult.get(0);

@@ -111,13 +111,20 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
 
         if (e.getSource().equals(validation)) {
 
+           logger.info("begin validation");
+            ArrayList<String> strArrayList = new ArrayList<>();
+            strArrayList.add("update");
+            strArrayList.add("manualmode");
+            strArrayList.add(id);
+            CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(strArrayList);
+
             logger.info("begin validation");
             ArrayList<String> stringArrayList = new ArrayList<>();
             stringArrayList.add("update");
             stringArrayList.add("strhigh");
             stringArrayList.add(id);
             stringArrayList.add(Sstorehigh.getValue() + "");
-            CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+            ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         }
     }
     public class eventStore implements ChangeListener {
