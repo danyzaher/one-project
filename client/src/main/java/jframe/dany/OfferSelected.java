@@ -22,10 +22,10 @@ public class OfferSelected extends JFrame implements ActionListener{
         oneOffer = on;
         setTitle("Détails de l'offre");
         setLocationRelativeTo(null);
-        setSize(400, 100);
+        setSize(100 + 10*oneOffer.title.getText().length(), 150);
         setResizable(true);
         setLayout(new FlowLayout());
-        desc = new JLabel(oneOffer.getTitle() + "  " + oneOffer.getPrice());
+        desc = new JLabel(oneOffer.getTitle() + "  PRICE : " + oneOffer.getPrice() + " €");
         left.add(desc);
         right.add(rent);
         rent.addActionListener(this);
@@ -47,13 +47,13 @@ public class OfferSelected extends JFrame implements ActionListener{
                 commands.add("id");
                 commands.add(companyName);
                 CCSocketTCPbis cc = new CCSocketTCPbis(commands);
-                System.out.println(cc.result);
                 ArrayList<String> al = new ArrayList<>();
                 al.add("insert");
                 al.add("location");
-                al.add(oneOffer.getPrice());
-                al.add(cc.result.get(0));
                 al.add(oneOffer.getId().get(i));
+                al.add(cc.result.get(0));
+                al.add(oneOffer.getPrice());
+
                 new CCSocketTCPbis(al);
             }
             Success s = new Success();

@@ -19,7 +19,7 @@ public class OneOffer extends JPanel implements ActionListener {
         companyName=cp;
         title = new JLabel("SALLES : " + ti);
         button.addActionListener(this);
-        price = new JLabel("PRIX : " + pri);
+        price = new JLabel(pri);
         idroom=id;
         left.setLayout(new BoxLayout(left,BoxLayout.LINE_AXIS));
         right.setLayout(new BoxLayout(right,BoxLayout.LINE_AXIS));

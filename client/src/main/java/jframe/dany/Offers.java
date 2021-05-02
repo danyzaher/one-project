@@ -27,7 +27,7 @@ public class Offers extends JFrame implements ActionListener {
             bigpan.add(offer);
         }
         this.add(bigpan);
-        setSize(50*title.getText().length(),100*list.size());
+        setSize(50*title.getText().length(),100+50*list.size());
         setVisible(true);
     }
     @Override

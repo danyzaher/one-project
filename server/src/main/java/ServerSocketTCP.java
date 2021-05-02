@@ -166,6 +166,9 @@ class ServerSocketTCP implements Runnable{
 				c.insertBePresentSensor(s,in.readLine());
 			}
 		}
+		if(recu.equals("location")) {
+			c.insertLocation(in.readLine(),in.readLine(),in.readLine());
+		}
 	}
 
 	public synchronized void delete(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {

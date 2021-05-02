@@ -42,13 +42,13 @@ public class ConnectionCrud {
             result += rs.getArray("name")+ "\n";}
         return result;
     }
-    public String getCompanyId(String name) throws SQLException{
-        String sql = "Select address from Company where name=" + name + ";";
+    public String getCompanyId(String n) throws SQLException{
+        String sql = "Select getcompanyid('" + n + "');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            result += rs.getArray("address")+ "\n";}
+            result += rs.getArray("getcompanyid")+ "\n";}
         return result;
     }
     public String getRoomInOrder() throws SQLException {
@@ -296,6 +296,12 @@ public class ConnectionCrud {
     public void updateOpacity(String id, String valueopacity) throws SQLException {
         logger.info("in update opacity");
         String sql = "update equipement set valueof = " + valueopacity + " where id_equipement =" + id + ";";
+        Statement smt = c.createStatement();
+        logger.info(String.valueOf(smt.executeUpdate(sql)));
+    }
+    public void insertLocation(String idroom, String idcompany, String price) throws SQLException {
+        logger.info("in insert location");
+        String sql = "insert into location values (" + idroom + "," + idcompany + "," + price + ", CURRENT_DATE);";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }

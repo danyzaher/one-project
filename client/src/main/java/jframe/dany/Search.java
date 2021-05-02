@@ -1,6 +1,5 @@
 package jframe.dany;
 
-import org.apache.maven.shared.utils.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -9,7 +8,6 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
 import java.util.ArrayList;
 import java.util.Stack;
 
@@ -34,7 +32,7 @@ public class Search  extends JFrame implements ActionListener {
     JTextField bmax = new JTextField();
     JTextField nbpeople = new JTextField();
     JCheckBox sun = new JCheckBox();
-    JCheckBox electrofen = new JCheckBox();
+    JCheckBox electrowin = new JCheckBox();
     JCheckBox height = new JCheckBox();
     JButton done = new JButton("Rechercher");
 
@@ -58,7 +56,7 @@ public class Search  extends JFrame implements ActionListener {
         pan3.add(bmax);
         pan7.add(nbpeople);
         pan4.add(sun);
-        pan5.add(electrofen);
+        pan5.add(electrowin);
         pan6.add(height);
 
         bmin.setSize(30,30);
@@ -173,7 +171,7 @@ public class Search  extends JFrame implements ActionListener {
                 // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
 
                 for (ArrayList<String> list : offers) {
-                    SearchLog.info("############## debut d'offre #################");
+                    SearchLog.info("############## begin offer #################");
                     SearchLog.info(String.valueOf(list));
                     ArrayList<String> ids = new ArrayList<>();
                     int finalprice = 0;
@@ -185,7 +183,7 @@ public class Search  extends JFrame implements ActionListener {
                         commands.add(id);
                         CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
                         commands.clear();
-                        commands.add("show"); commands.add("room"); commands.add("price"); commands.add(id); commands.add(String.valueOf(electrofen.isSelected()));
+                        commands.add("show"); commands.add("room"); commands.add("price"); commands.add(id); commands.add(String.valueOf(electrowin.isSelected()));
                         CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
                         finaltitle+=cc4.result.get(0) + " - ";
 
@@ -219,6 +217,6 @@ public class Search  extends JFrame implements ActionListener {
     }
 
     public static void main(String[] args) {
-        Search fen = new Search("Fritel Inc.");
+        Search fen = new Search("Apple");
     }
 }
