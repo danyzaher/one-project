@@ -195,7 +195,7 @@ class ServerSocketTCP implements Runnable{
 	}
 
 	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
-		logger.info(" FONCTION update");
+		logger.info(" in update");
 		String recu = in.readLine();
 
 		if(recu.equals("manualmode")){

@@ -215,7 +215,7 @@ public class ConnectionCrud {
             result.add(rs.getArray("value_of")+"");
         }return result;
     }
-    public ArrayList<String> getIdFenetre() throws SQLException{
+    public ArrayList<String> getIdWindow() throws SQLException{
 
         String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='fenêtre électrochromatique');";
         Statement smt = c.createStatement();
