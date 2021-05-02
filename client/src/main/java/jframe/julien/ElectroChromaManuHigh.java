@@ -110,8 +110,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     public void actionPerformed(ActionEvent e) {
 
         if (e.getSource().equals(validation)) {
-
-           logger.info("begin validation");
+            logger.info("begin validation");
             ArrayList<String> strArrayList = new ArrayList<>();
             strArrayList.add("update");
             strArrayList.add("manualmode");

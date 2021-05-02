@@ -56,7 +56,8 @@ public class OfferSelected extends JFrame implements ActionListener{
 
                 new CCSocketTCPbis(al);
             }
-            Success s = new Success();
+            JOptionPane.showMessageDialog(bigpan, "La location a bien été effectuée", "Succès", JOptionPane.INFORMATION_MESSAGE);
+
         }
     }
 }

@@ -83,156 +83,160 @@ public class Search  extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent actionEvent) {
         if (actionEvent.getSource() == done) {
-            ArrayList<String> commands = new ArrayList<>();
-            commands.add("show");
-            commands.add("room");
-            commands.add("id");
-            socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
-            commands.clear();
-            // SET A GRADE FOR EACH IDs
-
-            if (sun.isSelected() && height.isSelected()) {
-                for (String value : cc.result) {
-                    commands.add("setgradesunheight(" + value + ");");
-                    new socket.CCSocketTCPbis(commands);
-                    commands.clear();
-
-                }
-            }
-            if (sun.isSelected() && !height.isSelected()) {
-                for (String value : cc.result) {
-                    commands.add("setgradesun(" + value + ");");
-                    new socket.CCSocketTCPbis(commands);
-                    commands.clear();
-
-                }
-            }
-            if (!sun.isSelected() && height.isSelected()) {
-                for (String value : cc.result) {
-                    commands.add("setgradeheight(" + value + ");");
-                    new socket.CCSocketTCPbis(commands);
-                    commands.clear();
-                }
-            }
-            if (!sun.isSelected() && !height.isSelected()) {
-                for (String value : cc.result) {
-                    commands.add("setgrade(" + value + ");");
-                    new socket.CCSocketTCPbis(commands);
-                    commands.clear();
-
-                }
-            }
-
-            // GET IDs AND THE ROOM'S CAPACITY ORDERED BY THEIR GRADE - ASC BECAUSE THE STACK WILL REVERSE THE ORDER
-            commands.add("show");
-            commands.add("room");
-            commands.add("id");
-
-            CCSocketTCPbis cc2 = new CCSocketTCPbis(commands);
-            commands.clear();
-            commands.add("show");
-            commands.add("room");
-            commands.add("capacity");
-
-            CCSocketTCPbis cc3 = new CCSocketTCPbis(commands);
-            commands.clear();
-            // USE STACK TO ONLY USE EACH IDs ONE TIME
-            Stack<String> idroom = new Stack<>();
-            Stack<String> capacities = new Stack<>();
-
-            for (int i = 0; i < cc3.result.size() - 1; i++) {
-                idroom.add(cc2.result.get(i));
-                capacities.add(cc3.result.get(i));
-            }
-
-
-            System.out.println("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
-            if (idroom.isEmpty()) {
-                System.out.println("no offers found retry");
-
-            } else {
-                idroom.pop();
-                capacities.pop();
-                int people = 0;
-                ArrayList<ArrayList<String>> offers = new ArrayList<>();
-
-                // BUILDING LISTS OF IDs - EACH LIST WILL GIVE AN OFFER
-                while (!idroom.isEmpty() && !capacities.isEmpty()) {
-                    ArrayList<String> offer = new ArrayList<>();
-                    while (people < Integer.parseInt(nbpeople.getText())) {
-                        if (!idroom.isEmpty() && !capacities.isEmpty()) {
-                            offer.add(idroom.peek());
-                            people += Integer.parseInt(capacities.peek());
-                            idroom.pop();
-                            capacities.pop();
-                        } else {
-                            break;
-                        }
-                    }
-                    if (!offer.isEmpty() && people >= Integer.parseInt(nbpeople.getText())) {
-                        offers.add(offer);
-                    }
-                    people = 0;
-                }
-                ArrayList<OneOffer> finaloffers = new ArrayList<>();
+            if (Integer.parseInt(bmin.getText()) < Integer.parseInt(bmax.getText()) && !bmin.getText().equals("") && !bmax.getText().equals("") && !nbpeople.getText().equals("")) {
+                ArrayList<String> commands = new ArrayList<>();
+                commands.add("show");
+                commands.add("room");
+                commands.add("id");
+                socket.CCSocketTCPbis cc = new socket.CCSocketTCPbis(commands);
                 commands.clear();
-                // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
+                // SET A GRADE FOR EACH IDs
 
-                for (ArrayList<String> list : offers) {
-                    SearchLog.info("############## begin offer #################");
-                    SearchLog.info(String.valueOf(list));
-                    ArrayList<String> ids = new ArrayList<>();
-                    int finalprice = 0;
-                    String finaltitle = "";
-                    for (String id : list) {
-                        commands.add("show");
-                        commands.add("room");
-                        commands.add("name");
-                        commands.add(id);
-                        CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
+                if (sun.isSelected() && height.isSelected()) {
+                    for (String value : cc.result) {
+                        commands.add("setgradesunheight(" + value + ");");
+                        new socket.CCSocketTCPbis(commands);
                         commands.clear();
-                        commands.add("show");
-                        commands.add("room");
-                        commands.add("price");
-                        commands.add(id);
-                        commands.add(String.valueOf(electrowin.isSelected()));
-                        CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
-                        finaltitle += cc4.result.get(0) + " - ";
 
+                    }
+                }
+                if (sun.isSelected() && !height.isSelected()) {
+                    for (String value : cc.result) {
+                        commands.add("setgradesun(" + value + ");");
+                        new socket.CCSocketTCPbis(commands);
+                        commands.clear();
 
-                        ids.add(id);
-                        System.out.println(cc4.result);
-                        System.out.println(cc5.result);
-                        finalprice += Integer.parseInt(cc5.result.get(0));
+                    }
+                }
+                if (!sun.isSelected() && height.isSelected()) {
+                    for (String value : cc.result) {
+                        commands.add("setgradeheight(" + value + ");");
+                        new socket.CCSocketTCPbis(commands);
                         commands.clear();
                     }
-
-
-
-                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
-                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
-                    // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
-                    double min = Integer.parseInt(bmin.getText());
-                    double max = Integer.parseInt(bmax.getText());
-                    if (finalprice > min && finalprice < max)
-                        finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice), companyName));
-
                 }
-                if (finaloffers.isEmpty()) {
-                    SearchLog.info("no offers found retry");
-                    JLabel notfound = new JLabel("no offers found retry");
-                    notfound.setLayout(new BoxLayout(notfound, BoxLayout.LINE_AXIS));
-                    notfound.add(bigpan);
-                    this.add(bigpan);
+                if (!sun.isSelected() && !height.isSelected()) {
+                    for (String value : cc.result) {
+                        commands.add("setgrade(" + value + ");");
+                        new socket.CCSocketTCPbis(commands);
+                        commands.clear();
+
+                    }
+                }
+
+                // GET IDs AND THE ROOM'S CAPACITY ORDERED BY THEIR GRADE - ASC BECAUSE THE STACK WILL REVERSE THE ORDER
+                commands.add("show");
+                commands.add("room");
+                commands.add("id");
+
+                CCSocketTCPbis cc2 = new CCSocketTCPbis(commands);
+                commands.clear();
+                commands.add("show");
+                commands.add("room");
+                commands.add("capacity");
+
+                CCSocketTCPbis cc3 = new CCSocketTCPbis(commands);
+                commands.clear();
+                // USE STACK TO ONLY USE EACH IDs ONE TIME
+                Stack<String> idroom = new Stack<>();
+                Stack<String> capacities = new Stack<>();
+
+                for (int i = 0; i < cc3.result.size() - 1; i++) {
+                    idroom.add(cc2.result.get(i));
+                    capacities.add(cc3.result.get(i));
+                }
+
+
+                System.out.println("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
+                if (idroom.isEmpty()) {
+                    System.out.println("no offers found retry");
 
                 } else {
-                    for (OneOffer offer : finaloffers) {
-                        System.out.println(offer);
+                    idroom.pop();
+                    capacities.pop();
+                    int people = 0;
+                    ArrayList<ArrayList<String>> offers = new ArrayList<>();
+
+                    // BUILDING LISTS OF IDs - EACH LIST WILL GIVE AN OFFER
+                    while (!idroom.isEmpty() && !capacities.isEmpty()) {
+                        ArrayList<String> offer = new ArrayList<>();
+                        while (people < Integer.parseInt(nbpeople.getText())) {
+                            if (!idroom.isEmpty() && !capacities.isEmpty()) {
+                                offer.add(idroom.peek());
+                                people += Integer.parseInt(capacities.peek());
+                                idroom.pop();
+                                capacities.pop();
+                            } else {
+                                break;
+                            }
+                        }
+                        if (!offer.isEmpty() && people >= Integer.parseInt(nbpeople.getText())) {
+                            offers.add(offer);
+                        }
+                        people = 0;
                     }
+                    ArrayList<OneOffer> finaloffers = new ArrayList<>();
+                    commands.clear();
+                    // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
 
-                    // GO TP THE NEXT PAGE
+                    for (ArrayList<String> list : offers) {
+                        SearchLog.info("############## begin offer #################");
+                        SearchLog.info(String.valueOf(list));
+                        ArrayList<String> ids = new ArrayList<>();
+                        int finalprice = 0;
+                        String finaltitle = "";
+                        for (String id : list) {
+                            commands.add("show");
+                            commands.add("room");
+                            commands.add("name");
+                            commands.add(id);
+                            CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
+                            commands.clear();
+                            commands.add("show");
+                            commands.add("room");
+                            commands.add("price");
+                            commands.add(id);
+                            commands.add(String.valueOf(electrowin.isSelected()));
+                            CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
+                            finaltitle += cc4.result.get(0) + " - ";
 
-                    Offers ofpage = new Offers(finaloffers, companyName);
+
+                            ids.add(id);
+                            System.out.println(cc4.result);
+                            System.out.println(cc5.result);
+                            finalprice += Integer.parseInt(cc5.result.get(0));
+                            commands.clear();
+                        }
+
+
+                        finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
+                        finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
+                        // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
+                        double min = Integer.parseInt(bmin.getText());
+                        double max = Integer.parseInt(bmax.getText());
+                        if (finalprice > min && finalprice < max)
+                            finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice), companyName));
+
+                    }
+                    if (finaloffers.isEmpty()) {
+                        SearchLog.info("no offers found retry");
+                        JOptionPane.showMessageDialog(new JPanel(), "Aucunes offres ne correspondent à vos critères de recherche, veuillez en saisir de nouveaux", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    } else {
+                        for (OneOffer offer : finaloffers) {
+                            System.out.println(offer);
+                        }
+                        // GO TP THE NEXT PAGE
+                        Offers ofpage = new Offers(finaloffers, companyName);
+                    }
+                }
+            } else {
+                if (Integer.parseInt(bmin.getText()) < Integer.parseInt(bmax.getText())) {
+                    SearchLog.info("min > max");
+                    JOptionPane.showMessageDialog(bigpan, "Entrez un budget minimum inférieur au maximum", "Erreur", JOptionPane.ERROR_MESSAGE);
+                }
+                if (!bmin.getText().equals("") && !bmax.getText().equals("") && !nbpeople.getText().equals("")) {
+                    SearchLog.info("missing value");
+                    JOptionPane.showMessageDialog(bigpan, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }

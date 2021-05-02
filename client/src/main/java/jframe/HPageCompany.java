@@ -32,7 +32,8 @@ public class HPageCompany extends JFrame implements ActionListener {
         setTitle("Page d'accueil de l'entreprise "+s);
         setLayout(new FlowLayout());
         setSize(800, 300);
-        setVisible(true);
+        setLocationRelativeTo(null);
+
         setResizable(false);
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
@@ -44,7 +45,8 @@ public class HPageCompany extends JFrame implements ActionListener {
         badge.addActionListener(this);
         location.addActionListener(this);
         chromatique.addActionListener(this);
-        this.setJMenuBar(jMenuBar);
+        setJMenuBar(jMenuBar);
+        setVisible(true);
     }
     public void getMenu(){
         logger.info("begin getMenu");

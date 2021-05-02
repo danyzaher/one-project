@@ -14,11 +14,11 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     JComboBox jComboBox;
     JLabel l1, l2;
     ArrayList<String> s1 = new ArrayList<>();
-    public HPage(){
+    public HPage() {
         setTitle("Page d'Accueil");
 
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
+        setLocationRelativeTo(null);
         setSize(800, 300);
         setResizable(false);
         setLayout(new FlowLayout());

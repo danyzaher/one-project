@@ -6,6 +6,8 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
+import java.util.Collections;
+
 
 public class Offers extends JFrame implements ActionListener {
     JPanel bigpan = new JPanel();
@@ -23,6 +25,7 @@ public class Offers extends JFrame implements ActionListener {
         pantitle.setLayout(new BoxLayout(pantitle,BoxLayout.LINE_AXIS));
         bigpan.setLayout(new BoxLayout(bigpan,BoxLayout.PAGE_AXIS));
         bigpan.add(pantitle);
+        Collections.sort(offers, new SortByPrice());
         for (jframe.dany.OneOffer offer : offers) {
             bigpan.add(offer);
         }
@@ -39,4 +42,5 @@ public class Offers extends JFrame implements ActionListener {
             }
         }
     }
+
 }
