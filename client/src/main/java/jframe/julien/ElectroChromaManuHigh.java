@@ -125,6 +125,8 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
             stringArrayList.add(id);
             stringArrayList.add(Sstorehigh.getValue() + "");
             ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+
+            JOptionPane.showMessageDialog(new JPanel(), "LES MODIFICATIONS SE SONT FAITES AVEC SUCCES !", "Succès", JOptionPane.INFORMATION_MESSAGE);
         }
     }
     //SLIDER CHANGER

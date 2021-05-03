@@ -131,6 +131,8 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
             stringArrayList.add(Sopac.getValue() + "");
             ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
 
+            JOptionPane.showMessageDialog(new JPanel(), "LES MODIFICATIONS SE SONT FAITES AVEC SUCCES !", "Succès", JOptionPane.INFORMATION_MESSAGE);
+
     }
 }
     //SLIDER CHANGER
