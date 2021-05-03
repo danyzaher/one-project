@@ -1,5 +1,7 @@
 package jframe.dany;
 
+import jframe.maxime.button.GoBackButton;
+import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -35,7 +37,7 @@ public class Search  extends JFrame implements ActionListener {
     JCheckBox electrowin = new JCheckBox();
     JCheckBox height = new JCheckBox();
     JButton done = new JButton("Rechercher");
-
+    GoBackButton gbb;
      public String companyName;
     public Search(String companyName) {
         this.companyName=companyName;
@@ -225,21 +227,25 @@ public class Search  extends JFrame implements ActionListener {
                         for (OneOffer offer : finaloffers) {
                             System.out.println(offer);
                         }
-                        // GO TP THE NEXT PAGE
+                        // GO TO THE NEXT PAGE
                         Offers ofpage = new Offers(finaloffers, companyName);
+                        ofpage.newGoBack(this);
                     }
                 }
             } else {
-                if (Integer.parseInt(bmin.getText()) < Integer.parseInt(bmax.getText())) {
+                if (Integer.parseInt(bmin.getText()) > Integer.parseInt(bmax.getText())) {
                     SearchLog.info("min > max");
                     JOptionPane.showMessageDialog(bigpan, "Entrez un budget minimum inférieur au maximum", "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
-                if (!bmin.getText().equals("") && !bmax.getText().equals("") && !nbpeople.getText().equals("")) {
+                } else {
                     SearchLog.info("missing value");
                     JOptionPane.showMessageDialog(bigpan, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
                 }
             }
         }
+    }
+    public void newGoBack(JFrame j){
+        gbb = new GoBackButton(this,j);
+        add(gbb);
     }
 
     public static void main(String[] args) {

@@ -145,6 +145,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             stringArrayList.add(Slight.getValue() + "");
             stringArrayList.add(companyName);
             CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
+            JOptionPane.showMessageDialog(new JPanel(), "LES MODIFICATIONS SE SONT FAITES AVEC SUCCES !", "Succès", JOptionPane.INFORMATION_MESSAGE);
 
         }
     }
@@ -209,7 +210,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             logger.info("temperatureintresult = " + temperatureint);
         }
     }
-
     //RETURN BUTTON
     public void newGoBack(JFrame j){
         goBackButton = new GoBackButton(this,j);
