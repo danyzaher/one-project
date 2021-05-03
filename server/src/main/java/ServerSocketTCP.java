@@ -109,6 +109,13 @@ class ServerSocketTCP implements Runnable{
 					if(received.equals("temperatureint")){
 						listMessage.add(C.getTempInt(in.readLine()));
 					}
+					if(received.equals("ligautoparams")){
+						listMessage.add(C.getAutoLigParameters(in.readLine()));
+					}
+					if(received.equals("tempautoparams")){
+						listMessage.add(C.getAutoTempParameters(in.readLine()));
+						logger.info("IN TEMPAUTOPARAMS");
+					}
 					if(received.equals("emplacement")){
 						received = in.readLine();
 						String s = in.readLine();
@@ -196,24 +203,23 @@ class ServerSocketTCP implements Runnable{
 
 	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
 		logger.info(" in update");
-		String recu = in.readLine();
+		String received = in.readLine();
 
-		if(recu.equals("manualmode")){
+		if(received.equals("manualmode")){
 			C.PassToManualMode(in.readLine());
 		}
-		if(recu.equals("opacity")){
+		if(received.equals("opacity")){
 			String s = in.readLine(); //id
 			C.updateOpacity(s,in.readLine());//in.readLine() --> opacity by the connection crud
 		}
-		if(recu.equals("strhigh")){
+		if(received.equals("strhigh")){
 			String s = in.readLine(); //id
 			C.updateStoreHigh(s,in.readLine());//in.readLine() --> strhigh by the connection crud
 		}
-		if(recu.equals("location")) {
+		if(received.equals("location")) {
 			C.setTaken(in.readLine(),in.readLine(),in.readLine());
 		}
-		if(recu.equals("parameters")) {
-			logger.info(" dans parameters");
+		if(received.equals("parameters")) {
 			String s1 = in.readLine();
 			String s2 = in.readLine();
 			String s3 = in.readLine();
@@ -221,7 +227,7 @@ class ServerSocketTCP implements Runnable{
 			C.updateGeneralTempInt(s1,s3);
 			C.updateGeneralLigInt(s2,s3);
 		}
-		if(recu.equals("be_present")){
+		if(received.equals("be_present")){
 			String s = in.readLine();
 			if(s.equals("equipment")){
 				C.updateBePresentEquip(in.readLine(),in.readLine());

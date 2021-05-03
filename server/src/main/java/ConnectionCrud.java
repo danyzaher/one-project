@@ -84,12 +84,10 @@ public class ConnectionCrud {
     public String getMenu(String company) throws  SQLException{
         logger.info("in getMenu");
         String sql = "Select room.name, floor.floor_s_number,building.address from floor inner join room on floor.id_floor=room.id_floor inner join building on floor.address=building.address where room.room_s_number in ( Select room_s_number from location inner join company on company.id_company=location.id_company where company.name= '"+company+"');";
-        logger.info(sql);
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            logger.info("in the while");
             result += rs.getArray("name") + "\n";
             result += rs.getArray("floor_s_number")+ "\n";
             result += rs.getArray("address") + "\n";
@@ -97,14 +95,12 @@ public class ConnectionCrud {
         return result;
     }
     public String getEquipment(String room) throws SQLException{
-        logger.info("in getEquipement");
+        logger.info("in getEquipment");
         String sql = "Select equipement.id_equipement,equipement.type,equipplace.position_x,equipplace.position_y from be_present inner join equipement on be_present.id_equipement=equipement.id_equipement inner join equipplace on be_present.id_equipplace=equipplace.id_equipplace where equipplace.id_room in (Select room_s_number from room where name='"+room+"');";
-        logger.info(sql);
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String result = "";
         while (rs.next()) {
-            logger.info("in the while");
             result += rs.getArray("id_equipement")+ "\n";
             result += rs.getArray("type") + "\n";
             result += rs.getArray("position_x")+ "\n";
@@ -245,7 +241,7 @@ public class ConnectionCrud {
         smt.executeUpdate(sql);
     }
     public String getEquipmentAvailable(String roomName) throws SQLException{
-        logger.info("in getEquipementAvailable");
+        logger.info("in getEquipmentAvailable");
         String sql = "select distinct equipement.type from compatible inner join equipplace on equipplace.id_equipplace=compatible.id_equipplace inner join equipement on equipement.type= compatible.type_equip where equipplace.id_equipplace not in (Select id_equipplace from be_present) and equipement.id_equipement not in (Select id_equipement from be_present where id_equipement is not null) and equipplace.id_room in (Select room_s_number from room where name='"+roomName+"');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
@@ -253,6 +249,30 @@ public class ConnectionCrud {
         while(rs.next()){
             logger.info("in the while");
             result += rs.getArray("type")+ "\n";
+        }
+        return result;
+    }
+    public String getAutoTempParameters(String companyName) throws SQLException{
+
+        logger.info("in getAutoTempLigParameters");
+        String sql = "select temperature from parameter_of where automanu= true and id_equipement in (select id_equipement from be_present where id_equipplace in (Select id_equipplace from equipplace where id_room in (select room_s_number from location where id_company in (select id_company from company where name = '"+companyName +"')))) limit 1;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            result += rs.getArray("temperature");
+        }
+        return result;
+    }
+    public String getAutoLigParameters(String companyName) throws SQLException{
+
+        logger.info("in getAutoTempLigParameters");
+        String sql = "select luminosity from parameter_of where automanu= true and id_equipement in (select id_equipement from be_present where id_equipplace in (Select id_equipplace from equipplace where id_room in (select room_s_number from location where id_company in (select id_company from company where name = '"+companyName +"')))) limit 1;";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while(rs.next()){
+            result += rs.getArray("luminosity");
         }
         return result;
     }
@@ -269,7 +289,7 @@ public class ConnectionCrud {
         return result;
     }
     public String getAvailableEquipment(String id) throws SQLException{
-        logger.info("in getEtatEquipement");
+        logger.info("in getAvailableEquipment");
         String sql = "select animated from equipement where id_equipement="+id+";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
@@ -280,7 +300,7 @@ public class ConnectionCrud {
         return result;
     }
     public void deleteBePresentEquipment(String id) throws SQLException{
-        logger.info("in delete");
+        logger.info("in delete equipement");
         String sql = "delete from be_present where id_equipement="+id+";";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
@@ -327,10 +347,9 @@ public class ConnectionCrud {
         return result;
     }
     public void updateOpacity(String id, String valueopacity) throws SQLException {
-        logger.info("in update opacity");
         String sql = "update equipement set valueof = " + valueopacity + " where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
-        logger.info(String.valueOf(smt.executeUpdate(sql)));
+        smt.executeUpdate(sql);
     }
     public void insertLocation(String idroom, String idcompany, String price) throws SQLException {
         logger.info("in insert location");
@@ -339,10 +358,9 @@ public class ConnectionCrud {
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
     public void updateStoreHigh(String id, String valuehighstore) throws SQLException {
-        logger.info("in update store");
         String sql = "update equipement set valueof = " + valuehighstore + " where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
-        logger.info(String.valueOf(smt.executeUpdate(sql)));
+        smt.executeUpdate(sql);
     }
     public void updateGeneralTempInt(String temp, String company) throws SQLException{
         logger.info("in update GeneralTempInt");
@@ -360,7 +378,7 @@ public class ConnectionCrud {
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
     public String getAvailableSensor(String id) throws SQLException{
-        logger.info("in getEtatSensor");
+        logger.info("in getAvailableSensor");
         String sql = "select animated from sensor where id_sensor="+id+";";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
@@ -372,7 +390,7 @@ public class ConnectionCrud {
         return result;
     }
     public void setTaken(String rent, String companyName, String idRoom) throws SQLException {
-        logger.info("in settaken");
+        logger.info("in setTaken");
         String sql = "insert into location values (" + idRoom + ",(Select id_company from company where name ='"+ companyName+"') ," + rent + ", CURRENT_DATE);";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
