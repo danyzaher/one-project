@@ -59,7 +59,6 @@ public class HPageCompany extends JFrame implements ActionListener {
         logger.info("result = " + result);
 
         for(int k =0; k<result.size()-3;k=k+3){
-            logger.info("in the for "+k);
             JMenuItem r1 = new JMenuItem(result.get(k));
             JMenuFloor r2 = new JMenuFloor(result.get(k+1));
             JMenuBuilding r3 = new JMenuBuilding(result.get(k+2));
@@ -67,7 +66,6 @@ public class HPageCompany extends JFrame implements ActionListener {
             if (this.containsBuilding(r3)){
                 if (containsBuilding(r2)){
                     if (!containsBuilding(r1)){
-                        logger.info("in getMenu if if else ");
                         jMenus.get(indexBuilding(r3)).
                                 jf.get(indexBuilding(r2)).
                                 jf.add(r1);
@@ -77,8 +75,6 @@ public class HPageCompany extends JFrame implements ActionListener {
                     }
                 }
                 else {
-                    logger.info(("in getMenu if else"));
-
                     r2.jf.add(r1);
                     jMenus.get(indexBuilding(r3)).
                             jf.add(r2);
@@ -89,7 +85,6 @@ public class HPageCompany extends JFrame implements ActionListener {
                             jr.add(r1);
                 }
             } else {
-                logger.info("in get Menu else");
                 jMenus.add(r3);
                 r3.jb.add(r2.jf);
                 r2.jf.add(r1);
@@ -102,7 +97,7 @@ public class HPageCompany extends JFrame implements ActionListener {
                         jr.add(r1);
                 roomLocation.add(r3.jb);
             }
-        } logger.info("end of for");
+        }
     }
     public int indexBuilding(JMenuBuilding j){
         for(int k=0; k<jMenus.size();k++){
