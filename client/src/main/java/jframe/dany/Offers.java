@@ -1,6 +1,9 @@
 package jframe.dany;
 
 
+import jframe.maxime.button.GoBackButton;
+import jframe.maxime.button.GoBackMenu;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -15,6 +18,7 @@ public class Offers extends JFrame implements ActionListener {
     JLabel title = new JLabel("CHOISISSEZ UNE OFFRE");
     ArrayList<jframe.dany.OneOffer> offers;
     String companyName;
+    GoBackButton goBackbutton;
     public Offers(ArrayList<jframe.dany.OneOffer> list, String companyName) {
         this.companyName = companyName;
         offers = list;
@@ -41,6 +45,10 @@ public class Offers extends JFrame implements ActionListener {
                 break;
             }
         }
+    }
+    public void newGoBack(JFrame j){
+        goBackbutton = new GoBackButton(this,j);
+        add(goBackbutton);
     }
 
 }

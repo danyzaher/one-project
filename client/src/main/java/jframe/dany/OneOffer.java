@@ -25,7 +25,7 @@ public class OneOffer extends JPanel implements ActionListener {
         right.setLayout(new BoxLayout(right,BoxLayout.LINE_AXIS));
         left.add(title);
 
-        right.add(price);
+        right.add(new JLabel(price.getText() + "€"));
         left.add(button);
         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
         this.add(left);this.add(right);
@@ -42,7 +42,6 @@ public class OneOffer extends JPanel implements ActionListener {
     public ArrayList<String> getId() {
         return idroom;
     }
-    public int count() {return idroom.size();}
 
     public String getTitle() {
         return title.getText();
