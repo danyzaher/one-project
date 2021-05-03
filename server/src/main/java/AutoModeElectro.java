@@ -1,8 +1,13 @@
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.sql.SQLException;
 import java.util.ArrayList;
 
 
 public class AutoModeElectro {
+
+    private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 
     public void BrainElectroChroma(ConnectionCrud C) throws SQLException {
         while (true) {
@@ -11,6 +16,8 @@ public class AutoModeElectro {
 
             try {
                 Thread.sleep(1000 * 60);
+                logger.info("---- UPDATE ELECTROCHROMA AUTO ----");
+
             } catch (InterruptedException exception) {
                 exception.printStackTrace();
             }
