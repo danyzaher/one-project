@@ -179,6 +179,8 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         if (e.getSource().equals(location)){
             Search search = new Search(title);
+            search.newGoBack(this);
+
         }
         if (e.getSource().equals(chromatique)){
             ElectroChromaAuto electroChromaAuto = new ElectroChromaAuto(title);
