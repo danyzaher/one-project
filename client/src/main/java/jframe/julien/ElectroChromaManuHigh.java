@@ -155,7 +155,6 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
             Astorevalue.setText("Hauteur du store selectionné souhaitée : " + valuehighstore);
         }
     }
-
     //OBTAIN VALUES
     public void getStoreHighValue(){
 

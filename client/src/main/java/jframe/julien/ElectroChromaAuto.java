@@ -19,8 +19,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
 
-    int temperature;
-    int light;
     String companyName;
 
     private Box box;
@@ -168,7 +166,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             ALight.setText("Eclairage dans les salles souhaité : " + valuelight + " lux");
         }
     }
-
     //OBTAIN VALUES
     public void getTempExt(){
 

@@ -126,7 +126,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
         setVisible(true);
 
     }
-
     @Override
     //BUTTON CHANGER
     public void actionPerformed(ActionEvent e) {
@@ -160,7 +159,6 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
             Aopacvalue.setText("Opacité de la fenetre souhaitée : " + valueopacity);
         }
     }
-
     //OBTAIN VALUES
     public void getOpacityValue(){
 
