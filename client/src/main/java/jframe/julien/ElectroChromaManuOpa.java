@@ -29,7 +29,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     /** TEMPERATURES AND LIGHT INTENSITY VARIABLES **/
 
     //TEMP EXTERN
-    int temperatureext;
+    int temperatureext = 0;
     ArrayList<String> tempextresult;
 
     //TEMP INTERN

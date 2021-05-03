@@ -20,7 +20,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
 
     /** HIGH STORE VARIABLES **/
-    int strhigh;
+    int strhigh = 0;
     String id;
     String roomName;
     ArrayList<String> result;
@@ -31,7 +31,7 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     /** TEMPERATURES AND LIGHT VALUES **/
 
     //TEMP EXTERN
-    int temperatureext;
+    int temperatureext = 0;
     ArrayList<String> tempextresult;
 
     //TEMP INTERN
