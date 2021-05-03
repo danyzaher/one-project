@@ -57,7 +57,7 @@ public class AutoModeElectro {
             int l0 = Integer.parseInt(L0);
             int a = Integer.parseInt(A);
 
-            int value = a + (l - l0) + (t - t0); //to retake
+            int value = a + (l - l0) + (t - t0);
             if (value <0) {
                 value = 0;
             }

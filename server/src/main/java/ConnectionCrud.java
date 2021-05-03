@@ -351,10 +351,9 @@ public class ConnectionCrud {
         return result;
     }
     public void updateOpacity(String id, String valueopacity) throws SQLException {
-        logger.info("in update opacity");
         String sql = "update equipement set valueof = " + valueopacity + " where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
-        logger.info(String.valueOf(smt.executeUpdate(sql)));
+        smt.executeUpdate(sql);
     }
     public void insertLocation(String idroom, String idcompany, String price) throws SQLException {
         logger.info("in insert location");
@@ -363,10 +362,9 @@ public class ConnectionCrud {
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }
     public void updateStoreHigh(String id, String valuehighstore) throws SQLException {
-        logger.info("in update store");
         String sql = "update equipement set valueof = " + valuehighstore + " where id_equipement =" + id + ";";
         Statement smt = c.createStatement();
-        logger.info(String.valueOf(smt.executeUpdate(sql)));
+        smt.executeUpdate(sql);
     }
     public void updateGeneralTempInt(String temp, String company) throws SQLException{
         logger.info("in update GeneralTempInt");

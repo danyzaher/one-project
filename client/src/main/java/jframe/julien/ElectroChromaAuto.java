@@ -40,11 +40,11 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     JLabel Atempext;
 
     /** VARIABLES FOR INTERN TEMPERATURE **/
-    String temperatureint ="";
+    int temperatureint;
     ArrayList<String> tempintresult;
 
     /** VARIABLES FOR INTERN TEMPERATURE **/
-    String lightint ="";
+    int lightint;
     ArrayList<String> lightintresult;
 
     /*** BUTTON ***/
@@ -62,11 +62,16 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         setTitle("Parametres Automatiques Electrochroma");
         box = new Box(BoxLayout.Y_AXIS);
         box.setBackground(Color.WHITE);
-        //setLayout(new FlowLayout());
+
 
         validation = new JButton("VALIDER");
         validation.setSize(100, 100);
         validation.addActionListener(this);
+
+        /** METHODS **/
+        getTempExt();
+        getAutoLigParameters();
+        getAutoTempParameters();
 
         //Temperature ext part
 
@@ -74,29 +79,24 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
         //Temperature modification part
 
-        Stemp = new JSlider(JSlider.HORIZONTAL, 0, 30, temperature);
+        Stemp = new JSlider(JSlider.HORIZONTAL, 0, 30, temperatureint);
         Stemp.setMajorTickSpacing(1);
         Stemp.setPaintTicks(true);
 
-        eventTemp et = new eventTemp();
-        Stemp.addChangeListener(et);
+
 
         //Light part
 
-        Slight = new JSlider(JSlider.HORIZONTAL, 0, 5000, light);
+        Slight = new JSlider(JSlider.HORIZONTAL, 0, 5000, lightint);
         Slight.setMajorTickSpacing(500);
         Slight.setPaintTicks(true);
 
-        /** METHODS **/
-        getTempExt();
-        getAutoLigParameters();
-        getAutoTempParameters();
 
         /** TEMPERATURES AND LIGHT **/
 
         Atempext = new JLabel("Temperature exterieur :" + temperatureext + " °C");
-        ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperature + " °C");
-        ALight = new JLabel("Eclairage souhaitée dans les salles : " + light + " lux");
+        ATemp = new JLabel("Temperature souhaitée dans les salles : " + temperatureint + " °C");
+        ALight = new JLabel("Eclairage souhaitée dans les salles : " + lightint + " lux");
 
         /** FRAME ADD **/
 
@@ -121,6 +121,9 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         box2.add(validation);
         box2.add(Box.createGlue());
 
+
+        eventTemp et = new eventTemp();
+        Stemp.addChangeListener(et);
 
         eventLight el = new eventLight();
         Slight.addChangeListener(el);
@@ -188,7 +191,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.lightintresult = ccSocketTCP2.result;
         if(!lightintresult.isEmpty()) {
-            lightint = lightintresult.get(0);
+            lightint = Integer.parseInt(lightintresult.get(0));
             logger.info("lightintresult = " + lightint);
         }
     }
@@ -197,12 +200,12 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         logger.info("begin getAutoTempLigParameters");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
-        stringArrayList.add("temperatureautoparams");
+        stringArrayList.add("tempautoparams");
         stringArrayList.add(companyName);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.tempintresult = ccSocketTCP2.result;
         if(!tempintresult.isEmpty()) {
-            temperatureint = tempintresult.get(0);
+            temperatureint = Integer.parseInt(tempintresult.get(0));
             logger.info("temperatureintresult = " + temperatureint);
         }
     }

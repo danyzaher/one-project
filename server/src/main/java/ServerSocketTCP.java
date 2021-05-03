@@ -114,6 +114,7 @@ class ServerSocketTCP implements Runnable{
 					}
 					if(received.equals("tempautoparams")){
 						listMessage.add(C.getAutoTempParameters(in.readLine()));
+						logger.info("IN TEMPAUTOPARAMS");
 					}
 					if(received.equals("emplacement")){
 						received = in.readLine();
