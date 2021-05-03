@@ -70,6 +70,7 @@ public class CCSocketTCPbis {
                 clientLog.info(received);
                 result.add(received);
             }
+            result.remove(result.size()-1);
         } catch (Exception e) {
             e.printStackTrace();
         }
