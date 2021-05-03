@@ -1,5 +1,7 @@
 package jframe.maxime.button;
 
+import jframe.HPageCompany;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -21,5 +23,9 @@ public class GoBackButton extends JButton implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         jFrameA.setVisible(false);
         jFrameB.setVisible(true);
+        if(jFrameB.getClass().equals( HPageCompany.class)){
+            HPageCompany hPageCompany = (HPageCompany) jFrameB;
+            hPageCompany.getMenu();
+        }
     }
 }
