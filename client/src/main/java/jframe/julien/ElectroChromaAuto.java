@@ -19,8 +19,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
 
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
 
-    int temperature;
-    int light;
     String companyName;
 
     private Box box;
@@ -35,16 +33,16 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
     JLabel ALight;
 
     /** VARIABLES FOR EXTERN TEMPERATURE **/
-    int temperatureext;
+    int temperatureext = 0;
     ArrayList<String> tempresult;
     JLabel Atempext;
 
     /** VARIABLES FOR INTERN TEMPERATURE **/
-    int temperatureint;
+    int temperatureint = 0;
     ArrayList<String> tempintresult;
 
     /** VARIABLES FOR INTERN TEMPERATURE **/
-    int lightint;
+    int lightint = 0;
     ArrayList<String> lightintresult;
 
     /*** BUTTON ***/
@@ -168,7 +166,6 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
             ALight.setText("Eclairage dans les salles souhaité : " + valuelight + " lux");
         }
     }
-
     //OBTAIN VALUES
     public void getTempExt(){
 
@@ -205,7 +202,7 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         stringArrayList.add(companyName);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.tempintresult = ccSocketTCP2.result;
-        if(!tempintresult.isEmpty()) {
+        if(!tempintresult.isEmpty()){
             temperatureint = Integer.parseInt(tempintresult.get(0));
             logger.info("temperatureintresult = " + temperatureint);
         }
