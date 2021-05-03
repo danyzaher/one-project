@@ -51,6 +51,10 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     JButton validation;
     GoBackButton goBackButton;
 
+    /** BOXES **/
+    private Box box;
+    private Box box2;
+
     public ElectroChromaManuHigh(Equipment equipment){
 
         this.roomName = equipment.roomName; //RECUPERATION NAME ROOM
@@ -66,7 +70,8 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         setSize(400, 400);
         setResizable(false);
         setTitle("Parametres manuels de l'option electrochroma");
-        setLayout(new FlowLayout());
+        box = new Box(BoxLayout.Y_AXIS);
+        box.setBackground(Color.WHITE);
 
         /** METHOD **/
 
@@ -91,17 +96,28 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
         /** ADDING PART **/
 
         //General information
-        add(Atempext);
-        add(Atempint);
-        add(Alightint);
+        box.add(Atempext);
+        box.add(Box.createGlue());
+        box.add(Atempint);
+        box.add(Box.createGlue());
+        box.add(Alightint);
+        box.add(Box.createGlue());
 
         //Modification part
-        add(Astorevalue);
-        add(Sstorehigh);
-        add(validation);
+        box.add(Astorevalue);
+        box.add(Box.createGlue());
+        box.add(Sstorehigh);
+        box.add(Box.createGlue());
+
+        box2 = new Box(BoxLayout.X_AXIS);
+        box2.setBackground(Color.WHITE);
+        box2.add(Box.createGlue());
+        box2.add(validation);
+        box2.add(Box.createGlue());
 
         eventStore es = new eventStore();
         Sstorehigh.addChangeListener(es);
+
         setVisible(true);
 
     }
@@ -192,8 +208,13 @@ public class ElectroChromaManuHigh extends JFrame implements ActionListener {
     }
     //RETURN BUTTON
     public void newGoBack(JFrame j){
+
         goBackButton = new GoBackButton(this,j);
-        add(goBackButton);
+        box2.add(goBackButton);
+        box2.add(Box.createGlue());
+        box.add(box2);
+        box.add(Box.createGlue());
+        getContentPane().add(box,BorderLayout.CENTER);
     }
 
 }
