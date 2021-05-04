@@ -28,7 +28,7 @@
                 <configuration>
                     <archive>
                         <manifest>
-                            <mainClass>socket.CCSocketTCP</mainClass>
+                            <mainClass>jframe.HPage</mainClass>
                         </manifest>
                     </archive>
                     <descriptorRefs>
