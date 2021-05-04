@@ -19,7 +19,7 @@ public class WindowListEquipment extends JFrame implements ActionListener, ItemL
     JLabel l1, l2;
     JButton jButton;
     JComboBox jComboBox;
-    ArrayList<String> s1 = new ArrayList<>() ;
+    private ArrayList<String> listEquipment = new ArrayList<>() ;
     GoBackButton goBackButton;
     public WindowListEquipment(MapperRoom mapperRoom){
 
@@ -29,7 +29,7 @@ public class WindowListEquipment extends JFrame implements ActionListener, ItemL
         setLayout(new FlowLayout());
         setSize(700,700);
         getListEquipmentAvailable();
-        String[] s2 = s1.toArray(new String[0]);
+        String[] s2 = listEquipment.toArray(new String[0]);
         jComboBox = new JComboBox(s2);
         jComboBox.addItemListener(this);
 
@@ -56,7 +56,7 @@ public class WindowListEquipment extends JFrame implements ActionListener, ItemL
         stringArrayList.add("available");
         stringArrayList.add(mapperRoom.nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
-        s1 = ccSocketTCP2.result;
+        listEquipment = ccSocketTCP2.result;
 
     }
     public void newGoBack(JFrame j){

@@ -1,4 +1,4 @@
-package jFrame.yassir;
+package jframe.yassir;
 
 public class Modif {
 }

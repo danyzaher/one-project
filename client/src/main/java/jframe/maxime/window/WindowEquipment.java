@@ -20,7 +20,7 @@ public class WindowEquipment extends JFrame implements ActionListener {
     JButton delete;
     JButton move;
     JButton information;
-    GoBackButton goBackButton;
+    private GoBackButton goBackButton;
     public WindowEquipment(Equipment equipment){
         this.equipment = equipment;
         setTitle(equipment.name+" "+ equipment.id);

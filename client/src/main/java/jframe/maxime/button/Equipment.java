@@ -11,11 +11,11 @@ import java.util.ArrayList;
 
 public class Equipment extends JButton implements ActionListener {
     public String name;
-    final int WIDTH=13;
-    final int HEIGHT=13;
+    private final int WIDTH=13;
+    private final int HEIGHT=13;
     public boolean animated;
     public int id;
-    ArrayList<String> result;
+    private ArrayList<String> result;
     public String roomName;
     public MapperRoom mapperRoom;
     public int x;

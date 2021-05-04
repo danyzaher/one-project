@@ -12,24 +12,24 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class MapperRoom extends JFrame implements ActionListener {
-    public static Logger logger = LoggerFactory.getLogger("MapperRoom");
-    String type;
-    boolean sensorEquipment;
+    private static Logger logger = LoggerFactory.getLogger("MapperRoom");
+    private String type;
+    private boolean sensorEquipment;
     String nameRoom;
-    JMenuItem e1;
-    JMenuItem e2;
-    JMenuItem electrochroma;
+    private JMenuItem e1;
+    private JMenuItem e2;
+    private JMenuItem electrochroma;
     ArrayList<Equipment> listEquipmentInRoom = new ArrayList<>();
     ArrayList<Sensor> sensorArrayList = new ArrayList<>();
     ArrayList<Place> placeArrayList = new ArrayList<>();
     ArrayList<PlaceMove> placeMoveArrayList = new ArrayList<>();
-    ArrayList<String> result = new ArrayList<>();
-    JMenu jMenu;
-    GoBackMenu goBackMenu;
-    GoBackMenuTotal goBackMenuTotal = new GoBackMenuTotal(this);
+    private ArrayList<String> result = new ArrayList<>();
+    private JMenu jMenu;
+    private GoBackMenu goBackMenu;
+    private GoBackMenuTotal goBackMenuTotal = new GoBackMenuTotal(this);
     int width;
     int height;
-    Legend legend = new Legend();
+    private Legend legend = new Legend();
     public MapperRoom(String nameRoom){
         this.nameRoom = nameRoom;
         setTitle(nameRoom);

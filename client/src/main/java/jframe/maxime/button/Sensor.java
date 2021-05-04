@@ -13,11 +13,11 @@ import java.util.ArrayList;
 
 public class Sensor extends JButton implements ActionListener, Border {
     public String name;
-    final int WIDTH=11;
-    final int HEIGHT=11;
+    private final int WIDTH=11;
+    private final int HEIGHT=11;
     public boolean animated;
     public int id;
-    ArrayList<String> result;
+    private ArrayList<String> result;
     private final int r = 15;
      public String roomName;
      public MapperRoom mapperRoom;
@@ -36,7 +36,7 @@ public class Sensor extends JButton implements ActionListener, Border {
         getAnimated();
     }
 
-    public void getAnimated() {
+    private void getAnimated() {
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("sensor");

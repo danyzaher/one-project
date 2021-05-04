@@ -1,5 +1,5 @@
 package jframe.yassir;
-import jFrame.Yassir.Verify;
+import jframe.yassir.Verify;
 
 import javax.swing.* ;
 import java.awt.*;

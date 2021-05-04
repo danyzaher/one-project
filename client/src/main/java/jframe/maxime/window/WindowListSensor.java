@@ -19,7 +19,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
     JLabel l1, l2;
     JButton jButton;
     JComboBox jComboBox;
-    ArrayList<String> s1 = new ArrayList<>() ;
+    private ArrayList<String> s1 = new ArrayList<>() ;
     GoBackButton goBackButton;
     public WindowListSensor(MapperRoom mapperRoom){
 

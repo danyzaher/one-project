@@ -1,4 +1,4 @@
-package jFrame.Yassir;
+package jframe.yassir;
 
 import javax.swing.*;
 
