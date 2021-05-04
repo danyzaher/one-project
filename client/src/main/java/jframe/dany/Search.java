@@ -154,8 +154,7 @@ public class Search  extends JFrame implements ActionListener {
                     System.out.println("no offers found retry");
 
                 } else {
-                    idroom.pop();
-                    capacities.pop();
+                    idroom.pop(); capacities.pop();
                     int people = 0;
                     ArrayList<ArrayList<String>> offers = new ArrayList<>();
 
