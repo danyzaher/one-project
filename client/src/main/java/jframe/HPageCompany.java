@@ -1,5 +1,6 @@
 package jframe;
 
+import jframe.Dolf.Indicators;
 import jframe.maxime.button.GoBackMenu;
 import jframe.maxime.window.MapperRoom;
 import jframe.yassir.Badge;
@@ -21,6 +22,7 @@ public class HPageCompany extends JFrame implements ActionListener {
     private JMenu roomLocation = new JMenu("Salles à la location");
     private JMenu jMenu = new JMenu("Menu");
     private GoBackMenu goBackMenu;
+    private JMenuItem Indicators = new JMenuItem("verifier les indicateurs");
     private JMenuItem badge = new JMenuItem("Badge");
     private JMenuItem location = new JMenuItem("Effectuer une nouvelle location");
     private JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température générale");
@@ -39,9 +41,11 @@ public class HPageCompany extends JFrame implements ActionListener {
         jMenuBar.add(jMenu);
         getMenu();
         jMenu.add(roomLocation);
+        jMenu.add(Indicators);
         jMenu.add(badge);
         jMenu.add(location);
         jMenu.add(chromatique);
+        Indicators.addActionListener(this);
         badge.addActionListener(this);
         location.addActionListener(this);
         chromatique.addActionListener(this);
@@ -169,6 +173,11 @@ public class HPageCompany extends JFrame implements ActionListener {
                 }
             }
         }
+    if ( e.getSource().equals(Indicators)) {
+        Indicators indicators = new Indicators(title);
+        indicators.newGoBack(this);
+    }
+
         if (e.getSource().equals(badge)){
             Badge badge = new Badge(title);
         }
