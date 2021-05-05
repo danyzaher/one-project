@@ -15,11 +15,11 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class WindowEquipment extends JFrame implements ActionListener {
-    public static Logger logger = LoggerFactory.getLogger("WindowEquipment");
+    private static Logger logger = LoggerFactory.getLogger("WindowEquipment");
     Equipment equipment;
-    JButton delete;
-    JButton move;
-    JButton information;
+    private JButton delete;
+    private JButton move;
+    private JButton information;
     private GoBackButton goBackButton;
     public WindowEquipment(Equipment equipment){
         this.equipment = equipment;
@@ -50,7 +50,7 @@ public class WindowEquipment extends JFrame implements ActionListener {
         goBackButton = new GoBackButton(this,j);
         add(goBackButton);
     }
-    public void delete(){
+    private void delete(){
         logger.info("begin delete");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("delete");

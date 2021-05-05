@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class WindowListEquipment extends JFrame implements ActionListener, ItemListener {
     public static Logger logger = LoggerFactory.getLogger("WindowListEquipment");
     MapperRoom mapperRoom;
-    JLabel l1, l2;
-    JButton jButton;
-    JComboBox jComboBox;
+    private JLabel l1, l2;
+    private JButton jButton;
+    private JComboBox jComboBox;
     private ArrayList<String> listEquipment = new ArrayList<>() ;
     GoBackButton goBackButton;
     public WindowListEquipment(MapperRoom mapperRoom){
@@ -48,7 +48,7 @@ public class WindowListEquipment extends JFrame implements ActionListener, ItemL
         jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
     }
-    public void getListEquipmentAvailable(){
+    private void getListEquipmentAvailable(){
         logger.info("begin getListEquipmentAvailable");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");

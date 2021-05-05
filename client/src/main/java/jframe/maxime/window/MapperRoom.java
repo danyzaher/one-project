@@ -19,16 +19,16 @@ public class MapperRoom extends JFrame implements ActionListener {
     private JMenuItem e1;
     private JMenuItem e2;
     private JMenuItem electrochroma;
-    ArrayList<Equipment> listEquipmentInRoom = new ArrayList<>();
-    ArrayList<Sensor> sensorArrayList = new ArrayList<>();
-    ArrayList<Place> placeArrayList = new ArrayList<>();
-    ArrayList<PlaceMove> placeMoveArrayList = new ArrayList<>();
+    private ArrayList<Equipment> listEquipmentInRoom = new ArrayList<>();
+    private ArrayList<Sensor> sensorArrayList = new ArrayList<>();
+    private ArrayList<Place> placeArrayList = new ArrayList<>();
+    private ArrayList<PlaceMove> placeMoveArrayList = new ArrayList<>();
     private ArrayList<String> result = new ArrayList<>();
     private JMenu jMenu;
     private GoBackMenu goBackMenu;
     private GoBackMenuTotal goBackMenuTotal = new GoBackMenuTotal(this);
-    int width;
-    int height;
+    private int width;
+    private int height;
     private Legend legend = new Legend();
     public MapperRoom(String nameRoom){
         this.nameRoom = nameRoom;
@@ -171,7 +171,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         MapperRoom mapperRoom = new MapperRoom(nameRoom);
         this.setVisible(false);
     }
-    public void getSizeBis(){
+    private void getSizeBis(){
         logger.info("begin getSize");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");

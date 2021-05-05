@@ -4,12 +4,12 @@ import javax.swing.*;
 import java.awt.*;
 
 public class Legend extends JMenu {
-    JMenuItem green = new JMenuItem("équipements opérationnel");
-    JMenuItem red = new JMenuItem("équipements  non opérationnel");
-    JMenuItem blue = new JMenuItem("capteurs opérationnel");
-    JMenuItem pink = new JMenuItem("capteur non opérationnel");
-    JMenuItem gray = new JMenuItem("fenêtre ou store");
-    JMenuItem yellow = new JMenuItem("emplacement");
+    private JMenuItem green = new JMenuItem("équipements opérationnel");
+    private JMenuItem red = new JMenuItem("équipements  non opérationnel");
+    private JMenuItem blue = new JMenuItem("capteurs opérationnel");
+    private JMenuItem pink = new JMenuItem("capteur non opérationnel");
+    private JMenuItem gray = new JMenuItem("fenêtre ou store");
+    private JMenuItem yellow = new JMenuItem("emplacement");
     public Legend(){
         add(green);
         add(red);

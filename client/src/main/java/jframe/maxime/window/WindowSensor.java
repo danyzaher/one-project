@@ -13,10 +13,10 @@ import java.awt.event.ActionListener;
 import java.util.ArrayList;
 
 public class WindowSensor extends JFrame implements ActionListener {
-    public static Logger logger = LoggerFactory.getLogger("WindowSensor");
+    private static Logger logger = LoggerFactory.getLogger("WindowSensor");
     Sensor sensor;
-    JButton delete;
-    JButton move;
+    private JButton delete;
+    private JButton move;
     GoBackButton goBackButton;
     public WindowSensor(Sensor sensor){
 
@@ -39,7 +39,7 @@ public class WindowSensor extends JFrame implements ActionListener {
         add(jLabel2);
 
     }
-    public void delete(){
+    private void delete(){
         logger.info("begin delete sensor");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("delete");

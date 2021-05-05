@@ -13,7 +13,7 @@ import java.nio.file.Paths;
 import java.util.ArrayList;
 
 public class CCSocketTCPbis {
-    protected static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP2");
+    private static Logger clientLog  = LoggerFactory.getLogger("CCSocketTCP2");
     public ArrayList<String> result = new ArrayList<>();
 
 

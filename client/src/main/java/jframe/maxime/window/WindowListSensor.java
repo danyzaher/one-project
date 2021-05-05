@@ -16,9 +16,9 @@ import java.util.ArrayList;
 public class WindowListSensor extends JFrame implements ActionListener, ItemListener {
     public static Logger logger = LoggerFactory.getLogger("WindowListEquipment");
     MapperRoom mapperRoom;
-    JLabel l1, l2;
-    JButton jButton;
-    JComboBox jComboBox;
+    private JLabel l1, l2;
+    private JButton jButton;
+    private JComboBox jComboBox;
     private ArrayList<String> listSensor = new ArrayList<>() ;
     GoBackButton goBackButton;
     public WindowListSensor(MapperRoom mapperRoom){
@@ -48,7 +48,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         jButton.setBounds(200,100,100,100);
         jButton.addActionListener(this);
     }
-    public void getListSensorAvailable(){
+    private void getListSensorAvailable(){
         logger.info("begin getListSensorAvailable");
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
