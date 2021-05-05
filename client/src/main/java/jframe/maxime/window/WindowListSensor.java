@@ -19,7 +19,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
     JLabel l1, l2;
     JButton jButton;
     JComboBox jComboBox;
-    private ArrayList<String> s1 = new ArrayList<>() ;
+    private ArrayList<String> listSensor = new ArrayList<>() ;
     GoBackButton goBackButton;
     public WindowListSensor(MapperRoom mapperRoom){
 
@@ -29,7 +29,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         setLayout(new FlowLayout());
         setSize(700,700);
         getListSensorAvailable();
-        String[] s2 = s1.toArray(new String[0]);
+        String[] s2 = listSensor.toArray(new String[0]);
         jComboBox = new JComboBox(s2);
         jComboBox.addItemListener(this);
 
@@ -56,8 +56,8 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         stringArrayList.add("available");
         stringArrayList.add(mapperRoom.nameRoom);
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
-        s1 = ccSocketTCP2.result;
-        logger.info("s1= "+s1.toString());
+        listSensor = ccSocketTCP2.result;
+        logger.info("s1= "+ listSensor.toString());
 
     }
     public void newGoBack(JFrame j){

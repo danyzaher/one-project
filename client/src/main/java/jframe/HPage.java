@@ -11,9 +11,9 @@ import java.awt.event.ItemListener;
 import java.util.ArrayList;
 
 public class HPage extends JFrame implements ItemListener, ActionListener{
-    JComboBox jComboBox;
-    JLabel l1, l2;
-    ArrayList<String> s1 = new ArrayList<>();
+    private JComboBox jComboBox;
+    private JLabel l1, l2;
+    private ArrayList<String> companyList = new ArrayList<>();
     public HPage() {
         setTitle("Page d'Accueil");
 
@@ -24,12 +24,12 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
         setLayout(new FlowLayout());
 
         listCompany();
-        String[] s2 = s1.toArray(new String[0]);
+        String[] s2 = companyList.toArray(new String[0]);
         jComboBox = new JComboBox(s2);
         jComboBox.addItemListener(this);
 
         l1 = new JLabel("Choisissez une société ");
-        l2 = new JLabel(s1.get(0));
+        l2 = new JLabel(companyList.get(0));
 
         l2.setForeground(Color.blue);
 
@@ -53,14 +53,14 @@ public class HPage extends JFrame implements ItemListener, ActionListener{
     public static void main(String[] args){
          HPage h = new HPage();
     }
-    public void listCompany(){
+    private void listCompany(){
         // show Company name
         ArrayList<String> stringArrayList = new ArrayList<>();
         stringArrayList.add("show");
         stringArrayList.add("company");
         stringArrayList.add("name");
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
-        s1 = ccSocketTCP2.result;
+        companyList = ccSocketTCP2.result;
 
 
     }

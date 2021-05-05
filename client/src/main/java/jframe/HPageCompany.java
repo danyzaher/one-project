@@ -19,7 +19,7 @@ public class HPageCompany extends JFrame implements ActionListener {
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
     String title;
     JMenu roomLocation = new JMenu("Salles à la location");
-    JMenu jMenu = new JMenu("Menu");
+    private JMenu jMenu = new JMenu("Menu");
     GoBackMenu goBackMenu;
     JMenuItem badge = new JMenuItem("Badge");
     JMenuItem location = new JMenuItem("Effectuer une nouvelle location");
