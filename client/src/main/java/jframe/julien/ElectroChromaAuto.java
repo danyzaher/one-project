@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.event.*;
 
 import jframe.maxime.button.GoBackButton;
-import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
