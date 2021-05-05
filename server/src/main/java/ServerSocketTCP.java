@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 class ServerSocketTCP implements Runnable{
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
-	static Reader reader;
+	private static Reader reader;
 
 	static {
 		try {
@@ -22,8 +22,8 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
-	static ObjectMapper om = new ObjectMapper(new YAMLFactory());
-	static ServerConfig sc;
+	private static ObjectMapper om = new ObjectMapper(new YAMLFactory());
+	private static ServerConfig sc;
 	static {
 		try {
 			sc = om.readValue(reader, ServerConfig.class);
@@ -32,14 +32,14 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 
-	static Datasource source = new Datasource(sc.getNboneco());
-	static Socket socketClient;
-	static AutoModeElectro autoModeElectro = new AutoModeElectro();
-	static int compt = 1; //Automatic button
+	private static Datasource source = new Datasource(sc.getNboneco());
+	private static Socket socketClient;
+	private static AutoModeElectro autoModeElectro = new AutoModeElectro();
+	private static int compt = 1; //Automatic button
 
 	public ServerSocketTCP() {
 	}
-	public void analyseInputStream(Socket socket){
+	private void analyseInputStream(Socket socket){
 		try {
 			logger.info("Connexion avec : " + socket.getInetAddress());
 			BufferedReader in = new BufferedReader(new InputStreamReader(socket.getInputStream()));
@@ -186,7 +186,7 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 
-	public synchronized void delete(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+	private synchronized void delete(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
 		logger.info("delete");
 		String recu = in.readLine();
 		if(recu.equals("be_present")){
@@ -201,7 +201,7 @@ class ServerSocketTCP implements Runnable{
 
 	}
 
-	public synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
+	private synchronized void update(BufferedReader in, ConnectionCrud C) throws IOException, SQLException {
 		logger.info(" in update");
 		String received = in.readLine();
 
@@ -239,7 +239,7 @@ class ServerSocketTCP implements Runnable{
 
 	}
 
-	public void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException, InterruptedException {
+	private void constructOutputStream(Socket socket, LinkedList<String> listMessage) throws IOException, InterruptedException {
 		PrintWriter out = new PrintWriter(new BufferedWriter(new OutputStreamWriter(socket.getOutputStream())), true);
 		while(!listMessage.isEmpty()){
 			logger.info(listMessage.get(0));

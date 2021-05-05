@@ -17,15 +17,15 @@ import java.util.ArrayList;
 
 public class HPageCompany extends JFrame implements ActionListener {
     private final static Logger logger = LoggerFactory.getLogger(HPageCompany.class.getName());
-    String title;
-    JMenu roomLocation = new JMenu("Salles à la location");
+    public String title;
+    private JMenu roomLocation = new JMenu("Salles à la location");
     private JMenu jMenu = new JMenu("Menu");
-    GoBackMenu goBackMenu;
-    JMenuItem badge = new JMenuItem("Badge");
-    JMenuItem location = new JMenuItem("Effectuer une nouvelle location");
-    JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température générale");
-    ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
-    ArrayList<String> result = new ArrayList<>();
+    private GoBackMenu goBackMenu;
+    private JMenuItem badge = new JMenuItem("Badge");
+    private JMenuItem location = new JMenuItem("Effectuer une nouvelle location");
+    private JMenuItem chromatique = new JMenuItem("Programmer la luminosité et la température générale");
+    private ArrayList<JMenuBuilding> jMenus= new ArrayList<>();
+    private ArrayList<String> result = new ArrayList<>();
     public HPageCompany(String s){
         logger.info("begin HPageCompany "+s);
         title = s;
@@ -99,7 +99,7 @@ public class HPageCompany extends JFrame implements ActionListener {
             }
         }
     }
-    public int indexBuilding(JMenuBuilding j){
+    private int indexBuilding(JMenuBuilding j){
         for(int k=0; k<jMenus.size();k++){
             if (jMenus.get(k).jb.equals(j.jb)){
                 return k;
@@ -107,7 +107,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         return 0;
     }
-    public int indexBuilding(JMenuFloor j){
+    private int indexBuilding(JMenuFloor j){
         for (JMenuBuilding menu : jMenus) {
             for (int i = 0; i < menu.jf.size(); i++) {
                 if (menu.jf.get(i).jf.equals(j.jf)) {
@@ -117,7 +117,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         return 0;
     }
-    public boolean containsBuilding(JMenuBuilding j){
+    private boolean containsBuilding(JMenuBuilding j){
         for (JMenuBuilding menu : jMenus) {
             String s = menu.jb.getText();
             String ss = j.jb.getText();
@@ -127,7 +127,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         return false;
     }
-    public boolean containsBuilding(JMenuFloor j){
+    private boolean containsBuilding(JMenuFloor j){
         for (JMenuBuilding menu : jMenus) {
             for (int i = 0; i < menu.jf.size(); i++) {
                 String s = menu.jf.get(i).jf.getText();
@@ -139,7 +139,7 @@ public class HPageCompany extends JFrame implements ActionListener {
         }
         return false;
     }
-    public boolean containsBuilding(JMenuItem j){
+    private boolean containsBuilding(JMenuItem j){
         for (JMenuBuilding menu : jMenus) {
             for (int i = 0; i < menu.jf.size(); i++) {
                 for (int m = 0; m < menu.jf.get(i).jr.size(); m++) {
