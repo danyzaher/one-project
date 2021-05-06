@@ -38,12 +38,15 @@ public class Search  extends JFrame implements ActionListener {
     JCheckBox height = new JCheckBox();
     JButton done = new JButton("Rechercher");
     GoBackButton gbb;
+
      public String companyName;
     public Search(String companyName) {
+
         this.companyName=companyName;
         setTitle("Recherche");
-        setVisible(true);
+
         setSize(400,300);
+        setResizable(false);
         setLayout(new FlowLayout());
         setDefaultCloseOperation(EXIT_ON_CLOSE);
         setLocationRelativeTo(null);
@@ -60,7 +63,7 @@ public class Search  extends JFrame implements ActionListener {
         pan4.add(sun);
         pan5.add(electrowin);
         pan6.add(height);
-
+        bigpan.setBorder(BorderFactory.createLineBorder(Color.PINK, 30));
         bmin.setSize(30,30);
         pan2.setLayout(new BoxLayout(pan2,BoxLayout.LINE_AXIS));
         pan3.setLayout(new BoxLayout(pan3,BoxLayout.LINE_AXIS));
@@ -80,6 +83,7 @@ public class Search  extends JFrame implements ActionListener {
         bigpan.setLayout(new BoxLayout(bigpan,BoxLayout.PAGE_AXIS));
         this.add(bigpan);
         done.addActionListener(this);
+        setVisible(true);
     }
 
     @Override

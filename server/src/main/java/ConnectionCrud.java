@@ -362,6 +362,16 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
+    public String getRoomType(String id) throws  SQLException {
+        String sql = "Select type from room where room_s_number = " + id + ";";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("type")+ "\n";
+        }
+        return result;
+    }
     public void updateGeneralTempInt(String temp, String company) throws SQLException{
         logger.info("in update GeneralTempInt");
         String sql = "update parameter_of set temperature ="+ temp +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenetre electrochromatique') or (type='Store'));";
