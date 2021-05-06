@@ -22,7 +22,7 @@ public class ElectroChromaManuOpa extends JFrame implements ActionListener {
     /** OPACITY VARIABLES **/
 
     int opacity;
-    String id; //ID de la fenetre qu'on met en local
+    String id;
     String roomName;
     ArrayList<String> result;
 
