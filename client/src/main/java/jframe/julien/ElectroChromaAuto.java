@@ -188,8 +188,14 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.lightintresult = ccSocketTCP2.result;
         if(!lightintresult.isEmpty()) {
-            lightint = Integer.parseInt(lightintresult.get(0));
-            logger.info("lightintresult = " + lightint);
+            try{
+                lightint = Integer.parseInt(lightintresult.get(0));
+                logger.info("lightintresult = " + lightint);
+            }
+            catch (Exception e){
+                JOptionPane.showMessageDialog(new JPanel(), "VOUS N'AVEZ PAS DE SALLE ! LOUEZ EN UNE ", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }
     public void getAutoTempParameters(){
