@@ -63,7 +63,6 @@ public class Search  extends JFrame implements ActionListener {
         pan4.add(sun);
         pan5.add(electrowin);
         pan6.add(height);
-        bigpan.setBorder(BorderFactory.createLineBorder(Color.PINK, 30));
         bmin.setSize(30,30);
         pan2.setLayout(new BoxLayout(pan2,BoxLayout.LINE_AXIS));
         pan3.setLayout(new BoxLayout(pan3,BoxLayout.LINE_AXIS));
@@ -130,12 +129,7 @@ public class Search  extends JFrame implements ActionListener {
                     }
                 }
 
-                // GET IDs AND THE ROOM'S CAPACITY ORDERED BY THEIR GRADE - ASC BECAUSE THE STACK WILL REVERSE THE ORDER
-                commands.add("show");
-                commands.add("room");
-                commands.add("id");
-
-                CCSocketTCPbis cc2 = new CCSocketTCPbis(commands);
+                // WE ALREADY HAVE THE IDS, WE NEED THE ROOMS' CAPACITY ORDERED BY THEIR GRADE - ASC BECAUSE THE STACK WILL REVERSE THE ORDER
                 commands.clear();
                 commands.add("show");
                 commands.add("room");
@@ -148,7 +142,7 @@ public class Search  extends JFrame implements ActionListener {
                 Stack<String> capacities = new Stack<>();
 
                 for (int i = 0; i < cc3.result.size() - 1; i++) {
-                    idroom.add(cc2.result.get(i));
+                    idroom.add(cc.result.get(i));
                     capacities.add(cc3.result.get(i));
                 }
 

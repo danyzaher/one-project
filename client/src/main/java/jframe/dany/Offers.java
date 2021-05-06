@@ -30,7 +30,6 @@ public class Offers extends JFrame implements ActionListener {
         bigpan.setLayout(new BoxLayout(bigpan,BoxLayout.PAGE_AXIS));
         bigpan.add(pantitle);
         Collections.sort(offers, new SortByPrice());
-        setBackground(Color.DARK_GRAY);
         int i = 0;
         for (jframe.dany.OneOffer offer : offers) {
             bigpan.add(offer);

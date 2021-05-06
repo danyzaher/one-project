@@ -25,7 +25,6 @@ public class OneOffer extends JPanel implements ActionListener {
         left.setLayout(new BoxLayout(left,BoxLayout.LINE_AXIS));
         right.setLayout(new BoxLayout(right,BoxLayout.LINE_AXIS));
         left.add(title);
-        setBorder(BorderFactory.createLineBorder(Color.PINK, 20));
         right.add(new JLabel(price.getText() + "€"));
         left.add(button);
         this.setLayout(new BoxLayout(this,BoxLayout.PAGE_AXIS));
