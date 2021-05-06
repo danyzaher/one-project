@@ -153,96 +153,92 @@ public class Search  extends JFrame implements ActionListener {
                 }
 
 
-                System.out.println("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
-                if (idroom.isEmpty()) {
-                    System.out.println("no offers found retry");
+                SearchLog.info("IDROOM SIZE : " + idroom.size() + "  CAPACITIES SIZE : " + capacities.size());
+                int people = 0;
+                ArrayList<ArrayList<String>> offers = new ArrayList<>();
 
-                } else {
-                    idroom.pop(); capacities.pop();
-                    int people = 0;
-                    ArrayList<ArrayList<String>> offers = new ArrayList<>();
-
-                    // BUILDING LISTS OF IDs - EACH LIST WILL GIVE AN OFFER
-                    while (!idroom.isEmpty() && !capacities.isEmpty()) {
-                        ArrayList<String> offer = new ArrayList<>();
-                        while (people < Integer.parseInt(nbpeople.getText())) {
-                            if (!idroom.isEmpty() && !capacities.isEmpty()) {
-                                offer.add(idroom.peek());
-                                people += Integer.parseInt(capacities.peek());
-                                idroom.pop();
-                                capacities.pop();
-                            } else {
-                                break;
-                            }
+                // BUILDING LISTS OF IDs - EACH LIST WILL GIVE AN OFFER
+                while (!idroom.isEmpty() && !capacities.isEmpty()) {
+                    ArrayList<String> offer = new ArrayList<>();
+                    while (people < Integer.parseInt(nbpeople.getText())) {
+                        if (!idroom.isEmpty() && !capacities.isEmpty()) {
+                            offer.add(idroom.peek());
+                            people += Integer.parseInt(capacities.peek());
+                            idroom.pop();
+                            capacities.pop();
+                        } else {
+                            break;
                         }
-                        if (!offer.isEmpty() && people >= Integer.parseInt(nbpeople.getText())) {
-                            offers.add(offer);
-                        }
-                        people = 0;
                     }
-                    ArrayList<OneOffer> finaloffers = new ArrayList<>();
-                    commands.clear();
-                    // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
-
-                    for (ArrayList<String> list : offers) {
-                        SearchLog.info("############## begin offer #################");
-                        SearchLog.info(String.valueOf(list));
-                        ArrayList<String> ids = new ArrayList<>();
-                        int finalprice = 0;
-                        String finaltitle = "";
-                        for (String id : list) {
-                            commands.add("show");
-                            commands.add("room");
-                            commands.add("name");
-                            commands.add(id);
-                            CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
-                            commands.clear();
-                            commands.add("show");
-                            commands.add("room");
-                            commands.add("price");
-                            commands.add(id);
-                            commands.add(String.valueOf(electrowin.isSelected()));
-                            CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
-                            finaltitle += cc4.result.get(0) + " - ";
-
-
-                            ids.add(id);
-                            System.out.println(cc4.result);
-                            System.out.println(cc5.result);
-                            finalprice += Integer.parseInt(cc5.result.get(0));
-                            commands.clear();
-                        }
-
-
-                        finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
-                        finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
-                        // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
-                        double min = Integer.parseInt(bmin.getText());
-                        double max = Integer.parseInt(bmax.getText());
-                        if (finalprice > min && finalprice < max)
-                            finaloffers.add(new OneOffer(ids, finaltitle.toString(), String.valueOf(finalprice), companyName));
-
+                    if (!offer.isEmpty() && people >= Integer.parseInt(nbpeople.getText())) {
+                        offers.add(offer);
                     }
-                    if (finaloffers.isEmpty()) {
-                        SearchLog.info("no offers found retry");
-                        JOptionPane.showMessageDialog(new JPanel(), "Aucunes offres ne correspondent à vos critères de recherche, veuillez en saisir de nouveaux", "Erreur", JOptionPane.ERROR_MESSAGE);
-                    } else {
-                        for (OneOffer offer : finaloffers) {
-                            System.out.println(offer);
-                        }
-                        // GO TO THE NEXT PAGE
-                        Offers ofpage = new Offers(finaloffers, companyName);
-                        ofpage.newGoBack(this);
-                    }
+                    people = 0;
                 }
+                ArrayList<OneOffer> finaloffers = new ArrayList<>();
+                commands.clear();
+                // FOR EACH LIST/OFFER IN OFFERS MAKE A ONEOFFER OBJECT
+
+                for (ArrayList<String> list : offers) {
+                    SearchLog.info("############## begin offer #################");
+                    SearchLog.info(String.valueOf(list));
+                    ArrayList<String> ids = new ArrayList<>();
+                    int finalprice = 0;
+                    String finaltitle = "";
+                    for (String id : list) {
+                        commands.add("show");
+                        commands.add("room");
+                        commands.add("name");
+                        commands.add(id);
+                        CCSocketTCPbis cc4 = new CCSocketTCPbis(commands);
+                        commands.clear();
+                        commands.add("show");
+                        commands.add("room");
+                        commands.add("price");
+                        commands.add(id);
+                        commands.add(String.valueOf(electrowin.isSelected()));
+                        CCSocketTCPbis cc5 = new CCSocketTCPbis(commands);
+                        finaltitle += cc4.result.get(0) + " - ";
+
+
+                        ids.add(id);
+                        System.out.println(cc4.result);
+                        System.out.println(cc5.result);
+                        finalprice += Integer.parseInt(cc5.result.get(0));
+                        commands.clear();
+                    }
+
+
+                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
+                    finaltitle = finaltitle.substring(0, finaltitle.length() - 1);
+                    System.out.println(finalprice);
+                    System.out.println(finaltitle);
+                    // KEEP ONLY THE OFFERS THAT ARE IN THE CLIENT'S BUDGET +-10%
+                    double min = Integer.parseInt(bmin.getText());
+                    double max = Integer.parseInt(bmax.getText());
+                    if (finalprice > min && finalprice < max)
+                        finaloffers.add(new OneOffer(ids, finaltitle, String.valueOf(finalprice), companyName));
+
+                }
+                if (finaloffers.isEmpty()) {
+                    SearchLog.info("no offers found retry");
+                    JOptionPane.showMessageDialog(new JPanel(), "Aucunes offres ne correspondent à vos critères de recherche, veuillez en saisir de nouveaux", "Erreur", JOptionPane.ERROR_MESSAGE);
+                } else {
+                    for (OneOffer offer : finaloffers) {
+                        System.out.println(offer);
+                    }
+                    // GO TO THE NEXT PAGE
+                    Offers ofpage = new Offers(finaloffers, companyName);
+                    ofpage.newGoBack(this);
+                }
+            }
+        } else {
+            if (Integer.parseInt(bmin.getText()) > Integer.parseInt(bmax.getText())) {
+                SearchLog.info("min > max");
+                JOptionPane.showMessageDialog(bigpan, "Entrez un budget minimum inférieur au maximum", "Erreur", JOptionPane.ERROR_MESSAGE);
             } else {
-                if (Integer.parseInt(bmin.getText()) > Integer.parseInt(bmax.getText())) {
-                    SearchLog.info("min > max");
-                    JOptionPane.showMessageDialog(bigpan, "Entrez un budget minimum inférieur au maximum", "Erreur", JOptionPane.ERROR_MESSAGE);
-                } else {
-                    SearchLog.info("missing value");
-                    JOptionPane.showMessageDialog(bigpan, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
-                }
+                SearchLog.info("missing value");
+                JOptionPane.showMessageDialog(bigpan, "Veuillez remplir tous les champs", "Erreur", JOptionPane.ERROR_MESSAGE);
             }
         }
     }
