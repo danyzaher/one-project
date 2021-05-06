@@ -38,8 +38,6 @@ public class Showall extends JFrame {
 
 
 
-
-
         pack();
     }
 

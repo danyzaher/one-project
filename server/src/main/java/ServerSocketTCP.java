@@ -11,7 +11,7 @@ import java.sql.SQLException;
 import java.util.LinkedList;
 
 
-class ServerSocketTCP implements Runnable{
+class ServerSocketTCP implements Runnable {
 	private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 	private static Reader reader;
 
@@ -22,8 +22,10 @@ class ServerSocketTCP implements Runnable{
 			e.printStackTrace();
 		}
 	}
+
 	private static ObjectMapper om = new ObjectMapper(new YAMLFactory());
 	private static ServerConfig sc;
+
 	static {
 		try {
 			sc = om.readValue(reader, ServerConfig.class);
@@ -32,7 +34,12 @@ class ServerSocketTCP implements Runnable{
 		}
 	}
 
-	private static Datasource source = new Datasource(sc.getNboneco());
+	private static Datasource source;
+
+	static {
+		source = new Datasource(sc.getNboneco());
+	}
+
 	private static Socket socketClient;
 	private static AutoModeElectro autoModeElectro = new AutoModeElectro();
 	private static int compt = 1; //Automatic button
@@ -54,8 +61,24 @@ class ServerSocketTCP implements Runnable{
 					compt+=1;
 					autoModeElectro.BrainElectroChroma(C);
 				}
-				if (received.equals("show")){
+				if (received.equals("show")) {
 					received = in.readLine();
+					if (received.equals("room number")) {
+						logger.info("room number");
+						listMessage.add(C.getRoomNumber());
+					}
+					if(received.equals("water Max consumption rate")){
+						logger.info("W consumption rate");
+						listMessage.add(C.getMax_W_Consumption());
+					}
+					if(received.equals("water Min consumption rate")) {
+						logger.info("W consumption rate");
+						listMessage.add(C.getMin_w_Consumption());
+					}
+					if(received.equals("electricity Min consumption rate")) {
+						logger.info("E consumption rate");
+						listMessage.add(C.getMin_E_Consumption());
+					}
 					if (received.equals("company")){
 						received = in.readLine();
 						if (received.equals("name")){

@@ -94,6 +94,53 @@ public class ConnectionCrud {
         }
         return result;
     }
+
+
+    public String getRoomNumber() throws SQLException{
+        String sql = "SELECT name FROM public.room\n" +
+                "ORDER BY room_s_number ASC LIMIT 100";
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result +=rs.getArray("name")+ "\n";
+        }
+        return result;
+    }
+    public String getMax_W_Consumption() throws SQLException {
+        String sql = "select max(water_s_consumption) from room;\n";
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("water_s_consumption") + "\n";
+        }
+        return result;
+
+    }
+
+    public String getMin_w_Consumption()throws  SQLException {
+        String sql = "select min(water_s_consumption) from room;\n";
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("water_s_consumption") + "\n";
+        }
+        return result;
+    }
+    public String getMin_E_Consumption()throws  SQLException {
+        String sql = "select min(electricity_consumption) from room;\n";
+        Statement stmt = c.createStatement();
+        ResultSet rs = stmt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("electricity_consumption") + "\n";
+        }
+        return result;
+    }
+
+
     public String getEquipment(String room) throws SQLException{
         logger.info("in getEquipment");
         String sql = "Select equipement.id_equipement,equipement.type,equipplace.position_x,equipplace.position_y from be_present inner join equipement on be_present.id_equipement=equipement.id_equipement inner join equipplace on be_present.id_equipplace=equipplace.id_equipplace where equipplace.id_room in (Select room_s_number from room where name='"+room+"');";
