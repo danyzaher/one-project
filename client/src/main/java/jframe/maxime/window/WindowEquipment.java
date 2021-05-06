@@ -35,7 +35,7 @@ public class WindowEquipment extends JFrame implements ActionListener {
         move.setBounds(50,200,30,50);
         add(move);
         move.addActionListener(this);
-        if(equipment.name.equals("fenêtre électrochromatique") | equipment.name.equals("Store")){
+        if(equipment.name.equals("fenetre electrochromatique") | equipment.name.equals("Store")){
         information = new JButton("Information à propos de l'équipement");
         information.setBounds(50,300,30,50);
         add(information);
@@ -62,7 +62,7 @@ public class WindowEquipment extends JFrame implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource()==information){
-            if(equipment.name.equals("fenêtre électrochromatique")){
+            if(equipment.name.equals("fenetre electrochromatique")){
                 ElectroChromaManuOpa electroChromaManuOpa = new ElectroChromaManuOpa(equipment);
                 electroChromaManuOpa.newGoBack(this);
             }

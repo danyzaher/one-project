@@ -24,7 +24,7 @@ public class WindowListEquipment extends JFrame implements ActionListener, ItemL
     public WindowListEquipment(MapperRoom mapperRoom){
 
         this.mapperRoom = mapperRoom;
-        setTitle("liste des équipement disponible pour la salle " + mapperRoom.nameRoom);
+        setTitle("Liste des équipements disponibles pour la salle " + mapperRoom.nameRoom);
         setVisible(true);
         setLayout(new FlowLayout());
         setSize(700,700);
@@ -33,7 +33,7 @@ public class WindowListEquipment extends JFrame implements ActionListener, ItemL
         jComboBox = new JComboBox(s2);
         jComboBox.addItemListener(this);
 
-        l1 = new JLabel("choisissez un équipement à ajouter ");
+        l1 = new JLabel("Choisissez un équipement à ajouter ");
         l2 = new JLabel();
 
         l2.setForeground(Color.blue);
@@ -74,7 +74,7 @@ public class WindowListEquipment extends JFrame implements ActionListener, ItemL
 
     public void itemStateChanged(ItemEvent e)
     {
-        // si l'état du combobox est modifiée
+        // if statement of combobox is modified
         if (e.getSource() == jComboBox) {
 
             l2.setText(" ["+ jComboBox.getSelectedItem()+"]");
