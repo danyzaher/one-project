@@ -24,7 +24,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
     public WindowListSensor(MapperRoom mapperRoom){
 
         this.mapperRoom = mapperRoom;
-        setTitle("liste des capteurs disponible pour la salle " + mapperRoom.nameRoom);
+        setTitle("Liste des capteurs disponibles pour la salle " + mapperRoom.nameRoom);
         setVisible(true);
         setLayout(new FlowLayout());
         setSize(700,700);
@@ -33,7 +33,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
         jComboBox = new JComboBox(s2);
         jComboBox.addItemListener(this);
 
-        l1 = new JLabel("choisissez un capteur à ajouter ");
+        l1 = new JLabel("Choisissez un capteur à ajouter ");
         l2 = new JLabel();
 
         l2.setForeground(Color.blue);
@@ -75,7 +75,7 @@ public class WindowListSensor extends JFrame implements ActionListener, ItemList
 
     public void itemStateChanged(ItemEvent e)
     {
-        // si l'état du combobox est modifiée
+        // If statement of the combobox is modified
         if (e.getSource() == jComboBox) {
 
             l2.setText(" ["+ jComboBox.getSelectedItem()+"]");

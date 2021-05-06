@@ -44,7 +44,7 @@ public class MapperRoom extends JFrame implements ActionListener {
         JMenuBar jMenuBar = new JMenuBar();
         jMenuBar.add(jMenu);
         jMenuBar.add(legend);
-        e1 = new JMenuItem("Liste des équipement à ajouter");
+        e1 = new JMenuItem("Liste des équipements à ajouter");
         e1.addActionListener(this);
         e2 = new JMenuItem("Liste des capteurs à ajouter");
         e2.addActionListener(this);
@@ -77,9 +77,9 @@ public class MapperRoom extends JFrame implements ActionListener {
             } else {
                 equipment.setBackground(Color.RED);
             }
-            if ((equipment.name.equals("fenêtre électrochromatique"))
+            if ((equipment.name.equals("fenetre electrochromatique"))
                     | (equipment.name.equals("Store"))) {
-                logger.info("coloré en gris");
+                logger.info("Coloré en gris");
                 equipment.setBackground(Color.GRAY);
             }
         }

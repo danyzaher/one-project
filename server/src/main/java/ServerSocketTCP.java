@@ -65,6 +65,9 @@ class ServerSocketTCP implements Runnable{
 						if(received.equals("id")) {
 							listMessage.add(C.getCompanyId(in.readLine()));
 						}
+						if(received.equals("type")) {
+							listMessage.add(C.getRoomType(in.readLine()));
+						}
 					}
 					if (received.equals("size")){
 						listMessage.add(C.getSizeRoom(in.readLine()));

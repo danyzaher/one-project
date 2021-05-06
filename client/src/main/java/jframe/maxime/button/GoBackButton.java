@@ -15,7 +15,7 @@ public class GoBackButton extends JButton implements ActionListener {
         jFrameB.setVisible(false);
         addActionListener(this);
         setText("Retour");
-        setBounds(50,400,30,50);
+        setBounds(50,400,80,50);
 
     }
 

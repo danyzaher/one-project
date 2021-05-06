@@ -154,7 +154,7 @@ public class ConnectionCrud {
     }
     public String getTempInt(String roomName) throws SQLException {
         logger.info("in getTempInt");
-        String sql ="SELECT value_of FROM MEASURE WHERE id_sensor in (SELECT be_present.id_sensor FROM equipplace INNER JOIN be_present ON be_present.id_equipplace = equipplace.id_equipplace INNER JOIN room ON room.room_s_number = equipplace.id_room WHERE be_present.id_sensor in (SELECT id_sensor from sensor where description ='capteur de température') AND equipplace.id_room in (SELECT room_s_number from room where name = '"+ roomName +"')) ORDER BY - id_measure limit 1 ;";
+        String sql ="SELECT value_of FROM MEASURE WHERE id_sensor in (SELECT be_present.id_sensor FROM equipplace INNER JOIN be_present ON be_present.id_equipplace = equipplace.id_equipplace INNER JOIN room ON room.room_s_number = equipplace.id_room WHERE be_present.id_sensor in (SELECT id_sensor from sensor where description ='capteur de temperature') AND equipplace.id_room in (SELECT room_s_number from room where name = '"+ roomName +"')) ORDER BY - id_measure limit 1 ;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String tempint = "";
@@ -166,7 +166,7 @@ public class ConnectionCrud {
     }
     public String getLightInt(String roomName) throws SQLException {
         logger.info("in getLightInt");
-        String sql ="SELECT value_of FROM MEASURE WHERE id_sensor in (SELECT be_present.id_sensor FROM equipplace INNER JOIN be_present ON be_present.id_equipplace = equipplace.id_equipplace INNER JOIN room ON room.room_s_number = equipplace.id_room WHERE be_present.id_sensor in (SELECT id_sensor from sensor where description ='capteur de luminosité') AND equipplace.id_room in (SELECT room_s_number from room where name = '"+ roomName +"')) ORDER BY - id_measure limit 1 ;";
+        String sql ="SELECT value_of FROM MEASURE WHERE id_sensor in (SELECT be_present.id_sensor FROM equipplace INNER JOIN be_present ON be_present.id_equipplace = equipplace.id_equipplace INNER JOIN room ON room.room_s_number = equipplace.id_room WHERE be_present.id_sensor in (SELECT id_sensor from sensor where description ='capteur de luminosite') AND equipplace.id_room in (SELECT room_s_number from room where name = '"+ roomName +"')) ORDER BY - id_measure limit 1 ;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         String tempint = "";
@@ -191,7 +191,7 @@ public class ConnectionCrud {
     }
     public ArrayList<String> getLastTempInRoom(String id) throws SQLException {
 
-        String sql ="Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +")) and sensor.description='capteur de température' limit 1;";
+        String sql ="Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +")) and sensor.description='capteur de temperature' limit 1;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
@@ -202,7 +202,7 @@ public class ConnectionCrud {
     }
     public ArrayList<String> getLastLightInRoom(String id) throws SQLException {
 
-        String sql =" Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +"))and sensor.description='capteur de luminosité' limit 1;";
+        String sql =" Select measure.value_of from sensor inner join measure on sensor.id_sensor=measure.id_sensor inner join be_present on be_present.id_sensor=sensor.id_sensor where be_present.id_equipplace in (Select id_equipplace from equipplace where id_room in (Select equipplace.id_room from equipplace inner join be_present on be_present.id_equipplace=equipplace.id_equipplace where be_present.id_equipement="+ id +"))and sensor.description='capteur de luminosite' limit 1;";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
@@ -213,7 +213,7 @@ public class ConnectionCrud {
     }
     public ArrayList<String> getIdWindow() throws SQLException{
 
-        String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='fenêtre électrochromatique');";
+        String sql ="select id_equipement from parameter_of where automanu=true and id_equipement in (SELECT id_equipement from equipement where type='fenetre electrochromatique');";
         Statement smt = c.createStatement();
         ResultSet rs = smt.executeQuery(sql);
         ArrayList<String> result = new ArrayList<>();
@@ -362,18 +362,28 @@ public class ConnectionCrud {
         Statement smt = c.createStatement();
         smt.executeUpdate(sql);
     }
+    public String getRoomType(String id) throws  SQLException {
+        String sql = "Select type from room where room_s_number = " + id + ";";
+        Statement smt = c.createStatement();
+        ResultSet rs = smt.executeQuery(sql);
+        String result = "";
+        while (rs.next()) {
+            result += rs.getArray("type")+ "\n";
+        }
+        return result;
+    }
     public void updateGeneralTempInt(String temp, String company) throws SQLException{
         logger.info("in update GeneralTempInt");
-        String sql = "update parameter_of set temperature ="+ temp +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
+        String sql = "update parameter_of set temperature ="+ temp +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenetre electrochromatique') or (type='Store'));";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
-        String sql2 = "update parameter_of set automanu = true where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
+        String sql2 = "update parameter_of set automanu = true where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenetre electrochromatique') or (type='Store'));";
         Statement smt2 = c.createStatement();
         logger.info(String.valueOf(smt2.executeUpdate(sql2)));
     }
     public void updateGeneralLigInt(String light, String company) throws SQLException{
         logger.info("in update GeneralLigInt");
-        String sql = "update parameter_of set luminosity ="+ light +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenêtre électrochromatique') or (type='Store'));";
+        String sql = "update parameter_of set luminosity ="+ light +" where id_equipement in (Select be_present.id_equipement from be_present inner join equipplace on equipplace.id_equipplace=be_present.id_equipplace where equipplace.id_room in (Select location.room_s_number from location inner join company on company.id_company=location.id_company where company.name = '"+company+"') and id_equipement is not null) and id_equipement in (Select id_equipement from equipement where (type='fenetre electrochromatique') or (type='Store'));";
         Statement smt = c.createStatement();
         logger.info(String.valueOf(smt.executeUpdate(sql)));
     }

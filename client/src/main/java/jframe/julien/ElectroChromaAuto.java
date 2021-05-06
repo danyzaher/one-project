@@ -9,7 +9,6 @@ import java.util.ArrayList;
 import javax.swing.event.*;
 
 import jframe.maxime.button.GoBackButton;
-import jframe.maxime.button.GoBackMenu;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import socket.CCSocketTCPbis;
@@ -189,8 +188,14 @@ public class ElectroChromaAuto extends JFrame implements ActionListener {
         CCSocketTCPbis ccSocketTCP2 = new CCSocketTCPbis(stringArrayList);
         this.lightintresult = ccSocketTCP2.result;
         if(!lightintresult.isEmpty()) {
-            lightint = Integer.parseInt(lightintresult.get(0));
-            logger.info("lightintresult = " + lightint);
+            try{
+                lightint = Integer.parseInt(lightintresult.get(0));
+                logger.info("lightintresult = " + lightint);
+            }
+            catch (Exception e){
+                JOptionPane.showMessageDialog(new JPanel(), "VOUS N'AVEZ PAS DE SALLE ! LOUEZ EN UNE ", "Erreur", JOptionPane.ERROR_MESSAGE);
+            }
+
         }
     }
     public void getAutoTempParameters(){

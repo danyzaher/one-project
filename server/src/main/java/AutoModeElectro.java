@@ -27,10 +27,10 @@ public class AutoModeElectro {
     }
     public void ManualButtonFunction(ConnectionCrud C) throws SQLException {
 
-        ArrayList<String> id_fenetre = C.getIdWindow();
+        ArrayList<String> id_window = C.getIdWindow();
         ArrayList<String> id_store = C.getIdStore();
 
-        for (String id_f : id_fenetre) {
+        for (String id_w : id_window) {
 
             String T0 = "0";
             String T = "0";
@@ -38,22 +38,22 @@ public class AutoModeElectro {
             String L = "0";
             String A = "0";
 
-            ArrayList<String> general = C.getGeneralTempLigInt(id_f);
-            ArrayList<String> requeteT = C.getLastTempInRoom(id_f);
-            ArrayList<String> requeteL = C.getLastLightInRoom(id_f);
-            A = C.getOpacityValue(id_f);
+            ArrayList<String> general = C.getGeneralTempLigInt(id_w);
+            ArrayList<String> requestT = C.getLastTempInRoom(id_w);
+            ArrayList<String> requestL = C.getLastLightInRoom(id_w);
+            A = C.getOpacityValue(id_w);
 
             if (!general.isEmpty()) {
                 T0 = general.get(0);
                 L0 = general.get(1);
             }
-            if (!requeteT.isEmpty()) {
-                T = requeteT.get(0);
+            if (!requestT.isEmpty()) {
+                T = requestT.get(0);
             } else {
                 T = T0;
             }
-            if (!requeteL.isEmpty()) {
-                L = requeteL.get(0);
+            if (!requestL.isEmpty()) {
+                L = requestL.get(0);
             } else {
                 L = L0;
             }
@@ -71,7 +71,7 @@ public class AutoModeElectro {
             if (value >5){
                 value = 5;
             }
-            C.updateOpacity(id_f, value + "");
+            C.updateOpacity(id_w, value + "");
 
         }
 
@@ -84,8 +84,8 @@ public class AutoModeElectro {
             String A = "0";
 
             ArrayList<String> general = C.getGeneralTempLigInt(id_s);
-            ArrayList<String> requeteT = C.getLastTempInRoom(id_s);
-            ArrayList<String> requeteL = C.getLastLightInRoom(id_s);
+            ArrayList<String> requestT = C.getLastTempInRoom(id_s);
+            ArrayList<String> requestL = C.getLastLightInRoom(id_s);
             A = C.getOpacityValue(id_s);
 
             if (!general.isEmpty()) {
@@ -93,13 +93,13 @@ public class AutoModeElectro {
                 L0 = general.get(1);
             }
 
-            if (!requeteT.isEmpty()) {
-                T = requeteT.get(0);
+            if (!requestT.isEmpty()) {
+                T = requestT.get(0);
             } else {
                 T = T0;
             }
-            if (!requeteL.isEmpty()) {
-                L = requeteL.get(0);
+            if (!requestL.isEmpty()) {
+                L = requestL.get(0);
             } else {
                 L = L0;
             }
