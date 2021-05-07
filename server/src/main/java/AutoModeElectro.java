@@ -64,7 +64,8 @@ public class AutoModeElectro {
             int l0 = Integer.parseInt(L0);
             int a = Integer.parseInt(A);
 
-            int value = a + (l - l0) + (t - t0);
+            int value = a + (l - l0) + ((t - t0)/100);
+
             if (value <0) {
                 value = 0;
             }
@@ -110,7 +111,8 @@ public class AutoModeElectro {
             int l0 = Integer.parseInt(L0);
             int a = Integer.parseInt(A);
 
-            int value = a + (l - l0) + (t - t0);
+            int value = a - (l - l0) - ((t - t0)/100);
+
             if (value <0) {
                 value = 0;
             }
