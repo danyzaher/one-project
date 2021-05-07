@@ -111,12 +111,13 @@ public class AutoModeElectro {
             int a = Integer.parseInt(A);
 
             int value = a + (l - l0) + (t - t0);
-            if (value <0){
+            if (value <0) {
                 value = 0;
+            }
             if (value >5){
                 value = 5;
             }
-            }
+
             C.updateStoreHigh(id_s, value + "");
 
         }
