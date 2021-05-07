@@ -73,7 +73,7 @@ public class AutoModeElectro {
                 value = 5;
             }
             C.updateOpacity(id_w, value + "");
-            logger.info("UPDATE WINDOW OPACITY : "+id_w +"value precedente = "+a+" value = "+value);
+            logger.info("UPDATE WINDOW OPACITY : "+id_w +" value precedente = "+a+" value = "+value);
 
         }
 
@@ -120,7 +120,7 @@ public class AutoModeElectro {
             if (value >5){
                 value = 5;
             }
-            logger.info("UPDATE STORE HIGH : "+id_s +"value precedente = "+a+" value = "+value);
+            logger.info("UPDATE STORE HIGH : "+id_s +" value precedente = "+a+" value = "+value);
             C.updateStoreHigh(id_s, value + "");
 
         }
