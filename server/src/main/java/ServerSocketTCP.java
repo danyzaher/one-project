@@ -59,7 +59,7 @@ class ServerSocketTCP implements Runnable {
 				logger.info("received = "+received);
 				if (received.equals("automatic") && compt==1){
 					compt+=1;
-					autoModeElectro.BrainElectroChroma(C);
+					autoModeElectro.brainElectroChroma(C);
 				}
 				if (received.equals("show")) {
 					received = in.readLine();

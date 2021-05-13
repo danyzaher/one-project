@@ -9,10 +9,10 @@ public class AutoModeElectro {
 
     private final static Logger logger = LoggerFactory.getLogger(ServerSocketTCP.class.getName());
 
-    public void BrainElectroChroma(ConnectionCrud C) throws SQLException {
+    public void brainElectroChroma(ConnectionCrud C) throws SQLException {
         while (true) {
 
-           ManualButtonFunction(C);
+           manualButtonFunction(C);
 
             try {
                 Thread.sleep(1000 * 60);
@@ -25,7 +25,7 @@ public class AutoModeElectro {
         }
 
     }
-    public void ManualButtonFunction(ConnectionCrud C) throws SQLException {
+    public void manualButtonFunction(ConnectionCrud C) throws SQLException {
 
         ArrayList<String> id_window = C.getIdWindow();
         ArrayList<String> id_store = C.getIdStore();
